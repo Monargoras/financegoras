@@ -21,8 +21,8 @@ pnpm-debug.log*
 .DS_Store
 
 # yarn
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
