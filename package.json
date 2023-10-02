@@ -1,0 +1,19 @@
+{
+  "name": "financegoras",
+  "type": "module",
+  "version": "0.0.1",
+  "license": "ISC",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vue": "^3.0.0",
+    "astro": "^3.2.2",
+    "vue": "^3.3.4"
+  },
+  "packageManager": "yarn@3.6.3"
+}
