@@ -1,0 +1,61 @@
+---
+title: 'Dashboard'
+---
+
+<head>
+  <title>Dashboard - Financegoras</title>
+</head>
+
+<section>
+  <h1>Welcome to your Dashboard</h1>
+  <p>Here's a quick overview of your finances:</p>
+
+  <div class='grid'>
+    <div class='card'>
+      <h2>Income</h2>
+      <p>$5000</p>
+    </div>
+    <div class='card'>
+      <h2>Expenses</h2>
+      <p>$3000</p>
+    </div>
+    <div class='card'>
+      <h2>Savings</h2>
+      <p>$2000</p>
+    </div>
+  </div>
+
+  <p>For more detailed information, check out the links below:</p>
+
+  <ul>
+    <li><a href='/transactions'>Transactions</a></li>
+    <li><a href='/budget'>Budget</a></li>
+    <li><a href='/investments'>Investments</a></li>
+  </ul>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+</style>
