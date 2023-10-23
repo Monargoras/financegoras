@@ -1,35 +1,38 @@
 ---
 // Component Imports
-import Counter from '../components/Counter.vue';
+import Counter from '../components/Counter.vue'
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Financegoras - Track your expenses!</title>
-		<meta name="description" content="Financegoras helps you track your expenses and manage your finances with simple interfaces and powerful tools." />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<Counter client:visible>
-				<h1>Hello, Financegoras!</h1>
-			</Counter>
-		</main>
-	</body>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>Financegoras - Track your expenses!</title>
+    <meta
+      name='description'
+      content='Financegoras helps you track your expenses and manage your finances with simple interfaces and powerful tools.'
+    />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
+    <style>
+      html,
+      body {
+        font-family: system-ui;
+        margin: 0;
+      }
+      body {
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <Counter client:visible>
+        <h1>Hello, Financegoras!</h1>
+      </Counter>
+    </main>
+  </body>
 </html>
