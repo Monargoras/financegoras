@@ -1,15 +1,17 @@
 ---
 // Component Imports
 import Counter from '../components/Counter.vue'
+import '../styles/global.css'
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
+const title = 'Financegoras - Track your expenses!'
 ---
 
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
-    <title>Financegoras - Track your expenses!</title>
+    <title>{title}</title>
     <meta
       name='description'
       content='Financegoras helps you track your expenses and manage your finances with simple interfaces and powerful tools.'
@@ -20,11 +22,7 @@ import Counter from '../components/Counter.vue'
     <style>
       html,
       body {
-        font-family: system-ui;
         margin: 0;
-      }
-      body {
-        padding: 2rem;
       }
     </style>
   </head>
