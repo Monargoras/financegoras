@@ -2764,6 +2764,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/intl-localematcher@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "@formatjs/intl-localematcher@npm:0.5.4"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10/780cb29b42e1ea87f2eb5db268577fcdc53da52d9f096871f3a1bb78603b4ba81d208ea0b0b9bc21548797c941ce435321f62d2522795b83b740f90b0ceb5778
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -4989,6 +4998,13 @@ __metadata:
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
   checksum: 10/0493368244cced1a69cb791b485a260a422e6fcc857782e1178d1e6f219f1b161793e9f87f5fae1b219af0f50bee24fcbe733a18b4be8fdd07a38a8fb91146fd
+  languageName: node
+  linkType: hard
+
+"@types/negotiator@npm:^0":
+  version: 0.6.3
+  resolution: "@types/negotiator@npm:0.6.3"
+  checksum: 10/3ad4d92a5644a1c2cca2dc609ab19408501cac7cff31b0eb0c8b56ea8a1574e0493cb50a0784901a6f89160a224cf7df01b5c9b6e64754fc95a5e2502c553006
   languageName: node
   linkType: hard
 
@@ -9101,6 +9117,7 @@ __metadata:
   resolution: "financegoras@workspace:."
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@formatjs/intl-localematcher": "npm:^0.5.4"
     "@mantine/core": "npm:7.12.1"
     "@mantine/hooks": "npm:7.12.1"
     "@next/bundle-analyzer": "npm:^14.2.5"
@@ -9116,6 +9133,7 @@ __metadata:
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.5.2"
     "@types/jest": "npm:^29.5.12"
+    "@types/negotiator": "npm:^0"
     "@types/node": "npm:^22.2.0"
     "@types/react": "npm:18.3.3"
     "@typescript-eslint/eslint-plugin": "npm:^7.18.0"
@@ -9134,6 +9152,7 @@ __metadata:
     eslint-plugin-testing-library: "npm:^6.3.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
+    negotiator: "npm:^0.6.3"
     next: "npm:14.2.5"
     postcss: "npm:^8.4.41"
     postcss-preset-mantine: "npm:1.17.0"
