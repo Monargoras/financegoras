@@ -1,12 +1,12 @@
 {
-  "name": "mantine-next-template",
+  "name": "financegoras",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3003",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
-    "start": "next start",
+    "start": "next start -p 3003",
     "typecheck": "tsc --noEmit",
     "lint": "next lint && npm run lint:stylelint",
     "lint:stylelint": "stylelint '**/*.css' --cache",
