@@ -1,7 +1,7 @@
 import '@mantine/core/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
 export const metadata = {
   title: 'Financegoras',
@@ -13,7 +13,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <head>
         <ColorSchemeScript />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
