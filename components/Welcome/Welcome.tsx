@@ -1,7 +1,11 @@
 import { Title, Text, Anchor } from '@mantine/core';
 import classes from './Welcome.module.css';
 
-export function Welcome() {
+interface WelcomeProps {
+  dictionary: { [key: string]: { [key: string]: string } }
+}
+
+export function Welcome(props: WelcomeProps) {
   return (
     <>
       <Title className={classes.title} ta="center" mt={100}>
@@ -17,6 +21,9 @@ export function Welcome() {
           this guide
         </Anchor>
         . To get started edit page.tsx file.
+      </Text>
+      <Text>
+        {props.dictionary.landingPage.welcome}
       </Text>
     </>
   );
