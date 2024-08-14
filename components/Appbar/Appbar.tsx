@@ -15,7 +15,7 @@ interface AppbarProps {
 export function Appbar({ children, props }: { children: React.ReactNode; props: AppbarProps }) {
   const [opened, { toggle }] = useDisclosure()
   const pinned = useHeadroom({ fixedAt: 120 })
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <AppShell

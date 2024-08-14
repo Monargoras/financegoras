@@ -31,11 +31,6 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
           labelPosition="left"
           onChange={(event) => setIsIncome(event.currentTarget.checked)}
         />
-        <TextInput
-          value={name}
-          label={props.dictionary.budgetPage.name}
-          onChange={(event) => setName(event.currentTarget.value)}
-        />
         <NumberInput
           value={amount}
           label={props.dictionary.budgetPage.amount}
@@ -46,6 +41,11 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
           thousandSeparator=" "
           stepHoldDelay={500}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+        />
+        <TextInput
+          value={name}
+          label={props.dictionary.budgetPage.name}
+          onChange={(event) => setName(event.currentTarget.value)}
         />
         <NativeSelect
           style={{ marginTop: 'auto' }}
