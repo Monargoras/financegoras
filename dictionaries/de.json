@@ -1,4 +1,9 @@
 {
+  "appbar": {
+    "home": "Start",
+    "budget": "Haushaltsbuch",
+    "portfolio": "Portfolio"
+  },
   "landingPage": {
     "welcome": "Willkommen bei Financegoras!"
   },

@@ -6,8 +6,13 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import logo from '../../public/financegoras_new.jpg'
 import classes from './Appbar.module.css'
+import { Dictionary } from '@/utils/types'
 
-export function Appbar({ children }: { children: React.ReactNode }) {
+interface AppbarProps {
+  dictionary: Dictionary
+}
+
+export function Appbar({ children, props }: { children: React.ReactNode; props: AppbarProps }) {
   const [opened, { toggle }] = useDisclosure()
   const pinned = useHeadroom({ fixedAt: 120 })
   const router = useRouter()
@@ -25,12 +30,12 @@ export function Appbar({ children }: { children: React.ReactNode }) {
             <Image src={logo} alt="Financegoras" width={32} height={32} />
             <Group ml="xl" gap={0} visibleFrom="sm">
               <UnstyledButton onClick={() => router.push('/')} className={classes.control}>
-                Home
+                {props.dictionary.appbar.home}
               </UnstyledButton>
               <UnstyledButton onClick={() => router.push('/budget')} className={classes.control}>
-                Budget
+                {props.dictionary.appbar.budget}
               </UnstyledButton>
-              <UnstyledButton className={classes.control}>Portfolio</UnstyledButton>
+              <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
             </Group>
           </Group>
         </Group>
@@ -44,7 +49,7 @@ export function Appbar({ children }: { children: React.ReactNode }) {
           }}
           className={classes.control}
         >
-          Home
+          {props.dictionary.appbar.home}
         </UnstyledButton>
         <UnstyledButton
           onClick={() => {
@@ -53,9 +58,9 @@ export function Appbar({ children }: { children: React.ReactNode }) {
           }}
           className={classes.control}
         >
-          Budget
+          {props.dictionary.appbar.budget}
         </UnstyledButton>
-        <UnstyledButton className={classes.control}>Portfolio</UnstyledButton>
+        <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
       </AppShell.Navbar>
 
       <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>{children}</AppShell.Main>
