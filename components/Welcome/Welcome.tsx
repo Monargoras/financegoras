@@ -1,8 +1,9 @@
 import { Title, Text, Anchor } from '@mantine/core'
 import classes from './Welcome.module.css'
+import { Dictionary } from '@/utils/types'
 
 interface WelcomeProps {
-  dictionary: { [key: string]: { [key: string]: string } }
+  dictionary: Dictionary
 }
 
 export function Welcome(props: WelcomeProps) {

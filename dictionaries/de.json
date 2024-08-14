@@ -3,6 +3,10 @@
     "welcome": "Willkommen bei Financegoras!"
   },
   "budgetPage": {
-    "budgetBook": "Haushaltsbuch"
+    "budgetBook": "Haushaltsbuch",
+    "name": "Name",
+    "amount": "Betrag",
+    "income": "Einkommen?",
+    "category": "Kategorie"
   }
 }

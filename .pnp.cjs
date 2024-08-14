@@ -77,6 +77,7 @@ const RAW_RUNTIME_STATE =
           ["storybook-dark-mode", "npm:4.0.2"],\
           ["stylelint", "npm:16.8.1"],\
           ["stylelint-config-standard-scss", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:13.1.0"],\
+          ["tabler-icons", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.35.0"],\
           ["ts-jest", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:29.2.4"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["webpack", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:5.93.0"]\
@@ -13209,6 +13210,7 @@ const RAW_RUNTIME_STATE =
           ["storybook-dark-mode", "npm:4.0.2"],\
           ["stylelint", "npm:16.8.1"],\
           ["stylelint-config-standard-scss", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:13.1.0"],\
+          ["tabler-icons", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.35.0"],\
           ["ts-jest", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:29.2.4"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["webpack", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:5.93.0"]\
@@ -20513,6 +20515,32 @@ const RAW_RUNTIME_STATE =
           ["slice-ansi", "npm:4.0.0"],\
           ["string-width", "npm:4.2.3"],\
           ["strip-ansi", "npm:6.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tabler-icons", [\
+      ["npm:1.35.0", {\
+        "packageLocation": "./.yarn/cache/tabler-icons-npm-1.35.0-d379cbc094-5de63b3738.zip/node_modules/tabler-icons/",\
+        "packageDependencies": [\
+          ["tabler-icons", "npm:1.35.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.35.0", {\
+        "packageLocation": "./.yarn/__virtual__/tabler-icons-virtual-d797e1d890/0/cache/tabler-icons-npm-1.35.0-d379cbc094-5de63b3738.zip/node_modules/tabler-icons/",\
+        "packageDependencies": [\
+          ["tabler-icons", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.35.0"],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", null],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\

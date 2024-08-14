@@ -9366,6 +9366,7 @@ __metadata:
     storybook-dark-mode: "npm:^4.0.2"
     stylelint: "npm:^16.8.1"
     stylelint-config-standard-scss: "npm:^13.1.0"
+    tabler-icons: "npm:^1.35.0"
     ts-jest: "npm:^29.2.4"
     typescript: "npm:5.5.4"
     webpack: "npm:^5.93.0"
@@ -15636,6 +15637,16 @@ __metadata:
     string-width: "npm:^4.2.3"
     strip-ansi: "npm:^6.0.1"
   checksum: 10/2946162eb87a91b9bf4283214d26830db96f09cf517eff18e7501d47a4770c529b432bb54c9394337c3dfd6c8dbf66581f76edb37e9838beb6ec394080af4ac2
+  languageName: node
+  linkType: hard
+
+"tabler-icons@npm:^1.35.0":
+  version: 1.35.0
+  resolution: "tabler-icons@npm:1.35.0"
+  peerDependencies:
+    react: ^16.13.1
+    react-dom: ^16.13.1
+  checksum: 10/5de63b37385699194b25b577ffef89eb3e28d91d338b560bee36a87b7e0816457f5481c14def3f108c7ded90b3f6577b6bc30427a3d668c83812fb7771839fd2
   languageName: node
   linkType: hard
 

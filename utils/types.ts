@@ -3,3 +3,7 @@ export type PageProps = {
     lang: string
   }
 }
+
+export type Dictionary = {
+  [key: string]: { [key: string]: string }
+}
