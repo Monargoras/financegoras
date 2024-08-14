@@ -4,7 +4,7 @@ import { AppShell, Burger, Group, rem, UnstyledButton } from '@mantine/core'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import logo from '../../public/financegoras_new.jpg'
+import logo from '../../public/financegoras.png'
 import classes from './Appbar.module.css'
 import { Dictionary } from '@/utils/types'
 
@@ -15,7 +15,7 @@ interface AppbarProps {
 export function Appbar({ children, props }: { children: React.ReactNode; props: AppbarProps }) {
   const [opened, { toggle }] = useDisclosure()
   const pinned = useHeadroom({ fixedAt: 120 })
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <AppShell
@@ -27,7 +27,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
-            <Image src={logo} alt="Financegoras" width={32} height={32} />
+            <Image src={logo} alt="Financegoras" width={48} height={48} />
             <Group ml="xl" gap={0} visibleFrom="sm">
               <UnstyledButton onClick={() => router.push('/')} className={classes.control}>
                 {props.dictionary.appbar.home}
