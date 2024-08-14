@@ -1,7 +1,8 @@
 import { Welcome } from './Welcome';
+import data from '../../dictionaries/en.json'
 
 export default {
   title: 'Welcome',
 };
 
-export const Usage = () => <Welcome dictionary={{ landingPage: { welcome: 'Welcome to Financegoras' } }} />;
+export const Usage = () => <Welcome dictionary={data} />;
