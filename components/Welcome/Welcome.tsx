@@ -1,5 +1,5 @@
-import { Title, Text, Anchor } from '@mantine/core';
-import classes from './Welcome.module.css';
+import { Title, Text, Anchor } from '@mantine/core'
+import classes from './Welcome.module.css'
 
 interface WelcomeProps {
   dictionary: { [key: string]: { [key: string]: string } }
@@ -15,16 +15,14 @@ export function Welcome(props: WelcomeProps) {
         </Text>
       </Title>
       <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        This starter Next.js project includes a minimal setup for server side rendering, if you want
-        to learn more on Mantine + Next.js integration follow{' '}
+        This starter Next.js project includes a minimal setup for server side rendering, if you want to learn more on
+        Mantine + Next.js integration follow{' '}
         <Anchor href="https://mantine.dev/guides/next/" size="lg">
           this guide
         </Anchor>
         . To get started edit page.tsx file.
       </Text>
-      <Text>
-        {props.dictionary.landingPage.welcome}
-      </Text>
+      <Text>{props.dictionary.landingPage.welcome}</Text>
     </>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { Welcome } from '../../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
-import { PageProps } from '@/utils/types';
+import { Welcome } from '../../components/Welcome/Welcome'
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle'
+import { PageProps } from '@/utils/types'
 import { getDictionary } from './dictionaries'
 
 export default async function HomePage({ params: { lang } }: PageProps) {
@@ -11,5 +11,5 @@ export default async function HomePage({ params: { lang } }: PageProps) {
       <Welcome dictionary={dict} />
       <ColorSchemeToggle />
     </>
-  );
+  )
 }

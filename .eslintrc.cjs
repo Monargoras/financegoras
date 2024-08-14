@@ -15,5 +15,6 @@ module.exports = {
     'import/extensions': 'off',
     'linebreak-style': 'off',
     '@typescript-eslint/semi': 'off',
+    'max-len': ['error', { 'code': 150 }]
   },
 };
