@@ -1,5 +1,8 @@
 {
   "landingPage": {
     "welcome": "Willkommen bei Financegoras!"
+  },
+  "budgetPage": {
+    "budgetBook": "Haushaltsbuch"
   }
 }

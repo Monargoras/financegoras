@@ -1,7 +1,7 @@
 import '@mantine/core/styles.css'
-import React from 'react'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 import { theme } from '../../theme'
+import { Appbar } from '@/components/Appbar/Appbar'
 
 export const metadata = {
   title: 'Financegoras',
@@ -16,7 +16,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <Appbar>{children}</Appbar>
+        </MantineProvider>
       </body>
     </html>
   )
