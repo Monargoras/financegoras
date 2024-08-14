@@ -73,6 +73,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
+          ["sharp", "npm:0.33.4"],\
           ["storybook", "npm:8.2.9"],\
           ["storybook-dark-mode", "npm:4.0.2"],\
           ["stylelint", "npm:16.8.1"],\
@@ -13206,6 +13207,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
+          ["sharp", "npm:0.33.4"],\
           ["storybook", "npm:8.2.9"],\
           ["storybook-dark-mode", "npm:4.0.2"],\
           ["stylelint", "npm:16.8.1"],\

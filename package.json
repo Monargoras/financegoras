@@ -33,6 +33,7 @@
     "next": "14.2.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "sharp": "^0.33.4",
     "tabler-icons": "^1.35.0"
   },
   "devDependencies": {
