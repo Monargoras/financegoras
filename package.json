@@ -26,6 +26,7 @@
     "@formatjs/intl-localematcher": "^0.5.4",
     "@mantine/core": "7.12.1",
     "@mantine/hooks": "7.12.1",
+    "@mantine/notifications": "^7.12.1",
     "@next/bundle-analyzer": "^14.2.5",
     "@tabler/icons-react": "^3.12.0",
     "eslint-plugin-prettier": "^5.2.1",

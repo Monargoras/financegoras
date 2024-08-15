@@ -15,6 +15,10 @@
     "category": "Category",
     "addSingleTransaction": "Add Transaction",
     "addMonthlyTransaction": "Add Monthly Transaction",
-    "addAnnualTransaction": "Add Annual Transaction"
+    "addAnnualTransaction": "Add Annual Transaction",
+    "feedbackAddTransactionSuccessTitle": "Transaction added successfully!",
+    "feedbackAddTransactionSuccessMessage": "The transaction has been added to your budget book.",
+    "feedbackAddTransactionErrorTitle": "Transaction could not be added!",
+    "feedbackAddTransactionErrorMessage": "An error occurred while adding the transaction."
   }
 }

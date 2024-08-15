@@ -1,5 +1,7 @@
 import '@mantine/core/styles.css'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
+import { Notifications } from '@mantine/notifications'
+import '@mantine/notifications/styles.css'
 import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
@@ -32,6 +34,7 @@ export default async function RootLayout({
       <body>
         <MantineProvider theme={theme}>
           <Appbar props={{ dictionary: dict }}>{children}</Appbar>
+          <Notifications />
         </MantineProvider>
       </body>
     </html>

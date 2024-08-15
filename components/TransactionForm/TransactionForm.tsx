@@ -12,8 +12,9 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import { useState } from 'react'
-import { IconPlus, IconMinus } from 'tabler-icons'
+import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
 import { Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 
@@ -60,14 +61,27 @@ export default function TransactionForm(props: TransactionFormProps) {
       method: 'POST',
       body: JSON.stringify({ isIncome, amount, name, category, transactionType }),
     })
-    // TODO add feedback to the user https://mantine.dev/core/notification/
     if (res.status === 200) {
       setName('')
       setAmount('')
       setCategory(categories[0].items[0])
       setIsIncome(false)
+      notifications.show({
+        title: props.dictionary.budgetPage.feedbackAddTransactionSuccessTitle,
+        message: props.dictionary.budgetPage.feedbackAddTransactionSuccessMessage,
+        color: 'green',
+        icon: <IconCheck />,
+        position: 'bottom-right',
+      })
       return true
     }
+    notifications.show({
+      title: props.dictionary.budgetPage.feedbackAddTransactionErrorTitle,
+      message: props.dictionary.budgetPage.feedbackAddTransactionErrorMessage,
+      color: 'red',
+      icon: <IconX />,
+      position: 'bottom-right',
+    })
     return false
   }
 

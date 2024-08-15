@@ -15,6 +15,10 @@
     "category": "Kategorie",
     "addSingleTransaction": "Transaktion hinzufügen",
     "addMonthlyTransaction": "Monatliche Transaktion hinzufügen",
-    "addAnnualTransaction": "Jährliche Transaktion hinzufügen"
+    "addAnnualTransaction": "Jährliche Transaktion hinzufügen",
+    "feedbackAddTransactionSuccessTitle": "Transaktion erfolgreich hinzugefügt!",
+    "feedbackAddTransactionSuccessMessage": "Die Transaktion wurde zu deinem Haushaltsbuch hinzugefügt.",
+    "feedbackAddTransactionErrorTitle": "Transaktion konnte nicht hinzugefügt werden!",
+    "feedbackAddTransactionErrorMessage": "Beim Hinzufügen der Transaktion ist ein Fehler aufgetreten."
   }
 }

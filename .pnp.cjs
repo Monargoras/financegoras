@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@formatjs/intl-localematcher", "npm:0.5.4"],\
           ["@mantine/core", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@next/bundle-analyzer", "npm:14.2.5"],\
           ["@next/eslint-plugin-next", "npm:14.2.5"],\
           ["@storybook/addon-essentials", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.2.9"],\
@@ -4068,6 +4069,14 @@ const RAW_RUNTIME_STATE =
           ["regenerator-runtime", "npm:0.14.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:7.25.0", {\
+        "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.25.0-a7bca33687-6870e9e0e9.zip/node_modules/@babel/runtime/",\
+        "packageDependencies": [\
+          ["@babel/runtime", "npm:7.25.0"],\
+          ["regenerator-runtime", "npm:0.14.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@babel/template", [\
@@ -5416,6 +5425,64 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mantine-hooks-virtual-9090a4e9d0/0/cache/@mantine-hooks-npm-7.12.1-dd905cc71f-ea00e49028.zip/node_modules/@mantine/hooks/",\
         "packageDependencies": [\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@types/react", "npm:18.3.3"],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@mantine/notifications", [\
+      ["npm:7.12.1", {\
+        "packageLocation": "./.yarn/cache/@mantine-notifications-npm-7.12.1-7997ef707d-492e1a90a4.zip/node_modules/@mantine/notifications/",\
+        "packageDependencies": [\
+          ["@mantine/notifications", "npm:7.12.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1", {\
+        "packageLocation": "./.yarn/__virtual__/@mantine-notifications-virtual-794f7fcb7b/0/cache/@mantine-notifications-npm-7.12.1-7997ef707d-492e1a90a4.zip/node_modules/@mantine/notifications/",\
+        "packageDependencies": [\
+          ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/core", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/store", "virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:7.12.1"],\
+          ["@types/mantine__core", null],\
+          ["@types/mantine__hooks", null],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", null],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
+          ["react-transition-group", "virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:4.4.5"]\
+        ],\
+        "packagePeers": [\
+          "@mantine/core",\
+          "@mantine/hooks",\
+          "@types/mantine__core",\
+          "@types/mantine__hooks",\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@mantine/store", [\
+      ["npm:7.12.1", {\
+        "packageLocation": "./.yarn/cache/@mantine-store-npm-7.12.1-2addfe28b8-0aec736d2a.zip/node_modules/@mantine/store/",\
+        "packageDependencies": [\
+          ["@mantine/store", "npm:7.12.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:7.12.1", {\
+        "packageLocation": "./.yarn/__virtual__/@mantine-store-virtual-a6002a857e/0/cache/@mantine-store-npm-7.12.1-2addfe28b8-0aec736d2a.zip/node_modules/@mantine/store/",\
+        "packageDependencies": [\
+          ["@mantine/store", "virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:7.12.1"],\
           ["@types/react", "npm:18.3.3"],\
           ["react", "npm:18.3.1"]\
         ],\
@@ -11503,6 +11570,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dom-helpers", [\
+      ["npm:5.2.1", {\
+        "packageLocation": "./.yarn/cache/dom-helpers-npm-5.2.1-b38bb4470b-bed2341adf.zip/node_modules/dom-helpers/",\
+        "packageDependencies": [\
+          ["dom-helpers", "npm:5.2.1"],\
+          ["@babel/runtime", "npm:7.25.0"],\
+          ["csstype", "npm:3.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["dom-serializer", [\
       ["npm:1.4.1", {\
         "packageLocation": "./.yarn/cache/dom-serializer-npm-1.4.1-ebb24349c1-53b217bcfe.zip/node_modules/dom-serializer/",\
@@ -13187,6 +13265,7 @@ const RAW_RUNTIME_STATE =
           ["@formatjs/intl-localematcher", "npm:0.5.4"],\
           ["@mantine/core", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@next/bundle-analyzer", "npm:14.2.5"],\
           ["@next/eslint-plugin-next", "npm:14.2.5"],\
           ["@storybook/addon-essentials", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.2.9"],\
@@ -18859,6 +18938,36 @@ const RAW_RUNTIME_STATE =
         ],\
         "packagePeers": [\
           "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-transition-group", [\
+      ["npm:4.4.5", {\
+        "packageLocation": "./.yarn/cache/react-transition-group-npm-4.4.5-98ea4ef96e-ca32d3fd21.zip/node_modules/react-transition-group/",\
+        "packageDependencies": [\
+          ["react-transition-group", "npm:4.4.5"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:4.4.5", {\
+        "packageLocation": "./.yarn/__virtual__/react-transition-group-virtual-f5e84565b1/0/cache/react-transition-group-npm-4.4.5-98ea4ef96e-ca32d3fd21.zip/node_modules/react-transition-group/",\
+        "packageDependencies": [\
+          ["react-transition-group", "virtual:794f7fcb7bf3aabde26980d00365ea797fe87ceb44c80a4f9e08f249d8c93be78905142541de9be43086efa6613a3cadb6034b64e86163973d39f44be514b082#npm:4.4.5"],\
+          ["@babel/runtime", "npm:7.25.0"],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", null],\
+          ["dom-helpers", "npm:5.2.1"],\
+          ["loose-envify", "npm:1.4.0"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
           "react"\
         ],\
         "linkType": "HARD"\
