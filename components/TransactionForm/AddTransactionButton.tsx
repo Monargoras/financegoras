@@ -1,13 +1,13 @@
 import { Button, Menu, Group, ActionIcon, rem, useMantineTheme } from '@mantine/core'
 import { IconCalendarDollar, IconCalendarMonth, IconChevronDown } from '@tabler/icons-react'
-import classes from './AddEntryButton.module.css'
+import classes from './AddTransactionButton.module.css'
 import { Dictionary } from '@/utils/types'
 
-interface AddEntryButtonProps {
+interface AddTransactionButtonProps {
   dictionary: Dictionary
 }
 
-export function AddEntryButton(props: AddEntryButtonProps) {
+export function AddTransactionButton(props: AddTransactionButtonProps) {
   const theme = useMantineTheme()
 
   return (

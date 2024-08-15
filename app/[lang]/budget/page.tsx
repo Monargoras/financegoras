@@ -1,7 +1,7 @@
 import { Container, Flex, Text } from '@mantine/core'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
-import IncomeExpenseForm from '@/components/IncomeExpenseForm/IncomeExpenseForm'
+import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)

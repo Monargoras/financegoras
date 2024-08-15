@@ -4,9 +4,9 @@ import { Checkbox, CheckboxProps, Container, Flex, NativeSelect, NumberInput, Te
 import { useState } from 'react'
 import { IconPlus, IconMinus } from 'tabler-icons'
 import { Dictionary } from '@/utils/types'
-import { AddEntryButton } from './AddEntryButton'
+import { AddTransactionButton } from './AddTransactionButton'
 
-interface IncomeExpenseFormProps {
+interface TransactionFormProps {
   language: string
   dictionary: Dictionary
 }
@@ -14,7 +14,7 @@ interface IncomeExpenseFormProps {
 const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconMinus {...others} /> : <IconPlus {...others} />
 
-export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
+export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>('')
@@ -72,7 +72,7 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
             },
           ]}
         />
-        <AddEntryButton dictionary={props.dictionary} />
+        <AddTransactionButton dictionary={props.dictionary} />
       </Flex>
     </Container>
   )
