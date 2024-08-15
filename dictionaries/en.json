@@ -11,7 +11,7 @@
     "budgetBook": "Budget Book",
     "name": "Name",
     "amount": "Amount",
-    "income": "Income?",
+    "income": "Choose + for income, - for expenses",
     "category": "Category",
     "addSingleTransaction": "Add Transaction",
     "addMonthlyTransaction": "Add Monthly Transaction",

@@ -1,6 +1,17 @@
 'use client'
 
-import { Checkbox, CheckboxProps, Container, Flex, NativeSelect, NumberInput, TextInput } from '@mantine/core'
+import {
+  Checkbox,
+  CheckboxProps,
+  Container,
+  createTheme,
+  Flex,
+  MantineProvider,
+  NativeSelect,
+  NumberInput,
+  TextInput,
+  Tooltip,
+} from '@mantine/core'
 import { useState } from 'react'
 import { IconPlus, IconMinus } from 'tabler-icons'
 import { Dictionary, TransactionType } from '@/utils/types'
@@ -33,6 +44,10 @@ const categories = [
   },
 ]
 
+const checkboxTheme = createTheme({
+  cursorType: 'pointer',
+})
+
 export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
@@ -59,16 +74,19 @@ export default function TransactionForm(props: TransactionFormProps) {
   return (
     <Container fluid>
       <Flex mih={50} gap="xs" justify="center" align="center" direction="row" wrap="wrap">
-        <Checkbox
-          checked={isIncome}
-          style={{ marginTop: 'auto' }}
-          size="xl"
-          indeterminate={!isIncome}
-          icon={IsIncomeIcon}
-          label={props.dictionary.budgetPage.income}
-          labelPosition="left"
-          onChange={(event) => setIsIncome(event.currentTarget.checked)}
-        />
+        <MantineProvider theme={checkboxTheme}>
+          <Tooltip label={props.dictionary.budgetPage.income}>
+            <Checkbox
+              checked={isIncome}
+              style={{ marginTop: 'auto' }}
+              size="xl"
+              indeterminate={!isIncome}
+              icon={IsIncomeIcon}
+              labelPosition="left"
+              onChange={(event) => setIsIncome(event.currentTarget.checked)}
+            />
+          </Tooltip>
+        </MantineProvider>
         <NumberInput
           value={amount}
           label={props.dictionary.budgetPage.amount}

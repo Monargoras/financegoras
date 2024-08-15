@@ -11,7 +11,7 @@
     "budgetBook": "Haushaltsbuch",
     "name": "Name",
     "amount": "Betrag",
-    "income": "Einkommen?",
+    "income": "Wähle + für Einnahmen, - für Ausgaben",
     "category": "Kategorie",
     "addSingleTransaction": "Transaktion hinzufügen",
     "addMonthlyTransaction": "Monatliche Transaktion hinzufügen",
