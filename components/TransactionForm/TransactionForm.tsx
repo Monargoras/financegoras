@@ -45,6 +45,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       method: 'POST',
       body: JSON.stringify({ isIncome, amount, name, category, transactionType }),
     })
+    // TODO add feedback to the user https://mantine.dev/core/notification/
     if (res.status === 200) {
       setName('')
       setAmount('')
