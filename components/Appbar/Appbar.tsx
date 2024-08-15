@@ -27,7 +27,14 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
-            <Image src={logo} alt="Financegoras" width={48} height={48} />
+            <Image
+              src={logo}
+              alt="Financegoras"
+              width={48}
+              height={48}
+              onClick={() => router.push('/')}
+              style={{ cursor: 'pointer' }}
+            />
             <Group ml="xl" gap={0} visibleFrom="sm">
               <UnstyledButton onClick={() => router.push('/')} className={classes.control}>
                 {props.dictionary.appbar.home}
