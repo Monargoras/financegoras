@@ -3,7 +3,7 @@
 import { Checkbox, CheckboxProps, Container, Flex, NativeSelect, NumberInput, TextInput } from '@mantine/core'
 import { useState } from 'react'
 import { IconPlus, IconMinus } from 'tabler-icons'
-import { Dictionary } from '@/utils/types'
+import { Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 
 interface TransactionFormProps {
@@ -14,11 +14,46 @@ interface TransactionFormProps {
 const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconMinus {...others} /> : <IconPlus {...others} />
 
+const categories = [
+  {
+    group: 'Freetime',
+    items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation'],
+  },
+  {
+    group: 'Recurring',
+    items: ['Rent', 'Groceries', 'Upkeep', 'Subscriptions'],
+  },
+  {
+    group: 'Investments',
+    items: ['Single Stocks', 'ETFs', 'Property'],
+  },
+  {
+    group: 'Income',
+    items: ['Salary', 'Sidejob', 'Rent', 'Infrequent'],
+  },
+]
+
 export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState(categories[0].items[0])
+
+  const handleAddTransaction = async (transactionType: TransactionType) => {
+    const res = await fetch('/api/addTransaction', {
+      cache: 'no-cache',
+      method: 'POST',
+      body: JSON.stringify({ isIncome, amount, name, category, transactionType }),
+    })
+    if (res.status === 200) {
+      setName('')
+      setAmount('')
+      setCategory(categories[0].items[0])
+      setIsIncome(false)
+      return true
+    }
+    return false
+  }
 
   return (
     <Container fluid>
@@ -53,26 +88,9 @@ export default function TransactionForm(props: TransactionFormProps) {
           style={{ marginTop: 'auto' }}
           value={category}
           onChange={(event) => setCategory(event.currentTarget.value)}
-          data={[
-            {
-              group: 'Freetime',
-              items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation'],
-            },
-            {
-              group: 'Recurring',
-              items: ['Rent', 'Groceries', 'Upkeep', 'Subscriptions'],
-            },
-            {
-              group: 'Investments',
-              items: ['Single Stocks', 'ETFs', 'Property'],
-            },
-            {
-              group: 'Income',
-              items: ['Salary', 'Sidejob', 'Rent', 'Infrequent'],
-            },
-          ]}
+          data={categories}
         />
-        <AddTransactionButton dictionary={props.dictionary} />
+        <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>
     </Container>
   )

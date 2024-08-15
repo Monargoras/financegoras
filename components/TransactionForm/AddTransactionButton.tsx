@@ -1,10 +1,11 @@
 import { Button, Menu, Group, ActionIcon, rem, useMantineTheme } from '@mantine/core'
 import { IconCalendarDollar, IconCalendarMonth, IconChevronDown } from '@tabler/icons-react'
 import classes from './AddTransactionButton.module.css'
-import { Dictionary } from '@/utils/types'
+import { Dictionary, TransactionType } from '@/utils/types'
 
 interface AddTransactionButtonProps {
   dictionary: Dictionary
+  handleAddTransaction: (transactionType: TransactionType) => Promise<boolean>
 }
 
 export function AddTransactionButton(props: AddTransactionButtonProps) {
@@ -12,7 +13,9 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
 
   return (
     <Group wrap="nowrap" gap={0} style={{ marginTop: 'auto' }}>
-      <Button className={classes.button}>{props.dictionary.budgetPage.addSingleTransaction}</Button>
+      <Button className={classes.button} onClick={() => props.handleAddTransaction(TransactionType.Single)}>
+        {props.dictionary.budgetPage.addSingleTransaction}
+      </Button>
       <Menu transitionProps={{ transition: 'pop' }} position="bottom-end" withinPortal>
         <Menu.Target>
           <ActionIcon variant="filled" color={theme.primaryColor} size={36} className={classes.menuControl}>
@@ -28,6 +31,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
                 color={theme.colors.blue[5]}
               />
             }
+            onClick={() => props.handleAddTransaction(TransactionType.Monthly)}
           >
             {props.dictionary.budgetPage.addMonthlyTransaction}
           </Menu.Item>
@@ -39,6 +43,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
                 color={theme.colors.blue[5]}
               />
             }
+            onClick={() => props.handleAddTransaction(TransactionType.Annual)}
           >
             {props.dictionary.budgetPage.addAnnualTransaction}
           </Menu.Item>
