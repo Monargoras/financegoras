@@ -12,6 +12,9 @@
     "name": "Name",
     "amount": "Betrag",
     "income": "Einkommen?",
-    "category": "Kategorie"
+    "category": "Kategorie",
+    "addSingleTransaction": "Transaktion hinzufügen",
+    "addMonthlyTransaction": "Monatliche Transaktion hinzufügen",
+    "addAnnualTransaction": "Jährliche Transaktion hinzufügen"
   }
 }

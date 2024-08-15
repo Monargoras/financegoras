@@ -4,8 +4,10 @@ import { Checkbox, CheckboxProps, Container, Flex, NativeSelect, NumberInput, Te
 import { useState } from 'react'
 import { IconPlus, IconMinus } from 'tabler-icons'
 import { Dictionary } from '@/utils/types'
+import { AddEntryButton } from './AddEntryButton'
 
 interface IncomeExpenseFormProps {
+  language: string
   dictionary: Dictionary
 }
 
@@ -19,7 +21,7 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
   const [category, setCategory] = useState('')
 
   return (
-    <Container>
+    <Container fluid>
       <Flex mih={50} gap="xs" justify="center" align="center" direction="row" wrap="wrap">
         <Checkbox
           checked={isIncome}
@@ -53,8 +55,8 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
           onChange={(event) => setCategory(event.currentTarget.value)}
           data={[
             {
-              group: 'Income',
-              items: ['Work', 'Sidejob', 'Rent', 'Infrequent'],
+              group: 'Freetime',
+              items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation'],
             },
             {
               group: 'Recurring',
@@ -65,11 +67,12 @@ export default function IncomeExpenseForm(props: IncomeExpenseFormProps) {
               items: ['Single Stocks', 'ETFs', 'Property'],
             },
             {
-              group: 'Freetime',
-              items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation'],
+              group: 'Income',
+              items: ['Salary', 'Sidejob', 'Rent', 'Infrequent'],
             },
           ]}
         />
+        <AddEntryButton dictionary={props.dictionary} />
       </Flex>
     </Container>
   )

@@ -12,6 +12,9 @@
     "name": "Name",
     "amount": "Amount",
     "income": "Income?",
-    "category": "Category"
+    "category": "Category",
+    "addSingleTransaction": "Add Transaction",
+    "addMonthlyTransaction": "Add Monthly Transaction",
+    "addAnnualTransaction": "Add Annual Transaction"
   }
 }
