@@ -19,6 +19,8 @@
     "feedbackAddTransactionSuccessTitle": "Transaction added successfully!",
     "feedbackAddTransactionSuccessMessage": "The transaction has been added to your budget book.",
     "feedbackAddTransactionErrorTitle": "Transaction could not be added!",
-    "feedbackAddTransactionErrorMessage": "An error occurred while adding the transaction."
+    "feedbackAddTransactionErrorMessage": "An error occurred while adding the transaction.",
+    "monthlyIncome": "Monthly Income",
+    "monthlyExpenses": "Monthly Expenses"
   }
 }

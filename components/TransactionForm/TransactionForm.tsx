@@ -20,7 +20,6 @@ import { Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 
 interface TransactionFormProps {
-  language: string
   dictionary: Dictionary
 }
 
