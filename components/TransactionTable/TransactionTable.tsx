@@ -5,7 +5,7 @@ import { Loader, Text } from '@mantine/core'
 import { Transaction } from '@/utils/types'
 
 export function TransactionTable() {
-  const fetcher = (input: RequestInfo | URL) => fetch(input, { next: { revalidate: 10 } }).then((res) => res.json())
+  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/getTransactions', fetcher)
 
   return (

@@ -12,6 +12,7 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
+import { mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
@@ -73,6 +74,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         icon: <IconCheck />,
         position: 'bottom-right',
       })
+      mutate('/api/getTransactions')
       return true
     }
     notifications.show({
