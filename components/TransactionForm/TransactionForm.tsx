@@ -57,7 +57,7 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [category, setCategory] = useState(categories[0].items[0])
 
   const handleAddTransaction = async (transactionType: TransactionType) => {
-    const res = await fetch('/api/addTransaction', {
+    const res = await fetch('/api/budget/addTransaction', {
       cache: 'no-cache',
       method: 'POST',
       body: JSON.stringify({ isIncome, amount, name, category, transactionType }),
@@ -74,7 +74,8 @@ export default function TransactionForm(props: TransactionFormProps) {
         icon: <IconCheck />,
         position: 'bottom-right',
       })
-      mutate('/api/getTransactions')
+      mutate('/api/budget/getTransactions')
+      mutate('/api/budget/getAggregatedTransactions')
       return true
     }
     notifications.show({

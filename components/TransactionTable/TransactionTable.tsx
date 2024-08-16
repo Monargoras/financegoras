@@ -6,7 +6,7 @@ import { Transaction } from '@/utils/types'
 
 export function TransactionTable() {
   const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR('/api/getTransactions', fetcher)
+  const { data, error, isLoading } = useSWR('/api/budget/getTransactions', fetcher)
 
   return (
     <>
