@@ -1,4 +1,5 @@
 import { ColumnType, Insertable, Selectable, Updateable } from 'kysely'
+import { TransactionType } from './types'
 
 export interface Database {
   transactions: TransactionsTable
@@ -18,14 +19,14 @@ export interface TransactionsTable {
   amount: number
   name: string
   category: string
-  transactionType: 'Single' | 'Monthly' | 'Annual'
+  transactionType: TransactionType
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
   // wrapper. Here we define a column `created_at` that is selected as
   // a `Date`, has to be provided as a `string` in inserts and
   // can never be updated:
   createdAt: ColumnType<Date, string, never>
-  stoppedAt: ColumnType<Date, never, string | undefined>
+  stoppedAt: ColumnType<Date | undefined, never, string | undefined>
 }
 
 // You should not use the table schema interfaces directly. Instead, you should
