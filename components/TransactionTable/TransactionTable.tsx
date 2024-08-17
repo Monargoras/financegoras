@@ -13,6 +13,7 @@ export function TransactionTable() {
       {isLoading && <Loader color="blue" type="dots" />}
       {error && <Text>Error loading data.</Text>}
       {data &&
+        data.transactions &&
         data.transactions.map((transaction: Transaction) => (
           <div
             key={transaction.id}

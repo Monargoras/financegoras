@@ -13,7 +13,7 @@ export interface TransactionsTable {
   // using the `Generated` type. This way they are automatically
   // made optional in inserts and updates.
   // id: Generated<number>
-
+  userId: string
   id: string
   isIncome: boolean
   amount: number
