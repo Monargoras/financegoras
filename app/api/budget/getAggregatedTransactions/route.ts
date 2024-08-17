@@ -7,10 +7,12 @@ const calculateTotalPerMonth = (transactions: Transaction[]) =>
       transaction.transactionType === TransactionType.Annual ? acc + transaction.amount / 12 : acc + transaction.amount,
     0
   )
-
+// TODO add generalization for months and years
 /**
- * This endpoint returns the aggregated transactions from the database for the current month
+ * This endpoint returns the aggregated transactions from the database for given timeframe
  * @allowedMethods GET
+ * @param month - the month of the year (optional)
+ * @param year - the year
  * @returns body containing the transactions as an array
  */
 export async function GET() {
