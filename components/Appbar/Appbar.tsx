@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import logo from '../../public/financegoras.png'
 import classes from './Appbar.module.css'
 import { Dictionary } from '@/utils/types'
+import AuthMenu from '../AuthMenu/AuthMenu'
 
 interface AppbarProps {
   dictionary: Dictionary
@@ -35,7 +36,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               onClick={() => router.push('/')}
               style={{ cursor: 'pointer' }}
             />
-            <Group ml="xl" gap={0} visibleFrom="sm">
+            <Group ml="auto" gap={0} visibleFrom="sm">
               <UnstyledButton onClick={() => router.push('/')} className={classes.control}>
                 {props.dictionary.appbar.home}
               </UnstyledButton>
@@ -44,6 +45,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               </UnstyledButton>
               <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
             </Group>
+            <AuthMenu dictionary={props.dictionary} />
           </Group>
         </Group>
       </AppShell.Header>

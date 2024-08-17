@@ -2,7 +2,9 @@
   "appbar": {
     "home": "Start",
     "budget": "Haushaltsbuch",
-    "portfolio": "Portfolio"
+    "portfolio": "Portfolio",
+    "logout": "Abmelden",
+    "login": "Anmelden"
   },
   "landingPage": {
     "welcome": "Willkommen bei Financegoras!"

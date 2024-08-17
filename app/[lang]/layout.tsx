@@ -1,10 +1,13 @@
 import '@mantine/core/styles.css'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import '@mantine/notifications/styles.css'
 import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
+import ClientProviders from '@/components/ClientProviders/ClientProviders'
 
 export const metadata = {
   title: 'Financegoras',
@@ -24,6 +27,7 @@ export default async function RootLayout({
 }) {
   // get currently used dictionary
   const dict = await getDictionary(params.lang)
+  const session = await getServerSession(authOptions)
 
   return (
     <html lang={params.lang}>
@@ -33,8 +37,10 @@ export default async function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <Appbar props={{ dictionary: dict }}>{children}</Appbar>
-          <Notifications />
+          <ClientProviders session={session}>
+            <Appbar props={{ dictionary: dict }}>{children}</Appbar>
+            <Notifications />
+          </ClientProviders>
         </MantineProvider>
       </body>
     </html>
