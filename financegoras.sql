@@ -21,6 +21,7 @@ USE `financegoras`;
 
 -- Dumping structure for table financegoras.transactions
 CREATE TABLE IF NOT EXISTS `transactions` (
+  `userId` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `id` char(16) NOT NULL,
   `isIncome` bit(1) NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
