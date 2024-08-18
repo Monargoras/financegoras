@@ -1,4 +1,4 @@
-import { Container, Flex, Text } from '@mantine/core'
+import { Container, Flex } from '@mantine/core'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
@@ -11,7 +11,6 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
   return (
     <Container fluid>
       <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
-        <Text>{dict.budgetPage.budgetBook}</Text>
         <IncomeExpenseForm dictionary={dict} />
         <Flex gap="md" justify="space-apart" direction="row" wrap="wrap">
           <MonthlyStats dictionary={dict} />
