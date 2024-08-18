@@ -19,7 +19,7 @@ export interface TransactionsTable {
   amount: number
   name: string
   category: string
-  transactionType: TransactionType
+  transactionType: ColumnType<TransactionType, string, string>
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
   // wrapper. Here we define a column `created_at` that is selected as

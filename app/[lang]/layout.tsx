@@ -2,8 +2,9 @@ import '@mantine/core/styles.css'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import '@mantine/notifications/styles.css'
+import '@mantine/dates/styles.css'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
@@ -37,7 +38,7 @@ export default async function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <ClientProviders session={session}>
+          <ClientProviders session={session} language={params.lang}>
             <Appbar props={{ dictionary: dict }}>{children}</Appbar>
             <Notifications />
           </ClientProviders>

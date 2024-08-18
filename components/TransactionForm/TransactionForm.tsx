@@ -55,11 +55,11 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [amount, setAmount] = useState<string | number>('')
   const [category, setCategory] = useState(categories[0].items[0])
 
-  const handleAddTransaction = async (transactionType: TransactionType) => {
+  const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
     const res = await fetch('/api/budget/addTransaction', {
       cache: 'no-cache',
       method: 'POST',
-      body: JSON.stringify({ isIncome, amount, name, category, transactionType }),
+      body: JSON.stringify({ isIncome, amount, name, category, transactionType, date }),
     })
     if (res.status === 200) {
       setName('')
