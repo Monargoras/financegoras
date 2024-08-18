@@ -18,6 +18,16 @@ export async function POST(req: NextRequest) {
   }
 
   const data = await req.json()
+  if (
+    data.isIncome === undefined ||
+    data.amount === undefined ||
+    data.name === undefined ||
+    data.category === undefined ||
+    data.transactionType === undefined
+  ) {
+    return new Response('Missing required fields', { status: 400 })
+  }
+
   const id = nanoid(16)
   const transaction = {
     isIncome: data.isIncome,
@@ -26,7 +36,7 @@ export async function POST(req: NextRequest) {
     category: data.category,
     userId: session.user.id,
     id,
-    createdAt: (new Date(data.date) ?? new Date()).toISOString().slice(0, 19).replace('T', ' '),
+    createdAt: (data.date ? new Date(data.date) : new Date()).toISOString().slice(0, 19).replace('T', ' '),
     transactionType: TransactionType[data.transactionType],
   }
   const { insertId } = await db.insertInto('transactions').values(transaction).executeTakeFirstOrThrow()

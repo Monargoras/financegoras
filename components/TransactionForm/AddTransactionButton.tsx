@@ -16,8 +16,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
   const [opened, { open, close }] = useDisclosure(false)
   const [date, setDate] = useState<Date | null>(null)
   const [type, setType] = useState<string | null>(TransactionType[0])
-
-  // TODO set date as fourth option
+  const [dateError, setDateError] = useState(false)
 
   return (
     <Group wrap="nowrap" gap={0} style={{ marginTop: 'auto' }}>
@@ -69,6 +68,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
         <DateInput
           value={date}
           onChange={setDate}
+          error={dateError}
           placeholder={props.dictionary.budgetPage.pickDate}
           label={props.dictionary.budgetPage.date}
           valueFormat="DD MMMM YYYY"
@@ -85,13 +85,23 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
           ]}
           placeholder={props.dictionary.budgetPage.pickType}
           label={props.dictionary.budgetPage.type}
-          required
         />
         <Flex justify="flex-end">
           <Button
-            onClick={() => {
+            onClick={async () => {
+              if (!date) {
+                setDateError(true)
+                return
+              }
               close()
-              props.handleAddTransaction(TransactionType[type as keyof typeof TransactionType], date)
+              const succcess = await props.handleAddTransaction(
+                TransactionType[type as keyof typeof TransactionType],
+                date
+              )
+              if (succcess) {
+                setDate(null)
+                setType(TransactionType[0])
+              }
             }}
             style={{ marginTop: 20 }}
           >

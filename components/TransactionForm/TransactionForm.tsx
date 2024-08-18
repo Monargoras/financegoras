@@ -52,10 +52,21 @@ const checkboxTheme = createTheme({
 export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
-  const [amount, setAmount] = useState<string | number>('')
+  const [amount, setAmount] = useState<string | number>(0)
   const [category, setCategory] = useState(categories[0].items[0])
+  const [amountError, setAmountError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
+    if (name.length === 0) {
+      setNameError(true)
+      return false
+    }
+    if (amount === 0) {
+      setAmountError(true)
+      return false
+    }
+
     const res = await fetch('/api/budget/addTransaction', {
       cache: 'no-cache',
       method: 'POST',
@@ -105,7 +116,11 @@ export default function TransactionForm(props: TransactionFormProps) {
         <NumberInput
           value={amount}
           label={props.dictionary.budgetPage.amount}
-          onChange={setAmount}
+          onChange={(value) => {
+            setAmountError(false)
+            setAmount(value)
+          }}
+          error={amountError}
           allowNegative={false}
           prefix="€"
           decimalScale={2}
@@ -115,8 +130,12 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <TextInput
           value={name}
+          error={nameError}
           label={props.dictionary.budgetPage.name}
-          onChange={(event) => setName(event.currentTarget.value)}
+          onChange={(event) => {
+            setNameError(false)
+            setName(event.currentTarget.value)
+          }}
         />
         <NativeSelect
           style={{ marginTop: 'auto' }}
