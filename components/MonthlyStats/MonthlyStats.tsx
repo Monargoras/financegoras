@@ -10,7 +10,12 @@ interface MonthlyStatsProps {
 
 export function MonthlyStats(props: MonthlyStatsProps) {
   const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR('/api/budget/getAggregatedTransactions', fetcher)
+  const currentMonth = new Date().getMonth() + 1
+  const currentYear = new Date().getFullYear()
+  const { data, error, isLoading } = useSWR(
+    `/api/budget/getAggregatedTransactions?year=${currentYear}&month=${currentMonth}`,
+    fetcher
+  )
 
   return (
     <>
