@@ -8,6 +8,19 @@ export type Dictionary = {
   [key: string]: { [key: string]: string }
 }
 
+export const getTransactionType = (type: string): TransactionType => {
+  switch (type) {
+    case 'Single':
+      return TransactionType.Single
+    case 'Monthly':
+      return TransactionType.Monthly
+    case 'Annual':
+      return TransactionType.Annual
+    default:
+      throw new Error(`Unknown transaction type: ${type}`)
+  }
+}
+
 export enum TransactionType {
   Single,
   Monthly,

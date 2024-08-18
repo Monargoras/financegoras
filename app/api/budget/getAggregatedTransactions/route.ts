@@ -1,13 +1,13 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { db } from '@/utils/database'
-import { Transaction, TransactionType } from '@/utils/types'
+import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
 const calculateTotalPerMonth = (transactions: Transaction[]) => {
   let sum = 0
   for (const transaction of transactions) {
-    if (transaction.transactionType === TransactionType[TransactionType.Annual]) {
+    if (transaction.transactionType === TransactionType.Annual) {
       sum += transaction.amount / 12
     } else {
       sum += transaction.amount
@@ -19,7 +19,7 @@ const calculateTotalPerMonth = (transactions: Transaction[]) => {
 const calculateTotalPerYear = (transactions: Transaction[]) => {
   let sum = 0
   for (const transaction of transactions) {
-    if (transaction.transactionType === TransactionType[TransactionType.Monthly]) {
+    if (transaction.transactionType === TransactionType.Monthly) {
       sum += transaction.amount * 12
     } else {
       sum += transaction.amount
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const incomeTransactions = await db
+  const incomeRes = await db
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', session.user.id)
@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
     .where('isIncome', '=', true)
     .execute()
 
-  const expenseTransactions = await db
+  const expenseRes = await db
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', session.user.id)
@@ -82,6 +82,17 @@ export async function GET(request: NextRequest) {
     )
     .where('isIncome', '=', false)
     .execute()
+
+  // transform transaction type to enum
+  const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({
+    ...transaction,
+    transactionType: getTransactionType(transaction.transactionType),
+  }))
+
+  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
+    ...transaction,
+    transactionType: getTransactionType(transaction.transactionType),
+  }))
 
   const totalIncome = month ? calculateTotalPerMonth(incomeTransactions) : calculateTotalPerYear(incomeTransactions)
   const totalExpenses = month ? calculateTotalPerMonth(expenseTransactions) : calculateTotalPerYear(expenseTransactions)
