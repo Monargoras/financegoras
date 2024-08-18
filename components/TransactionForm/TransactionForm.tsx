@@ -18,6 +18,7 @@ import { useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
 import { Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
+import CategoryDrawer from '../CategoryDrawer/CategoryDrawer'
 
 interface TransactionFormProps {
   dictionary: Dictionary
@@ -139,10 +140,16 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <Select
           data={categories}
-          label={props.dictionary.budgetPage.category}
+          label={
+            <Flex direction="row" gap="xs" style={{ marginBottom: -2 }}>
+              {props.dictionary.budgetPage.category}
+              <CategoryDrawer dictionary={props.dictionary} />
+            </Flex>
+          }
           value={category}
           onChange={(value) => setCategory(value)}
           maxDropdownHeight={400}
+          allowDeselect={false}
         />
         <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>
