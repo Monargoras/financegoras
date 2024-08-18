@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { db } from '@/utils/database'
 import { Transaction, TransactionType } from '@/utils/types'
-import { authOptions } from '../../auth/[...nextauth]/route'
+import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
 const calculateTotalPerMonth = (transactions: Transaction[]) =>
   transactions.reduce(

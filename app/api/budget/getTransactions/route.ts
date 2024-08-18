@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
-import { authOptions } from '../../auth/[...nextauth]/route'
+import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
 /**
  * This endpoint returns all transactions from the database

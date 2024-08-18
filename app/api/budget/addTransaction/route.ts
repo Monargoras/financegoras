@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { TransactionType } from '@/utils/types'
-import { authOptions } from '../../auth/[...nextauth]/route'
+import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
 /**
  * This endpoint accepts new transactions and adds them to the database
