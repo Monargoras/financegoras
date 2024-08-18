@@ -4,21 +4,29 @@ import { db } from '@/utils/database'
 import { Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
-const calculateTotalPerMonth = (transactions: Transaction[]) =>
-  transactions.reduce(
-    (acc, transaction) =>
-      transaction.transactionType === TransactionType.Annual ? acc + transaction.amount / 12 : acc + transaction.amount,
-    0
-  )
+const calculateTotalPerMonth = (transactions: Transaction[]) => {
+  let sum = 0
+  for (const transaction of transactions) {
+    if (transaction.transactionType === TransactionType[TransactionType.Annual]) {
+      sum += transaction.amount / 12
+    } else {
+      sum += transaction.amount
+    }
+  }
+  return sum.toFixed(2)
+}
 
-const calculateTotalPerYear = (transactions: Transaction[]) =>
-  transactions.reduce(
-    (acc, transaction) =>
-      transaction.transactionType === TransactionType.Monthly
-        ? acc + transaction.amount * 12
-        : acc + transaction.amount,
-    0
-  )
+const calculateTotalPerYear = (transactions: Transaction[]) => {
+  let sum = 0
+  for (const transaction of transactions) {
+    if (transaction.transactionType === TransactionType[TransactionType.Monthly]) {
+      sum += transaction.amount * 12
+    } else {
+      sum += transaction.amount
+    }
+  }
+  return sum.toFixed(2)
+}
 
 /**
  * This endpoint returns the aggregated transactions from the database for given timeframe

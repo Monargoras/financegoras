@@ -1,5 +1,4 @@
 import { ColumnType, Insertable, Selectable, Updateable } from 'kysely'
-import { TransactionType } from './types'
 
 export interface Database {
   transactions: TransactionsTable
@@ -19,7 +18,7 @@ export interface TransactionsTable {
   amount: number
   name: string
   category: string
-  transactionType: ColumnType<TransactionType, string, string>
+  transactionType: string
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
   // wrapper. Here we define a column `created_at` that is selected as
