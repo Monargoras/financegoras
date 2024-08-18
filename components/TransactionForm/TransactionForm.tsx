@@ -7,7 +7,7 @@ import {
   createTheme,
   Flex,
   MantineProvider,
-  NativeSelect,
+  Select,
   NumberInput,
   TextInput,
   Tooltip,
@@ -41,7 +41,7 @@ const categories = [
   },
   {
     group: 'Income',
-    items: ['Salary', 'Sidejob', 'Rent', 'Infrequent'],
+    items: ['Salary', 'Sidejob', 'Infrequent'],
   },
 ]
 
@@ -53,7 +53,7 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
-  const [category, setCategory] = useState(categories[0].items[0])
+  const [category, setCategory] = useState<string | null>(categories[0].items[0])
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
 
@@ -137,11 +137,12 @@ export default function TransactionForm(props: TransactionFormProps) {
             setName(event.currentTarget.value)
           }}
         />
-        <NativeSelect
-          style={{ marginTop: 'auto' }}
-          value={category}
-          onChange={(event) => setCategory(event.currentTarget.value)}
+        <Select
           data={categories}
+          label={props.dictionary.budgetPage.category}
+          value={category}
+          onChange={(value) => setCategory(value)}
+          maxDropdownHeight={400}
         />
         <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>
