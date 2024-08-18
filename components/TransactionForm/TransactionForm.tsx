@@ -73,8 +73,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         icon: <IconCheck />,
         position: 'bottom-right',
       })
-      mutate('/api/budget/getTransactions')
-      mutate('/api/budget/getAggregatedTransactions')
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
       return true
     }
     notifications.show({
