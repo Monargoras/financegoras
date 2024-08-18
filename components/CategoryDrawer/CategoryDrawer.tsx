@@ -23,7 +23,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
           e.preventDefault()
           open()
         }}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', marginBottom: -2 }}
       >
         {props.dictionary.budgetPage.edit}
       </Text>

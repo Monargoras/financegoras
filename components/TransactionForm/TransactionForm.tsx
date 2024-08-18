@@ -141,7 +141,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         <Select
           data={categories}
           label={
-            <Flex direction="row" gap="xs" style={{ marginBottom: -2 }}>
+            <Flex direction="row" gap="xs">
               {props.dictionary.budgetPage.category}
               <CategoryDrawer dictionary={props.dictionary} />
             </Flex>
