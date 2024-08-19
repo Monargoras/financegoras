@@ -2,6 +2,7 @@ import { ColumnType, Insertable, Selectable, Updateable } from 'kysely'
 
 export interface Database {
   transactions: TransactionsTable
+  userData: UserDataTable
 }
 
 // This interface describes the `transactions` table to Kysely. Table
@@ -37,3 +38,12 @@ export interface TransactionsTable {
 export type Transaction = Selectable<TransactionsTable>
 export type NewTransaction = Insertable<TransactionsTable>
 export type TransactionUpdate = Updateable<TransactionsTable>
+
+export interface UserDataTable {
+  userId: string
+  categories: string
+}
+
+export type UserData = Selectable<UserDataTable>
+export type NewUserData = Insertable<UserDataTable>
+export type UserDataUpdate = Updateable<UserDataTable>
