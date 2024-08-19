@@ -29,7 +29,17 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `category` varchar(50) NOT NULL,
   `transactionType` enum('Single','Monthly','Annual') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'Single',
   `createdAt` datetime NOT NULL,
-  `stoppedAt` datetime DEFAULT NULL
+  `stoppedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`userId`,`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table financegoras.userdata
+CREATE TABLE IF NOT EXISTS `userdata` (
+  `userId` varchar(50) NOT NULL,
+  `categories` mediumtext,
+  PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- Data exporting was unselected.
