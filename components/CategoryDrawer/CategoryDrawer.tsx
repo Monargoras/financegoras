@@ -13,6 +13,7 @@ interface CategoryDrawerProps {
   dictionary: Dictionary
   categories: Categories
   setCategories: (categories: Categories) => void
+  setUpdateBackendCategories: (value: boolean) => void
 }
 
 export default function CategoryDrawer(props: CategoryDrawerProps) {
@@ -54,6 +55,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       props.setCategories(newCategories)
       setEditing(props.dictionary.budgetPage.defaultCategoryName)
       setEditingValue(props.dictionary.budgetPage.defaultCategoryName)
+      props.setUpdateBackendCategories(true)
       return true
     }
     return false
@@ -67,7 +69,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       return true
     }
     // check if the new name is already in use
-    if (allCategories.includes(newName) || !editing) {
+    if (allCategories.includes(newName) || !editing || !editingValue) {
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddGroupErrorTitle,
         message: props.dictionary.budgetPage.feedbackAddGroupErrorMessage,
@@ -91,6 +93,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       newCategories[index] = newCategory
       // set the new categories array
       props.setCategories(newCategories)
+      props.setUpdateBackendCategories(true)
       return true
     }
     return false
@@ -105,6 +108,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       icon: <IconTrashX />,
       position: 'bottom-right',
     })
+    // props.setUpdateBackendCategories(true)
   }
 
   const handleAddGroup = () => {
@@ -124,6 +128,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     props.setCategories([...props.categories, newGroup])
     setEditing(props.dictionary.budgetPage.defaultGroupName)
     setEditingValue(props.dictionary.budgetPage.defaultGroupName)
+    props.setUpdateBackendCategories(true)
     return true
   }
 
@@ -135,7 +140,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       return true
     }
     // check if the new name is already in use
-    if (allCategories.includes(newName)) {
+    if (allCategories.includes(newName) || !editingValue) {
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddGroupErrorTitle,
         message: props.dictionary.budgetPage.feedbackAddGroupErrorMessage,
@@ -157,6 +162,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       newCategories[index] = newGroup
       // set the new categories array
       props.setCategories(newCategories)
+      props.setUpdateBackendCategories(true)
       return true
     }
     return false
@@ -171,6 +177,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       icon: <IconTrashX />,
       position: 'bottom-right',
     })
+    // props.setUpdateBackendCategories(true)
   }
 
   const items = props.categories.map((item) => (

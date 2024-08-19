@@ -42,6 +42,10 @@
     "defaultGroupName": "Neue Gruppe",
     "defaultCategoryName": "Neue Kategorie",
     "feedbackAddGroupErrorTitle": "Name existiert bereits für Kategorie oder Gruppe!",
-    "feedbackAddGroupErrorMessage": "Bitte wähle einen anderen Namen."
+    "feedbackAddGroupErrorMessage": "Bitte wähle einen anderen Namen.",
+    "feedbackUpdateBackendSuccessTitle": "Änderungen erfolgreich gespeichert!",
+    "feedbackUpdateBackendSuccessMessage": "Die Änderungen wurden erfolgreich auf dem Server gespeichert.",
+    "feedbackUpdateBackendErrorTitle": "Änderungen konnten nicht gespeichert werden!",
+    "feedbackUpdateBackendErrorMessage": "Beim Speichern der Änderungen ist ein Fehler aufgetreten."
   }
 }

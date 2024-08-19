@@ -42,6 +42,10 @@
     "defaultGroupName": "New Group",
     "defaultCategoryName": "New Category",
     "feedbackAddGroupErrorTitle": "Name already exists for category or group!",
-    "feedbackAddGroupErrorMessage": "Please choose a different name."
+    "feedbackAddGroupErrorMessage": "Please choose a different name.",
+    "feedbackUpdateBackendSuccessTitle": "Changes saved successfully!",
+    "feedbackUpdateBackendSuccessMessage": "The changes have been saved successfully on the server.",
+    "feedbackUpdateBackendErrorTitle": "Changes could not be saved!",
+    "feedbackUpdateBackendErrorMessage": "An error occurred while saving the changes."
   }
 }

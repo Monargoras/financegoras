@@ -12,7 +12,7 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
@@ -27,21 +27,6 @@ interface TransactionFormProps {
 const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconMinus {...others} /> : <IconPlus {...others} />
 
-const mockUpCategories = [
-  {
-    group: 'Freetime',
-    items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation', 'Other'],
-  },
-  {
-    group: 'Recurring',
-    items: ['Rent', 'Groceries', 'Upkeep', 'Subscriptions', 'Investment'],
-  },
-  {
-    group: 'Income',
-    items: ['Salary', 'Sidejob', 'Infrequent'],
-  },
-]
-
 const checkboxTheme = createTheme({
   cursorType: 'pointer',
 })
@@ -50,16 +35,51 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
-  const [categories, setCategories] = useState<Categories | null>(mockUpCategories)
+  const [categories, setCategories] = useState<Categories | null>(null)
   const [category, setCategory] = useState<string | null>(null)
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
+  const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
+
+  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const { data } = useSWR('/api/budget/getCategories', fetcher)
 
   useEffect(() => {
-    if (categories) {
-      setCategory(categories[0].items[0])
+    if (data) {
+      setCategories(data.categories)
+      setCategory(data.categories[0].items[0])
     }
-  }, [categories])
+  }, [data])
+
+  useEffect(() => {
+    if (!updateBackendCategories) {
+      return
+    }
+    fetch('/api/budget/updateCategories', {
+      cache: 'no-cache',
+      method: 'POST',
+      body: JSON.stringify(categories),
+    }).then((res) => {
+      if (res.status === 200) {
+        notifications.show({
+          title: props.dictionary.budgetPage.feedbackUpdateBackendSuccessTitle,
+          message: props.dictionary.budgetPage.feedbackUpdateBackendSuccessMessage,
+          color: 'green',
+          icon: <IconCheck />,
+          position: 'bottom-right',
+        })
+      } else {
+        notifications.show({
+          title: props.dictionary.budgetPage.feedbackUpdateBackendErrorTitle,
+          message: props.dictionary.budgetPage.feedbackUpdateBackendErrorMessage,
+          color: 'red',
+          icon: <IconX />,
+          position: 'bottom-right',
+        })
+      }
+    })
+    setUpdateBackendCategories(false)
+  }, [updateBackendCategories])
 
   const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
     if (name.length === 0) {
@@ -152,6 +172,7 @@ export default function TransactionForm(props: TransactionFormProps) {
                 dictionary={props.dictionary}
                 categories={categories ?? []}
                 setCategories={setCategories}
+                setUpdateBackendCategories={setUpdateBackendCategories}
               />
             </Flex>
           }
