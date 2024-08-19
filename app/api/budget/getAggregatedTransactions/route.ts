@@ -55,13 +55,12 @@ export async function GET(request: NextRequest) {
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', session.user.id)
-    .where('createdAt', '>=', month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`))
     .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
     .where((eb) =>
       eb('stoppedAt', 'is', null).or(
         'stoppedAt',
         '>',
-        month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`)
+        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
       )
     )
     .where('isIncome', '=', true)
@@ -71,13 +70,12 @@ export async function GET(request: NextRequest) {
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', session.user.id)
-    .where('createdAt', '>=', month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`))
     .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
     .where((eb) =>
       eb('stoppedAt', 'is', null).or(
         'stoppedAt',
         '>',
-        month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`)
+        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
       )
     )
     .where('isIncome', '=', false)

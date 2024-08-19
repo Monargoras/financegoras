@@ -38,6 +38,9 @@ export async function POST(req: NextRequest) {
     id,
     createdAt: (data.date ? new Date(data.date) : new Date()).toISOString().slice(0, 19).replace('T', ' '),
     transactionType: TransactionType[data.transactionType],
+    ...(data.transactionType === 0 && {
+      stoppedAt: (data.date ? new Date(data.date) : new Date()).toISOString().slice(0, 19).replace('T', ' '),
+    }),
   }
   const { insertId } = await db.insertInto('transactions').values(transaction).executeTakeFirstOrThrow()
   return Response.json({ insertId }, { status: 200 })
