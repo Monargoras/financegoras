@@ -14,9 +14,9 @@ import {
 } from '@mantine/core'
 import { mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
-import { Dictionary, TransactionType } from '@/utils/types'
+import { Categories, Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 import CategoryDrawer from '../CategoryDrawer/CategoryDrawer'
 
@@ -27,18 +27,14 @@ interface TransactionFormProps {
 const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconMinus {...others} /> : <IconPlus {...others} />
 
-const categories = [
+const mockUpCategories = [
   {
     group: 'Freetime',
-    items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation'],
+    items: ['Restaurants', 'Activities', 'Socializing', 'Gifts', 'Vacation', 'Other'],
   },
   {
     group: 'Recurring',
-    items: ['Rent', 'Groceries', 'Upkeep', 'Subscriptions'],
-  },
-  {
-    group: 'Investments',
-    items: ['Single Stocks', 'ETFs', 'Property'],
+    items: ['Rent', 'Groceries', 'Upkeep', 'Subscriptions', 'Investment'],
   },
   {
     group: 'Income',
@@ -54,9 +50,16 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
-  const [category, setCategory] = useState<string | null>(categories[0].items[0])
+  const [categories, setCategories] = useState<Categories | null>(mockUpCategories)
+  const [category, setCategory] = useState<string | null>(null)
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
+
+  useEffect(() => {
+    if (categories) {
+      setCategory(categories[0].items[0])
+    }
+  }, [categories])
 
   const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
     if (name.length === 0) {
@@ -76,7 +79,9 @@ export default function TransactionForm(props: TransactionFormProps) {
     if (res.status === 200) {
       setName('')
       setAmount('')
-      setCategory(categories[0].items[0])
+      if (categories) {
+        setCategory(categories[0].items[0])
+      }
       setIsIncome(false)
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddTransactionSuccessTitle,
@@ -139,11 +144,15 @@ export default function TransactionForm(props: TransactionFormProps) {
           }}
         />
         <Select
-          data={categories}
+          data={categories ?? []}
           label={
             <Flex direction="row" gap="xs">
               {props.dictionary.budgetPage.category}
-              <CategoryDrawer dictionary={props.dictionary} />
+              <CategoryDrawer
+                dictionary={props.dictionary}
+                categories={categories ?? []}
+                setCategories={setCategories}
+              />
             </Flex>
           }
           value={category}

@@ -37,3 +37,10 @@ export type Transaction = {
   transactionType: TransactionType
   stoppedAt?: Date
 }
+
+export type CategoryGroup = {
+  group: string
+  items: string[]
+}
+
+export type Categories = CategoryGroup[]

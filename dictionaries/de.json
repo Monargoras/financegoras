@@ -30,11 +30,18 @@
     "add": "Hinzufügen",
     "cancel": "Abbrechen",
     "edit": "Bearbeiten",
+    "delete": "Löschen",
     "feedbackAddTransactionSuccessTitle": "Transaktion erfolgreich hinzugefügt!",
     "feedbackAddTransactionSuccessMessage": "Die Transaktion wurde zu deinem Haushaltsbuch hinzugefügt.",
     "feedbackAddTransactionErrorTitle": "Transaktion konnte nicht hinzugefügt werden!",
     "feedbackAddTransactionErrorMessage": "Beim Hinzufügen der Transaktion ist ein Fehler aufgetreten.",
     "monthlyIncome": "Monatliche Einnahmen",
-    "monthlyExpenses": "Monatliche Ausgaben"
+    "monthlyExpenses": "Monatliche Ausgaben",
+    "addCategory": "Kategorie hinzufügen",
+    "addGroup": "Gruppe hinzufügen",
+    "defaultGroupName": "Neue Gruppe",
+    "defaultCategoryName": "Neue Kategorie",
+    "feedbackAddGroupErrorTitle": "Name existiert bereits für Kategorie oder Gruppe!",
+    "feedbackAddGroupErrorMessage": "Bitte wähle einen anderen Namen."
   }
 }

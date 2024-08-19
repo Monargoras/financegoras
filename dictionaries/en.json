@@ -30,11 +30,18 @@
     "add": "Add",
     "cancel": "Cancel",
     "edit": "Edit",
+    "delete": "Delete",
     "feedbackAddTransactionSuccessTitle": "Transaction added successfully!",
     "feedbackAddTransactionSuccessMessage": "The transaction has been added to your budget book.",
     "feedbackAddTransactionErrorTitle": "Transaction could not be added!",
     "feedbackAddTransactionErrorMessage": "An error occurred while adding the transaction.",
     "monthlyIncome": "Monthly Income",
-    "monthlyExpenses": "Monthly Expenses"
+    "monthlyExpenses": "Monthly Expenses",
+    "addCategory": "Add Category",
+    "addGroup": "Add Group",
+    "defaultGroupName": "New Group",
+    "defaultCategoryName": "New Category",
+    "feedbackAddGroupErrorTitle": "Name already exists for category or group!",
+    "feedbackAddGroupErrorMessage": "Please choose a different name."
   }
 }
