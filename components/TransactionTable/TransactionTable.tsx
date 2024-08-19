@@ -27,7 +27,7 @@ export function TransactionTable() {
             }}
           >
             <Text>{transaction.name}</Text>
-            <Text>{transaction.amount}</Text>
+            <Text>{transaction.amount.toFixed(2)}</Text>
             <Text>{transaction.category}</Text>
           </div>
         ))}
