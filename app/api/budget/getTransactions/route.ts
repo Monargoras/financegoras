@@ -17,7 +17,7 @@ export async function GET() {
     .selectFrom('transactions')
     .where('userId', '=', session.user.id)
     .orderBy('createdAt', 'desc')
-    .select(['id', 'name', 'amount', 'category', 'isIncome', 'transactionType', 'createdAt'])
+    .select(['id', 'name', 'amount', 'category', 'isIncome', 'transactionType', 'createdAt', 'stoppedAt'])
     .execute()
   return Response.json({ transactions }, { status: 200 })
 }
