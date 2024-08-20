@@ -13,7 +13,7 @@ interface CateforyItemProps {
   setEditingValue: (value: string) => void
   dictionary: Dictionary
   handleRenameCategory: (newName: string) => boolean
-  handleDeleteCategory: () => void
+  handleDeleteCategory: (category: string) => boolean
 }
 
 export default function CategoryItem(props: CateforyItemProps) {
@@ -89,7 +89,7 @@ export default function CategoryItem(props: CateforyItemProps) {
             <Menu.Item
               leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
               c="red"
-              onClick={props.handleDeleteCategory}
+              onClick={() => props.handleDeleteCategory(category)}
             >
               {props.dictionary.budgetPage.delete}
             </Menu.Item>

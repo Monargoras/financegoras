@@ -5,7 +5,6 @@ import { useDisclosure } from '@mantine/hooks'
 import { Accordion, Button, Drawer, Flex, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { IconX } from 'tabler-icons'
-import { IconTrashX } from '@tabler/icons-react'
 import { Categories, Dictionary } from '@/utils/types'
 import GroupAccordionItem from './GroupAccordionItem'
 
@@ -79,15 +78,15 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       })
       return false
     }
-    // find the category that is being edited
-    const category = props.categories.find((item) => item.items.includes(editing))
-    if (category) {
+    // find the group that is being edited
+    const group = props.categories.find((item) => item.items.includes(editing))
+    if (group) {
       // find the index of the category in the array
-      const index = props.categories.indexOf(category)
+      const index = props.categories.indexOf(group)
       // create a new category array with the new name
-      const newItems = category.items.map((item) => (item === editing ? newName : item))
+      const newItems = group.items.map((item) => (item === editing ? newName : item))
       // create a new category object with the new items array
-      const newCategory = { group: category.group, items: newItems }
+      const newCategory = { group: group.group, items: newItems }
       // create a new categories array with the new category object
       const newCategories = [...props.categories]
       newCategories[index] = newCategory
@@ -99,16 +98,25 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return false
   }
 
-  const handleDeleteCategory = () => {
-    // TODO delete category
-    notifications.show({
-      title: 'TODO delete category',
-      message: 'TODO delete category',
-      color: 'red',
-      icon: <IconTrashX />,
-      position: 'bottom-right',
-    })
-    // props.setUpdateBackendCategories(true)
+  const handleDeleteCategory = (category: string) => {
+    // find the group of to be deleted category
+    const group = props.categories.find((item) => item.items.includes(category))
+    if (group) {
+      // find the index of the category in the array
+      const index = props.categories.indexOf(group)
+      // create a new category array with the new name
+      const newItems = group.items.filter((item) => item !== category)
+      // create a new category object with the new items array
+      const newCategory = { group: group.group, items: newItems }
+      // create a new categories array with the new category object
+      const newCategories = [...props.categories]
+      newCategories[index] = newCategory
+      // set the new categories array
+      props.setCategories(newCategories)
+      props.setUpdateBackendCategories(true)
+      return true
+    }
+    return false
   }
 
   const handleAddGroup = () => {
@@ -168,16 +176,15 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return false
   }
 
-  const handleDeleteGroup = () => {
-    // TODO: delete group
-    notifications.show({
-      title: 'TODO delete group',
-      message: 'TODO delete group',
-      color: 'red',
-      icon: <IconTrashX />,
-      position: 'bottom-right',
-    })
-    // props.setUpdateBackendCategories(true)
+  const handleDeleteGroup = (group: string) => {
+    // create a new categories array with the new category object
+    const newCategories = [...props.categories]
+    // filter groups
+    const filteredCategories = newCategories.filter((item) => item.group !== group)
+    // set the new categories array
+    props.setCategories(filteredCategories)
+    props.setUpdateBackendCategories(true)
+    return true
   }
 
   const items = props.categories.map((item) => (

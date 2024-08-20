@@ -14,10 +14,10 @@ interface GroupAccordionItemProps {
   setEditingValue: (value: string) => void
   dictionary: Dictionary
   handleRenameGroup: (newName: string) => boolean
-  handleDeleteGroup: () => void
-  handleAddCategory: (groupName: string) => void
+  handleDeleteGroup: (group: string) => boolean
+  handleAddCategory: (groupName: string) => boolean
   handleRenameCategory: (newName: string) => boolean
-  handleDeleteCategory: () => void
+  handleDeleteCategory: (category: string) => boolean
 }
 
 export default function GroupAccordionItem(props: GroupAccordionItemProps) {
@@ -95,7 +95,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
             <Menu.Item
               leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
               c="red"
-              onClick={props.handleDeleteGroup}
+              onClick={() => props.handleDeleteGroup(item.group)}
             >
               {props.dictionary.budgetPage.delete}
             </Menu.Item>
