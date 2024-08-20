@@ -1,6 +1,19 @@
 'use client'
 
-import { Accordion, ActionIcon, Center, Flex, Menu, TextInput, Text, rem, FocusTrap } from '@mantine/core'
+import {
+  Accordion,
+  ActionIcon,
+  Center,
+  Flex,
+  Menu,
+  TextInput,
+  Text,
+  rem,
+  FocusTrap,
+  Modal,
+  Button,
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { IconCheck, IconDots, IconPencil, IconPlus, IconX } from 'tabler-icons'
 import { IconTrashX } from '@tabler/icons-react'
 import { CategoryGroup, Dictionary } from '@/utils/types'
@@ -22,6 +35,7 @@ interface GroupAccordionItemProps {
 
 export default function GroupAccordionItem(props: GroupAccordionItemProps) {
   const { item, editing, editingValue, setEditing, setEditingValue } = props
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <Accordion.Item key={item.group} value={item.group}>
@@ -92,15 +106,38 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
             >
               {props.dictionary.budgetPage.edit}
             </Menu.Item>
-            <Menu.Item
-              leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
-              c="red"
-              onClick={() => props.handleDeleteGroup(item.group)}
-            >
+            <Menu.Item leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />} c="red" onClick={open}>
               {props.dictionary.budgetPage.delete}
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
+        <Modal opened={opened} onClose={close} title={props.dictionary.budgetPage.deleteModalGroupTitle} centered>
+          <Text>
+            {props.dictionary.budgetPage.deleteModalGroupText1} &quot;{item.group}&quot; <br />{' '}
+            {props.dictionary.budgetPage.deleteModalGroupText2}
+            <Text style={{ marginLeft: 12 }}>
+              {item.items.map((c) => (
+                <>
+                  - {c}
+                  <br />
+                </>
+              ))}
+            </Text>
+            {props.dictionary.budgetPage.deleteModalGroupText3}
+          </Text>
+          <Flex gap="md" justify="end">
+            <Button onClick={close} variant="subtle">
+              {props.dictionary.budgetPage.cancel}
+            </Button>
+            <Button
+              leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
+              color="red"
+              onClick={() => props.handleDeleteGroup(item.group)}
+            >
+              {props.dictionary.budgetPage.delete}
+            </Button>
+          </Flex>
+        </Modal>
       </Center>
       {item.items.map((category) => (
         <CategoryItem

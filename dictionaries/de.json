@@ -46,6 +46,10 @@
     "feedbackUpdateBackendSuccessTitle": "Änderungen erfolgreich gespeichert!",
     "feedbackUpdateBackendSuccessMessage": "Die Änderungen wurden erfolgreich auf dem Server gespeichert.",
     "feedbackUpdateBackendErrorTitle": "Änderungen konnten nicht gespeichert werden!",
-    "feedbackUpdateBackendErrorMessage": "Beim Speichern der Änderungen ist ein Fehler aufgetreten."
+    "feedbackUpdateBackendErrorMessage": "Beim Speichern der Änderungen ist ein Fehler aufgetreten.",
+    "deleteModalGroupTitle": "Gruppe löschen?",
+    "deleteModalGroupText1": "Möchtest du die folgende Gruppe wirklich löschen",
+    "deleteModalGroupText2": "Dadurch werden auch die enthaltenen Kategorien gelöscht:",
+    "deleteModalGroupText3": "Bereits erstellte Transaktionen und ihre Kategorien werden nicht verändert."
   }
 }
