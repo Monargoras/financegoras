@@ -33,6 +33,15 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                 <TextInput
                   value={editingValue}
                   onChange={(event) => setEditingValue(event.currentTarget.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      const success = props.handleRenameCategory(editingValue)
+                      if (success) {
+                        setEditing(null)
+                        setEditingValue('')
+                      }
+                    }
+                  }}
                   style={{ width: '100%' }}
                 />
               </FocusTrap>
