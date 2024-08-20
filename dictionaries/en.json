@@ -50,6 +50,7 @@
     "deleteModalGroupTitle": "Delete Group?",
     "deleteModalGroupText1": "Do you really want to delete the following group?",
     "deleteModalGroupText2": "This will also delete the contained categories:",
-    "deleteModalGroupText3": "Already created transactions and their categories will not be affected."
+    "deleteModalGroupText3": "Already created transactions and their categories will not be affected.",
+    "errorLoadingData": "Error loading data."
   }
 }
