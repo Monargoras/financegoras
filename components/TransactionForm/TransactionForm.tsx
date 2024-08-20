@@ -52,6 +52,12 @@ export default function TransactionForm(props: TransactionFormProps) {
   }, [data])
 
   useEffect(() => {
+    if (categories) {
+      setCategory(categories[0].items[0])
+    }
+  }, [categories])
+
+  useEffect(() => {
     if (!updateBackendCategories) {
       return
     }
