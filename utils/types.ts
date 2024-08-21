@@ -56,3 +56,9 @@ export type AggregatedIncomeExpenseTotals = {
   totalIncome: number
   totalExpenses: number
 }
+
+export type MonthlyExpense = {
+  month: string
+} & Record<string, number>
+
+export type MonthlyExpenseEvolution = MonthlyExpense[]
