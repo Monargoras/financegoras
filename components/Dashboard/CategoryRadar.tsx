@@ -2,15 +2,16 @@
 
 import { Loader, Text } from '@mantine/core'
 import { RadarChart } from '@mantine/charts'
-import useSWR from 'swr'
-import { Dictionary } from '@/utils/types'
+import useSWR, { Fetcher } from 'swr'
+import { CategoryExpenseData, Dictionary } from '@/utils/types'
 
 interface CategoryRadarProps {
   dictionary: Dictionary
 }
 
 export default function CategoryRadar(props: CategoryRadarProps) {
-  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const fetcher: Fetcher<CategoryExpenseData[], string> = (input: RequestInfo | URL) =>
+    fetch(input).then((res) => res.json())
   const currentMonth = new Date().getMonth() + 1
   const currentYear = new Date().getFullYear()
   const { data, error, isLoading } = useSWR(
@@ -28,7 +29,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
           w={300}
           data={data}
           dataKey="category"
-          series={[{ name: 'percentage', color: 'blue.4', opacity: 0.2 }]}
+          series={[{ name: 'percentageOfExpenses', color: 'blue.4', opacity: 0.2 }]}
         />
       )}
     </>

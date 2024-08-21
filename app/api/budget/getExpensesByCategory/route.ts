@@ -10,7 +10,7 @@ import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedT
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
- * @returns body containing { category: string, total: number, percentage: number }[]
+ * @returns body containing { category: string, total: number, percentageOfExpenses: number, percentageOfIncome: number }[]
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
@@ -28,6 +28,21 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
+  const incomeRes = await db
+    .selectFrom('transactions')
+    .selectAll()
+    .where('userId', '=', session.user.id)
+    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where((eb) =>
+      eb('stoppedAt', 'is', null).or(
+        'stoppedAt',
+        '>',
+        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
+      )
+    )
+    .where('isIncome', '=', true)
+    .execute()
+
   const expenseRes = await db
     .selectFrom('transactions')
     .selectAll()
@@ -44,6 +59,11 @@ export async function GET(request: NextRequest) {
     .execute()
 
   // transform transaction type to enum
+  const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({
+    ...transaction,
+    transactionType: getTransactionType(transaction.transactionType),
+  }))
+
   const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
     ...transaction,
     transactionType: getTransactionType(transaction.transactionType),
@@ -68,6 +88,10 @@ export async function GET(request: NextRequest) {
     {} as Record<string, number>
   )
 
+  const totalIncome = month
+    ? parseFloat(calculateTotalPerMonth(incomeTransactions))
+    : parseFloat(calculateTotalPerYear(incomeTransactions))
+
   const totalExpense = month
     ? parseFloat(calculateTotalPerMonth(expenseTransactions))
     : parseFloat(calculateTotalPerYear(expenseTransactions))
@@ -75,7 +99,8 @@ export async function GET(request: NextRequest) {
   const expenses = Object.entries(expensesPerCategory).map(([category, total]) => ({
     category,
     total: total.toFixed(2),
-    percentage: ((total / totalExpense) * 100).toFixed(2),
+    percentageOfExpenses: ((total / totalExpense) * 100).toFixed(2),
+    percentageOfIncome: ((total / totalIncome) * 100).toFixed(2),
   }))
 
   return new Response(JSON.stringify(expenses), { status: 200 })

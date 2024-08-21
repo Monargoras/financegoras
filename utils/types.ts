@@ -44,3 +44,15 @@ export type CategoryGroup = {
 }
 
 export type Categories = CategoryGroup[]
+
+export type CategoryExpenseData = {
+  category: string
+  total: number
+  percentageOfExpenses: number
+  percentageOfIncome: number
+}
+
+export type AggregatedIncomeExpenseTotals = {
+  totalIncome: number
+  totalExpenses: number
+}
