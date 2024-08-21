@@ -33,7 +33,7 @@ export const calculateTotalPerYear = (transactions: Transaction[]) => {
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
- * @returns body containing the transactions as an array
+ * @returns body containing { totalIncome: number, totalExpenses: number }
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)

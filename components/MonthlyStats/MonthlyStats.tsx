@@ -1,8 +1,8 @@
 'use client'
 
-import useSWR from 'swr'
+import useSWR, { Fetcher } from 'swr'
 import { Container, Flex, Loader, Paper, Text, useMantineTheme } from '@mantine/core'
-import { Dictionary } from '@/utils/types'
+import { AggregatedIncomeExpenseTotals, Dictionary } from '@/utils/types'
 
 interface MonthlyStatsProps {
   dictionary: Dictionary
@@ -11,7 +11,8 @@ interface MonthlyStatsProps {
 export function MonthlyStats(props: MonthlyStatsProps) {
   const theme = useMantineTheme()
 
-  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const fetcher: Fetcher<AggregatedIncomeExpenseTotals, string> = (input: RequestInfo | URL) =>
+    fetch(input).then((res) => res.json())
   const currentMonth = new Date().getMonth() + 1
   const currentYear = new Date().getFullYear()
   const { data, error, isLoading } = useSWR(
