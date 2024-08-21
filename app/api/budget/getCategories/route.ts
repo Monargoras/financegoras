@@ -23,5 +23,5 @@ export async function GET() {
     return new Response('Categories not found', { status: 404 })
   }
 
-  return Response.json({ categories: JSON.parse(categories.categories) }, { status: 200 })
+  return Response.json(JSON.parse(categories.categories), { status: 200 })
 }

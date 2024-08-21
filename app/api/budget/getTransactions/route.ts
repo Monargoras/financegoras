@@ -19,5 +19,5 @@ export async function GET() {
     .orderBy('createdAt', 'desc')
     .select(['id', 'name', 'amount', 'category', 'isIncome', 'transactionType', 'createdAt', 'stoppedAt'])
     .execute()
-  return Response.json({ transactions }, { status: 200 })
+  return Response.json(transactions, { status: 200 })
 }

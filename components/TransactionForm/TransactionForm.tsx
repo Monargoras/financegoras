@@ -12,7 +12,7 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
-import useSWR, { mutate } from 'swr'
+import useSWR, { Fetcher, mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
@@ -41,13 +41,13 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [nameError, setNameError] = useState(false)
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
 
-  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const fetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data } = useSWR('/api/budget/getCategories', fetcher)
 
   useEffect(() => {
     if (data) {
-      setCategories(data.categories)
-      setCategory(data.categories[0].items[0])
+      setCategories(data)
+      setCategory(data[0].items[0])
     }
   }, [data])
 

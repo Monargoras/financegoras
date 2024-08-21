@@ -1,6 +1,6 @@
 'use client'
 
-import useSWR from 'swr'
+import useSWR, { Fetcher } from 'swr'
 import { Loader, Table, Text, useMantineTheme } from '@mantine/core'
 import { Dictionary, Transaction } from '@/utils/types'
 
@@ -11,14 +11,14 @@ interface TransactionTableProps {
 export function TransactionTable(props: TransactionTableProps) {
   const theme = useMantineTheme()
 
-  const fetcher = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/budget/getTransactions', fetcher)
 
   return (
     <>
       {isLoading && <Loader color="blue" type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
-      {data && data.transactions && (
+      {data && (
         <Table.ScrollContainer mah="50dvh" minWidth={300}>
           <Table striped highlightOnHover withRowBorders={false} withTableBorder stickyHeader stickyHeaderOffset={-1}>
             <Table.Thead>
@@ -28,7 +28,7 @@ export function TransactionTable(props: TransactionTableProps) {
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
-              {data.transactions.map((ta: Transaction) => (
+              {data.map((ta: Transaction) => (
                 <Table.Tr key={ta.id}>
                   <Table.Td c={ta.isIncome ? theme.colors.green[5] : theme.colors.red[5]}>
                     {ta.isIncome ? '' : '-'}
