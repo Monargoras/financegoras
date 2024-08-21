@@ -1,32 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { db } from '@/utils/database'
-import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
+import { getTransactionType, Transaction } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-
-export const calculateTotalPerMonth = (transactions: Transaction[]) => {
-  let sum = 0
-  for (const transaction of transactions) {
-    if (transaction.transactionType === TransactionType.Annual) {
-      sum += transaction.amount / 12
-    } else {
-      sum += transaction.amount
-    }
-  }
-  return sum.toFixed(2)
-}
-
-export const calculateTotalPerYear = (transactions: Transaction[]) => {
-  let sum = 0
-  for (const transaction of transactions) {
-    if (transaction.transactionType === TransactionType.Monthly) {
-      sum += transaction.amount * 12
-    } else {
-      sum += transaction.amount
-    }
-  }
-  return sum.toFixed(2)
-}
+import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
 
 /**
  * This endpoint returns the aggregated transactions from the database for given timeframe

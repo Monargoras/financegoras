@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server'
 import { db } from '@/utils/database'
 import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/route'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 
 /**
  * This endpoint returns the aggregated expenses per category for a given month or year.
