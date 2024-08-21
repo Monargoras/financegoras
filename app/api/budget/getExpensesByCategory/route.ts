@@ -10,7 +10,7 @@ import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedT
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
- * @returns body containing { category: string, total: number, percentageOfExpenses: number, percentageOfIncome: number }[]
+ * @returns body containing CategoryExpenseData[]
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
