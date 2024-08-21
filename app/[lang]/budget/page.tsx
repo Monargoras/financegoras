@@ -4,6 +4,7 @@ import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import { TransactionTable } from '@/components/TransactionTable/TransactionTable'
 import { MonthlyStats } from '@/components/MonthlyStats/MonthlyStats'
+import Dashboard from '@/components/Dashboard/Dashboard'
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
@@ -12,11 +13,10 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
     <Container fluid>
       <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
         <IncomeExpenseForm dictionary={dict} />
+        <Dashboard dictionary={dict} />
         <Flex gap="md" justify="space-apart" direction="row" wrap="wrap">
           <MonthlyStats dictionary={dict} />
-          <Flex gap="md" justify="center" align="center" direction="column">
-            <TransactionTable dictionary={dict} />
-          </Flex>
+          <TransactionTable dictionary={dict} />
         </Flex>
       </Flex>
     </Container>

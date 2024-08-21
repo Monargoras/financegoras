@@ -4,7 +4,7 @@ import { db } from '@/utils/database'
 import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 
-const calculateTotalPerMonth = (transactions: Transaction[]) => {
+export const calculateTotalPerMonth = (transactions: Transaction[]) => {
   let sum = 0
   for (const transaction of transactions) {
     if (transaction.transactionType === TransactionType.Annual) {
@@ -16,7 +16,7 @@ const calculateTotalPerMonth = (transactions: Transaction[]) => {
   return sum.toFixed(2)
 }
 
-const calculateTotalPerYear = (transactions: Transaction[]) => {
+export const calculateTotalPerYear = (transactions: Transaction[]) => {
   let sum = 0
   for (const transaction of transactions) {
     if (transaction.transactionType === TransactionType.Monthly) {
