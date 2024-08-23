@@ -36,6 +36,14 @@ const colorsHex = [
   '#6F1E51',
 ]
 
+const getMonthNameArray = (lang: string) => {
+  const monthNames = []
+  for (let i = 0; i < 12; i += 1) {
+    monthNames.push(new Date(2021, i, 1).toLocaleString(lang, { month: 'long' }))
+  }
+  return monthNames
+}
+
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
   const { lang } = props
 
@@ -86,7 +94,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
             onClick: (event) => {
               const { month } = event.payload
               // get month number from name
-              const selectedMonth = new Date(Date.parse(`01-${month}`)).getMonth() + 1
+              const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
               props.setSelectedMonth(selectedMonth)
             },
           }}

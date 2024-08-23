@@ -53,7 +53,7 @@ export default function Dashboard(props: DashboardProps) {
         />
       </Flex>
       <Flex gap="md" direction="row" wrap="wrap">
-        <MonthlyStats dictionary={props.dictionary} />
+        <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} />
         <TransactionTable dictionary={props.dictionary} />
       </Flex>
     </Flex>

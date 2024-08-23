@@ -16,8 +16,10 @@ interface CategoryRadarProps {
 export default function CategoryRadar(props: CategoryRadarProps) {
   const fetcher: Fetcher<CategoryExpenseData[], string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const currentYear = new Date().getFullYear()
-  const params = `?year=${currentYear}&month=${props.selectedMonth}&percentage=${props.percentage}&includeSavings=${props.includeSavings}`
+  // update selected year if month changes to month is larger than current month -> is in last year
+  const selectedYear =
+    props.selectedMonth > new Date().getMonth() + 1 ? new Date().getFullYear() - 1 : new Date().getFullYear()
+  const params = `?year=${selectedYear}&month=${props.selectedMonth}&percentage=${props.percentage}&includeSavings=${props.includeSavings}`
   const { data, error, isLoading } = useSWR(`/api/budget/getExpensesByCategory${params}`, fetcher)
 
   return (
@@ -25,7 +27,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
       {isLoading && (
         <>
           <Text style={{ visibility: 'hidden' }}>
-            {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
+            {new Date(`${selectedYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
           </Text>
           <Flex justify="center" align="center" w={300} h={200}>
             <Loader color="blue" type="dots" />
@@ -35,7 +37,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
       {error && (
         <>
           <Text style={{ visibility: 'hidden' }}>
-            {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
+            {new Date(`${selectedYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
           </Text>
           <Flex justify="center" align="center" w={300} h={200}>
             <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
@@ -45,7 +47,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
       {data && (
         <Flex direction="column" align="center">
           <Text>
-            {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
+            {new Date(`${selectedYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
           </Text>
           <RadarChart
             w={300}
