@@ -14,6 +14,7 @@ interface DashboardProps {
 export default function Dashboard(props: DashboardProps) {
   const [percentage, setPercentage] = useState(false)
   const [includeSavings, setIncludeSavings] = useState(false)
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
 
   return (
     <Flex direction="column">
@@ -39,8 +40,15 @@ export default function Dashboard(props: DashboardProps) {
           dictionary={props.dictionary}
           percentage={percentage}
           includeSavings={includeSavings}
+          setSelectedMonth={setSelectedMonth}
         />
-        <CategoryRadar dictionary={props.dictionary} percentage={percentage} includeSavings={includeSavings} />
+        <CategoryRadar
+          lang={props.lang}
+          dictionary={props.dictionary}
+          percentage={percentage}
+          includeSavings={includeSavings}
+          selectedMonth={selectedMonth}
+        />
       </Flex>
     </Flex>
   )

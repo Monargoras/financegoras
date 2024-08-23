@@ -10,6 +10,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   dictionary: Dictionary
   percentage: boolean
   includeSavings: boolean
+  setSelectedMonth: (month: number) => void
 }
 
 const colorsHex = [
@@ -73,6 +74,14 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
           dataKey="month"
           type={props.percentage ? 'percent' : 'stacked'}
           series={getSeries(data)}
+          barProps={{
+            onClick: (event) => {
+              const { month } = event.payload
+              // get month number from name
+              const selectedMonth = new Date(Date.parse(`01-${month}`)).getMonth() + 1
+              props.setSelectedMonth(selectedMonth)
+            },
+          }}
         />
       )}
     </>
