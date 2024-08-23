@@ -36,7 +36,8 @@ const colorsHex = [
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
   const [ofIncome, setOfIncome] = useState(true)
-  const [percentage, setPercentage] = useState(true)
+  const [percentage, setPercentage] = useState(false)
+  const [includeSavings, setIncludeSavings] = useState(false)
   const { lang } = props
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
@@ -44,7 +45,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const currentMonth = new Date().getMonth() + 1
   const currentYear = new Date().getFullYear()
   const { data, error, isLoading } = useSWR(
-    `/api/budget/getMonthlyExpenseEvolution?year=${currentYear}&month=${currentMonth}&ofIncome=${ofIncome}&percentage=${percentage}&lang=${lang}`,
+    `/api/budget/getMonthlyExpenseEvolution?year=${currentYear}&month=${currentMonth}&ofIncome=${ofIncome}&percentage=${percentage}&includeSavings=${includeSavings}&lang=${lang}`,
     fetcher
   )
 
@@ -83,6 +84,13 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
               onChange={(event) => setOfIncome(event.currentTarget.checked)}
               onLabel={props.dictionary.budgetPage.ofIncome}
               offLabel={props.dictionary.budgetPage.ofExpenses}
+              size="xl"
+            />
+            <Switch
+              checked={includeSavings}
+              onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
+              onLabel={props.dictionary.budgetPage.includeSavings}
+              offLabel={props.dictionary.budgetPage.excludeSavings}
               size="xl"
             />
           </Flex>

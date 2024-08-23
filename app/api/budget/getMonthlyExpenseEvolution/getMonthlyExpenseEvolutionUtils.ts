@@ -7,6 +7,7 @@ export const getMonthlyExpenseDataOneMonth = async (
   year: number,
   ofIncome: boolean,
   calcPercentage: boolean,
+  includeSavings: boolean,
   userId: string,
   lang: string
 ) => {
@@ -25,7 +26,7 @@ export const getMonthlyExpenseDataOneMonth = async (
     .where('isIncome', '=', true)
     .execute()
 
-  const expenseRes = await db
+  let expenseQuery = db
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', userId)
@@ -38,7 +39,12 @@ export const getMonthlyExpenseDataOneMonth = async (
       )
     )
     .where('isIncome', '=', false)
-    .execute()
+
+  if (!includeSavings) {
+    expenseQuery = expenseQuery.where('isSavings', '=', false)
+  }
+
+  const expenseRes = await expenseQuery.execute()
 
   // transform transaction type to enum
   const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({

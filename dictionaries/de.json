@@ -58,6 +58,8 @@
     "ofIncome": "Vom Einkommen",
     "ofExpenses": "Von Ausgaben",
     "percentage": "Prozent",
-    "sum": "Summe"
+    "sum": "Summe",
+    "includeSavings": "Mit Sparen",
+    "excludeSavings": "Ohne Sparen"
   }
 }

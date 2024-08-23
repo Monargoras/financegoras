@@ -58,6 +58,8 @@
     "ofIncome": "Of income",
     "ofExpenses": "Of expenses",
     "percentage": "Percentage",
-    "sum": "Sum"
+    "sum": "Sum",
+    "includeSavings": "Include Savings",
+    "excludeSavings": "Exclude Savings"
   }
 }
