@@ -2,8 +2,6 @@ import { Container, Divider, Flex } from '@mantine/core'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
-import { TransactionTable } from '@/components/TransactionTable/TransactionTable'
-import { MonthlyStats } from '@/components/MonthlyStats/MonthlyStats'
 import Dashboard from '@/components/Dashboard/Dashboard'
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
@@ -15,10 +13,6 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
         <IncomeExpenseForm dictionary={dict} />
         <Divider size="lg" w="100%" />
         <Dashboard lang={lang} dictionary={dict} />
-        <Flex gap="md" justify="space-apart" direction="row" wrap="wrap">
-          <MonthlyStats dictionary={dict} />
-          <TransactionTable dictionary={dict} />
-        </Flex>
       </Flex>
     </Container>
   )

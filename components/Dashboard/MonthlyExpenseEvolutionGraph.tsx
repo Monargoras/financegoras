@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader, Text } from '@mantine/core'
+import { Flex, Loader, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
@@ -64,12 +64,20 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
   return (
     <>
-      {isLoading && <Loader color="blue" type="dots" />}
-      {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
+      {isLoading && (
+        <Flex justify="center" align="center" w={900} h={200}>
+          <Loader color="blue" type="dots" />
+        </Flex>
+      )}
+      {error && (
+        <Flex justify="center" align="center" w={900} h={200}>
+          <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
+        </Flex>
+      )}
       {data && (
         <BarChart
-          h={200}
           w={900}
+          h={200}
           data={data}
           dataKey="month"
           type={props.percentage ? 'percent' : 'stacked'}

@@ -22,16 +22,34 @@ export default function CategoryRadar(props: CategoryRadarProps) {
 
   return (
     <>
-      {isLoading && <Loader color="blue" type="dots" />}
-      {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
+      {isLoading && (
+        <>
+          <Text style={{ visibility: 'hidden' }}>
+            {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
+          </Text>
+          <Flex justify="center" align="center" w={300} h={200}>
+            <Loader color="blue" type="dots" />
+          </Flex>
+        </>
+      )}
+      {error && (
+        <>
+          <Text style={{ visibility: 'hidden' }}>
+            {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
+          </Text>
+          <Flex justify="center" align="center" w={300} h={200}>
+            <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
+          </Flex>
+        </>
+      )}
       {data && (
-        <Flex direction="column" align="center" gap={0}>
+        <Flex direction="column" align="center">
           <Text>
             {new Date(`${currentYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
           </Text>
           <RadarChart
-            h={200}
             w={300}
+            h={200}
             data={data}
             dataKey="category"
             series={[{ name: 'value', color: 'blue.5', opacity: 0.2 }]}

@@ -1,7 +1,7 @@
 'use client'
 
 import useSWR, { Fetcher } from 'swr'
-import { Loader, Table, Text, useMantineTheme } from '@mantine/core'
+import { Flex, Loader, Table, Text, useMantineTheme } from '@mantine/core'
 import { Dictionary, Transaction } from '@/utils/types'
 
 interface TransactionTableProps {
@@ -16,10 +16,18 @@ export function TransactionTable(props: TransactionTableProps) {
 
   return (
     <>
-      {isLoading && <Loader color="blue" type="dots" />}
-      {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
+      {isLoading && (
+        <Flex justify="center" align="center" w={250} h={400}>
+          <Loader color="blue" type="dots" />
+        </Flex>
+      )}
+      {error && (
+        <Flex justify="center" align="center" w={250} h={400}>
+          <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
+        </Flex>
+      )}
       {data && (
-        <Table.ScrollContainer mah="50dvh" minWidth={250}>
+        <Table.ScrollContainer mah="45dvh" minWidth={250} style={{ margin: 8 }}>
           <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
             <Table.Thead>
               <Table.Tr>
