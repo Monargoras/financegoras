@@ -24,13 +24,17 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `userId` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `id` char(16) NOT NULL,
   `isIncome` bit(1) NOT NULL,
+  `isSavings` bit(1) NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
   `category` varchar(50) NOT NULL,
   `transactionType` enum('Single','Monthly','Annual') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'Single',
   `createdAt` datetime NOT NULL,
   `stoppedAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`userId`,`id`)
+  PRIMARY KEY (`userId`,`id`),
+  KEY `isIncome` (`userId`,`isIncome`),
+  KEY `isSavings` (`userId`,`isSavings`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- Data exporting was unselected.
