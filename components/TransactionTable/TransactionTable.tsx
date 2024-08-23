@@ -6,13 +6,19 @@ import { Dictionary, Transaction } from '@/utils/types'
 
 interface TransactionTableProps {
   dictionary: Dictionary
+  selectedMonth: number
 }
 
 export function TransactionTable(props: TransactionTableProps) {
   const theme = useMantineTheme()
 
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR('/api/budget/getTransactions', fetcher)
+  const selectedYear =
+    props.selectedMonth > new Date().getMonth() + 1 ? new Date().getFullYear() - 1 : new Date().getFullYear()
+  const { data, error, isLoading } = useSWR(
+    `/api/budget/getTransactions?year=${selectedYear}&month=${props.selectedMonth}`,
+    fetcher
+  )
 
   return (
     <>
