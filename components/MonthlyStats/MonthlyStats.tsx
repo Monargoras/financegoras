@@ -22,8 +22,16 @@ export function MonthlyStats(props: MonthlyStatsProps) {
 
   return (
     <>
-      {isLoading && <Loader color="blue" type="dots" />}
-      {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
+      {isLoading && (
+        <Flex justify="center" align="center" w={900} h={200}>
+          <Loader color="blue" type="dots" />
+        </Flex>
+      )}
+      {error && (
+        <Flex justify="center" align="center" w={900} h={200}>
+          <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
+        </Flex>
+      )}
       {data && (
         <Container>
           <Flex gap="md" justify="space-apart" direction="row" wrap="wrap">
