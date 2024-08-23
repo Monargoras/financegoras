@@ -11,6 +11,7 @@ import {
   NumberInput,
   TextInput,
   Tooltip,
+  Switch,
 } from '@mantine/core'
 import useSWR, { Fetcher, mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
@@ -33,6 +34,7 @@ const checkboxTheme = createTheme({
 
 export default function TransactionForm(props: TransactionFormProps) {
   const [isIncome, setIsIncome] = useState(false)
+  const [isSavings, setIsSavings] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
   const [categories, setCategories] = useState<Categories | null>(null)
@@ -100,7 +102,7 @@ export default function TransactionForm(props: TransactionFormProps) {
     const res = await fetch('/api/budget/addTransaction', {
       cache: 'no-cache',
       method: 'POST',
-      body: JSON.stringify({ isIncome, amount, name, category, transactionType, date }),
+      body: JSON.stringify({ isIncome, isSavings, amount, name, category, transactionType, date }),
     })
     if (res.status === 200) {
       setName('')
@@ -133,7 +135,7 @@ export default function TransactionForm(props: TransactionFormProps) {
     <Container fluid>
       <Flex mih={50} gap="xs" justify="center" align="center" direction="row" wrap="wrap">
         <MantineProvider theme={checkboxTheme}>
-          <Tooltip label={props.dictionary.budgetPage.income}>
+          <Tooltip label={props.dictionary.budgetPage.incomeTooltip}>
             <Checkbox
               checked={isIncome}
               style={{ marginTop: 'auto' }}
@@ -186,6 +188,14 @@ export default function TransactionForm(props: TransactionFormProps) {
           onChange={(value) => setCategory(value)}
           maxDropdownHeight={400}
           allowDeselect={false}
+        />
+        <Switch
+          checked={isSavings}
+          onChange={(event) => setIsSavings(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.isSavings}
+          offLabel={props.dictionary.budgetPage.isIncomeExpense}
+          size="xl"
+          style={{ marginTop: 'auto' }}
         />
         <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>

@@ -8,7 +8,7 @@ import { authOptions } from '../../auth/[...nextauth]/authOptions'
 /**
  * This endpoint accepts new transactions and adds them to the database
  * @allowedMethods POST
- * @body { isIncome, amount, name, category, transactionType, date? }
+ * @body { isIncome, isSavings, amount, name, category, transactionType, date? }
  * @returns 200 if the transaction was added successfully, error otherwise
  */
 export async function POST(req: NextRequest) {
@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
   const data = await req.json()
   if (
     data.isIncome === undefined ||
+    data.isSavings === undefined ||
     data.amount === undefined ||
     data.name === undefined ||
     data.category === undefined ||
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
   const id = nanoid(16)
   const transaction = {
     isIncome: data.isIncome,
+    isSavings: data.isSavings,
     amount: data.amount,
     name: data.name,
     category: data.category,

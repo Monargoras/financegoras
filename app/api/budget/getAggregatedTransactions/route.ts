@@ -10,7 +10,7 @@ import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
- * @returns body containing { totalIncome: number, totalExpenses: number }
+ * @returns body containing AggregatedIncomeExpenseTotals
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
@@ -56,6 +56,23 @@ export async function GET(request: NextRequest) {
       )
     )
     .where('isIncome', '=', false)
+    .where('isSavings', '=', false)
+    .execute()
+
+  const savingsRes = await db
+    .selectFrom('transactions')
+    .selectAll()
+    .where('userId', '=', session.user.id)
+    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where((eb) =>
+      eb('stoppedAt', 'is', null).or(
+        'stoppedAt',
+        '>',
+        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
+      )
+    )
+    .where('isIncome', '=', false)
+    .where('isSavings', '=', true)
     .execute()
 
   // transform transaction type to enum
@@ -69,8 +86,14 @@ export async function GET(request: NextRequest) {
     transactionType: getTransactionType(transaction.transactionType),
   }))
 
+  const savingsTransactions: Transaction[] = savingsRes.map((transaction) => ({
+    ...transaction,
+    transactionType: getTransactionType(transaction.transactionType),
+  }))
+
   const totalIncome = month ? calculateTotalPerMonth(incomeTransactions) : calculateTotalPerYear(incomeTransactions)
   const totalExpenses = month ? calculateTotalPerMonth(expenseTransactions) : calculateTotalPerYear(expenseTransactions)
+  const totalSavings = month ? calculateTotalPerMonth(savingsTransactions) : calculateTotalPerYear(savingsTransactions)
 
-  return Response.json({ totalIncome, totalExpenses }, { status: 200 })
+  return Response.json({ totalIncome, totalExpenses, totalSavings }, { status: 200 })
 }

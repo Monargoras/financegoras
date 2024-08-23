@@ -43,6 +43,18 @@ export function MonthlyStats(props: MonthlyStatsProps) {
                 )
               }
             </Paper>
+            <Paper shadow="sm" radius="md" withBorder p="md" m="xs">
+              <Text>{props.dictionary.budgetPage.monthlySavings}</Text>
+              <Text c={theme.colors.blue[5]}>{data.totalSavings}€</Text>
+              {
+                // calculate percentage of savings from income
+                data.totalIncome > 0 ? (
+                  <Text c={theme.colors.blue[5]}>{((data.totalSavings / data.totalIncome) * 100).toFixed(2)}%</Text>
+                ) : (
+                  <Text c={theme.colors.blue[5]}>100%</Text>
+                )
+              }
+            </Paper>
           </Flex>
         </Container>
       )}

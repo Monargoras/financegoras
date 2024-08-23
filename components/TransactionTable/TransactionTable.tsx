@@ -30,7 +30,9 @@ export function TransactionTable(props: TransactionTableProps) {
             <Table.Tbody>
               {data.map((ta: Transaction) => (
                 <Table.Tr key={ta.id}>
-                  <Table.Td c={ta.isIncome ? theme.colors.green[5] : theme.colors.red[5]}>
+                  <Table.Td
+                    c={ta.isIncome ? theme.colors.green[5] : ta.isSavings ? theme.colors.blue[5] : theme.colors.red[5]}
+                  >
                     {ta.isIncome ? '' : '-'}
                     {ta.amount.toFixed(2)}€
                   </Table.Td>

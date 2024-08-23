@@ -30,6 +30,7 @@ export enum TransactionType {
 export type Transaction = {
   id: string
   isIncome: boolean
+  isSavings: boolean
   amount: number
   createdAt: Date
   name: string
@@ -55,6 +56,7 @@ export type CategoryExpenseData = {
 export type AggregatedIncomeExpenseTotals = {
   totalIncome: number
   totalExpenses: number
+  totalSavings: number
 }
 
 export type MonthlyExpense = {

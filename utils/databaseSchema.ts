@@ -16,6 +16,7 @@ export interface TransactionsTable {
   userId: string
   id: string
   isIncome: boolean
+  isSavings: boolean
   amount: number
   name: string
   category: string
