@@ -20,7 +20,7 @@ export function TransactionTable(props: TransactionTableProps) {
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
       {data && (
         <Table.ScrollContainer mah="50dvh" minWidth={250}>
-          <Table striped highlightOnHover stickyHeader withTableBorder>
+          <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>{props.dictionary.budgetPage.amount}</Table.Th>

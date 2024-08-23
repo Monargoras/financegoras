@@ -55,8 +55,6 @@
     "deleteModalGroupText2": "Dadurch werden auch die enthaltenen Kategorien gelöscht:",
     "deleteModalGroupText3": "Bereits erstellte Transaktionen und ihre Kategorien werden nicht verändert.",
     "errorLoadingData": "Fehler beim Laden der Daten.",
-    "ofIncome": "Vom Einkommen",
-    "ofExpenses": "Von Ausgaben",
     "percentage": "Prozent",
     "sum": "Summe",
     "includeSavings": "Mit Sparen",

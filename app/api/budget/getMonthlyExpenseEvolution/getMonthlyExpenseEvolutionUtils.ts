@@ -1,31 +1,13 @@
 import { db } from '@/utils/database'
 import { getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
-import { calculateTotalPerMonth } from '../getAggregatedTransactions/calculateTotals'
 
 export const getMonthlyExpenseDataOneMonth = async (
   month: number,
   year: number,
-  ofIncome: boolean,
-  calcPercentage: boolean,
   includeSavings: boolean,
   userId: string,
   lang: string
 ) => {
-  const incomeRes = await db
-    .selectFrom('transactions')
-    .selectAll()
-    .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
-    )
-    .where('isIncome', '=', true)
-    .execute()
-
   let expenseQuery = db
     .selectFrom('transactions')
     .selectAll()
@@ -45,12 +27,6 @@ export const getMonthlyExpenseDataOneMonth = async (
   }
 
   const expenseRes = await expenseQuery.execute()
-
-  // transform transaction type to enum
-  const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
 
   const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
     ...transaction,
@@ -76,14 +52,8 @@ export const getMonthlyExpenseDataOneMonth = async (
     {} as Record<string, number>
   )
 
-  const totalIncome = parseFloat(calculateTotalPerMonth(incomeTransactions))
-
-  const totalExpense = parseFloat(calculateTotalPerMonth(expenseTransactions))
-
   const expensesOneMonthArray = Object.entries(expensesPerCategory).map(([category, total]) => ({
-    [category]: calcPercentage
-      ? ((total / (ofIncome ? totalIncome : totalExpense)) * 100).toFixed(2)
-      : total.toFixed(2),
+    [category]: total.toFixed(2),
   }))
 
   // transform array to object with all categories for the given month

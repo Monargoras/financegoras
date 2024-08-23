@@ -35,7 +35,6 @@ const colorsHex = [
 ]
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
-  const [ofIncome, setOfIncome] = useState(true)
   const [percentage, setPercentage] = useState(false)
   const [includeSavings, setIncludeSavings] = useState(false)
   const { lang } = props
@@ -44,7 +43,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
     fetch(input).then((res) => res.json())
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
-  const params = `?year=${curYear}&month=${curMonth}&ofIncome=${ofIncome}&percentage=${percentage}&includeSavings=${includeSavings}&lang=${lang}`
+  const params = `?year=${curYear}&month=${curMonth}&includeSavings=${includeSavings}&lang=${lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
@@ -78,13 +77,6 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
               size="xl"
             />
             <Switch
-              checked={ofIncome}
-              onChange={(event) => setOfIncome(event.currentTarget.checked)}
-              onLabel={props.dictionary.budgetPage.ofIncome}
-              offLabel={props.dictionary.budgetPage.ofExpenses}
-              size="xl"
-            />
-            <Switch
               checked={includeSavings}
               onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
               onLabel={props.dictionary.budgetPage.includeSavings}
@@ -92,7 +84,14 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
               size="xl"
             />
           </Flex>
-          <BarChart h={200} w={900} data={data} dataKey="month" type="stacked" series={getSeries(data)} />
+          <BarChart
+            h={200}
+            w={900}
+            data={data}
+            dataKey="month"
+            type={percentage ? 'percent' : 'stacked'}
+            series={getSeries(data)}
+          />
         </Flex>
       )}
     </>

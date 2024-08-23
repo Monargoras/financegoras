@@ -55,8 +55,6 @@
     "deleteModalGroupText2": "This will also delete the contained categories:",
     "deleteModalGroupText3": "Already created transactions and their categories will not be affected.",
     "errorLoadingData": "Error loading data.",
-    "ofIncome": "Of income",
-    "ofExpenses": "Of expenses",
     "percentage": "Percentage",
     "sum": "Sum",
     "includeSavings": "Include Savings",
