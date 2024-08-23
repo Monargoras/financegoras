@@ -5,7 +5,7 @@ import { Flex, Switch } from '@mantine/core'
 import { Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
-import { MonthlyStats } from '../MonthlyStats/MonthlyStats'
+import { MonthlyStats } from './MonthlyStats'
 import { TransactionTable } from '../TransactionTable/TransactionTable'
 
 interface DashboardProps {
@@ -52,8 +52,10 @@ export default function Dashboard(props: DashboardProps) {
           selectedMonth={selectedMonth}
         />
       </Flex>
-      <Flex gap="md" direction="row" wrap="wrap">
-        <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} />
+      <Flex gap="md" direction="row" justify="space-between" wrap="wrap">
+        <Flex gap="md" direction="column">
+          <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} />
+        </Flex>
         <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} />
       </Flex>
     </Flex>
