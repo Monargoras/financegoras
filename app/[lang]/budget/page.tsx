@@ -13,7 +13,7 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
     <Container fluid>
       <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
         <IncomeExpenseForm dictionary={dict} />
-        <Dashboard dictionary={dict} />
+        <Dashboard lang={lang} dictionary={dict} />
         <Flex gap="md" justify="space-apart" direction="row" wrap="wrap">
           <MonthlyStats dictionary={dict} />
           <TransactionTable dictionary={dict} />

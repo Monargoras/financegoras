@@ -7,7 +7,8 @@ export const getMonthlyExpenseDataOneMonth = async (
   year: number,
   ofIncome: boolean,
   calcPercentage: boolean,
-  userId: string
+  userId: string,
+  lang: string
 ) => {
   const incomeRes = await db
     .selectFrom('transactions')
@@ -86,7 +87,7 @@ export const getMonthlyExpenseDataOneMonth = async (
       acc[key] = parseFloat(obj[key])
       return acc
     },
-    { month: new Date(`${year}-${month}-01`).toLocaleString('default', { month: 'long' }) } as Record<
+    { month: new Date(`${year}-${month}-01`).toLocaleString(lang, { month: 'long' }) } as Record<
       string,
       number | string
     >

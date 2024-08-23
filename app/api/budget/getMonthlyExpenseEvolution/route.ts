@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
   const yearString = request.nextUrl.searchParams.get('year')
   const ofIncome = valueToBoolean(request.nextUrl.searchParams.get('ofIncome'))
   const percentage = valueToBoolean(request.nextUrl.searchParams.get('percentage'))
+  const lang = request.nextUrl.searchParams.get('lang') ?? 'en'
 
   if (!yearString || ofIncome === null || percentage === null) {
     return new Response('More fields is required', { status: 400 })
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest) {
   const monthsToCompute = getMonthYearTuples(month, year)
   // get the expenses for the last 12 months or the given year
   const expenses = await Promise.all(
-    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, ofIncome, percentage, session.user.id))
+    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, ofIncome, percentage, session.user.id, lang))
   )
 
   return new Response(JSON.stringify(expenses), { status: 200 })

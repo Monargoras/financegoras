@@ -4,13 +4,14 @@ import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 
 interface DashboardProps {
+  lang: string
   dictionary: Dictionary
 }
 
 export default function Dashboard(props: DashboardProps) {
   return (
     <Flex>
-      <MonthlyExpenseEvolutionGraph dictionary={props.dictionary} />
+      <MonthlyExpenseEvolutionGraph lang={props.lang} dictionary={props.dictionary} />
       <CategoryRadar dictionary={props.dictionary} />
     </Flex>
   )

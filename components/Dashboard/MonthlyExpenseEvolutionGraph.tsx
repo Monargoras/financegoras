@@ -1,26 +1,50 @@
 'use client'
 
 import { useState } from 'react'
-import { Flex, Loader, Switch, Text, useMantineTheme } from '@mantine/core'
+import { Flex, Loader, Switch, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 
 interface MonthlyExpenseEvolutionGraphProps {
+  lang: string
   dictionary: Dictionary
 }
 
+const colorsHex = [
+  '#FFC312',
+  '#C4E538',
+  '#12CBC4',
+  '#FDA7DF',
+  '#ED4C67',
+  '#F79F1F',
+  '#A3CB38',
+  '#1289A7',
+  '#D980FA',
+  '#B53471',
+  '#EE5A24',
+  '#009432',
+  '#0652DD',
+  '#9980FA',
+  '#833471',
+  '#EA2027',
+  '#006266',
+  '#1B1464',
+  '#5758BB',
+  '#6F1E51',
+]
+
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
-  const theme = useMantineTheme()
   const [ofIncome, setOfIncome] = useState(true)
   const [percentage, setPercentage] = useState(true)
+  const { lang } = props
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const currentMonth = new Date().getMonth() + 1
   const currentYear = new Date().getFullYear()
   const { data, error, isLoading } = useSWR(
-    `/api/budget/getMonthlyExpenseEvolution?year=${currentYear}&month=${currentMonth}&ofIncome=${ofIncome}&percentage=${percentage}`,
+    `/api/budget/getMonthlyExpenseEvolution?year=${currentYear}&month=${currentMonth}&ofIncome=${ofIncome}&percentage=${percentage}&lang=${lang}`,
     fetcher
   )
 
@@ -35,7 +59,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
     const res = Array.from(categorySet).map((category, index) => ({
       name: category,
-      color: theme.colors[Object.keys(theme.colors)[index]][5],
+      color: colorsHex[index],
     }))
     return res
   }
@@ -62,7 +86,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
               size="xl"
             />
           </Flex>
-          <BarChart h={200} w={400} data={data} dataKey="category" type="stacked" series={getSeries(data)} />
+          <BarChart h={200} w={900} data={data} dataKey="month" type="stacked" series={getSeries(data)} />
         </Flex>
       )}
     </>
