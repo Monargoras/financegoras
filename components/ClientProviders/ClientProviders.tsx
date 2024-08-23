@@ -5,6 +5,7 @@ import { Session } from 'next-auth'
 import 'dayjs/locale/en'
 import 'dayjs/locale/de'
 import { DatesProvider } from '@mantine/dates'
+import { SWRConfig } from 'swr'
 
 export default function ClientProviders({
   session,
@@ -17,7 +18,9 @@ export default function ClientProviders({
 }) {
   return (
     <SessionProvider session={session}>
-      <DatesProvider settings={{ locale: language, timezone: 'CET' }}>{children}</DatesProvider>
+      <SWRConfig value={{ revalidateOnFocus: false }}>
+        <DatesProvider settings={{ locale: language, timezone: 'CET' }}>{children}</DatesProvider>
+      </SWRConfig>
     </SessionProvider>
   )
 }
