@@ -42,12 +42,10 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const currentMonth = new Date().getMonth() + 1
-  const currentYear = new Date().getFullYear()
-  const { data, error, isLoading } = useSWR(
-    `/api/budget/getMonthlyExpenseEvolution?year=${currentYear}&month=${currentMonth}&ofIncome=${ofIncome}&percentage=${percentage}&includeSavings=${includeSavings}&lang=${lang}`,
-    fetcher
-  )
+  const curMonth = new Date().getMonth() + 1
+  const curYear = new Date().getFullYear()
+  const params = `?year=${curYear}&month=${curMonth}&ofIncome=${ofIncome}&percentage=${percentage}&includeSavings=${includeSavings}&lang=${lang}`
+  const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
     const categorySet = new Set<string>()
