@@ -1,4 +1,7 @@
-import { Flex } from '@mantine/core'
+'use client'
+
+import { useState } from 'react'
+import { Flex, Switch } from '@mantine/core'
 import { Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
@@ -9,10 +12,36 @@ interface DashboardProps {
 }
 
 export default function Dashboard(props: DashboardProps) {
+  const [percentage, setPercentage] = useState(false)
+  const [includeSavings, setIncludeSavings] = useState(false)
+
   return (
-    <Flex>
-      <MonthlyExpenseEvolutionGraph lang={props.lang} dictionary={props.dictionary} />
-      <CategoryRadar dictionary={props.dictionary} />
+    <Flex direction="column">
+      <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }}>
+        <Switch
+          checked={percentage}
+          onChange={(event) => setPercentage(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.percentage}
+          offLabel={props.dictionary.budgetPage.sum}
+          size="xl"
+        />
+        <Switch
+          checked={includeSavings}
+          onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.includeSavings}
+          offLabel={props.dictionary.budgetPage.excludeSavings}
+          size="xl"
+        />
+      </Flex>
+      <Flex direction="row" justify="center" align="center" gap="md">
+        <MonthlyExpenseEvolutionGraph
+          lang={props.lang}
+          dictionary={props.dictionary}
+          percentage={percentage}
+          includeSavings={includeSavings}
+        />
+        <CategoryRadar dictionary={props.dictionary} percentage={percentage} includeSavings={includeSavings} />
+      </Flex>
     </Flex>
   )
 }

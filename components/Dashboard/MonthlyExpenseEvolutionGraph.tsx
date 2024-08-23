@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { Flex, Loader, Switch, Text } from '@mantine/core'
+import { Loader, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
@@ -9,6 +8,8 @@ import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 interface MonthlyExpenseEvolutionGraphProps {
   lang: string
   dictionary: Dictionary
+  percentage: boolean
+  includeSavings: boolean
 }
 
 const colorsHex = [
@@ -35,15 +36,13 @@ const colorsHex = [
 ]
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
-  const [percentage, setPercentage] = useState(false)
-  const [includeSavings, setIncludeSavings] = useState(false)
   const { lang } = props
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
-  const params = `?year=${curYear}&month=${curMonth}&includeSavings=${includeSavings}&lang=${lang}`
+  const params = `?year=${curYear}&month=${curMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
@@ -67,32 +66,14 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       {isLoading && <Loader color="blue" type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
       {data && (
-        <Flex direction="column">
-          <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }}>
-            <Switch
-              checked={percentage}
-              onChange={(event) => setPercentage(event.currentTarget.checked)}
-              onLabel={props.dictionary.budgetPage.percentage}
-              offLabel={props.dictionary.budgetPage.sum}
-              size="xl"
-            />
-            <Switch
-              checked={includeSavings}
-              onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
-              onLabel={props.dictionary.budgetPage.includeSavings}
-              offLabel={props.dictionary.budgetPage.excludeSavings}
-              size="xl"
-            />
-          </Flex>
-          <BarChart
-            h={200}
-            w={900}
-            data={data}
-            dataKey="month"
-            type={percentage ? 'percent' : 'stacked'}
-            series={getSeries(data)}
-          />
-        </Flex>
+        <BarChart
+          h={200}
+          w={900}
+          data={data}
+          dataKey="month"
+          type={props.percentage ? 'percent' : 'stacked'}
+          series={getSeries(data)}
+        />
       )}
     </>
   )

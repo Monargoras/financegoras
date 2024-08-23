@@ -7,6 +7,8 @@ import { CategoryExpenseData, Dictionary } from '@/utils/types'
 
 interface CategoryRadarProps {
   dictionary: Dictionary
+  percentage: boolean
+  includeSavings: boolean
 }
 
 export default function CategoryRadar(props: CategoryRadarProps) {
@@ -14,10 +16,8 @@ export default function CategoryRadar(props: CategoryRadarProps) {
     fetch(input).then((res) => res.json())
   const currentMonth = new Date().getMonth() + 1
   const currentYear = new Date().getFullYear()
-  const { data, error, isLoading } = useSWR(
-    `/api/budget/getExpensesByCategory?year=${currentYear}&month=${currentMonth}`,
-    fetcher
-  )
+  const params = `?year=${currentYear}&month=${currentMonth}&percentage=${props.percentage}&includeSavings=${props.includeSavings}`
+  const { data, error, isLoading } = useSWR(`/api/budget/getExpensesByCategory${params}`, fetcher)
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
           w={300}
           data={data}
           dataKey="category"
-          series={[{ name: 'percentageOfExpenses', color: 'blue.4', opacity: 0.2 }]}
+          series={[{ name: 'value', color: 'blue.5', opacity: 0.2 }]}
         />
       )}
     </>
