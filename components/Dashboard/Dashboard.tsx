@@ -7,6 +7,7 @@ import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 import { MonthlyStats } from './MonthlyStats'
 import { TransactionTable } from '../TransactionTable/TransactionTable'
+import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
 
 interface DashboardProps {
   lang: string
@@ -52,9 +53,14 @@ export default function Dashboard(props: DashboardProps) {
           selectedMonth={selectedMonth}
         />
       </Flex>
-      <Flex gap="md" direction="row" justify="space-between" wrap="wrap">
+      <Flex gap="md" direction="row" wrap="wrap">
         <Flex gap="md" direction="column">
           <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} />
+          <AggregatedIncExpEvolutionGraph
+            lang={props.lang}
+            dictionary={props.dictionary}
+            setSelectedMonth={setSelectedMonth}
+          />
         </Flex>
         <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} />
       </Flex>

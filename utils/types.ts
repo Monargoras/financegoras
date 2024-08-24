@@ -57,6 +57,13 @@ export type AggregatedIncomeExpenseTotals = {
   totalSavings: number
 }
 
+export type AggregatedIncomeExpenseEvolution = {
+  month: string
+  totalIncome: number
+  totalExpenses: number
+  totalSavings: number
+}[]
+
 export type MonthlyExpense = {
   month: string
 } & Record<string, number>

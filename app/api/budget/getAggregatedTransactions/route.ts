@@ -1,9 +1,8 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { db } from '@/utils/database'
-import { getTransactionType, Transaction } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
+import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
 
 /**
  * This endpoint returns the aggregated transactions from the database for given timeframe
@@ -28,68 +27,11 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const incomeRes = await db
-    .selectFrom('transactions')
-    .selectAll()
-    .where('userId', '=', session.user.id)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
-    )
-    .where('isIncome', '=', true)
-    .execute()
-
-  const expenseRes = await db
-    .selectFrom('transactions')
-    .selectAll()
-    .where('userId', '=', session.user.id)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
-    )
-    .where('isIncome', '=', false)
-    .where('isSavings', '=', false)
-    .execute()
-
-  const savingsRes = await db
-    .selectFrom('transactions')
-    .selectAll()
-    .where('userId', '=', session.user.id)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
-    )
-    .where('isIncome', '=', false)
-    .where('isSavings', '=', true)
-    .execute()
-
-  // transform transaction type to enum
-  const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
-
-  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
-
-  const savingsTransactions: Transaction[] = savingsRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const { incomeTransactions, expenseTransactions, savingsTransactions } = await fetchIncExpSavTransactions(
+    session.user.id,
+    year,
+    month
+  )
 
   const totalIncome = month ? calculateTotalPerMonth(incomeTransactions) : calculateTotalPerYear(incomeTransactions)
   const totalExpenses = month ? calculateTotalPerMonth(expenseTransactions) : calculateTotalPerYear(expenseTransactions)
