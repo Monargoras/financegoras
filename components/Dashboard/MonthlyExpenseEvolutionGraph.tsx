@@ -12,6 +12,8 @@ interface MonthlyExpenseEvolutionGraphProps {
   percentage: boolean
   includeSavings: boolean
   setSelectedMonth: (month: number) => void
+  selectedYear: number
+  timeframe: string
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -19,9 +21,8 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const curMonth = new Date().getMonth() + 1
-  const curYear = new Date().getFullYear()
-  const params = `?year=${curYear}&month=${curMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
+  const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
+  const params = `?year=${props.selectedYear}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {

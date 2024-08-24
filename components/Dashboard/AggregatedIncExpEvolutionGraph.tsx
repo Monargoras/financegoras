@@ -10,14 +10,15 @@ interface AggregatedIncExpEvolutionGraphProps {
   lang: string
   dictionary: Dictionary
   setSelectedMonth: (month: number) => void
+  selectedYear: number
+  timeframe: string
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
   const fetcher: Fetcher<AggregatedIncomeExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const curMonth = new Date().getMonth() + 1
-  const curYear = new Date().getFullYear()
-  const params = `?year=${curYear}&month=${curMonth}&lang=${props.lang}`
+  const month = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
+  const params = `?year=${props.selectedYear}&month=${month}&lang=${props.lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getIncExpEvolution${params}`, fetcher)
 
   return (

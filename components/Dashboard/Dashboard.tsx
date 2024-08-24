@@ -8,6 +8,7 @@ import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 import { MonthlyStats } from './MonthlyStats'
 import { TransactionTable } from '../TransactionTable/TransactionTable'
 import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
+import TimeframeSelect from './TimeframeSelect'
 
 interface DashboardProps {
   lang: string
@@ -18,6 +19,8 @@ export default function Dashboard(props: DashboardProps) {
   const [percentage, setPercentage] = useState(false)
   const [includeSavings, setIncludeSavings] = useState(false)
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [timeframe, setTimeframe] = useState(props.dictionary.budgetPage.last12Months)
 
   return (
     <Flex direction="column">
@@ -36,6 +39,14 @@ export default function Dashboard(props: DashboardProps) {
           offLabel={props.dictionary.budgetPage.excludeSavings}
           size="xl"
         />
+        <TimeframeSelect
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+          setSelectedMonth={setSelectedMonth}
+          dictionary={props.dictionary}
+          timeframe={timeframe}
+          setTimeframe={setTimeframe}
+        />
       </Flex>
       <Flex direction="row" justify="center" align="center" gap="md">
         <MonthlyExpenseEvolutionGraph
@@ -44,6 +55,8 @@ export default function Dashboard(props: DashboardProps) {
           percentage={percentage}
           includeSavings={includeSavings}
           setSelectedMonth={setSelectedMonth}
+          selectedYear={selectedYear}
+          timeframe={timeframe}
         />
         <CategoryRadar
           lang={props.lang}
@@ -60,6 +73,8 @@ export default function Dashboard(props: DashboardProps) {
             lang={props.lang}
             dictionary={props.dictionary}
             setSelectedMonth={setSelectedMonth}
+            selectedYear={selectedYear}
+            timeframe={timeframe}
           />
         </Flex>
         <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} />

@@ -58,6 +58,8 @@
     "percentage": "Percentage",
     "sum": "Sum",
     "includeSavings": "Include Savings",
-    "excludeSavings": "Exclude Savings"
+    "excludeSavings": "Exclude Savings",
+    "last12Months": "Last 12 Months",
+    "selectYear": "Select Year"
   }
 }
