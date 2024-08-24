@@ -6,13 +6,9 @@ export const fetchIncExpSavTransactions = async (userId: string, year: number, m
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
+      eb('stoppedAt', 'is', null).or('stoppedAt', '>', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
     )
     .where('isIncome', '=', true)
     .execute()
@@ -21,13 +17,9 @@ export const fetchIncExpSavTransactions = async (userId: string, year: number, m
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
+      eb('stoppedAt', 'is', null).or('stoppedAt', '>', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
     )
     .where('isIncome', '=', false)
     .where('isSavings', '=', false)
@@ -37,13 +29,9 @@ export const fetchIncExpSavTransactions = async (userId: string, year: number, m
     .selectFrom('transactions')
     .selectAll()
     .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
+      eb('stoppedAt', 'is', null).or('stoppedAt', '>', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
     )
     .where('isIncome', '=', false)
     .where('isSavings', '=', true)

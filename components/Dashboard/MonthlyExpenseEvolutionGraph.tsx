@@ -13,6 +13,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   includeSavings: boolean
   setSelectedMonth: (month: number) => void
   selectedYear: number
+  setSelectedYear: (year: number) => void
   timeframe: string
 }
 
@@ -22,7 +23,9 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
-  const params = `?year=${props.selectedYear}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
+  const year =
+    props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
+  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
@@ -68,6 +71,18 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
               // get month number from name
               const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
               props.setSelectedMonth(selectedMonth)
+              if (
+                props.timeframe === props.dictionary.budgetPage.last12Months &&
+                selectedMonth > new Date().getMonth() + 1
+              ) {
+                props.setSelectedYear(new Date().getFullYear() - 1)
+              }
+              if (
+                props.timeframe === props.dictionary.budgetPage.last12Months &&
+                selectedMonth < new Date().getMonth() + 1
+              ) {
+                props.setSelectedYear(new Date().getFullYear())
+              }
             },
           }}
         />

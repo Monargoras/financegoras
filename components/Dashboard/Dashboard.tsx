@@ -56,6 +56,7 @@ export default function Dashboard(props: DashboardProps) {
           includeSavings={includeSavings}
           setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
           timeframe={timeframe}
         />
         <CategoryRadar
@@ -64,20 +65,22 @@ export default function Dashboard(props: DashboardProps) {
           percentage={percentage}
           includeSavings={includeSavings}
           selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
         />
       </Flex>
       <Flex gap="md" direction="row" wrap="wrap">
         <Flex gap="md" direction="column">
-          <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} />
+          <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} selectedYear={selectedYear} />
           <AggregatedIncExpEvolutionGraph
             lang={props.lang}
             dictionary={props.dictionary}
             setSelectedMonth={setSelectedMonth}
             selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
             timeframe={timeframe}
           />
         </Flex>
-        <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} />
+        <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} selectedYear={selectedYear} />
       </Flex>
     </Flex>
   )

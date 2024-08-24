@@ -29,13 +29,9 @@ export async function GET(request: NextRequest) {
   const transactions = await db
     .selectFrom('transactions')
     .where('userId', '=', session.user.id)
-    .where('createdAt', '<', month ? new Date(`${year}-${month + 1}-01`) : new Date(`${year + 1}-01-01`))
+    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
-      eb('stoppedAt', 'is', null).or(
-        'stoppedAt',
-        '>',
-        month ? new Date(`${year}-${month}-01`) : new Date(`${year}-01-01`)
-      )
+      eb('stoppedAt', 'is', null).or('stoppedAt', '>', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
     )
     .orderBy('createdAt', 'desc')
     .select(['id', 'name', 'amount', 'category', 'isIncome', 'isSavings', 'transactionType', 'createdAt', 'stoppedAt'])

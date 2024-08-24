@@ -7,6 +7,7 @@ import { AggregatedIncomeExpenseTotals, Dictionary } from '@/utils/types'
 interface MonthlyStatsProps {
   dictionary: Dictionary
   selectedMonth: number
+  selectedYear: number
 }
 
 export function MonthlyStats(props: MonthlyStatsProps) {
@@ -14,11 +15,8 @@ export function MonthlyStats(props: MonthlyStatsProps) {
 
   const fetcher: Fetcher<AggregatedIncomeExpenseTotals, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  // update selected year if month changes to month is larger than current month -> is in last year
-  const selectedYear =
-    props.selectedMonth > new Date().getMonth() + 1 ? new Date().getFullYear() - 1 : new Date().getFullYear()
   const { data, error, isLoading } = useSWR(
-    `/api/budget/getAggregatedTransactions?year=${selectedYear}&month=${props.selectedMonth}`,
+    `/api/budget/getAggregatedTransactions?year=${props.selectedYear}&month=${props.selectedMonth}`,
     fetcher
   )
 

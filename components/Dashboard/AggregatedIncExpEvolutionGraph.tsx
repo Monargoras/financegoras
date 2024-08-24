@@ -11,6 +11,7 @@ interface AggregatedIncExpEvolutionGraphProps {
   dictionary: Dictionary
   setSelectedMonth: (month: number) => void
   selectedYear: number
+  setSelectedYear: (year: number) => void
   timeframe: string
 }
 
@@ -18,7 +19,9 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
   const fetcher: Fetcher<AggregatedIncomeExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const month = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
-  const params = `?year=${props.selectedYear}&month=${month}&lang=${props.lang}`
+  const year =
+    props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
+  const params = `?year=${year}&month=${month}&lang=${props.lang}`
   const { data, error, isLoading } = useSWR(`/api/budget/getIncExpEvolution${params}`, fetcher)
 
   return (
@@ -52,6 +55,18 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
               // @ts-expect-error payload is not typed in correctly by recharts, but does exist
               const selectedMonth = getMonthNameArray(props.lang).indexOf(payload.payload.month) + 1
               props.setSelectedMonth(selectedMonth)
+              if (
+                props.timeframe === props.dictionary.budgetPage.last12Months &&
+                selectedMonth > new Date().getMonth() + 1
+              ) {
+                props.setSelectedYear(new Date().getFullYear() - 1)
+              }
+              if (
+                props.timeframe === props.dictionary.budgetPage.last12Months &&
+                selectedMonth < new Date().getMonth() + 1
+              ) {
+                props.setSelectedYear(new Date().getFullYear())
+              }
             },
           }}
         />
