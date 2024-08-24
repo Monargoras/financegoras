@@ -38,7 +38,6 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
           h={280}
           data={data}
           dataKey="month"
-          withLegend
           legendProps={{ verticalAlign: 'bottom' }}
           series={[
             { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
