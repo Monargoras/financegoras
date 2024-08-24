@@ -20,6 +20,7 @@ import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
 import { Categories, Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 import CategoryDrawer from '../CategoryDrawer/CategoryDrawer'
+import submitTransaction from './AddTransactionServerAction'
 
 interface TransactionFormProps {
   dictionary: Dictionary
@@ -99,12 +100,16 @@ export default function TransactionForm(props: TransactionFormProps) {
       return false
     }
 
-    const res = await fetch('/api/budget/addTransaction', {
-      cache: 'no-cache',
-      method: 'POST',
-      body: JSON.stringify({ isIncome, isSavings, amount, name, category, transactionType, date }),
-    })
-    if (res.status === 200) {
+    const success = await submitTransaction(
+      isIncome,
+      isSavings,
+      Number(amount),
+      name,
+      category ?? '',
+      transactionType,
+      date
+    )
+    if (success) {
       setName('')
       setAmount('')
       if (categories) {
