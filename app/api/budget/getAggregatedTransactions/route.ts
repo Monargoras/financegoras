@@ -33,9 +33,15 @@ export async function GET(request: NextRequest) {
     month
   )
 
-  const totalIncome = month ? calculateTotalPerMonth(incomeTransactions) : calculateTotalPerYear(incomeTransactions)
-  const totalExpenses = month ? calculateTotalPerMonth(expenseTransactions) : calculateTotalPerYear(expenseTransactions)
-  const totalSavings = month ? calculateTotalPerMonth(savingsTransactions) : calculateTotalPerYear(savingsTransactions)
+  const totalIncome = month
+    ? calculateTotalPerMonth(incomeTransactions)
+    : calculateTotalPerYear(incomeTransactions, year)
+  const totalExpenses = month
+    ? calculateTotalPerMonth(expenseTransactions)
+    : calculateTotalPerYear(expenseTransactions, year)
+  const totalSavings = month
+    ? calculateTotalPerMonth(savingsTransactions)
+    : calculateTotalPerYear(savingsTransactions, year)
 
   return Response.json({ totalIncome, totalExpenses, totalSavings }, { status: 200 })
 }

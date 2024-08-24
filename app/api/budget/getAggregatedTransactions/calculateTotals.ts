@@ -12,11 +12,17 @@ export const calculateTotalPerMonth = (transactions: Transaction[]) => {
   return sum.toFixed(2)
 }
 
-export const calculateTotalPerYear = (transactions: Transaction[]) => {
+// check for monthly how many months they were active in the year
+export const calculateTotalPerYear = (transactions: Transaction[], year: number) => {
   let sum = 0
   for (const transaction of transactions) {
     if (transaction.transactionType === TransactionType.Monthly) {
-      sum += transaction.amount * 12
+      const { createdAt, stoppedAt } = transaction
+      const monthsActive =
+        12 -
+        (createdAt.getFullYear() === year ? createdAt.getMonth() : 0) -
+        (stoppedAt?.getFullYear() === year ? 12 - stoppedAt.getMonth() : 0)
+      sum += transaction.amount * monthsActive
     } else {
       sum += transaction.amount
     }

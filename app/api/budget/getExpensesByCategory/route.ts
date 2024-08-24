@@ -63,7 +63,12 @@ export async function GET(request: NextRequest) {
       }
       // timeframe year: monthly transactions are multiplied by 12
       if (!month && transaction.transactionType === TransactionType.Monthly) {
-        acc[category] = (acc[category] || 0) + transaction.amount * 12
+        const { createdAt, stoppedAt } = transaction
+        const monthsActive =
+          12 -
+          (createdAt.getFullYear() === year ? createdAt.getMonth() : 0) -
+          (stoppedAt?.getFullYear() === year ? 12 - stoppedAt.getMonth() : 0)
+        acc[category] = (acc[category] || 0) + transaction.amount * monthsActive
         return acc
       }
       acc[category] = (acc[category] || 0) + transaction.amount
@@ -74,7 +79,7 @@ export async function GET(request: NextRequest) {
 
   const totalExpense = month
     ? parseFloat(calculateTotalPerMonth(expenseTransactions))
-    : parseFloat(calculateTotalPerYear(expenseTransactions))
+    : parseFloat(calculateTotalPerYear(expenseTransactions, year))
 
   const expenses = Object.entries(expensesPerCategory).map(([category, total]) => ({
     category,

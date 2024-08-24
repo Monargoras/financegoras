@@ -8,9 +8,15 @@ export const getIncExpOneMonth = async (month: number, year: number, userId: str
     month
   )
 
-  const totalIncome = month ? calculateTotalPerMonth(incomeTransactions) : calculateTotalPerYear(incomeTransactions)
-  const totalExpenses = month ? calculateTotalPerMonth(expenseTransactions) : calculateTotalPerYear(expenseTransactions)
-  const totalSavings = month ? calculateTotalPerMonth(savingsTransactions) : calculateTotalPerYear(savingsTransactions)
+  const totalIncome = month
+    ? calculateTotalPerMonth(incomeTransactions)
+    : calculateTotalPerYear(incomeTransactions, year)
+  const totalExpenses = month
+    ? calculateTotalPerMonth(expenseTransactions)
+    : calculateTotalPerYear(expenseTransactions, year)
+  const totalSavings = month
+    ? calculateTotalPerMonth(savingsTransactions)
+    : calculateTotalPerYear(savingsTransactions, year)
 
   return {
     month: new Date(`${year}-${month}-01`).toLocaleString(lang, { month: 'long' }),
