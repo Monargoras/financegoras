@@ -21,10 +21,9 @@ export async function GET(request: NextRequest) {
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')
-  const percentage = valueToBoolean(request.nextUrl.searchParams.get('percentage'))
   const includeSavings = valueToBoolean(request.nextUrl.searchParams.get('includeSavings'))
 
-  if (!yearString || percentage === null || includeSavings === null) {
+  if (!yearString || includeSavings === null) {
     return new Response('More fields required', { status: 400 })
   }
 
@@ -83,7 +82,7 @@ export async function GET(request: NextRequest) {
 
   const expenses = Object.entries(expensesPerCategory).map(([category, total]) => ({
     category,
-    value: percentage ? ((total / totalExpense) * 100).toFixed(2) : total.toFixed(2),
+    value: ((total / totalExpense) * 100).toFixed(2),
   }))
 
   return new Response(JSON.stringify(expenses), { status: 200 })

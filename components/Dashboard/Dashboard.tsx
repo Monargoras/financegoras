@@ -62,7 +62,6 @@ export default function Dashboard(props: DashboardProps) {
         <CategoryRadar
           lang={props.lang}
           dictionary={props.dictionary}
-          percentage={percentage}
           includeSavings={includeSavings}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
