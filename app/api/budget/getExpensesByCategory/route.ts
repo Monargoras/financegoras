@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
         acc[category] = (acc[category] || 0) + transaction.amount / 12
         return acc
       }
-      // timeframe year: monthly transactions are multiplied by 12
+      // timeframe year: monthly transactions are multiplied by 12 minus the months the transaction was inactive
       if (!month && transaction.transactionType === TransactionType.Monthly) {
         const { createdAt, stoppedAt } = transaction
         const monthsActive =
