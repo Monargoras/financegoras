@@ -1,7 +1,8 @@
 'use client'
 
-import { AppShell, Burger, Group, rem, UnstyledButton } from '@mantine/core'
+import { ActionIcon, AppShell, Burger, Group, rem, UnstyledButton, useMantineColorScheme } from '@mantine/core'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
+import { IconSunMoon } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import logo from '../../public/financegoras.png'
@@ -15,6 +16,7 @@ interface AppbarProps {
 
 export function Appbar({ children, props }: { children: React.ReactNode; props: AppbarProps }) {
   const [opened, { toggle }] = useDisclosure()
+  const { toggleColorScheme } = useMantineColorScheme()
   const pinned = useHeadroom({ fixedAt: 120 })
   const router = useRouter()
 
@@ -27,7 +29,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Group justify="space-between" style={{ flex: 1 }}>
+          <Group justify="space-between" align="center" style={{ flex: 1 }}>
             <Image
               src={logo}
               alt="Financegoras"
@@ -45,7 +47,12 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               </UnstyledButton>
               <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
             </Group>
-            <AuthMenu dictionary={props.dictionary} />
+            <Group>
+              <AuthMenu dictionary={props.dictionary} />
+              <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
+                <IconSunMoon onClick={toggleColorScheme} />
+              </ActionIcon>
+            </Group>
           </Group>
         </Group>
       </AppShell.Header>
