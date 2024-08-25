@@ -21,10 +21,18 @@ export default function Dashboard(props: DashboardProps) {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [timeframe, setTimeframe] = useState(props.dictionary.budgetPage.last12Months)
+  const [stackedBarChart, setStackedBarChart] = useState(true)
 
   return (
     <Flex direction="column">
       <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }}>
+        <Switch
+          checked={stackedBarChart}
+          onChange={(event) => setStackedBarChart(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.stackedBarChart}
+          offLabel={props.dictionary.budgetPage.normalBarChart}
+          size="xl"
+        />
         <Switch
           checked={percentage}
           onChange={(event) => setPercentage(event.currentTarget.checked)}
@@ -57,6 +65,7 @@ export default function Dashboard(props: DashboardProps) {
           setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
+          stackedBarChart={stackedBarChart}
           timeframe={timeframe}
         />
         <CategoryRadar

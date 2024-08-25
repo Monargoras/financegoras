@@ -61,6 +61,8 @@
     "includeSavings": "Include Savings",
     "excludeSavings": "Exclude Savings",
     "last12Months": "Last 12 Months",
-    "selectYear": "Select Year"
+    "selectYear": "Select Year",
+    "stackedBarChart": "Stacked Bars",
+    "normalBarChart": "Parallel Bars"
   }
 }
