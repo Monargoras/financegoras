@@ -1,11 +1,24 @@
-# Mantine Next.js template
+# Financegoras
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+Financegoras is a web application that helps users to manage their finances. It is built with Next.js, Mantine, and TypeScript.
 
 ## Features
 
-This template comes with the following features:
+- **Dashboard** - View your account balance, income, and expenses. Including different charts to visualize your financial data.
+- **Transactions** - Add, edit, and delete transactions.
+- **Categories** - Manage transaction categories.
+
+## Use locally
+
+- Database needed to run the application is not included in the repository
+- Setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
+- .env file is required to run the application, a sample .env file is provided in the root directory of the project `sample.env`
+- Run `yarn install` to install all the dependencies
+- Run `yarn dev` to start the application in development mode or `yarn build` to build the application and then `yarn start` to start the application in production mode
+
+## Template Features
+
+This mantine nextjs template comes with the following features:
 
 - [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -13,7 +26,7 @@ This template comes with the following features:
 - [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 - ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
 
-## npm scripts
+## yarn scripts
 
 ### Build and dev scripts
 
