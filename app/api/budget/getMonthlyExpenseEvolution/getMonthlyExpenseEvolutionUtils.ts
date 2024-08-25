@@ -14,7 +14,7 @@ export const getMonthlyExpenseDataOneMonth = async (
     .where('userId', '=', userId)
     .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
-      eb('stoppedAt', 'is', null).or('stoppedAt', '>', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
+      eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
     )
     .where('isIncome', '=', false)
 
