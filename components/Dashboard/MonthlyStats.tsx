@@ -63,6 +63,37 @@ export function MonthlyStats(props: MonthlyStatsProps) {
                 )
               }
             </Paper>
+            <Paper shadow="sm" radius="md" withBorder p="md" m="xs">
+              <Text>{props.dictionary.budgetPage.remainingIncome}</Text>
+              <Text
+                c={
+                  data.totalIncome - data.totalExpenses - data.totalSavings > 0
+                    ? theme.colors.green[5]
+                    : theme.colors.red[5]
+                }
+              >
+                {(data.totalIncome - data.totalExpenses - data.totalSavings).toFixed(2)}€
+              </Text>
+              {
+                // calculate leftover percentage of income
+                data.totalIncome > 0 ? (
+                  <Text
+                    c={
+                      data.totalIncome - data.totalExpenses - data.totalSavings > 0
+                        ? theme.colors.green[5]
+                        : theme.colors.red[5]
+                    }
+                  >
+                    {(((data.totalIncome - data.totalExpenses - data.totalSavings) / data.totalIncome) * 100).toFixed(
+                      2
+                    )}
+                    %
+                  </Text>
+                ) : (
+                  <Text c={theme.colors.green[5]}>0%</Text>
+                )
+              }
+            </Paper>
           </Flex>
         </Container>
       )}
