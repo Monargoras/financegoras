@@ -8,6 +8,12 @@ import { DatesProvider } from '@mantine/dates'
 import { SWRConfig } from 'swr'
 import { motion } from 'framer-motion'
 
+export const pageTransition = {
+  initial: { y: 50, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: { ease: 'easeInOut', duration: 0.75 },
+}
+
 export default function ClientProviders({
   session,
   language,
@@ -20,13 +26,9 @@ export default function ClientProviders({
   return (
     <SessionProvider session={session}>
       <SWRConfig value={{ revalidateOnFocus: false }}>
-        <motion.main
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ ease: 'easeInOut', duration: 0.75 }}
-        >
+        <motion.div {...pageTransition}>
           <DatesProvider settings={{ locale: language, timezone: 'UTC' }}>{children}</DatesProvider>
-        </motion.main>
+        </motion.div>
       </SWRConfig>
     </SessionProvider>
   )
