@@ -7,7 +7,9 @@
     "login": "Login"
   },
   "general": {
-    "logInPrompt": "Log in to view content"
+    "logInPrompt": "Log in to view content",
+    "en": "English",
+    "de": "German"
   },
   "landingPage": {
     "welcome": "Welcome to Financegoras!",

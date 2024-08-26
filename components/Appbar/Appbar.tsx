@@ -9,6 +9,7 @@ import logo from '../../public/financegoras.png'
 import classes from './Appbar.module.css'
 import { Dictionary } from '@/utils/types'
 import AuthMenu from '../AuthMenu/AuthMenu'
+import LocaleSwitcher from './LocaleSwitcher'
 
 interface AppbarProps {
   dictionary: Dictionary
@@ -49,6 +50,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
             </Group>
             <Group>
               <AuthMenu dictionary={props.dictionary} />
+              <LocaleSwitcher dictionary={props.dictionary} />
               <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
                 <IconSunMoon onClick={toggleColorScheme} />
               </ActionIcon>
