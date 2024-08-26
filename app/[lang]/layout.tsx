@@ -10,10 +10,21 @@ import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
+import de from '@/dictionaries/de.json'
+import en from '@/dictionaries/en.json'
 
-export const metadata = {
+const englishMetadata = {
   title: 'Financegoras',
-  description: 'Analyze your finances with ease!',
+  description: en.landingPage.introText,
+}
+
+const germanMetadata = {
+  title: 'Financegoras',
+  description: de.landingPage.introText,
+}
+
+export async function generateMetadata({ params }: { params: { lang: string } }) {
+  return params.lang === 'de' ? germanMetadata : englishMetadata
 }
 
 export async function generateStaticParams() {

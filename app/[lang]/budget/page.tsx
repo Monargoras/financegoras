@@ -7,6 +7,22 @@ import Dashboard from '@/components/Dashboard/Dashboard'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
+import de from '@/dictionaries/de.json'
+import en from '@/dictionaries/en.json'
+
+const englishMetadata = {
+  title: 'Budget Book - Financegoras',
+  description: en.landingPage.introText,
+}
+
+const germanMetadata = {
+  title: 'Haushaltsbuch - Financegoras',
+  description: de.landingPage.introText,
+}
+
+export async function generateMetadata({ params }: { params: { lang: string } }) {
+  return params.lang === 'de' ? germanMetadata : englishMetadata
+}
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
