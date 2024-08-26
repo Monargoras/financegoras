@@ -10,7 +10,6 @@ import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
-import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 
 export const metadata = {
   title: 'Financegoras',
@@ -41,9 +40,7 @@ export default async function RootLayout({
       <body>
         <MantineProvider theme={theme}>
           <ClientProviders session={session} language={params.lang}>
-            <Appbar props={{ dictionary: dict }}>
-              <PageTransitionProvider>{children}</PageTransitionProvider>
-            </Appbar>
+            <Appbar props={{ dictionary: dict }}>{children}</Appbar>
             <Notifications />
           </ClientProviders>
         </MantineProvider>
