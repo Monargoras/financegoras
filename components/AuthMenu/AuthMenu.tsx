@@ -12,9 +12,19 @@ export default function AuthMenu(props: AuthMenuProps) {
 
   return (
     <div>
-      {!session && <Button onClick={() => signIn()}>{props.dictionary.appbar.login}</Button>}
+      {!session && (
+        <Button size="md" onClick={() => signIn()}>
+          {props.dictionary.appbar.login}
+        </Button>
+      )}
       {session && (
-        <Button c={theme.colors.red[5]} color={theme.colors.red[5]} variant="subtle" onClick={() => signOut()}>
+        <Button
+          size="md"
+          c={theme.colors.red[5]}
+          color={theme.colors.red[5]}
+          variant="subtle"
+          onClick={() => signOut()}
+        >
           {props.dictionary.appbar.logout}
         </Button>
       )}
