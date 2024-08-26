@@ -6,13 +6,6 @@ import 'dayjs/locale/en'
 import 'dayjs/locale/de'
 import { DatesProvider } from '@mantine/dates'
 import { SWRConfig } from 'swr'
-import { motion } from 'framer-motion'
-
-export const pageTransition = {
-  initial: { y: 50, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  transition: { ease: 'easeInOut', duration: 0.75 },
-}
 
 export default function ClientProviders({
   session,
@@ -26,9 +19,7 @@ export default function ClientProviders({
   return (
     <SessionProvider session={session}>
       <SWRConfig value={{ revalidateOnFocus: false }}>
-        <motion.div {...pageTransition}>
-          <DatesProvider settings={{ locale: language, timezone: 'UTC' }}>{children}</DatesProvider>
-        </motion.div>
+        <DatesProvider settings={{ locale: language, timezone: 'UTC' }}>{children}</DatesProvider>
       </SWRConfig>
     </SessionProvider>
   )

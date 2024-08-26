@@ -7,7 +7,9 @@
     "login": "Anmelden"
   },
   "landingPage": {
-    "welcome": "Willkommen bei Financegoras!"
+    "welcome": "Willkommen bei Financegoras!",
+    "introText": "Verwalte deine Finanzen mühelos. Nutze das Dashboard, um deine monatlichen Einnahmen, Ausgaben und Ersparnisse schnell zu analysieren. Vergleiche die Daten über Monate und Jahre hinweg, um Trends und Optimierungsmöglichkeiten zu erkennen.",
+    "demo": "Demo"
   },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",

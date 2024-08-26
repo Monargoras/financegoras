@@ -1,4 +1,4 @@
-import { Title, Text, Anchor } from '@mantine/core'
+import { Title, Text, Flex } from '@mantine/core'
 import classes from './Welcome.module.css'
 import { Dictionary } from '@/utils/types'
 
@@ -8,22 +8,15 @@ interface WelcomeProps {
 
 export function Welcome(props: WelcomeProps) {
   return (
-    <>
-      <Title className={classes.title} ta="center" mt={100}>
-        Welcome to{' '}
-        <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
-          Mantine
+    <Flex justify="center" direction="column">
+      <Title className={classes.title} ta="center" mt={50}>
+        <Text inherit variant="gradient" component="span" gradient={{ from: 'blue', to: 'teal' }}>
+          {props.dictionary.landingPage.welcome}
         </Text>
       </Title>
-      <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        This starter Next.js project includes a minimal setup for server side rendering, if you want to learn more on
-        Mantine + Next.js integration follow{' '}
-        <Anchor href="https://mantine.dev/guides/next/" size="lg">
-          this guide
-        </Anchor>
-        . To get started edit page.tsx file.
+      <Text ta="center" size="xl" maw="30dvw" mx="auto" my="xl">
+        {props.dictionary.landingPage.introText}
       </Text>
-      <Text>{props.dictionary.landingPage.welcome}</Text>
-    </>
+    </Flex>
   )
 }

@@ -10,6 +10,7 @@ import { theme } from '../../theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
+import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 
 export const metadata = {
   title: 'Financegoras',
@@ -32,7 +33,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang={params.lang}>
+    <html lang={params.lang} style={{ overflowX: 'hidden' }}>
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
@@ -40,7 +41,9 @@ export default async function RootLayout({
       <body>
         <MantineProvider theme={theme}>
           <ClientProviders session={session} language={params.lang}>
-            <Appbar props={{ dictionary: dict }}>{children}</Appbar>
+            <Appbar props={{ dictionary: dict }}>
+              <PageTransitionProvider>{children}</PageTransitionProvider>
+            </Appbar>
             <Notifications />
           </ClientProviders>
         </MantineProvider>
