@@ -1,22 +1,30 @@
 import { Container, Divider, Flex } from '@mantine/core'
+import { getServerSession } from 'next-auth'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import Dashboard from '@/components/Dashboard/Dashboard'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
+  const session = await getServerSession(authOptions)
 
   return (
     <PageTransitionProvider>
-      <Container fluid>
-        <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
-          <IncomeExpenseForm dictionary={dict} />
-          <Divider size="lg" w="100%" />
-          <Dashboard lang={lang} dictionary={dict} />
-        </Flex>
-      </Container>
+      {session?.user ? (
+        <Container fluid>
+          <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
+            <IncomeExpenseForm dictionary={dict} />
+            <Divider size="lg" w="100%" />
+            <Dashboard lang={lang} dictionary={dict} />
+          </Flex>
+        </Container>
+      ) : (
+        <AuthenticationPrompt dictionary={dict} />
+      )}
     </PageTransitionProvider>
   )
 }

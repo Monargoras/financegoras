@@ -6,6 +6,9 @@
     "logout": "Abmelden",
     "login": "Anmelden"
   },
+  "general": {
+    "logInPrompt": "Anmelden um Inhalt zu sehen"
+  },
   "landingPage": {
     "welcome": "Willkommen bei Financegoras!",
     "introText": "Verwalte deine Finanzen mühelos. Nutze das Dashboard, um deine monatlichen Einnahmen, Ausgaben und Ersparnisse schnell zu analysieren. Vergleiche die Daten über Monate und Jahre hinweg, um Trends und Optimierungsmöglichkeiten zu erkennen.",

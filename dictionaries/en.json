@@ -6,6 +6,9 @@
     "logout": "Logout",
     "login": "Login"
   },
+  "general": {
+    "logInPrompt": "Log in to view content"
+  },
   "landingPage": {
     "welcome": "Welcome to Financegoras!",
     "introText": "Manage your finances with ease. Use the Dashboard to swiftly analyze your monthly income, expenses and savings. Compare across months and years to spot trends and opportunities for optimization.",
