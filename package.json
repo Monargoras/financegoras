@@ -42,7 +42,7 @@
     "next-auth": "^4.24.7",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "recharts": "2.12.7",
+    "recharts": "^2.13.0-alpha.4",
     "sharp": "^0.33.5",
     "swr": "^2.2.5",
     "tabler-icons": "^1.35.0"

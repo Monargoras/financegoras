@@ -82,7 +82,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
-          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.12.7"],\
+          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.13.0-alpha.4"],\
           ["sharp", "npm:0.33.5"],\
           ["storybook", "npm:8.2.9"],\
           ["storybook-dark-mode", "npm:4.0.2"],\
@@ -5546,7 +5546,7 @@ const RAW_RUNTIME_STATE =
           ["@types/recharts", null],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
-          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.12.7"]\
+          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.13.0-alpha.4"]\
         ],\
         "packagePeers": [\
           "@mantine/core",\
@@ -13783,7 +13783,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
-          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.12.7"],\
+          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.13.0-alpha.4"],\
           ["sharp", "npm:0.33.5"],\
           ["storybook", "npm:8.2.9"],\
           ["storybook-dark-mode", "npm:4.0.2"],\
@@ -19399,6 +19399,13 @@ const RAW_RUNTIME_STATE =
           ["react-is", "npm:18.2.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:18.3.1", {\
+        "packageLocation": "./.yarn/cache/react-is-npm-18.3.1-370a81e1e9-d5f60c87d2.zip/node_modules/react-is/",\
+        "packageDependencies": [\
+          ["react-is", "npm:18.3.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["react-number-format", [\
@@ -19536,10 +19543,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:08da117e04c6527b4cf81f355ca3e50558ef77e1d1cf70f02e65f56d70d5523dcb20291450abc8747b48a75c7e8554301a25a0d4c25b67a1f482d232e9a13dcc#npm:4.0.1", {\
-        "packageLocation": "./.yarn/__virtual__/react-smooth-virtual-5f6ab065fc/0/cache/react-smooth-npm-4.0.1-61dcbf28ea-1ecd78c04f.zip/node_modules/react-smooth/",\
+      ["virtual:6c1290a5084b3d2714fc31a753614cc43afa1549d7636f23ff0702bcad2a842034790a1f1531dd1956d307e54ff8db75f8c7219bbc0ec670945bbb058ae17d00#npm:4.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/react-smooth-virtual-26f0c20443/0/cache/react-smooth-npm-4.0.1-61dcbf28ea-1ecd78c04f.zip/node_modules/react-smooth/",\
         "packageDependencies": [\
-          ["react-smooth", "virtual:08da117e04c6527b4cf81f355ca3e50558ef77e1d1cf70f02e65f56d70d5523dcb20291450abc8747b48a75c7e8554301a25a0d4c25b67a1f482d232e9a13dcc#npm:4.0.1"],\
+          ["react-smooth", "virtual:6c1290a5084b3d2714fc31a753614cc43afa1549d7636f23ff0702bcad2a842034790a1f1531dd1956d307e54ff8db75f8c7219bbc0ec670945bbb058ae17d00#npm:4.0.1"],\
           ["@types/react", "npm:18.3.4"],\
           ["@types/react-dom", null],\
           ["fast-equals", "npm:5.0.1"],\
@@ -19702,17 +19709,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["recharts", [\
-      ["npm:2.12.7", {\
-        "packageLocation": "./.yarn/cache/recharts-npm-2.12.7-d5b69f8380-dd2806978d.zip/node_modules/recharts/",\
+      ["npm:2.13.0-alpha.4", {\
+        "packageLocation": "./.yarn/cache/recharts-npm-2.13.0-alpha.4-d57418f6dc-c8f864e720.zip/node_modules/recharts/",\
         "packageDependencies": [\
-          ["recharts", "npm:2.12.7"]\
+          ["recharts", "npm:2.13.0-alpha.4"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.12.7", {\
-        "packageLocation": "./.yarn/__virtual__/recharts-virtual-08da117e04/0/cache/recharts-npm-2.12.7-d5b69f8380-dd2806978d.zip/node_modules/recharts/",\
+      ["virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.13.0-alpha.4", {\
+        "packageLocation": "./.yarn/__virtual__/recharts-virtual-6c1290a508/0/cache/recharts-npm-2.13.0-alpha.4-d57418f6dc-c8f864e720.zip/node_modules/recharts/",\
         "packageDependencies": [\
-          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.12.7"],\
+          ["recharts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:2.13.0-alpha.4"],\
           ["@types/react", "npm:18.3.4"],\
           ["@types/react-dom", null],\
           ["clsx", "npm:2.1.1"],\
@@ -19720,8 +19727,8 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
-          ["react-is", "npm:16.13.1"],\
-          ["react-smooth", "virtual:08da117e04c6527b4cf81f355ca3e50558ef77e1d1cf70f02e65f56d70d5523dcb20291450abc8747b48a75c7e8554301a25a0d4c25b67a1f482d232e9a13dcc#npm:4.0.1"],\
+          ["react-is", "npm:18.3.1"],\
+          ["react-smooth", "virtual:6c1290a5084b3d2714fc31a753614cc43afa1549d7636f23ff0702bcad2a842034790a1f1531dd1956d307e54ff8db75f8c7219bbc0ec670945bbb058ae17d00#npm:4.0.1"],\
           ["recharts-scale", "npm:0.4.5"],\
           ["tiny-invariant", "npm:1.3.1"],\
           ["victory-vendor", "npm:36.9.2"]\
