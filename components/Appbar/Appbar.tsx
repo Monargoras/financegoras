@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import logo from '../../public/financegoras.png'
 import classes from './Appbar.module.css'
 import { Dictionary } from '@/utils/types'
-import AuthMenu from '../AuthMenu/AuthMenu'
+import AuthMenu from './AuthMenu'
 import LocaleSwitcher from './LocaleSwitcher'
 
 interface AppbarProps {

@@ -6,7 +6,7 @@ import { Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 import { MonthlyStats } from './MonthlyStats'
-import { TransactionTable } from '../TransactionTable/TransactionTable'
+import { TransactionTable } from './TransactionTable'
 import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
 import TimeframeSelect from './TimeframeSelect'
 
