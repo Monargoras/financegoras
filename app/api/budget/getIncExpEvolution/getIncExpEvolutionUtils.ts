@@ -17,11 +17,13 @@ export const getIncExpOneMonth = async (month: number, year: number, userId: str
   const totalSavings = month
     ? calculateTotalPerMonth(savingsTransactions)
     : calculateTotalPerYear(savingsTransactions, year)
+  const remainingIncome = (parseFloat(totalIncome) - parseFloat(totalExpenses) - parseFloat(totalSavings)).toFixed(2)
 
   return {
     month: new Date(`${year}-${month}-01`).toLocaleString(lang, { month: 'long' }),
     totalIncome,
     totalExpenses,
     totalSavings,
+    remainingIncome,
   }
 }

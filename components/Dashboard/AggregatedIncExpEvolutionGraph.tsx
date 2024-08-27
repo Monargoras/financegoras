@@ -48,6 +48,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
             { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
             { name: 'totalExpenses', label: props.dictionary.budgetPage.monthlyExpenses, color: 'red.5' },
             { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'blue.5' },
+            { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'cyan.5' },
           ]}
           areaChartProps={{ syncId: 'month' }}
           activeDotProps={{

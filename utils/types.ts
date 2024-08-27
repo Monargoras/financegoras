@@ -62,6 +62,7 @@ export type AggregatedIncomeExpenseEvolution = {
   totalIncome: number
   totalExpenses: number
   totalSavings: number
+  remainingIncome: number
 }[]
 
 export type MonthlyExpense = {
