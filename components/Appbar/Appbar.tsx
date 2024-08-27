@@ -33,6 +33,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
           <Group justify="space-between" align="center" style={{ flex: 1 }}>
             <Image
               src={logo}
+              priority
               alt="Financegoras"
               width={48}
               height={48}
