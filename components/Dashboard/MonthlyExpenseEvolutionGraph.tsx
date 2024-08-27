@@ -66,7 +66,11 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
           dataKey="month"
           type={props.percentage ? 'percent' : props.stackedChart ? 'stacked' : 'default'}
           series={getSeries(data)}
-          barChartProps={{ syncId: 'month', barGap: 1 }}
+          barChartProps={{
+            syncId: 'month',
+            barGap: 1,
+            barCategoryGap: props.stackedChart || props.percentage ? 5 : 10,
+          }}
           barProps={{
             onClick: (event) => {
               const { month } = event.payload
