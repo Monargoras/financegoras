@@ -51,7 +51,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
             // increased domain for standard chart because it sometimes overshot graph for some reason
             domain: ([dataMin, dataMax]) => [
               dataMin * 0,
-              !props.stackedChart ? Math.round(dataMax * 1.5) : Math.round(dataMax),
+              !props.stackedChart && !props.percentage ? Math.round(dataMax * 1.5) : Math.round(dataMax),
             ],
           }}
           series={[
