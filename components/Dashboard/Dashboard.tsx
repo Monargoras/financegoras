@@ -13,6 +13,7 @@ import TimeframeSelect from './TimeframeSelect'
 interface DashboardProps {
   lang: string
   dictionary: Dictionary
+  demo: boolean
 }
 
 export default function Dashboard(props: DashboardProps) {
@@ -67,6 +68,7 @@ export default function Dashboard(props: DashboardProps) {
           setSelectedYear={setSelectedYear}
           stackedBarChart={stackedBarChart}
           timeframe={timeframe}
+          demo={props.demo}
         />
         <CategoryRadar
           lang={props.lang}
@@ -74,11 +76,17 @@ export default function Dashboard(props: DashboardProps) {
           includeSavings={includeSavings}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
+          demo={props.demo}
         />
       </Flex>
       <Flex gap="md" direction="row" wrap="wrap">
         <Flex gap="md" direction="column">
-          <MonthlyStats dictionary={props.dictionary} selectedMonth={selectedMonth} selectedYear={selectedYear} />
+          <MonthlyStats
+            dictionary={props.dictionary}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            demo={props.demo}
+          />
           <AggregatedIncExpEvolutionGraph
             lang={props.lang}
             dictionary={props.dictionary}
@@ -86,9 +94,15 @@ export default function Dashboard(props: DashboardProps) {
             selectedYear={selectedYear}
             setSelectedYear={setSelectedYear}
             timeframe={timeframe}
+            demo={props.demo}
           />
         </Flex>
-        <TransactionTable dictionary={props.dictionary} selectedMonth={selectedMonth} selectedYear={selectedYear} />
+        <TransactionTable
+          dictionary={props.dictionary}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+          demo={props.demo}
+        />
       </Flex>
     </Flex>
   )

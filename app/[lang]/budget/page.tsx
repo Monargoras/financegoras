@@ -35,7 +35,7 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
           <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
             <IncomeExpenseForm dictionary={dict} />
             <Divider size="lg" w="100%" />
-            <Dashboard lang={lang} dictionary={dict} />
+            <Dashboard lang={lang} dictionary={dict} demo={false} />
           </Flex>
         </Container>
       ) : (

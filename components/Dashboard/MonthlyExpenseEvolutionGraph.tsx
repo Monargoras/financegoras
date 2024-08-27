@@ -16,6 +16,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   setSelectedYear: (year: number) => void
   stackedBarChart: boolean
   timeframe: string
+  demo: boolean
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -26,7 +27,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
-  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}`
+  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}&demo=${props.demo}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {

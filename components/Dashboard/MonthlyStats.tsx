@@ -8,6 +8,7 @@ interface MonthlyStatsProps {
   dictionary: Dictionary
   selectedMonth: number
   selectedYear: number
+  demo: boolean
 }
 
 export function MonthlyStats(props: MonthlyStatsProps) {
@@ -16,7 +17,7 @@ export function MonthlyStats(props: MonthlyStatsProps) {
   const fetcher: Fetcher<AggregatedIncomeExpenseTotals, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
-    `/api/budget/getAggregatedTransactions?year=${props.selectedYear}&month=${props.selectedMonth}`,
+    `/api/budget/getAggregatedTransactions?year=${props.selectedYear}&month=${props.selectedMonth}&demo=${props.demo}`,
     fetcher
   )
 

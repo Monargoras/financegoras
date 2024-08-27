@@ -2,20 +2,26 @@ import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { getMonthlyExpenseDataOneMonth, getMonthYearTuples, valueToBoolean } from './getMonthlyExpenseEvolutionUtils'
+import { demoUserId } from '@/utils/CONSTANTS'
 
 /**
  * This endpoint returns the evolution of expenses per category the last 12 months or the given year
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
- * @param ofIncome - if true, the expenses are calculated as a percentage of the income
+ * @param includeSavings - if true, the expenses are calculated with savings combined
+ * @param lang - the current language used by user for month names
+ * @param demo - set if demo data is requested
  * @returns body containing MonthlyExpenseEvolution
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
+  if ((!session || !session.user) && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
+
+  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')
@@ -32,7 +38,7 @@ export async function GET(request: NextRequest) {
   const monthsToCompute = getMonthYearTuples(month, year)
   // get the expenses for the last 12 months or the given year
   const expenses = await Promise.all(
-    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, includeSavings, session.user.id, lang))
+    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, includeSavings, userId, lang))
   )
 
   return new Response(JSON.stringify(expenses), { status: 200 })

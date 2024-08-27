@@ -5,19 +5,25 @@ import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import { demoUserId } from '@/utils/CONSTANTS'
 
 /**
  * This endpoint returns the aggregated expenses per category for a given month or year.
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param year - the year
+ * @param includeSavings - if true, the expenses are calculated with savings combined
+ * @param demo - set if demo data is requested
  * @returns body containing CategoryExpenseData[]
  */
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
+  if ((!session || !session.user) && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
+
+  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')
@@ -33,7 +39,7 @@ export async function GET(request: NextRequest) {
   let expenseQuery = db
     .selectFrom('transactions')
     .selectAll()
-    .where('userId', '=', session.user.id)
+    .where('userId', '=', userId)
     .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
       eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
