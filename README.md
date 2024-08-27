@@ -2,6 +2,8 @@
 
 Financegoras is a web application that helps users to manage their finances. It is built with Next.js, Mantine, and TypeScript.
 
+![Dashboard](/assets/FinancegorasDashboard.png)
+
 ## Features
 
 - **Dashboard** - View your account balance, income, and expenses. Including different charts to visualize your financial data.
