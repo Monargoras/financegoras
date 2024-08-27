@@ -13,6 +13,8 @@ interface AggregatedIncExpEvolutionGraphProps {
   selectedYear: number
   setSelectedYear: (year: number) => void
   timeframe: string
+  percentage: boolean
+  stackedChart: boolean
   demo: boolean
 }
 
@@ -43,9 +45,18 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
           h={280}
           data={data}
           dataKey="month"
+          type={props.percentage ? 'percent' : props.stackedChart ? 'stacked' : 'default'}
           legendProps={{ verticalAlign: 'bottom' }}
+          yAxisProps={{
+            // increased domain for standard chart because it sometimes overshot graph for some reason
+            domain: ([dataMin, dataMax]) => [
+              dataMin * 0,
+              !props.stackedChart ? Math.round(dataMax * 1.5) : Math.round(dataMax),
+            ],
+          }}
           series={[
-            { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
+            // remove total income for readability, replaced by remaining income
+            // { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
             { name: 'totalExpenses', label: props.dictionary.budgetPage.monthlyExpenses, color: 'red.5' },
             { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'blue.5' },
             { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'cyan.5' },

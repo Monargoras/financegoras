@@ -69,7 +69,7 @@
     "excludeSavings": "Exclude Savings",
     "last12Months": "Last 12 Months",
     "selectYear": "Select Year",
-    "stackedBarChart": "Stacked Bars",
-    "normalBarChart": "Parallel Bars"
+    "stackedChart": "Stacked Graphs",
+    "normalChart": "Normal Graphs"
   }
 }

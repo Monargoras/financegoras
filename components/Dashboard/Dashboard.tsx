@@ -22,16 +22,16 @@ export default function Dashboard(props: DashboardProps) {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [timeframe, setTimeframe] = useState(props.dictionary.budgetPage.last12Months)
-  const [stackedBarChart, setStackedBarChart] = useState(true)
+  const [stackedChart, setStackedChart] = useState(true)
 
   return (
     <Flex direction="column">
       <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }}>
         <Switch
-          checked={stackedBarChart}
-          onChange={(event) => setStackedBarChart(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.stackedBarChart}
-          offLabel={props.dictionary.budgetPage.normalBarChart}
+          checked={stackedChart}
+          onChange={(event) => setStackedChart(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.stackedChart}
+          offLabel={props.dictionary.budgetPage.normalChart}
           size="xl"
         />
         <Switch
@@ -66,7 +66,7 @@ export default function Dashboard(props: DashboardProps) {
           setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
-          stackedBarChart={stackedBarChart}
+          stackedChart={stackedChart}
           timeframe={timeframe}
           demo={props.demo}
         />
@@ -94,6 +94,8 @@ export default function Dashboard(props: DashboardProps) {
             selectedYear={selectedYear}
             setSelectedYear={setSelectedYear}
             timeframe={timeframe}
+            percentage={percentage}
+            stackedChart={stackedChart}
             demo={props.demo}
           />
         </Flex>

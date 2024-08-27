@@ -14,7 +14,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   setSelectedMonth: (month: number) => void
   selectedYear: number
   setSelectedYear: (year: number) => void
-  stackedBarChart: boolean
+  stackedChart: boolean
   timeframe: string
   demo: boolean
 }
@@ -64,9 +64,9 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
           h={200}
           data={data}
           dataKey="month"
-          type={!props.stackedBarChart ? 'default' : props.percentage ? 'percent' : 'stacked'}
+          type={props.percentage ? 'percent' : props.stackedChart ? 'stacked' : 'default'}
           series={getSeries(data)}
-          barChartProps={{ syncId: 'month' }}
+          barChartProps={{ syncId: 'month', barGap: 1 }}
           barProps={{
             onClick: (event) => {
               const { month } = event.payload

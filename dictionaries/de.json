@@ -69,7 +69,7 @@
     "excludeSavings": "Ohne Sparen",
     "last12Months": "Letzte 12 Monate",
     "selectYear": "Jahr auswählen",
-    "stackedBarChart": "Gestapelte Balken",
-    "normalBarChart": "Parallele Balken"
+    "stackedChart": "Gestapelte Graphen",
+    "normalChart": "Normale Graphen"
   }
 }
