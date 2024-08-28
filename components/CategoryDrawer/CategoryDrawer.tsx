@@ -63,8 +63,6 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   const handleRenameCategory = (newName: string) => {
     // if value was not changed, close the editing mode
     if (newName === editing) {
-      setEditing(null)
-      setEditingValue('')
       return true
     }
     // check if the new name is already in use
@@ -143,8 +141,6 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   const handleRenameGroup = (newName: string) => {
     // if value was not changed, close the editing mode
     if (newName === editing) {
-      setEditing(null)
-      setEditingValue('')
       return true
     }
     // check if the new name is already in use
