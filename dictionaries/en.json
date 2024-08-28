@@ -17,6 +17,12 @@
     "introText": "Manage your finances with ease. Use the Dashboard to swiftly analyze your monthly income, expenses and savings. Compare across months and years to spot trends and opportunities for optimization.",
     "demo": "Demo"
   },
+  "transactionsPage": {
+    "earliestFirst": "Earliest First",
+    "latestFirst": "Latest First",
+    "textSearch": "Text Search",
+    "searchPlaceholder": "Search Name/Category"
+  },
   "budgetPage": {
     "budgetBook": "Budget Book",
     "name": "Name",
