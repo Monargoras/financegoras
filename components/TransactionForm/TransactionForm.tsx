@@ -167,6 +167,14 @@ export default function TransactionForm(props: TransactionFormProps) {
           stepHoldDelay={500}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
         />
+        <Switch
+          checked={isSavings}
+          onChange={(event) => setIsSavings(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.isSavings}
+          offLabel={props.dictionary.budgetPage.isIncomeExpense}
+          size="xl"
+          style={{ marginTop: 'auto' }}
+        />
         <TextInput
           value={name}
           error={nameError}
@@ -193,14 +201,6 @@ export default function TransactionForm(props: TransactionFormProps) {
           onChange={(value) => setCategory(value)}
           maxDropdownHeight={400}
           allowDeselect={false}
-        />
-        <Switch
-          checked={isSavings}
-          onChange={(event) => setIsSavings(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.isSavings}
-          offLabel={props.dictionary.budgetPage.isIncomeExpense}
-          size="xl"
-          style={{ marginTop: 'auto' }}
         />
         <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>
