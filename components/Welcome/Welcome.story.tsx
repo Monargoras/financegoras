@@ -1,4 +1,4 @@
-import { Welcome } from './Welcome'
+import Welcome from './Welcome'
 import data from '../../dictionaries/en.json'
 
 export default {
