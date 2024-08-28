@@ -1,9 +1,11 @@
 import { Button, useMantineTheme } from '@mantine/core'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { Dictionary } from '@/utils/types'
+import classes from './Appbar.module.css'
 
 interface AuthMenuProps {
   dictionary: Dictionary
+  unstyled?: boolean
 }
 
 export default function AuthMenu(props: AuthMenuProps) {
@@ -13,7 +15,12 @@ export default function AuthMenu(props: AuthMenuProps) {
   return (
     <div>
       {!session && (
-        <Button size="md" onClick={() => signIn()}>
+        <Button
+          size="md"
+          onClick={() => signIn()}
+          variant={props.unstyled ? 'subtle' : 'filled'}
+          className={props.unstyled ? classes.control : ''}
+        >
           {props.dictionary.appbar.login}
         </Button>
       )}
@@ -24,6 +31,7 @@ export default function AuthMenu(props: AuthMenuProps) {
           color={theme.colors.red[5]}
           variant="subtle"
           onClick={() => signOut()}
+          className={props.unstyled ? classes.control : ''}
         >
           {props.dictionary.appbar.logout}
         </Button>

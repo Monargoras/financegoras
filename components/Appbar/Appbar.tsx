@@ -48,9 +48,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
                 {props.dictionary.appbar.budget}
               </UnstyledButton>
               <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+              <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
-              <AuthMenu dictionary={props.dictionary} />
               <LocaleSwitcher dictionary={props.dictionary} />
               <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
                 <IconSunMoon onClick={toggleColorScheme} />
@@ -80,6 +80,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
           {props.dictionary.appbar.budget}
         </UnstyledButton>
         <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+        <Group style={{ marginTop: 24 }}>
+          <AuthMenu dictionary={props.dictionary} unstyled />
+        </Group>
       </AppShell.Navbar>
 
       <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>{children}</AppShell.Main>
