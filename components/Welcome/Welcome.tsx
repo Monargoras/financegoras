@@ -14,7 +14,7 @@ export function Welcome(props: WelcomeProps) {
           {props.dictionary.landingPage.welcome}
         </Text>
       </Title>
-      <Text ta="center" size="xl" maw="30dvw" mx="auto" my="xl">
+      <Text ta="center" size="xl" maw="max(30dvw, 400px)" mx="auto" my="xl">
         {props.dictionary.landingPage.introText}
       </Text>
     </Flex>
