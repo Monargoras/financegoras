@@ -4,6 +4,7 @@ import { db } from '@/utils/database'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
+import { getTransactionType, Transaction } from '@/utils/types'
 
 /**
  * This endpoint returns all transactions from the database
@@ -42,5 +43,11 @@ export async function GET(request: NextRequest) {
     .orderBy('createdAt', 'desc')
     .select(['id', 'name', 'amount', 'category', 'isIncome', 'isSavings', 'transactionType', 'createdAt', 'stoppedAt'])
     .execute()
-  return Response.json(transactions, { status: 200 })
+
+  const res: Transaction[] = transactions.map((transaction) => ({
+    ...transaction,
+    transactionType: getTransactionType(transaction.transactionType),
+  }))
+
+  return Response.json(res, { status: 200 })
 }

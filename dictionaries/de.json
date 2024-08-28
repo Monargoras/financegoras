@@ -22,6 +22,7 @@
     "name": "Name",
     "amount": "Betrag",
     "incomeTooltip": "Wähle + für Einnahmen, - für Ausgaben",
+    "isIncome": "Einnahme",
     "isSavings": "Sparen",
     "isIncomeExpense": "Einnahme/Ausgabe",
     "category": "Kategorie",
