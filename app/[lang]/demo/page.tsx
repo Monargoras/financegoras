@@ -26,7 +26,7 @@ export default async function DemoPage({ params: { lang } }: PageProps) {
   return (
     <PageTransitionProvider>
       <Container fluid>
-        <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
+        <Flex gap="md" justify="center" align="center" direction="column">
           <Dashboard lang={lang} dictionary={dict} demo />
         </Flex>
       </Container>

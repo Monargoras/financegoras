@@ -32,7 +32,7 @@ export default async function BudgetPage({ params: { lang } }: PageProps) {
     <PageTransitionProvider>
       {session?.user ? (
         <Container fluid>
-          <Flex gap="md" justify="center" align="center" direction="column" wrap="wrap">
+          <Flex gap="md" justify="center" align="center" direction="column">
             <IncomeExpenseForm dictionary={dict} />
             <Divider size="lg" w="100%" />
             <Dashboard lang={lang} dictionary={dict} demo={false} />
