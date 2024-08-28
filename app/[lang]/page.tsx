@@ -1,5 +1,5 @@
 import { Flex } from '@mantine/core'
-import { Welcome } from '../../components/Welcome/Welcome'
+import Welcome from '../../components/Welcome/Welcome'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from './dictionaries'
 import DemoButton from '@/components/Welcome/DemoButton'

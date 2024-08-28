@@ -6,7 +6,7 @@ interface WelcomeProps {
   dictionary: Dictionary
 }
 
-export function Welcome(props: WelcomeProps) {
+export default function Welcome(props: WelcomeProps) {
   return (
     <Flex justify="center" direction="column">
       <Title className={classes.title} ta="center" mt={50}>
