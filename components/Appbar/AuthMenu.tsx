@@ -19,7 +19,7 @@ export default function AuthMenu(props: AuthMenuProps) {
           size="md"
           onClick={() => signIn()}
           variant={props.unstyled ? 'subtle' : 'filled'}
-          className={props.unstyled ? classes.control : ''}
+          className={classes.control}
         >
           {props.dictionary.appbar.login}
         </Button>
@@ -31,7 +31,7 @@ export default function AuthMenu(props: AuthMenuProps) {
           color={theme.colors.red[5]}
           variant="subtle"
           onClick={() => signOut()}
-          className={props.unstyled ? classes.control : ''}
+          className={classes.control}
         >
           {props.dictionary.appbar.logout}
         </Button>

@@ -47,6 +47,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <UnstyledButton onClick={() => router.push('/budget')} className={classes.control}>
                 {props.dictionary.appbar.budget}
               </UnstyledButton>
+              <UnstyledButton onClick={() => router.push('/transactions')} className={classes.control}>
+                {props.dictionary.appbar.transactions}
+              </UnstyledButton>
               <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
               <AuthMenu dictionary={props.dictionary} />
             </Group>
@@ -78,6 +81,15 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
           className={classes.control}
         >
           {props.dictionary.appbar.budget}
+        </UnstyledButton>
+        <UnstyledButton
+          onClick={() => {
+            router.push('/transactions')
+            toggle()
+          }}
+          className={classes.control}
+        >
+          {props.dictionary.appbar.transactions}
         </UnstyledButton>
         <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
         <Group style={{ marginTop: 24 }}>

@@ -2,6 +2,7 @@
   "appbar": {
     "home": "Start",
     "budget": "Haushaltsbuch",
+    "transactions": "Transaktionen",
     "portfolio": "Portfolio",
     "logout": "Abmelden",
     "login": "Anmelden"

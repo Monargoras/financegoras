@@ -2,6 +2,7 @@
   "appbar": {
     "home": "Home",
     "budget": "Budget Book",
+    "transactions": "Transactions",
     "portfolio": "Portfolio",
     "logout": "Logout",
     "login": "Login"
