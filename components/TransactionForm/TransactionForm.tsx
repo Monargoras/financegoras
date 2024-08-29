@@ -121,6 +121,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         position: 'bottom-right',
       })
       mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
       return true
     }
     notifications.show({
