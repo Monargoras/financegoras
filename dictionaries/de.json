@@ -21,7 +21,8 @@
     "earliestFirst": "Älteste zuerst",
     "latestFirst": "Neueste zuerst",
     "textSearch": "Textsuche",
-    "searchPlaceholder": "Suche Name/Kategorie"
+    "searchPlaceholder": "Suche Name/Kategorie",
+    "typeFilterPlaceholder": "Typ Filter"
   },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",

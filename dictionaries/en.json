@@ -21,7 +21,8 @@
     "earliestFirst": "Earliest First",
     "latestFirst": "Latest First",
     "textSearch": "Text Search",
-    "searchPlaceholder": "Search Name/Category"
+    "searchPlaceholder": "Search Name/Category",
+    "typeFilterPlaceholder": "Filter Type"
   },
   "budgetPage": {
     "budgetBook": "Budget Book",

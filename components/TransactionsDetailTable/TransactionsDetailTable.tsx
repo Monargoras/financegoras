@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Flex, Loader, Text, Table, useMantineTheme } from '@mantine/core'
 import useSWR, { Fetcher } from 'swr'
 import { IconDots } from 'tabler-icons'
@@ -17,16 +18,22 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher)
 
+  const [listOfCategoriesAndNames, setListOfCategoriesAndNames] = useState<string[]>([])
+
+  useEffect(() => {
+    if (!data) return
+    const array = data.map((ta: Transaction) => [ta.category, ta.name]).flat()
+    const unique = Array.from(new Set(array))
+    setListOfCategoriesAndNames(unique)
+  }, [data])
+
   return (
     <Flex justify="center">
       {isLoading && <Loader color="blue" type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
       {data && (
         <Flex justify="center" align="center" direction="column">
-          <TableControls
-            dictionary={props.dictionary}
-            listOfCategoriesAndNames={data.map((ta: Transaction) => [ta.category, ta.name]).flat()}
-          />
+          <TableControls dictionary={props.dictionary} listOfCategoriesAndNames={listOfCategoriesAndNames} />
           <Table.ScrollContainer mah="73dvh" minWidth={400} w="95dvw" style={{ margin: 8 }}>
             <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
               <Table.Thead>

@@ -19,11 +19,13 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
 }
 
 export default function TableControls(props: TableControlsProps) {
-  const allTypes = Object.keys(TransactionType).map((key) => TransactionType[Number(key)])
+  const allTypes = Object.values(TransactionType)
+    .filter((el) => typeof el === 'string')
+    .map((name) => ({ value: name, label: props.dictionary.budgetPage[name.toLocaleLowerCase()] }))
 
   const [earliestFirst, setEarliestFirst] = useState(true)
   const [catNameSearch, setCatNameSearch] = useState<string[]>([])
-  const [typeFilter, setTypeFilter] = useState<string[]>(allTypes)
+  const [typeFilter, setTypeFilter] = useState<string[]>([])
 
   return (
     <Flex gap="xs">
@@ -34,7 +36,6 @@ export default function TableControls(props: TableControlsProps) {
         offLabel={props.dictionary.transactionsPage.latestFirst}
         size="xl"
       />
-      {/*
       <MultiSelect
         value={catNameSearch}
         onChange={(value) => setCatNameSearch(value)}
@@ -43,15 +44,17 @@ export default function TableControls(props: TableControlsProps) {
         placeholder={props.dictionary.transactionsPage.searchPlaceholder}
         hidePickedOptions
         filter={optionsFilter}
+        clearable
+        maw={500}
       />
       <MultiSelect
         value={typeFilter}
         onChange={(value) => setTypeFilter(value)}
         data={allTypes}
+        placeholder={props.dictionary.transactionsPage.typeFilterPlaceholder}
         searchable
-        hidePickedOptions
+        clearable
       />
-      */}
       {/* TODO timeframe select */}
     </Flex>
   )
