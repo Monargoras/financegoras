@@ -27,7 +27,7 @@ export interface TransactionsTable {
   // a `Date`, has to be provided as a `string` in inserts and
   // can never be updated:
   createdAt: ColumnType<Date, string, never>
-  stoppedAt: ColumnType<Date | undefined, string | undefined, string | undefined>
+  stoppedAt: ColumnType<Date | null, string | null, string | null>
 }
 
 // You should not use the table schema interfaces directly. Instead, you should

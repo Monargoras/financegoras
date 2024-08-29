@@ -36,7 +36,7 @@ export type Transaction = {
   name: string
   category: string
   transactionType: TransactionType
-  stoppedAt?: Date
+  stoppedAt: Date | null
 }
 
 export type CategoryGroup = {

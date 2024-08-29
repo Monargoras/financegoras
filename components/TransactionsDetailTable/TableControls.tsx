@@ -1,13 +1,22 @@
 'use client'
 
 import { ComboboxItem, Flex, MultiSelect, OptionsFilter, Switch } from '@mantine/core'
-import { useState } from 'react'
 import { DatePickerInput } from '@mantine/dates'
 import { Dictionary, TransactionType } from '@/utils/types'
 
 interface TableControlsProps {
   dictionary: Dictionary
   listOfCategoriesAndNames: string[]
+  earliestFirst: boolean
+  setEarliestFirst: (newValue: boolean) => void
+  hideStopped: boolean
+  setHideStopped: (newValue: boolean) => void
+  catNameSearch: string[]
+  setCatNameSearch: (newValue: string[]) => void
+  typeFilter: string[]
+  setTypeFilter: (newValue: string[]) => void
+  dateRange: [Date | null, Date | null]
+  setDateRange: (newValue: [Date | null, Date | null]) => void
 }
 
 const optionsFilter: OptionsFilter = ({ options, search }) => {
@@ -24,17 +33,11 @@ export default function TableControls(props: TableControlsProps) {
     .filter((el) => typeof el === 'string')
     .map((name) => ({ value: name, label: props.dictionary.budgetPage[name.toLocaleLowerCase()] }))
 
-  const [earliestFirst, setEarliestFirst] = useState(true)
-  const [hideStopped, setHideStopped] = useState(true)
-  const [catNameSearch, setCatNameSearch] = useState<string[]>([])
-  const [typeFilter, setTypeFilter] = useState<string[]>([])
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
-
   return (
     <Flex gap="md" wrap="wrap" align="center">
       <MultiSelect
-        value={catNameSearch}
-        onChange={(value) => setCatNameSearch(value)}
+        value={props.catNameSearch}
+        onChange={(value) => props.setCatNameSearch(value)}
         data={props.listOfCategoriesAndNames}
         searchable
         placeholder={props.dictionary.transactionsPage.searchPlaceholder}
@@ -44,8 +47,8 @@ export default function TableControls(props: TableControlsProps) {
         maw={500}
       />
       <MultiSelect
-        value={typeFilter}
-        onChange={(value) => setTypeFilter(value)}
+        value={props.typeFilter}
+        onChange={(value) => props.setTypeFilter(value)}
         data={allTypes}
         placeholder={props.dictionary.transactionsPage.typeFilterPlaceholder}
         searchable
@@ -54,18 +57,18 @@ export default function TableControls(props: TableControlsProps) {
       <DatePickerInput
         type="range"
         placeholder={props.dictionary.transactionsPage.pickDatesRange}
-        value={dateRange}
-        onChange={setDateRange}
+        value={props.dateRange}
+        onChange={props.setDateRange}
         clearable
       />
       <Switch
-        checked={earliestFirst}
-        onChange={(event) => setEarliestFirst(event.currentTarget.checked)}
+        checked={props.earliestFirst}
+        onChange={(event) => props.setEarliestFirst(event.currentTarget.checked)}
         label={props.dictionary.transactionsPage.earliestFirst}
       />
       <Switch
-        checked={hideStopped}
-        onChange={(event) => setHideStopped(event.currentTarget.checked)}
+        checked={props.hideStopped}
+        onChange={(event) => props.setHideStopped(event.currentTarget.checked)}
         label={props.dictionary.transactionsPage.hideStopped}
       />
     </Flex>
