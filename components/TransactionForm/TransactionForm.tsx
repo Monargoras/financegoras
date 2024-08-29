@@ -19,8 +19,9 @@ import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
 import { Categories, Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
-import CategoryDrawer from '../CategoryDrawer/CategoryDrawer'
-import submitTransaction from './AddTransactionServerAction'
+import CategoryDrawer from '@/components/CategoryDrawer/CategoryDrawer'
+import submitTransaction from '@/serverActions/submitTransaction'
+import updateCategories from '@/serverActions/updateCategories'
 
 interface TransactionFormProps {
   dictionary: Dictionary
@@ -61,15 +62,11 @@ export default function TransactionForm(props: TransactionFormProps) {
   }, [categories])
 
   useEffect(() => {
-    if (!updateBackendCategories) {
+    if (!updateBackendCategories || !categories) {
       return
     }
-    fetch('/api/budget/updateCategories', {
-      cache: 'no-cache',
-      method: 'POST',
-      body: JSON.stringify(categories),
-    }).then((res) => {
-      if (res.status === 200) {
+    updateCategories(categories).then((success) => {
+      if (success) {
         notifications.show({
           title: props.dictionary.budgetPage.feedbackUpdateBackendSuccessTitle,
           message: props.dictionary.budgetPage.feedbackUpdateBackendSuccessMessage,
@@ -86,8 +83,8 @@ export default function TransactionForm(props: TransactionFormProps) {
           position: 'bottom-right',
         })
       }
+      setUpdateBackendCategories(false)
     })
-    setUpdateBackendCategories(false)
   }, [updateBackendCategories])
 
   const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
@@ -167,6 +164,14 @@ export default function TransactionForm(props: TransactionFormProps) {
           stepHoldDelay={500}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
         />
+        <Switch
+          checked={isSavings}
+          onChange={(event) => setIsSavings(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.isSavings}
+          offLabel={props.dictionary.budgetPage.isIncomeExpense}
+          size="xl"
+          style={{ marginTop: 'auto' }}
+        />
         <TextInput
           value={name}
           error={nameError}
@@ -193,14 +198,6 @@ export default function TransactionForm(props: TransactionFormProps) {
           onChange={(value) => setCategory(value)}
           maxDropdownHeight={400}
           allowDeselect={false}
-        />
-        <Switch
-          checked={isSavings}
-          onChange={(event) => setIsSavings(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.isSavings}
-          offLabel={props.dictionary.budgetPage.isIncomeExpense}
-          size="xl"
-          style={{ marginTop: 'auto' }}
         />
         <AddTransactionButton dictionary={props.dictionary} handleAddTransaction={handleAddTransaction} />
       </Flex>

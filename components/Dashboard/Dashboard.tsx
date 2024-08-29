@@ -6,7 +6,7 @@ import { Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 import { MonthlyStats } from './MonthlyStats'
-import { TransactionTable } from '../TransactionTable/TransactionTable'
+import { TransactionTable } from './TransactionTable'
 import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
 import TimeframeSelect from './TimeframeSelect'
 
@@ -26,7 +26,7 @@ export default function Dashboard(props: DashboardProps) {
 
   return (
     <Flex direction="column">
-      <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }}>
+      <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }} wrap="wrap">
         <Switch
           checked={stackedChart}
           onChange={(event) => setStackedChart(event.currentTarget.checked)}
@@ -57,7 +57,7 @@ export default function Dashboard(props: DashboardProps) {
           setTimeframe={setTimeframe}
         />
       </Flex>
-      <Flex direction="row" justify="center" align="center" gap="md">
+      <Flex direction="row" justify="center" align="center" gap="md" wrap="wrap">
         <MonthlyExpenseEvolutionGraph
           lang={props.lang}
           dictionary={props.dictionary}
@@ -79,8 +79,8 @@ export default function Dashboard(props: DashboardProps) {
           demo={props.demo}
         />
       </Flex>
-      <Flex gap="md" direction="row" wrap="wrap">
-        <Flex gap="md" direction="column">
+      <Flex gap="md" justify="center" direction="row" wrap="wrap">
+        <Flex gap="md" align="center" direction="column" wrap="wrap">
           <MonthlyStats
             dictionary={props.dictionary}
             selectedMonth={selectedMonth}

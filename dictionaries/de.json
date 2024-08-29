@@ -2,6 +2,7 @@
   "appbar": {
     "home": "Start",
     "budget": "Haushaltsbuch",
+    "transactions": "Transaktionen",
     "portfolio": "Portfolio",
     "logout": "Abmelden",
     "login": "Anmelden"
@@ -16,11 +17,18 @@
     "introText": "Verwalte deine Finanzen mühelos. Nutze das Dashboard, um deine monatlichen Einnahmen, Ausgaben und Ersparnisse schnell zu analysieren. Vergleiche die Daten über Monate und Jahre hinweg, um Trends und Optimierungsmöglichkeiten zu erkennen.",
     "demo": "Demo"
   },
+  "transactionsPage": {
+    "earliestFirst": "Älteste zuerst",
+    "latestFirst": "Neueste zuerst",
+    "textSearch": "Textsuche",
+    "searchPlaceholder": "Suche Name/Kategorie"
+  },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",
     "name": "Name",
     "amount": "Betrag",
     "incomeTooltip": "Wähle + für Einnahmen, - für Ausgaben",
+    "isIncome": "Einnahme",
     "isSavings": "Sparen",
     "isIncomeExpense": "Einnahme/Ausgabe",
     "category": "Kategorie",

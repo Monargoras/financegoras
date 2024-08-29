@@ -49,7 +49,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                   onChange={(event) => setEditingValue(event.currentTarget.value)}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
-                      const success = props.handleRenameCategory(editingValue)
+                      const success = props.handleRenameGroup(editingValue)
                       if (success) {
                         setEditing(null)
                         setEditingValue('')

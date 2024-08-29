@@ -1,6 +1,6 @@
 'use client'
 
-import { Flex, Loader, Text } from '@mantine/core'
+import { Flex, Loader, Text, useMatches } from '@mantine/core'
 import { AreaChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
@@ -19,6 +19,11 @@ interface AggregatedIncExpEvolutionGraphProps {
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
+  const chartWidth = useMatches({
+    md: 900,
+    sm: 400,
+  })
+
   const fetcher: Fetcher<AggregatedIncomeExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const month = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
@@ -30,18 +35,18 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
   return (
     <>
       {isLoading && (
-        <Flex justify="center" align="center" w={900} h={280}>
+        <Flex justify="center" align="center" w={chartWidth} h={280}>
           <Loader color="blue" type="dots" />
         </Flex>
       )}
       {error && (
-        <Flex justify="center" align="center" w={900} h={280}>
+        <Flex justify="center" align="center" w={chartWidth} h={280}>
           <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
         </Flex>
       )}
       {data && (
         <AreaChart
-          w={900}
+          w={chartWidth}
           h={280}
           data={data}
           dataKey="month"

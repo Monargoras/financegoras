@@ -1,8 +1,10 @@
 import 'server-only'
+import { i18n } from '@/middleware'
 
 const dictionaries = {
   en: () => import('../../dictionaries/en.json').then((module) => module.default),
   de: () => import('../../dictionaries/de.json').then((module) => module.default),
 }
 
-export const getDictionary = async (locale) => dictionaries[locale]()
+export const getDictionary = async (locale) =>
+  dictionaries[i18n.locales.includes(locale) ? locale : i18n.defaultLocale]()

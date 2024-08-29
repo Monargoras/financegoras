@@ -1,4 +1,5 @@
-import { Welcome } from '../../components/Welcome/Welcome'
+import { Flex } from '@mantine/core'
+import Welcome from '../../components/Welcome/Welcome'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from './dictionaries'
 import DemoButton from '@/components/Welcome/DemoButton'
@@ -19,7 +20,14 @@ export default async function HomePage({ params: { lang } }: PageProps) {
     >
       <PageTransitionProvider>
         <Welcome dictionary={dict} />
-        <DemoButton dictionary={dict} />
+        <Flex justify="center">
+          <DemoButton
+            title={dict.landingPage.demo}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          />
+        </Flex>
       </PageTransitionProvider>
     </div>
   )

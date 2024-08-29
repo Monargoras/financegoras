@@ -1,6 +1,6 @@
 'use client'
 
-import { Flex, Loader, Text } from '@mantine/core'
+import { Flex, Loader, Text, useMatches } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
@@ -21,6 +21,11 @@ interface MonthlyExpenseEvolutionGraphProps {
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
   const { lang } = props
+
+  const chartWidth = useMatches({
+    md: 900,
+    sm: 400,
+  })
 
   const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
@@ -49,18 +54,18 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   return (
     <>
       {isLoading && (
-        <Flex justify="center" align="center" w={900} h={200}>
+        <Flex justify="center" align="center" w={chartWidth} h={200}>
           <Loader color="blue" type="dots" />
         </Flex>
       )}
       {error && (
-        <Flex justify="center" align="center" w={900} h={200}>
+        <Flex justify="center" align="center" w={chartWidth} h={200}>
           <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
         </Flex>
       )}
       {data && (
         <BarChart
-          w={900}
+          w={chartWidth}
           h={200}
           data={data}
           dataKey="month"

@@ -2,6 +2,7 @@
   "appbar": {
     "home": "Home",
     "budget": "Budget Book",
+    "transactions": "Transactions",
     "portfolio": "Portfolio",
     "logout": "Logout",
     "login": "Login"
@@ -16,15 +17,24 @@
     "introText": "Manage your finances with ease. Use the Dashboard to swiftly analyze your monthly income, expenses and savings. Compare across months and years to spot trends and opportunities for optimization.",
     "demo": "Demo"
   },
+  "transactionsPage": {
+    "earliestFirst": "Earliest First",
+    "latestFirst": "Latest First",
+    "textSearch": "Text Search",
+    "searchPlaceholder": "Search Name/Category"
+  },
   "budgetPage": {
     "budgetBook": "Budget Book",
     "name": "Name",
     "amount": "Amount",
     "incomeTooltip": "Choose + for income, - for expenses",
+    "isIncome": "Income",
     "isSavings": "Savings",
     "isIncomeExpense": "Income/Expense",
     "category": "Category",
     "categories": "Categories",
+    "createdAt": "Created",
+    "stoppedAt": "Stopped",
     "addSingleTransaction": "Add Transaction",
     "addMonthlyTransaction": "Add Monthly Transaction",
     "addAnnualTransaction": "Add Annual Transaction",

@@ -1,28 +1,30 @@
 'use client'
 
-import { Button, Flex } from '@mantine/core'
+import { forwardRef } from 'react'
+import { Button } from '@mantine/core'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { IconArrowRight } from 'tabler-icons'
-import { Dictionary } from '@/utils/types'
 
 interface DemoButtonProps {
-  dictionary: Dictionary
+  title: string
 }
 
-export default function DemoButton(props: DemoButtonProps) {
+const DemoButtonRef = forwardRef<HTMLButtonElement, DemoButtonProps>((props, ref) => {
   const router = useRouter()
 
   return (
-    <Flex justify="center">
-      <Button
-        size="xl"
-        rightSection={<IconArrowRight size={28} />}
-        onClick={() => {
-          router.push('/demo')
-        }}
-      >
-        {props.dictionary.landingPage.demo}
-      </Button>
-    </Flex>
+    <Button
+      ref={ref}
+      size="xl"
+      rightSection={<IconArrowRight size={28} />}
+      onClick={() => {
+        router.push('/demo')
+      }}
+    >
+      {props.title}
+    </Button>
   )
-}
+})
+
+export default motion(DemoButtonRef)
