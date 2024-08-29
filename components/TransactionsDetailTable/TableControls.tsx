@@ -34,7 +34,7 @@ export default function TableControls(props: TableControlsProps) {
     .map((name) => ({ value: name, label: props.dictionary.budgetPage[name.toLocaleLowerCase()] }))
 
   return (
-    <Flex gap="md" wrap="wrap" align="center">
+    <Flex gap="md" wrap="wrap" align="center" justify="center">
       <MultiSelect
         value={props.catNameSearch}
         onChange={(value) => props.setCatNameSearch(value)}
