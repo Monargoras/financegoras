@@ -18,11 +18,12 @@
     "demo": "Demo"
   },
   "transactionsPage": {
-    "earliestFirst": "Älteste zuerst",
-    "latestFirst": "Neueste zuerst",
+    "earliestFirst": "Neueste zuerst",
     "textSearch": "Textsuche",
     "searchPlaceholder": "Suche Name/Kategorie",
-    "typeFilterPlaceholder": "Typ Filter"
+    "typeFilterPlaceholder": "Typ Filter",
+    "hideStopped": "Nur laufende",
+    "showStopped": "Auch beendete"
   },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",
@@ -74,8 +75,8 @@
     "errorLoadingData": "Fehler beim Laden der Daten.",
     "percentage": "Prozent",
     "sum": "Summe",
-    "includeSavings": "Mit Sparen",
-    "excludeSavings": "Ohne Sparen",
+    "includeSavings": "Mit sparen",
+    "excludeSavings": "Ohne sparen",
     "last12Months": "Letzte 12 Monate",
     "selectYear": "Jahr auswählen",
     "stackedChart": "Gestapelte Graphen",

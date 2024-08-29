@@ -24,18 +24,12 @@ export default function TableControls(props: TableControlsProps) {
     .map((name) => ({ value: name, label: props.dictionary.budgetPage[name.toLocaleLowerCase()] }))
 
   const [earliestFirst, setEarliestFirst] = useState(true)
+  const [hideStopped, setHideStopped] = useState(true)
   const [catNameSearch, setCatNameSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
 
   return (
-    <Flex gap="xs">
-      <Switch
-        checked={earliestFirst}
-        onChange={(event) => setEarliestFirst(event.currentTarget.checked)}
-        onLabel={props.dictionary.transactionsPage.earliestFirst}
-        offLabel={props.dictionary.transactionsPage.latestFirst}
-        size="xl"
-      />
+    <Flex gap="md" wrap="wrap" align="center">
       <MultiSelect
         value={catNameSearch}
         onChange={(value) => setCatNameSearch(value)}
@@ -54,6 +48,16 @@ export default function TableControls(props: TableControlsProps) {
         placeholder={props.dictionary.transactionsPage.typeFilterPlaceholder}
         searchable
         clearable
+      />
+      <Switch
+        checked={earliestFirst}
+        onChange={(event) => setEarliestFirst(event.currentTarget.checked)}
+        label={props.dictionary.transactionsPage.earliestFirst}
+      />
+      <Switch
+        checked={hideStopped}
+        onChange={(event) => setHideStopped(event.currentTarget.checked)}
+        label={props.dictionary.transactionsPage.hideStopped}
       />
       {/* TODO timeframe select */}
     </Flex>
