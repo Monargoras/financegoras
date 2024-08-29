@@ -34,15 +34,18 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
       res = res.filter((ta) => ta.stoppedAt === null)
     }
     if (catNameSearch.length > 0) {
-      res = res.filter((ta) => ta.name in catNameSearch || ta.category in catNameSearch)
+      res = res.filter((ta) => catNameSearch.includes(ta.name) || catNameSearch.includes(ta.category))
     }
     if (typeFilter.length > 0) {
-      res = res.filter(
-        (ta) => TransactionType[ta.transactionType] in typeFilter.map((el) => TransactionType[getTransactionType(el)])
+      res = res.filter((ta) =>
+        typeFilter.map((el) => TransactionType[getTransactionType(el)]).includes(TransactionType[ta.transactionType])
       )
     }
     if (dateRange.every((el) => el !== null)) {
-      res = res.filter((ta) => ta.createdAt < dateRange[1]! && (ta.stoppedAt === null || ta.stoppedAt >= dateRange[0]!))
+      res = res.filter(
+        (ta) =>
+          new Date(ta.createdAt) < dateRange[1]! && (ta.stoppedAt === null || new Date(ta.stoppedAt) >= dateRange[0]!)
+      )
     }
     if (earliestFirst) {
       res = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
