@@ -23,7 +23,8 @@
     "searchPlaceholder": "Suche Name/Kategorie",
     "typeFilterPlaceholder": "Typ Filter",
     "hideStopped": "Nur laufende",
-    "showStopped": "Auch beendete"
+    "showStopped": "Auch beendete",
+    "pickDatesRange": "Zeitraum filtern"
   },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",

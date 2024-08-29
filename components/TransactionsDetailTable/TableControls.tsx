@@ -2,6 +2,7 @@
 
 import { ComboboxItem, Flex, MultiSelect, OptionsFilter, Switch } from '@mantine/core'
 import { useState } from 'react'
+import { DatePickerInput } from '@mantine/dates'
 import { Dictionary, TransactionType } from '@/utils/types'
 
 interface TableControlsProps {
@@ -27,6 +28,7 @@ export default function TableControls(props: TableControlsProps) {
   const [hideStopped, setHideStopped] = useState(true)
   const [catNameSearch, setCatNameSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
 
   return (
     <Flex gap="md" wrap="wrap" align="center">
@@ -49,6 +51,13 @@ export default function TableControls(props: TableControlsProps) {
         searchable
         clearable
       />
+      <DatePickerInput
+        type="range"
+        placeholder={props.dictionary.transactionsPage.pickDatesRange}
+        value={dateRange}
+        onChange={setDateRange}
+        clearable
+      />
       <Switch
         checked={earliestFirst}
         onChange={(event) => setEarliestFirst(event.currentTarget.checked)}
@@ -59,7 +68,6 @@ export default function TableControls(props: TableControlsProps) {
         onChange={(event) => setHideStopped(event.currentTarget.checked)}
         label={props.dictionary.transactionsPage.hideStopped}
       />
-      {/* TODO timeframe select */}
     </Flex>
   )
 }

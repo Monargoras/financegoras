@@ -22,7 +22,8 @@
     "textSearch": "Text search",
     "searchPlaceholder": "Search name/category",
     "typeFilterPlaceholder": "Filter type",
-    "hideStopped": "Only running"
+    "hideStopped": "Only running",
+    "pickDatesRange": "Filter date range"
   },
   "budgetPage": {
     "budgetBook": "Budget Book",
