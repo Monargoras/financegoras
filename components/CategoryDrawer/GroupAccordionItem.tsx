@@ -126,7 +126,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
             {props.dictionary.budgetPage.deleteModalGroupText3}
           </Text>
           <Flex gap="md" justify="end">
-            <Button onClick={close} variant="subtle">
+            <Button onClick={close} variant="light">
               {props.dictionary.budgetPage.cancel}
             </Button>
             <Button
