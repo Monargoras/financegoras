@@ -24,7 +24,8 @@
     "typeFilterPlaceholder": "Typ Filter",
     "hideStopped": "Nur laufende",
     "showStopped": "Auch beendete",
-    "pickDatesRange": "Zeitraum filtern"
+    "pickDatesRange": "Zeitraum filtern",
+    "editTransaction": "Transaktion bearbeiten"
   },
   "budgetPage": {
     "budgetBook": "Haushaltsbuch",
@@ -50,6 +51,7 @@
     "add": "Hinzufügen",
     "cancel": "Abbrechen",
     "edit": "Bearbeiten",
+    "save": "Speichern",
     "delete": "Löschen",
     "feedbackAddTransactionSuccessTitle": "Transaktion erfolgreich hinzugefügt!",
     "feedbackAddTransactionSuccessMessage": "Die Transaktion wurde zu deinem Haushaltsbuch hinzugefügt.",

@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react'
 import { Flex, Loader, Text, Table, useMantineTheme } from '@mantine/core'
 import useSWR, { Fetcher } from 'swr'
+import { useDisclosure } from '@mantine/hooks'
 import { IconDots } from 'tabler-icons'
-import { Dictionary, getTransactionType, Transaction, TransactionType } from '@/utils/types'
+import { Categories, Dictionary, getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import TableControls from './TableControls'
+import TransactionEditModal from './TransactionEditModal'
 
 interface TransactionsDetailTableProps {
   locale: string
@@ -14,6 +16,19 @@ interface TransactionsDetailTableProps {
 
 export default function TransactionsDetailTable(props: TransactionsDetailTableProps) {
   const theme = useMantineTheme()
+  const [opened, { open, close }] = useDisclosure(false)
+  const [categories, setCategories] = useState<Categories | null>(null)
+  const [editTransaction, setEditTransaction] = useState<Transaction | null>(null)
+
+  const categoryFetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) =>
+    fetch(input).then((res) => res.json())
+  const categoryRes = useSWR('/api/budget/getCategories', categoryFetcher)
+
+  useEffect(() => {
+    if (categoryRes.data) {
+      setCategories(categoryRes.data)
+    }
+  }, [categoryRes.data])
 
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher)
@@ -101,7 +116,14 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
               </Table.Thead>
               <Table.Tbody>
                 {filteredData.map((ta: Transaction) => (
-                  <Table.Tr key={ta.id}>
+                  <Table.Tr
+                    key={ta.id}
+                    onClick={() => {
+                      setEditTransaction(ta)
+                      open()
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <Table.Td
                       c={
                         ta.isIncome ? theme.colors.green[5] : ta.isSavings ? theme.colors.blue[5] : theme.colors.red[5]
@@ -140,6 +162,18 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
               </Table.Tbody>
             </Table>
           </Table.ScrollContainer>
+          {editTransaction && (
+            <TransactionEditModal
+              dictionary={props.dictionary}
+              opened={opened}
+              close={() => {
+                setEditTransaction(null)
+                close()
+              }}
+              transaction={editTransaction}
+              categories={categories ?? []}
+            />
+          )}
         </Flex>
       )}
     </Flex>

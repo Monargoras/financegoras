@@ -23,7 +23,8 @@
     "searchPlaceholder": "Search name/category",
     "typeFilterPlaceholder": "Filter type",
     "hideStopped": "Only running",
-    "pickDatesRange": "Filter date range"
+    "pickDatesRange": "Filter date range",
+    "editTransaction": "Edit transaction"
   },
   "budgetPage": {
     "budgetBook": "Budget Book",
@@ -51,6 +52,7 @@
     "add": "Add",
     "cancel": "Cancel",
     "edit": "Edit",
+    "save": "Save",
     "delete": "Delete",
     "feedbackAddTransactionSuccessTitle": "Transaction added successfully!",
     "feedbackAddTransactionSuccessMessage": "The transaction has been added to your budget book.",

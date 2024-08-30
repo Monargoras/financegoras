@@ -27,10 +27,10 @@ interface TransactionFormProps {
   dictionary: Dictionary
 }
 
-const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
+export const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconMinus {...others} /> : <IconPlus {...others} />
 
-const checkboxTheme = createTheme({
+export const checkboxTheme = createTheme({
   cursorType: 'pointer',
 })
 

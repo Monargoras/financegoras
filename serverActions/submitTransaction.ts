@@ -19,6 +19,12 @@ export default async function submitTransaction(
   if (!session || !session.user) {
     return false
   }
+  if (name.length === 0) {
+    return false
+  }
+  if (amount === 0) {
+    return false
+  }
 
   const id = nanoid(16)
   const transaction = {
