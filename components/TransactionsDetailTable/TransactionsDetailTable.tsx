@@ -42,10 +42,13 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
       )
     }
     if (dateRange.every((el) => el !== null)) {
-      res = res.filter(
-        (ta) =>
-          new Date(ta.createdAt) < dateRange[1]! && (ta.stoppedAt === null || new Date(ta.stoppedAt) >= dateRange[0]!)
-      )
+      res = res.filter((ta) => {
+        const createdAt = new Date(ta.createdAt)
+        const stoppedAt = ta.stoppedAt ? new Date(ta.stoppedAt) : null
+        // add 24 hours to the end date to include the whole day
+        const rangeEnd = new Date(dateRange[1]!.getTime() + 86400000)
+        return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= dateRange[0]!)
+      })
     }
     if (earliestFirst) {
       res = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())

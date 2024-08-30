@@ -29,10 +29,10 @@ export default async function submitTransaction(
     category,
     userId: session.user.id,
     id,
-    createdAt: date.toISOString().slice(0, 19).replace('T', ' '),
+    createdAt: date,
     transactionType: TransactionType[transactionType],
     ...(transactionType === TransactionType.Single && {
-      stoppedAt: date.toISOString().slice(0, 19).replace('T', ' '),
+      stoppedAt: date,
     }),
   }
   await db.insertInto('transactions').values(transaction).executeTakeFirst()

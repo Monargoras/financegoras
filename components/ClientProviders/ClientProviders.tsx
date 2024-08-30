@@ -19,7 +19,7 @@ export default function ClientProviders({
   return (
     <SessionProvider session={session}>
       <SWRConfig value={{ revalidateOnFocus: false }}>
-        <DatesProvider settings={{ locale: language, timezone: 'UTC' }}>{children}</DatesProvider>
+        <DatesProvider settings={{ locale: language }}>{children}</DatesProvider>
       </SWRConfig>
     </SessionProvider>
   )

@@ -26,8 +26,8 @@ export interface TransactionsTable {
   // wrapper. Here we define a column `created_at` that is selected as
   // a `Date`, has to be provided as a `string` in inserts and
   // can never be updated:
-  createdAt: ColumnType<Date, string, never>
-  stoppedAt: ColumnType<Date | null, string | null, string | null>
+  createdAt: ColumnType<Date, Date, Date | null>
+  stoppedAt: ColumnType<Date | null, Date | null, Date | null>
 }
 
 // You should not use the table schema interfaces directly. Instead, you should
