@@ -9,6 +9,7 @@ import {
   MantineProvider,
   Modal,
   NumberInput,
+  rem,
   Select,
   Switch,
   TextInput,
@@ -18,10 +19,12 @@ import { DateInput } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks'
 import { mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
-import { IconCheck, IconX } from 'tabler-icons'
+import { IconCheck, IconDeviceFloppy, IconX } from 'tabler-icons'
+import { IconTrashX } from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
 import updateTransaction from '@/serverActions/updateTransaction'
+import deleteTransaction from '@/serverActions/deleteTransaction'
 
 interface TransactionEditModalProps {
   dictionary: Dictionary
@@ -83,8 +86,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     )
     if (success) {
       notifications.show({
-        title: props.dictionary.budgetPage.feedbackAddTransactionSuccessTitle,
-        message: props.dictionary.budgetPage.feedbackAddTransactionSuccessMessage,
+        title: props.dictionary.budgetPage.feedbackUpdateTransactionSuccessTitle,
+        message: props.dictionary.budgetPage.feedbackUpdateTransactionSuccessMessage,
         color: 'green',
         icon: <IconCheck />,
         position: 'bottom-right',
@@ -94,8 +97,32 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       return true
     }
     notifications.show({
-      title: props.dictionary.budgetPage.feedbackAddTransactionErrorTitle,
-      message: props.dictionary.budgetPage.feedbackAddTransactionErrorMessage,
+      title: props.dictionary.budgetPage.feedbackUpdateTransactionErrorTitle,
+      message: props.dictionary.budgetPage.feedbackUpdateTransactionErrorMessage,
+      color: 'red',
+      icon: <IconX />,
+      position: 'bottom-right',
+    })
+    return false
+  }
+
+  const handleDeleteTransaction = async () => {
+    const success = await deleteTransaction(props.transaction.id)
+    if (success) {
+      notifications.show({
+        title: props.dictionary.budgetPage.feedbackDeleteTransactionSuccessTitle,
+        message: props.dictionary.budgetPage.feedbackDeleteTransactionSuccessMessage,
+        color: 'green',
+        icon: <IconCheck />,
+        position: 'bottom-right',
+      })
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+      return true
+    }
+    notifications.show({
+      title: props.dictionary.budgetPage.feedbackDeleteTransactionErrorTitle,
+      message: props.dictionary.budgetPage.feedbackDeleteTransactionErrorMessage,
       color: 'red',
       icon: <IconX />,
       position: 'bottom-right',
@@ -213,12 +240,26 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       <Divider size="md" style={{ marginTop: 16 }} />
       <Flex justify="center" align="center" gap="md" style={{ marginTop: 16 }}>
         <Button
+          color="red"
+          leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
+          onClick={async () => {
+            const success = await handleDeleteTransaction()
+            if (success) {
+              props.close()
+            }
+          }}
+        >
+          {props.dictionary.budgetPage.delete}
+        </Button>
+        <Button
+          leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />}
           onClick={async () => {
             const success = await handleUpdateTransaction()
             if (success) {
               props.close()
             }
           }}
+          style={{ marginLeft: 'auto' }}
         >
           {props.dictionary.budgetPage.save}
         </Button>
