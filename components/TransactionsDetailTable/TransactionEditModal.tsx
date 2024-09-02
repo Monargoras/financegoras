@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 import {
   Button,
   Checkbox,
@@ -17,6 +17,7 @@ import {
 } from '@mantine/core'
 import { DateInput } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks'
+import { useForm } from '@mantine/form'
 import { mutate } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { IconCheck, IconDeviceFloppy, IconX } from 'tabler-icons'
@@ -37,41 +38,42 @@ interface TransactionEditModalProps {
 export default function TransactionEditModal(props: TransactionEditModalProps) {
   const isMobile = useMediaQuery('(max-width: 50em)')
 
-  const [name, setName] = useState(props.transaction.name)
-  const [amount, setAmount] = useState<string | number>(props.transaction.amount)
-  const [category, setCategory] = useState(props.transaction.category)
-  const [transactionType, setTransactionType] = useState(TransactionType[props.transaction.transactionType])
-  const [createdAt, setCreatedAt] = useState<Date | null>(new Date(props.transaction.createdAt))
-  const [stoppedAt, setStoppedAt] = useState<Date | null>(
-    props.transaction.stoppedAt ? new Date(props.transaction.stoppedAt) : null
-  )
-  const [isIncome, setIsIncome] = useState(props.transaction.isIncome)
-  const [isSavings, setIsSavings] = useState(props.transaction.isSavings)
-  const [amountError, setAmountError] = useState(false)
-  const [nameError, setNameError] = useState(false)
-  const [createdAtError, setCreatedAtError] = useState(false)
-  const [stoppedAtError, setStoppedAtError] = useState(false)
+  const form = useForm({
+    mode: 'controlled',
+    initialValues: {
+      name: props.transaction.name,
+      amount: props.transaction.amount,
+      category: props.transaction.category,
+      transactionType: TransactionType[props.transaction.transactionType],
+      createdAt: new Date(props.transaction.createdAt),
+      stoppedAt: props.transaction.stoppedAt ? new Date(props.transaction.stoppedAt) : null,
+      isIncome: props.transaction.isIncome,
+      isSavings: props.transaction.isSavings,
+    },
+    validate: {
+      // functions return true if there is an error
+      name: (value) => value.length === 0,
+      amount: (value) => value <= 0,
+      createdAt: (value) => value === null,
+      stoppedAt: (value, formValues) =>
+        formValues.transactionType === TransactionType[TransactionType.Single] && formValues.createdAt && value
+          ? formValues.createdAt.getTime() !== value.getTime()
+          : null,
+    },
+  })
+
+  useEffect(() => {
+    if (form.values.transactionType === TransactionType[TransactionType.Single]) {
+      form.setFieldValue('stoppedAt', null)
+    }
+  }, [form.values.transactionType])
 
   const handleUpdateTransaction = async () => {
-    if (name.length === 0) {
-      setNameError(true)
+    const res = form.validate()
+    if (res.hasErrors) {
       return false
     }
-    if (amount === 0) {
-      setAmountError(true)
-      return false
-    }
-    if (!createdAt) {
-      setCreatedAtError(true)
-      return false
-    }
-    if (
-      transactionType === TransactionType[TransactionType.Single] &&
-      (!stoppedAt || createdAt.getTime() !== stoppedAt.getTime())
-    ) {
-      setStoppedAtError(true)
-      return false
-    }
+    const { name, amount, category, transactionType, createdAt, stoppedAt, isIncome, isSavings } = form.values
 
     const success = await updateTransaction(
       props.transaction.id,
@@ -82,7 +84,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       category ?? '',
       transactionType,
       createdAt,
-      stoppedAt
+      transactionType === TransactionType[TransactionType.Single] ? createdAt : stoppedAt
     )
     if (success) {
       notifications.show({
@@ -143,97 +145,80 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           <MantineProvider theme={checkboxTheme}>
             <Tooltip label={props.dictionary.budgetPage.incomeTooltip}>
               <Checkbox
-                checked={isIncome}
                 style={{ marginTop: 'auto' }}
                 size="xl"
-                indeterminate={!isIncome}
+                indeterminate={!form.getValues().isIncome}
                 icon={IsIncomeIcon}
                 labelPosition="left"
-                onChange={(event) => setIsIncome(event.currentTarget.checked)}
+                key={form.key('isIncome')}
+                {...form.getInputProps('isIncome', { type: 'checkbox' })}
               />
             </Tooltip>
           </MantineProvider>
           <NumberInput
-            value={amount}
             label={props.dictionary.budgetPage.amount}
-            onChange={(value) => {
-              setAmountError(false)
-              setAmount(value)
-            }}
-            error={amountError}
             allowNegative={false}
             prefix="€"
             decimalScale={2}
             thousandSeparator=" "
             stepHoldDelay={500}
             stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+            key={form.key('amount')}
+            error={form.errors.amount}
+            {...form.getInputProps('amount', { type: 'input' })}
           />
           <Switch
-            checked={isSavings}
-            onChange={(event) => setIsSavings(event.currentTarget.checked)}
             onLabel={props.dictionary.budgetPage.isSavings}
             offLabel={props.dictionary.budgetPage.isIncomeExpense}
             size="xl"
             style={{ marginTop: 'auto' }}
+            key={form.key('isSavings')}
+            {...form.getInputProps('isSavings', { type: 'checkbox' })}
           />
         </Flex>
         <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
           <TextInput
             label={props.dictionary.budgetPage.name}
-            value={name}
-            error={nameError}
-            onChange={(e) => {
-              setName(e.currentTarget.value)
-              setNameError(false)
-            }}
+            key={form.key('name')}
+            error={form.errors.name}
+            {...form.getInputProps('name', { type: 'input' })}
           />
           <Select
             data={props.categories}
             label={props.dictionary.budgetPage.category}
-            value={category}
-            onChange={(value) => setCategory(value as string)}
             maxDropdownHeight={400}
             allowDeselect={false}
+            key={form.key('category')}
+            {...form.getInputProps('category', { type: 'input' })}
           />
           <Select
             data={Object.keys(TransactionType)
               .filter((key) => Number.isNaN(Number(key)))
               .map((key) => ({ value: key, label: props.dictionary.budgetPage[key.toLowerCase()] }))}
             label={props.dictionary.budgetPage.type}
-            value={transactionType}
-            onChange={(value) => {
-              setTransactionType(value as string)
-              if (value === TransactionType[TransactionType.Single]) {
-                setStoppedAt(createdAt)
-              }
-            }}
             maxDropdownHeight={400}
             allowDeselect={false}
+            key={form.key('transactionType')}
+            {...form.getInputProps('transactionType', { type: 'input' })}
           />
         </Flex>
         <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
           <DateInput
             label={props.dictionary.budgetPage.createdAt}
-            value={createdAt}
-            error={createdAtError}
-            onChange={(value) => {
-              setCreatedAtError(false)
-              setCreatedAt(value)
-            }}
             allowDeselect={false}
             valueFormat="DD MMMM YYYY"
+            key={form.key('createdAt')}
+            error={form.errors.createdAt}
+            {...form.getInputProps('createdAt', { type: 'input' })}
           />
           <DateInput
             label={props.dictionary.budgetPage.stoppedAt}
-            value={stoppedAt}
-            error={stoppedAtError}
-            disabled={transactionType === TransactionType[TransactionType.Single]}
-            onChange={(value) => {
-              setStoppedAtError(false)
-              setStoppedAt(value)
-            }}
+            disabled={form.getValues().transactionType === TransactionType[TransactionType.Single]}
             allowDeselect={false}
             valueFormat="DD MMMM YYYY"
+            key={form.key('stoppedAt')}
+            error={form.errors.stoppedAt}
+            {...form.getInputProps('stoppedAt', { type: 'input' })}
           />
         </Flex>
       </Flex>

@@ -32,6 +32,7 @@ const RAW_RUNTIME_STATE =
           ["@mantine/charts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/core", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/dates", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/form", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.2"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@next/bundle-analyzer", "npm:14.2.6"],\
@@ -5633,6 +5634,30 @@ const RAW_RUNTIME_STATE =
           "@types/react",\
           "dayjs",\
           "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@mantine/form", [\
+      ["npm:7.12.2", {\
+        "packageLocation": "./.yarn/cache/@mantine-form-npm-7.12.2-075cdecfc2-004ae53386.zip/node_modules/@mantine/form/",\
+        "packageDependencies": [\
+          ["@mantine/form", "npm:7.12.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.2", {\
+        "packageLocation": "./.yarn/__virtual__/@mantine-form-virtual-3feb4981a6/0/cache/@mantine-form-npm-7.12.2-075cdecfc2-004ae53386.zip/node_modules/@mantine/form/",\
+        "packageDependencies": [\
+          ["@mantine/form", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.2"],\
+          ["@types/react", "npm:18.3.4"],\
+          ["fast-deep-equal", "npm:3.1.3"],\
+          ["klona", "npm:2.0.6"],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
           "react"\
         ],\
         "linkType": "HARD"\
@@ -13733,6 +13758,7 @@ const RAW_RUNTIME_STATE =
           ["@mantine/charts", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/core", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/dates", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
+          ["@mantine/form", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.2"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.12.1"],\
           ["@next/bundle-analyzer", "npm:14.2.6"],\
