@@ -6,15 +6,22 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# NEW enable yarn 4.0.2 version and copy yarnrc.yml
+RUN corepack enable
+COPY .yarn ./.yarn
+
+# Install dependencies based on the preferred package manager (NEW copy yarnrc.yml to the image)
+COPY package.json yarn.lock* .yarnrc.yml ./
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* ./
-RUN yarn --frozen-lockfile
+RUN yarn --immutable
 
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
