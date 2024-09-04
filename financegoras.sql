@@ -98,7 +98,7 @@ INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amo
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 
 -- Dumping structure for table financegoras.userdata
-CREATE TABLE IF NOT EXISTS `userdata` (
+CREATE TABLE IF NOT EXISTS `userData` (
   `userId` varchar(50) NOT NULL,
   `categories` mediumtext,
   PRIMARY KEY (`userId`)
