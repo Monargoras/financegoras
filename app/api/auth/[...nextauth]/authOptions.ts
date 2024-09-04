@@ -2,6 +2,8 @@ import { Session, SessionStrategy, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import GithubProvider from 'next-auth/providers/github'
 
+const nextAuthUrl = process.env.NEXTAUTH_URL || 'http://localhost:3003'
+
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -31,5 +33,17 @@ export const authOptions = {
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
+  },
+  cookies: {
+    sessionToken: {
+      name: `${nextAuthUrl.startsWith('https://') ? '__Secure-' : ''}next-auth.session-token`,
+      options: {
+        domain: nextAuthUrl === 'localhost' ? `.${nextAuthUrl}` : `.${new URL(nextAuthUrl).hostname}`, // support all subdomains
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: nextAuthUrl.startsWith('https://'),
+      },
+    },
   },
 }
