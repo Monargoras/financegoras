@@ -19,7 +19,7 @@ export default function AuthMenu(props: AuthMenuProps) {
           size="md"
           onClick={() => signIn()}
           variant={props.unstyled ? 'subtle' : 'filled'}
-          className={classes.control}
+          className={props.unstyled ? classes.control : undefined}
         >
           {props.dictionary.appbar.login}
         </Button>
