@@ -93,6 +93,8 @@
     "last12Months": "Last 12 months",
     "selectYear": "Select year",
     "stackedChart": "Stacked graphs",
-    "normalChart": "Normal graphs"
+    "normalChart": "Normal graphs",
+    "noGroup": "Placeholder group",
+    "noCategory": "Click 'Edit' to add a category"
   }
 }

@@ -43,6 +43,7 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [category, setCategory] = useState<string | null>(null)
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
+  const [categoryError, setCategoryError] = useState(false)
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
 
   const fetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
@@ -87,13 +88,25 @@ export default function TransactionForm(props: TransactionFormProps) {
     })
   }, [updateBackendCategories])
 
-  const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
+  const validData = () => {
+    let isValid = true
     if (name.length === 0) {
       setNameError(true)
-      return false
+      isValid = false
     }
     if (amount === 0) {
       setAmountError(true)
+      isValid = false
+    }
+    if (!category || category === props.dictionary.budgetPage.noCategory) {
+      setCategoryError(true)
+      isValid = false
+    }
+    return isValid
+  }
+
+  const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
+    if (!validData()) {
       return false
     }
 
@@ -183,7 +196,11 @@ export default function TransactionForm(props: TransactionFormProps) {
           }}
         />
         <Select
-          data={categories ?? []}
+          data={
+            categories ?? [
+              { group: props.dictionary.budgetPage.noGroup, items: [props.dictionary.budgetPage.noCategory] },
+            ]
+          }
           label={
             <Flex direction="row" gap="xs">
               {props.dictionary.budgetPage.category}
@@ -195,8 +212,12 @@ export default function TransactionForm(props: TransactionFormProps) {
               />
             </Flex>
           }
-          value={category}
-          onChange={(value) => setCategory(value)}
+          value={category ?? props.dictionary.budgetPage.noCategory}
+          onChange={(value) => {
+            setCategory(value)
+            setCategoryError(false)
+          }}
+          error={categoryError}
           maxDropdownHeight={400}
           allowDeselect={false}
         />
