@@ -54,8 +54,9 @@ export function middleware(request: NextRequest) {
       '/favicon-32x32.png',
       // Your other files in `public`
     ].includes(pathname)
-  )
+  ) {
     return NextResponse.redirect(new URL(`/${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url))
+  }
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = locales.every(
