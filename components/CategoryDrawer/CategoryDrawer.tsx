@@ -7,6 +7,7 @@ import { notifications } from '@mantine/notifications'
 import { IconX } from 'tabler-icons'
 import { Categories, Dictionary } from '@/utils/types'
 import GroupAccordionItem from './GroupAccordionItem'
+import updateTransactionCategories from '@/serverActions/updateTransactionCategories'
 
 interface CategoryDrawerProps {
   dictionary: Dictionary
@@ -79,6 +80,10 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     // find the group that is being edited
     const group = props.categories.find((item) => item.items.includes(editing))
     if (group) {
+      const success = updateTransactionCategories(editing, newName)
+      if (!success) {
+        return false
+      }
       // find the index of the category in the array
       const index = props.categories.indexOf(group)
       // create a new category array with the new name

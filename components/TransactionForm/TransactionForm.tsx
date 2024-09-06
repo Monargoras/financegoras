@@ -75,6 +75,11 @@ export default function TransactionForm(props: TransactionFormProps) {
           icon: <IconCheck />,
           position: 'bottom-right',
         })
+        // refresh all transaction related data after updating categories
+        mutate(
+          (key) => typeof key === 'string' && key.startsWith('/api/budget/') && key !== '/api/budget/getCategories'
+        )
+        mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
       } else {
         notifications.show({
           title: props.dictionary.budgetPage.feedbackUpdateBackendErrorTitle,
