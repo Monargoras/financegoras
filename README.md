@@ -13,7 +13,7 @@ Financegoras is a web application that helps users to manage their finances. It 
 ## Use locally
 
 - Database needed to run the application is not included in the repository
-- Setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
+- To setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
 - .env file is required to run the application, a sample .env file is provided in the root directory of the project `sample.env`
 - Run `yarn install` to install all the dependencies
 - Run `yarn dev` to start the application in development mode or `yarn build` to build the application and then `yarn start` to start the application in production mode
@@ -21,14 +21,20 @@ Financegoras is a web application that helps users to manage their finances. It 
 ## Deploy using Docker
 
 - Database needed to run the application is not included in the repository
-- Setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
+- To setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
 - Environment variables required to run the application, a list of needed variables is provided in the root directory of the project `sample.env`
-  Then run the following commands in the project root to deploy the application using Docker
+- Then run the following commands in the project root to deploy the application using Docker:
 
 ```bash
 docker build -t financegoras .
+```
+
+```bash
 # Stop all running containers if needed
 docker stop $(docker ps -a -q)
+```
+
+```bash
 docker run -p 80:3003 -e DB_URL -e GITHUB_ID -e GITHUB_SECRET -e NEXTAUTH_URL -e NEXTAUTH_SECRET financegoras
 ```
 
