@@ -5,7 +5,8 @@
     "transactions": "Transaktionen",
     "portfolio": "Portfolio",
     "logout": "Abmelden",
-    "login": "Anmelden"
+    "login": "Anmelden",
+    "comingSoon": "Kommt bald"
   },
   "general": {
     "logInPrompt": "Anmelden um Inhalt zu sehen",

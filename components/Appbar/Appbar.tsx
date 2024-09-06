@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, AppShell, Burger, Group, rem, UnstyledButton, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, AppShell, Burger, Group, rem, Tooltip, UnstyledButton, useMantineColorScheme } from '@mantine/core'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
 import { IconSunMoon } from '@tabler/icons-react'
 import Image from 'next/image'
@@ -50,7 +50,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <UnstyledButton onClick={() => router.push('/transactions')} className={classes.control}>
                 {props.dictionary.appbar.transactions}
               </UnstyledButton>
-              <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+              <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom" withArrow>
+                <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+              </Tooltip>
               <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
@@ -91,7 +93,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         >
           {props.dictionary.appbar.transactions}
         </UnstyledButton>
-        <UnstyledButton className={classes.control}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+        <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom-start">
+          <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
+        </Tooltip>
         <Group style={{ marginTop: 24 }}>
           <AuthMenu dictionary={props.dictionary} unstyled />
         </Group>

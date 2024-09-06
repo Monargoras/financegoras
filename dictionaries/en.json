@@ -5,7 +5,8 @@
     "transactions": "Transactions",
     "portfolio": "Portfolio",
     "logout": "Logout",
-    "login": "Login"
+    "login": "Login",
+    "comingSoon": "Coming soon"
   },
   "general": {
     "logInPrompt": "Log in to view content",
