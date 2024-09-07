@@ -41,22 +41,23 @@ export function middleware(request: NextRequest) {
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // // If you have one
-  if (
+  /*if (
     [
-      '/favicon.ico',
-      '/apple-touch-icon.png',
-      '/.webmanifest',
-      '/android-chrome-192x192.png',
-      '/android-chrome-512x512.png',
-      '/mstile-150x150.png',
-      '/browserconfig.xml',
-      '/favicon-16x16.png',
-      '/favicon-32x32.png',
+      '/img/favicon.ico',
+      '/img/apple-icon.png',
+      '.webmanifest',
+      '/img/android-chrome-192x192.png',
+      '/img/android-chrome-512x512.png',
+      '/img/mstile-150x150.png',
+      'browserconfig.xml',
+      '/img/favicon-16x16.png',
+      '/img/favicon-32x32.png',
+      '/img/safari-pinned-tab.svg',
       // Your other files in `public`
     ].includes(pathname)
   ) {
     return NextResponse.redirect(new URL(`/${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url))
-  }
+  }*/
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = locales.every(
@@ -75,5 +76,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|img/|favicon.ico).*)'],
 }

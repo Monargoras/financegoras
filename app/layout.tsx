@@ -11,14 +11,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
-        <link rel="manifest" href=".webmanifest" />
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-        <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#339af0" />
+        <link rel="manifest" href="/.webmanifest" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon.png" />
+        <link rel="shortcut icon" href="/img/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+        <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#339af0" />
         <meta name="msapplication-TileColor" content="#2d89ef" />
-        <meta name="msapplication-config" content="browserconfig.xml" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="theme-color" content="#339af0" />
       </head>
       <body>{children}</body>
