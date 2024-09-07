@@ -11,7 +11,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
-        <link rel="manifest" href="/.webmanifest" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon.png" />
         <link rel="shortcut icon" href="/img/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
