@@ -26,14 +26,14 @@ Financegoras is a web application that helps users to manage their finances. It 
 - Then run the following commands in the project root to deploy the application using Docker:
 
 ```bash
-docker build -t financegoras .
-```
-
-```bash
 # Stop all running containers if needed
 docker stop $(docker ps -a -q)
 # remove images and cache from disk if needed
 docker system prune -a --volumes
+```
+
+```bash
+docker build -t financegoras .
 ```
 
 ```bash
