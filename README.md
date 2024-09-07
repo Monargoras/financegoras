@@ -32,6 +32,8 @@ docker build -t financegoras .
 ```bash
 # Stop all running containers if needed
 docker stop $(docker ps -a -q)
+# remove images and cache from disk if needed
+docker system prune -a --volumes
 ```
 
 ```bash
