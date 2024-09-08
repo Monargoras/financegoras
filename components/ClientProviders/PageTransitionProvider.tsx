@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-export const pageTransition = {
+const pageTransition = {
   initial: { x: 50, opacity: 0 },
   animate: { x: 0, opacity: 1 },
   transition: { ease: 'easeInOut', duration: 0.75 },

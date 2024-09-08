@@ -1,8 +1,4 @@
-import '@mantine/core/styles.css'
-import '@mantine/notifications/styles.css'
-import '@mantine/dates/styles.css'
-import '@mantine/charts/styles.css'
-import { MantineProvider, ColorSchemeScript } from '@mantine/core'
+import { MantineProvider } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
@@ -44,10 +40,6 @@ export default async function RootLayout({
 
   return (
     <html lang={params.lang} style={{ overflowX: 'hidden' }}>
-      <head>
-        <ColorSchemeScript />
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
-      </head>
       <body>
         <MantineProvider theme={theme}>
           <ClientProviders session={session} language={params.lang}>
