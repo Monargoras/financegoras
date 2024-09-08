@@ -9,7 +9,7 @@
   }
 }
 
-.text {
+.textLeft {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   font-size: rem(18px);
   margin-left: auto;
@@ -18,5 +18,15 @@
     padding-top: rem(75px);
     font-size: rem(14px);
     margin-left: 0;
+  }
+}
+
+.textRight {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  font-size: rem(18px);
+
+  @media (max-width: 75em) {
+    font-size: rem(14px);
+    margin-right: 0;
   }
 }

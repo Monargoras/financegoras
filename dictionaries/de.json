@@ -17,7 +17,8 @@
     "welcome": "Behalte dein monatliches Budget im Blick!",
     "introText": "Lass deine Excel-Tabelle hinter dir und nutze Financegoras um deine Einnahmen, Ausgaben und Ersparnisse an einem Ort zu sammeln. Erkenne Trends und Optimierungsmöglichkeiten mit den verschiedenen Visualisierungen.",
     "demo": "Demo",
-    "dashboardImageText": "Nach dem Anmelden, dem Erstellen deiner individuellen Kategorien und dem Hinzufügen deiner ersten Transaktionen, kannst du dein Haushaltsbuch und die Visualisierungen verwenden. Beginne damit dein Gehalt, deine Miete und Abonnements hinzuzufügen. Füge dann deine täglichen Ausgaben hinzu und sieh wie sich dein Budget im Laufe der Zeit entwickelt."
+    "dashboardImageText": "Nach dem Anmelden, dem Erstellen deiner individuellen Kategorien und dem Hinzufügen deiner ersten Transaktionen, kannst du dein Haushaltsbuch und die Visualisierungen verwenden. Beginne damit dein Gehalt, deine Miete und Abonnements hinzuzufügen. Füge dann deine täglichen Ausgaben hinzu und sieh wie sich dein Budget im Laufe der Zeit entwickelt.",
+    "dataSecurityText": "Deine Transaktionen werden in unserer Datenbank zusammen mit deiner gehashten Benutzer-ID gespeichert. Wir speichern keine Daten, die zur Identifizierung von dir verwendet werden könnten, außer den von dir eingegebenen Transaktionsdaten. Die Authentifizierung erfolgt über OAuth-Anwendungen und es werden keine Anmelde- oder Kontodaten von uns gespeichert."
   },
   "transactionsPage": {
     "earliestFirst": "Neueste zuerst",
