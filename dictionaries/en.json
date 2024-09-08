@@ -14,9 +14,10 @@
     "de": "German"
   },
   "landingPage": {
-    "welcome": "Welcome to Financegoras!",
-    "introText": "Manage your finances with ease. Use the Dashboard to swiftly analyze your monthly income, expenses and savings. Compare across months and years to spot trends and opportunities for optimization.",
-    "demo": "Demo"
+    "welcome": "Keep your monthly budget in check!",
+    "introText": "Upgrade from your Excel sheet and use Financegoras to collect your income, expenses and savings in one place. Spot trends and opportunities for optimization using the different visualizations.",
+    "demo": "Demo",
+    "dashboardImageText": "After logging in, creating your custom categories and adding your first transactions, you can overview your budget book and the visualizations. Start by adding your salary, rent and subscriptions. Then, add your daily expenses and see how your budget evolves over time."
   },
   "transactionsPage": {
     "earliestFirst": "Newest first",

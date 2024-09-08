@@ -14,9 +14,10 @@
     "de": "Deutsch"
   },
   "landingPage": {
-    "welcome": "Willkommen bei Financegoras!",
-    "introText": "Verwalte deine Finanzen mühelos. Nutze das Dashboard, um deine monatlichen Einnahmen, Ausgaben und Ersparnisse schnell zu analysieren. Vergleiche die Daten über Monate und Jahre hinweg, um Trends und Optimierungsmöglichkeiten zu erkennen.",
-    "demo": "Demo"
+    "welcome": "Behalte dein monatliches Budget im Blick!",
+    "introText": "Lass deine Excel-Tabelle hinter dir und nutze Financegoras um deine Einnahmen, Ausgaben und Ersparnisse an einem Ort zu sammeln. Erkenne Trends und Optimierungsmöglichkeiten mit den verschiedenen Visualisierungen.",
+    "demo": "Demo",
+    "dashboardImageText": "Nach dem Anmelden, dem Erstellen deiner individuellen Kategorien und dem Hinzufügen deiner ersten Transaktionen, kannst du dein Haushaltsbuch und die Visualisierungen verwenden. Beginne damit dein Gehalt, deine Miete und Abonnements hinzuzufügen. Füge dann deine täglichen Ausgaben hinzu und sieh wie sich dein Budget im Laufe der Zeit entwickelt."
   },
   "transactionsPage": {
     "earliestFirst": "Neueste zuerst",
