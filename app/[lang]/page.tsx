@@ -17,7 +17,7 @@ export default async function HomePage({ params: { lang } }: PageProps) {
         backgroundSize: 'cover',
         paddingBottom: 30,
         backgroundImage:
-          'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,100,200,0.75) 80%, rgba(0,100,200,0.85) 100%)',
+          'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,100,200,0.65) 35%, rgba(0,100,200,0.85) 100%)',
       }}
     >
       <PageTransitionProvider>
