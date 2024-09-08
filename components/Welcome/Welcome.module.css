@@ -15,7 +15,7 @@
   margin-left: auto;
 
   @media (max-width: 75em) {
-    padding-top: rem(50px);
+    padding-top: rem(75px);
     font-size: rem(14px);
     margin-left: 0;
   }

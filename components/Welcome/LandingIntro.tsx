@@ -15,7 +15,7 @@ export default function LandingIntro(props: LandingIntroProps) {
   const isMobile = useMediaQuery(`(max-width: ${em(1200)})`)
 
   return (
-    <Paper w="max(60dvw, 400px)" mx="auto" radius="50%">
+    <Paper w="max(min(60dvw, 1000px), 400px)" mx="auto" radius="50%">
       <Flex direction="row" mt="xl" align="center" wrap="wrap" justify={isMobile ? 'center' : 'end'}>
         <Text ta="center" maw="300" className={classes.text}>
           {props.dictionary.landingPage.dashboardImageText}
