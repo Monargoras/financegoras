@@ -1,5 +1,5 @@
 import 'server-only'
-import { i18n } from '@/middleware'
+import { i18n } from '@/utils/i18nConfig'
 
 const dictionaries = {
   en: () => import('../../dictionaries/en.json').then((module) => module.default),

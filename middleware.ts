@@ -2,16 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
-
-const defaultLocale = 'en'
-const locales = ['en', 'de']
-
-export const i18n = {
-  defaultLocale,
-  locales,
-} as const
-
-export type Locale = (typeof i18n)['locales'][number]
+import { i18n } from './utils/i18nConfig'
 
 // Get the preferred locale, similar to the above or using a library
 function getLocale(request: NextRequest): string | undefined {
@@ -28,9 +19,9 @@ function getLocale(request: NextRequest): string | undefined {
   })
 
   // Use negotiator and intl-localematcher to get best locale
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(locales)
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(i18n.locales)
 
-  const locale = match(languages, locales, defaultLocale)
+  const locale = match(languages, i18n.locales, i18n.defaultLocale)
 
   return locale
 }
@@ -60,7 +51,7 @@ export function middleware(request: NextRequest) {
   }*/
 
   // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = locales.every(
+  const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   )
 

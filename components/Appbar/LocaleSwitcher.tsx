@@ -2,7 +2,7 @@
 
 import { Select } from '@mantine/core'
 import { usePathname, useRouter } from 'next/navigation'
-import { i18n, type Locale } from '@/middleware'
+import { i18n, type Locale } from '@/utils/i18nConfig'
 import { Dictionary } from '@/utils/types'
 
 interface LocaleSwitcherProps {
