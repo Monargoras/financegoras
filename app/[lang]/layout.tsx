@@ -8,6 +8,7 @@ import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
 import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
+import { i18n } from '@/middleware'
 
 const englishMetadata = {
   title: 'Financegoras',
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'de' }]
+  return i18n.locales.map((lang) => ({ params: { lang } }))
 }
 
 export default async function RootLayout({
