@@ -28,8 +28,8 @@ export default function LandingIntro(props: LandingIntroProps) {
             src={FinancegorasImage}
             alt="Financegoras Dashboard"
             style={{
-              width: 'max(30dvw, 400px)',
-              height: 'max(25dvw, 325px)',
+              width: 'max(min(30dvw, 600px), 400px)',
+              height: 'max(min(25dvw, 500px), 325px)',
               borderRadius: '10%',
               display: 'block',
               border: '3px solid #fff',
