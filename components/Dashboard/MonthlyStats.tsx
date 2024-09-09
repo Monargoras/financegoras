@@ -9,6 +9,7 @@ interface MonthlyStatsProps {
   selectedMonth: number
   selectedYear: number
   demo: boolean
+  initialData: AggregatedIncomeExpenseTotals
 }
 
 export function MonthlyStats(props: MonthlyStatsProps) {
@@ -18,7 +19,10 @@ export function MonthlyStats(props: MonthlyStatsProps) {
     fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
     `/api/budget/getAggregatedTransactions?year=${props.selectedYear}&month=${props.selectedMonth}&demo=${props.demo}`,
-    fetcher
+    fetcher,
+    {
+      fallbackData: props.initialData,
+    }
   )
 
   const paperStyles = {
@@ -32,7 +36,7 @@ export function MonthlyStats(props: MonthlyStatsProps) {
 
   return (
     <>
-      {isLoading && (
+      {!data && isLoading && (
         <Flex justify="center" align="center" w={500} h={200}>
           <Loader color="blue" type="dots" />
         </Flex>

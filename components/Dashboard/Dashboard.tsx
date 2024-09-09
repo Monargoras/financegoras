@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Flex, Switch } from '@mantine/core'
-import { Dictionary } from '@/utils/types'
+import { DashboardData, Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
 import { MonthlyStats } from './MonthlyStats'
@@ -14,6 +14,7 @@ interface DashboardProps {
   lang: string
   dictionary: Dictionary
   demo: boolean
+  initialData: DashboardData
 }
 
 export default function Dashboard(props: DashboardProps) {
@@ -69,6 +70,7 @@ export default function Dashboard(props: DashboardProps) {
           stackedChart={stackedChart}
           timeframe={timeframe}
           demo={props.demo}
+          initialData={props.initialData.monthlyExpenseEvolution}
         />
         <CategoryRadar
           lang={props.lang}
@@ -77,6 +79,7 @@ export default function Dashboard(props: DashboardProps) {
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
           demo={props.demo}
+          initialData={props.initialData.expensesByCategory}
         />
       </Flex>
       <Flex gap="md" justify="center" direction="row" wrap="wrap">
@@ -86,6 +89,7 @@ export default function Dashboard(props: DashboardProps) {
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
             demo={props.demo}
+            initialData={props.initialData.monthlyStats}
           />
           <AggregatedIncExpEvolutionGraph
             lang={props.lang}
@@ -97,6 +101,7 @@ export default function Dashboard(props: DashboardProps) {
             percentage={percentage}
             stackedChart={stackedChart}
             demo={props.demo}
+            initialData={props.initialData.incExpEvolution}
           />
         </Flex>
         <TransactionTable
@@ -104,6 +109,7 @@ export default function Dashboard(props: DashboardProps) {
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
           demo={props.demo}
+          initialData={props.initialData.transactions}
         />
       </Flex>
     </Flex>

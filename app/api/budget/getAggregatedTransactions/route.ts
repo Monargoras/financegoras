@@ -1,10 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
-import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
+import getMonthlyData from './getMonthlyDataAction'
 
 /**
  * This endpoint returns the aggregated transactions from the database for given timeframe
@@ -33,21 +32,7 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const { incomeTransactions, expenseTransactions, savingsTransactions } = await fetchIncExpSavTransactions(
-    userId,
-    year,
-    month
-  )
+  const res = await getMonthlyData(userId, year, month)
 
-  const totalIncome = month
-    ? calculateTotalPerMonth(incomeTransactions)
-    : calculateTotalPerYear(incomeTransactions, year)
-  const totalExpenses = month
-    ? calculateTotalPerMonth(expenseTransactions)
-    : calculateTotalPerYear(expenseTransactions, year)
-  const totalSavings = month
-    ? calculateTotalPerMonth(savingsTransactions)
-    : calculateTotalPerYear(savingsTransactions, year)
-
-  return Response.json({ totalIncome, totalExpenses, totalSavings }, { status: 200 })
+  return Response.json(res, { status: 200 })
 }

@@ -16,6 +16,7 @@ interface AggregatedIncExpEvolutionGraphProps {
   percentage: boolean
   stackedChart: boolean
   demo: boolean
+  initialData: AggregatedIncomeExpenseEvolution
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
@@ -30,11 +31,13 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
   const params = `?year=${year}&month=${month}&lang=${props.lang}&demo=${props.demo}`
-  const { data, error, isLoading } = useSWR(`/api/budget/getIncExpEvolution${params}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/budget/getIncExpEvolution${params}`, fetcher, {
+    fallbackData: props.initialData,
+  })
 
   return (
     <>
-      {isLoading && (
+      {!data && isLoading && (
         <Flex justify="center" align="center" w={chartWidth} h={280}>
           <Loader color="blue" type="dots" />
         </Flex>

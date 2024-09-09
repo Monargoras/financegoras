@@ -17,6 +17,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   stackedChart: boolean
   timeframe: string
   demo: boolean
+  initialData: MonthlyExpenseEvolution
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -33,7 +34,9 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
   const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}&demo=${props.demo}`
-  const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher, {
+    fallbackData: props.initialData,
+  })
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
     const categorySet = new Set<string>()
@@ -53,7 +56,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
   return (
     <>
-      {isLoading && (
+      {!data && isLoading && (
         <Flex justify="center" align="center" w={chartWidth} h={200}>
           <Loader color="blue" type="dots" />
         </Flex>

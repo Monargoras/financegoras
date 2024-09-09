@@ -9,6 +9,7 @@ interface TransactionTableProps {
   selectedMonth: number
   selectedYear: number
   demo: boolean
+  initialData: Transaction[]
 }
 
 export function TransactionTable(props: TransactionTableProps) {
@@ -17,12 +18,15 @@ export function TransactionTable(props: TransactionTableProps) {
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
     `/api/budget/getTransactions?year=${props.selectedYear}&month=${props.selectedMonth}&demo=${props.demo}`,
-    fetcher
+    fetcher,
+    {
+      fallbackData: props.initialData,
+    }
   )
 
   return (
     <>
-      {isLoading && (
+      {!data && isLoading && (
         <Flex justify="center" align="center" w={250} h={400}>
           <Loader color="blue" type="dots" />
         </Flex>

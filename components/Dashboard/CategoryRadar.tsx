@@ -12,17 +12,20 @@ interface CategoryRadarProps {
   selectedMonth: number
   selectedYear: number
   demo: boolean
+  initialData: CategoryExpenseData[]
 }
 
 export default function CategoryRadar(props: CategoryRadarProps) {
   const fetcher: Fetcher<CategoryExpenseData[], string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?year=${props.selectedYear}&month=${props.selectedMonth}&includeSavings=${props.includeSavings}&demo=${props.demo}`
-  const { data, error, isLoading } = useSWR(`/api/budget/getExpensesByCategory${params}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/budget/getExpensesByCategory${params}`, fetcher, {
+    fallbackData: props.initialData,
+  })
 
   return (
     <>
-      {isLoading && (
+      {!data && isLoading && (
         <>
           <Text style={{ visibility: 'hidden' }}>
             {new Date(`${props.selectedYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}

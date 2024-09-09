@@ -70,3 +70,11 @@ export type MonthlyExpense = {
 } & Record<string, number>
 
 export type MonthlyExpenseEvolution = MonthlyExpense[]
+
+export type DashboardData = {
+  monthlyExpenseEvolution: MonthlyExpenseEvolution
+  incExpEvolution: AggregatedIncomeExpenseEvolution
+  monthlyStats: AggregatedIncomeExpenseTotals
+  expensesByCategory: CategoryExpenseData[]
+  transactions: Transaction[]
+}

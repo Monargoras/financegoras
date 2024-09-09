@@ -1,11 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { db } from '@/utils/database'
-import { getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
+import getExpensesByCategory from './getExpensesByCategoryAction'
 
 /**
  * This endpoint returns the aggregated expenses per category for a given month or year.
@@ -36,60 +34,7 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  let expenseQuery = db
-    .selectFrom('transactions')
-    .selectAll()
-    .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
-    )
-    .where('isIncome', '=', false)
+  const res = await getExpensesByCategory(userId, year, month, includeSavings)
 
-  if (!includeSavings) {
-    expenseQuery = expenseQuery.where('isSavings', '=', false)
-  }
-
-  const expenseRes = await expenseQuery.execute()
-
-  // transform transaction type to enum
-  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
-
-  const expensesPerCategory = expenseTransactions.reduce(
-    (acc, transaction) => {
-      const { category } = transaction
-      // timeframe month: annual transactions are divided by 12
-      if (month && transaction.transactionType === TransactionType.Annual) {
-        acc[category] = (acc[category] || 0) + transaction.amount / 12
-        return acc
-      }
-      // timeframe year: monthly transactions are multiplied by 12 minus the months the transaction was inactive
-      if (!month && transaction.transactionType === TransactionType.Monthly) {
-        const { createdAt, stoppedAt } = transaction
-        const monthsActive =
-          12 -
-          (createdAt.getFullYear() === year ? createdAt.getMonth() : 0) -
-          (stoppedAt?.getFullYear() === year ? 12 - stoppedAt.getMonth() : 0)
-        acc[category] = (acc[category] || 0) + transaction.amount * monthsActive
-        return acc
-      }
-      acc[category] = (acc[category] || 0) + transaction.amount
-      return acc
-    },
-    {} as Record<string, number>
-  )
-
-  const totalExpense = month
-    ? parseFloat(calculateTotalPerMonth(expenseTransactions))
-    : parseFloat(calculateTotalPerYear(expenseTransactions, year))
-
-  const expenses = Object.entries(expensesPerCategory).map(([category, total]) => ({
-    category,
-    value: ((total / totalExpense) * 100).toFixed(2),
-  }))
-
-  return new Response(JSON.stringify(expenses), { status: 200 })
+  return new Response(JSON.stringify(res), { status: 200 })
 }

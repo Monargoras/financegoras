@@ -1,10 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { db } from '@/utils/database'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
-import { getTransactionType, Transaction } from '@/utils/types'
+import getTransactions from './getTransactionsAction'
 
 /**
  * This endpoint returns all transactions from the database
@@ -33,21 +32,7 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const transactions = await db
-    .selectFrom('transactions')
-    .where('userId', '=', userId)
-    .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
-    .where((eb) =>
-      eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
-    )
-    .orderBy('createdAt', 'desc')
-    .select(['id', 'name', 'amount', 'category', 'isIncome', 'isSavings', 'transactionType', 'createdAt', 'stoppedAt'])
-    .execute()
-
-  const res: Transaction[] = transactions.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const res = await getTransactions(userId, year, month)
 
   return Response.json(res, { status: 200 })
 }

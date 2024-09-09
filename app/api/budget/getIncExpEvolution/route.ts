@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { getIncExpOneMonth } from './getIncExpEvolutionUtils'
-import { getMonthYearTuples, valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
+import getIncExpEvolution from './getIncExpEvolutionAction'
 
 /**
  * This endpoint returns the evolution of income, expeneses and savings for the last 12 months or the given year.
@@ -34,9 +34,7 @@ export async function GET(request: NextRequest) {
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const monthsToCompute = getMonthYearTuples(month, year)
-  // get the expenses for the last 12 months or the given year
-  const expenses = await Promise.all(monthsToCompute.map(([m, y]) => getIncExpOneMonth(m, y, userId, lang)))
+  const res = await getIncExpEvolution(userId, year, month, lang)
 
-  return new Response(JSON.stringify(expenses), { status: 200 })
+  return new Response(JSON.stringify(res), { status: 200 })
 }
