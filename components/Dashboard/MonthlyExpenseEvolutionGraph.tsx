@@ -79,6 +79,9 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
             barGap: 1,
             barCategoryGap: props.stackedChart || props.percentage ? 5 : 10,
           }}
+          tooltipProps={{
+            wrapperStyle: { zIndex: 1000 },
+          }}
           barProps={{
             onClick: (event) => {
               const { month } = event.payload

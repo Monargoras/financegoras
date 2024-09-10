@@ -55,6 +55,9 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
           dataKey="month"
           type={props.percentage ? 'percent' : props.stackedChart ? 'stacked' : 'default'}
           legendProps={{ verticalAlign: 'bottom' }}
+          tooltipProps={{
+            wrapperStyle: { zIndex: 1000 },
+          }}
           yAxisProps={{
             // increased domain for standard chart because it sometimes overshot graph for some reason
             domain: ([dataMin, dataMax]) => [
