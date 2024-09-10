@@ -1,6 +1,16 @@
 'use client'
 
-import { ActionIcon, AppShell, Burger, Group, rem, Tooltip, UnstyledButton, useMantineColorScheme } from '@mantine/core'
+import {
+  ActionIcon,
+  Anchor,
+  AppShell,
+  Burger,
+  Group,
+  rem,
+  Tooltip,
+  UnstyledButton,
+  useMantineColorScheme,
+} from '@mantine/core'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
 import { IconSunMoon } from '@tabler/icons-react'
 import Image from 'next/image'
@@ -31,25 +41,47 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" align="center" style={{ flex: 1 }}>
-            <Image
-              src={logo}
-              priority
-              alt="Financegoras"
-              width={48}
-              height={48}
-              onClick={() => router.push('/')}
-              style={{ cursor: 'pointer' }}
-            />
+            <Anchor
+              href="/"
+              onClick={(event) => {
+                event.preventDefault()
+                router.push('/')
+              }}
+              style={{ display: 'flex', lignItems: 'center' }}
+            >
+              <Image src={logo} priority alt="Financegoras" width={48} height={48} />
+            </Anchor>
             <Group ml="auto" gap={0} visibleFrom="sm">
-              <UnstyledButton onClick={() => router.push('/')} className={classes.control}>
+              <Anchor
+                href="/"
+                className={classes.control}
+                onClick={(event) => {
+                  event.preventDefault()
+                  router.push('/')
+                }}
+              >
                 {props.dictionary.appbar.home}
-              </UnstyledButton>
-              <UnstyledButton onClick={() => router.push('/budget')} className={classes.control}>
+              </Anchor>
+              <Anchor
+                href="/budget"
+                className={classes.control}
+                onClick={(event) => {
+                  event.preventDefault()
+                  router.push('/budget')
+                }}
+              >
                 {props.dictionary.appbar.budget}
-              </UnstyledButton>
-              <UnstyledButton onClick={() => router.push('/transactions')} className={classes.control}>
+              </Anchor>
+              <Anchor
+                href="/transactions"
+                className={classes.control}
+                onClick={(event) => {
+                  event.preventDefault()
+                  router.push('/transactions')
+                }}
+              >
                 {props.dictionary.appbar.transactions}
-              </UnstyledButton>
+              </Anchor>
               <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom" withArrow>
                 <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
               </Tooltip>
