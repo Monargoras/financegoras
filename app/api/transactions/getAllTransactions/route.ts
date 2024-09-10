@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth'
-import { db } from '@/utils/database'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { getTransactionType, Transaction } from '@/utils/types'
+import getAllTransactions from './getAllTransactionsAction'
 
 /**
  * This endpoint returns all transactions from the database
@@ -14,17 +13,7 @@ export async function GET() {
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const transactions = await db
-    .selectFrom('transactions')
-    .where('userId', '=', session.user.id)
-    .orderBy('createdAt', 'desc')
-    .select(['id', 'name', 'amount', 'category', 'isIncome', 'isSavings', 'transactionType', 'createdAt', 'stoppedAt'])
-    .execute()
-
-  const res: Transaction[] = transactions.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const res = await getAllTransactions(session.user.id)
 
   return Response.json(res, { status: 200 })
 }

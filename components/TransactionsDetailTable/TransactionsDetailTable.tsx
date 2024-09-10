@@ -9,9 +9,12 @@ import { Categories, Dictionary, getTransactionType, Transaction, TransactionTyp
 import TableControls from './TableControls'
 import TransactionEditModal from './TransactionEditModal'
 
+export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] }
+
 interface TransactionsDetailTableProps {
   locale: string
   dictionary: Dictionary
+  initialData: InitialDetailTableData
 }
 
 export default function TransactionsDetailTable(props: TransactionsDetailTableProps) {
@@ -22,7 +25,9 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
 
   const categoryFetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const categoryRes = useSWR('/api/budget/getCategories', categoryFetcher)
+  const categoryRes = useSWR('/api/budget/getCategories', categoryFetcher, {
+    fallbackData: props.initialData.categories ?? [],
+  })
 
   useEffect(() => {
     if (categoryRes.data) {
@@ -31,7 +36,9 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   }, [categoryRes.data])
 
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher)
+  const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher, {
+    fallbackData: props.initialData.transactions,
+  })
 
   // filter/sorting
   const [earliestFirst, setEarliestFirst] = useState(true)
