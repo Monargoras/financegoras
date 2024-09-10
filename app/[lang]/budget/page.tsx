@@ -1,6 +1,6 @@
 import { Container, Divider, Flex } from '@mantine/core'
 import { getServerSession } from 'next-auth'
-import { DashboardData, PageProps } from '@/utils/types'
+import { Categories, DashboardData, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import Dashboard from '@/components/Dashboard/Dashboard'
@@ -14,6 +14,7 @@ import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExp
 import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
 import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
+import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 
 const englishMetadata = {
   title: 'Budget Book - Financegoras',
@@ -30,6 +31,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 async function getInitialDashboardData({ lang }: { lang: string }): Promise<DashboardData> {
+  'use server'
+
   const session = await getServerSession(authOptions)
   if (!session?.user) {
     return {
@@ -64,17 +67,30 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   }
 }
 
+async function getInitialCategories(): Promise<Categories | null> {
+  'use server'
+
+  const session = await getServerSession(authOptions)
+  if (!session?.user) {
+    return null
+  }
+  const categories = await getCategories(session.user.id)
+
+  return categories
+}
+
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const initialData = await getInitialDashboardData({ lang })
+  const initialCategories = await getInitialCategories()
 
   return (
     <PageTransitionProvider>
       {session?.user ? (
         <Container fluid>
           <Flex gap="md" justify="center" align="center" direction="column">
-            <IncomeExpenseForm dictionary={dict} />
+            <IncomeExpenseForm dictionary={dict} initialData={initialCategories} />
             <Divider size="lg" w="100%" />
             <Dashboard lang={lang} dictionary={dict} demo={false} initialData={initialData} />
           </Flex>

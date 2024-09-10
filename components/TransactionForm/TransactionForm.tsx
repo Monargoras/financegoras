@@ -25,6 +25,7 @@ import updateCategories from '@/serverActions/updateCategories'
 
 interface TransactionFormProps {
   dictionary: Dictionary
+  initialData: Categories | null
 }
 
 export const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
@@ -47,7 +48,9 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
 
   const fetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data } = useSWR('/api/budget/getCategories', fetcher)
+  const { data } = useSWR('/api/budget/getCategories', fetcher, {
+    fallbackData: props.initialData ?? [],
+  })
 
   useEffect(() => {
     if (data) {
