@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 async function getInitialDemoData({ lang }: { lang: string }): Promise<DashboardData> {
+  'use server'
+
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
   const includeSavings = false
