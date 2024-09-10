@@ -69,7 +69,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
             { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'blue.5' },
             { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'cyan.5' },
           ]}
-          areaChartProps={{ syncId: 'month' }}
+          valueFormatter={(value) => `${value.toFixed(2)}€`}
           activeDotProps={{
             onClick: (_event, payload) => {
               // get month number from name

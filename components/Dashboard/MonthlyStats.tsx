@@ -50,11 +50,11 @@ export function MonthlyStats(props: MonthlyStatsProps) {
         <Flex gap="md" justify="center" direction="row" wrap="wrap">
           <Paper {...paperStyles}>
             <Text>{props.dictionary.budgetPage.monthlyIncome}</Text>
-            <Text c={theme.colors.green[5]}>{data.totalIncome}€</Text>
+            <Text c={theme.colors.green[5]}>{data.totalIncome.toFixed(2)}€</Text>
           </Paper>
           <Paper {...paperStyles}>
             <Text>{props.dictionary.budgetPage.monthlyExpenses}</Text>
-            <Text c={theme.colors.red[5]}>{data.totalExpenses}€</Text>
+            <Text c={theme.colors.red[5]}>{data.totalExpenses.toFixed(2)}€</Text>
             {
               // calculate percentage of expenses from income
               data.totalIncome > 0 ? (
@@ -66,7 +66,7 @@ export function MonthlyStats(props: MonthlyStatsProps) {
           </Paper>
           <Paper {...paperStyles}>
             <Text>{props.dictionary.budgetPage.monthlySavings}</Text>
-            <Text c={theme.colors.blue[5]}>{data.totalSavings}€</Text>
+            <Text c={theme.colors.blue[5]}>{data.totalSavings.toFixed(2)}€</Text>
             {
               // calculate percentage of savings from income
               data.totalIncome > 0 ? (
