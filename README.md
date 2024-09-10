@@ -28,8 +28,6 @@ Financegoras is a web application that helps users to manage their finances. It 
 ```bash
 # Stop all running containers if needed
 docker stop $(docker ps -a -q)
-# remove images and cache from disk if needed
-docker system prune -a --volumes
 ```
 
 ```bash
@@ -38,6 +36,11 @@ docker build -t financegoras .
 
 ```bash
 docker run -p 80:3003 -e DB_URL -e GITHUB_ID -e GITHUB_SECRET -e NEXTAUTH_URL -e NEXTAUTH_SECRET financegoras
+```
+
+```bash
+# remove images and cache from disk if needed
+docker system prune
 ```
 
 ## Template Features
