@@ -91,7 +91,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
 
   return (
     <Flex justify="center">
-      {isLoading && <Loader color="blue" type="dots" />}
+      {!data && isLoading && <Loader color="blue" type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
       {filteredData && (
         <Flex justify="center" align="center" direction="column">
