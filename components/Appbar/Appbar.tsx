@@ -98,33 +98,39 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <UnstyledButton
-          onClick={() => {
+        <Anchor
+          href="/"
+          className={classes.control}
+          onClick={(event) => {
+            event.preventDefault()
             router.push('/')
             toggle()
           }}
-          className={classes.control}
         >
           {props.dictionary.appbar.home}
-        </UnstyledButton>
-        <UnstyledButton
-          onClick={() => {
+        </Anchor>
+        <Anchor
+          href="/budget"
+          className={classes.control}
+          onClick={(event) => {
+            event.preventDefault()
             router.push('/budget')
             toggle()
           }}
-          className={classes.control}
         >
           {props.dictionary.appbar.budget}
-        </UnstyledButton>
-        <UnstyledButton
-          onClick={() => {
+        </Anchor>
+        <Anchor
+          href="/transactions"
+          className={classes.control}
+          onClick={(event) => {
+            event.preventDefault()
             router.push('/transactions')
             toggle()
           }}
-          className={classes.control}
         >
           {props.dictionary.appbar.transactions}
-        </UnstyledButton>
+        </Anchor>
         <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom-start">
           <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
         </Tooltip>
