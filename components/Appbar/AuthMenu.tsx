@@ -1,5 +1,6 @@
 import { Button, useMantineTheme } from '@mantine/core'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSWRConfig } from 'swr'
 import { Dictionary } from '@/utils/types'
 import classes from './Appbar.module.css'
 
@@ -11,6 +12,9 @@ interface AuthMenuProps {
 export default function AuthMenu(props: AuthMenuProps) {
   const theme = useMantineTheme()
   const { data: session } = useSession()
+  const { mutate } = useSWRConfig()
+
+  const clearCache = () => mutate(() => true, undefined, { revalidate: false })
 
   return (
     <div>
@@ -30,7 +34,10 @@ export default function AuthMenu(props: AuthMenuProps) {
           c={theme.colors.red[5]}
           color={theme.colors.red[5]}
           variant="subtle"
-          onClick={() => signOut()}
+          onClick={() => {
+            signOut()
+            clearCache()
+          }}
           className={classes.control}
         >
           {props.dictionary.appbar.logout}
