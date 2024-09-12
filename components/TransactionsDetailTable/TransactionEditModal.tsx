@@ -18,7 +18,7 @@ import {
 import { DateInput } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
-import { mutate } from 'swr'
+import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { IconCheck, IconDeviceFloppy, IconX } from 'tabler-icons'
 import { IconTrashX } from '@tabler/icons-react'
@@ -36,6 +36,7 @@ interface TransactionEditModalProps {
 }
 
 export default function TransactionEditModal(props: TransactionEditModalProps) {
+  const { mutate } = useSWRConfig()
   const isMobile = useMediaQuery('(max-width: 50em)')
 
   const form = useForm({

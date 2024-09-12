@@ -13,7 +13,7 @@ import {
   Tooltip,
   Switch,
 } from '@mantine/core'
-import useSWR, { Fetcher, mutate } from 'swr'
+import useSWR, { Fetcher, useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
@@ -36,6 +36,7 @@ export const checkboxTheme = createTheme({
 })
 
 export default function TransactionForm(props: TransactionFormProps) {
+  const { mutate } = useSWRConfig()
   const [isIncome, setIsIncome] = useState(false)
   const [isSavings, setIsSavings] = useState(false)
   const [name, setName] = useState('')
