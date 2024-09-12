@@ -11,8 +11,8 @@ import en from '@/dictionaries/en.json'
 import TransactionsDetailTable, {
   InitialDetailTableData,
 } from '@/components/TransactionsDetailTable/TransactionsDetailTable'
-import getCategories from '@/serverActions/getCategories'
-import getAllTransactions from '@/serverActions/getAllTransactions'
+import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
 
 const englishMetadata = {
   title: 'Transactions - Financegoras',
@@ -31,8 +31,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 async function getInitialCategories(): Promise<InitialDetailTableData> {
   'use server'
 
-  const categories = await getCategories()
-  const transactions = await getAllTransactions()
+  const session = await getServerSession(authOptions)
+  if (!session?.user) {
+    return { categories: null, transactions: [] }
+  }
+  const categories = await getCategories(session.user.id)
+  const transactions = await getAllTransactions(session.user.id)
 
   return { categories, transactions }
 }

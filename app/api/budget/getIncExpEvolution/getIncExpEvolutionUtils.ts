@@ -1,5 +1,5 @@
-import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
-import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
+import { fetchIncExpSavTransactions } from '../getAggregatedTransactions/fetchIncExpSavTransactions'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 
 export const getIncExpOneMonth = async (month: number, year: number, userId: string, lang: string) => {
   const { incomeTransactions, expenseTransactions, savingsTransactions } = await fetchIncExpSavTransactions(

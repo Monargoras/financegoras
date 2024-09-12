@@ -13,7 +13,7 @@ import {
   Tooltip,
   Switch,
 } from '@mantine/core'
-import useSWR, { useSWRConfig } from 'swr'
+import useSWR, { Fetcher, useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
@@ -22,7 +22,6 @@ import { AddTransactionButton } from './AddTransactionButton'
 import CategoryDrawer from '@/components/CategoryDrawer/CategoryDrawer'
 import submitTransaction from '@/serverActions/submitTransaction'
 import updateCategories from '@/serverActions/updateCategories'
-import getCategories from '@/serverActions/getCategories'
 
 interface TransactionFormProps {
   dictionary: Dictionary
@@ -49,7 +48,8 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [categoryError, setCategoryError] = useState(false)
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
 
-  const { data } = useSWR('/api/categories/getCategories', getCategories, {
+  const fetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const { data } = useSWR('/api/budget/getCategories', fetcher, {
     fallbackData: props.initialData ?? [],
   })
 

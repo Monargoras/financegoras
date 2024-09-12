@@ -5,7 +5,6 @@ import { AreaChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
-import getIncExpEvolution from '@/serverActions/getIncExpEvolution'
 
 interface AggregatedIncExpEvolutionGraphProps {
   lang: string
@@ -17,7 +16,7 @@ interface AggregatedIncExpEvolutionGraphProps {
   percentage: boolean
   stackedChart: boolean
   demo: boolean
-  initialData: AggregatedIncomeExpenseEvolution | null
+  initialData: AggregatedIncomeExpenseEvolution
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
@@ -26,12 +25,13 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
     sm: 400,
   })
 
+  const fetcher: Fetcher<AggregatedIncomeExpenseEvolution, string> = (input: RequestInfo | URL) =>
+    fetch(input).then((res) => res.json())
   const month = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
-  const fetcher: Fetcher<AggregatedIncomeExpenseEvolution | null, string> = () =>
-    getIncExpEvolution(year, month, props.lang, props.demo)
-  const { data, error, isLoading } = useSWR('/api/budget/getIncExpEvolution', fetcher, {
+  const params = `?year=${year}&month=${month}&lang=${props.lang}&demo=${props.demo}`
+  const { data, error, isLoading } = useSWR(`/api/budget/getIncExpEvolution${params}`, fetcher, {
     fallbackData: props.initialData,
   })
 

@@ -8,9 +8,8 @@ import { IconDots } from 'tabler-icons'
 import { Categories, Dictionary, getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import TableControls from './TableControls'
 import TransactionEditModal from './TransactionEditModal'
-import getAllTransactions from '@/serverActions/getAllTransactions'
 
-export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] | null }
+export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] }
 
 interface TransactionsDetailTableProps {
   locale: string
@@ -36,7 +35,8 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     }
   }, [categoryRes.data])
 
-  const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', getAllTransactions, {
+  const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher, {
     fallbackData: props.initialData.transactions,
   })
 

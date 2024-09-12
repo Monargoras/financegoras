@@ -5,7 +5,6 @@ import { BarChart } from '@mantine/charts'
 import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { colorsHex, getMonthNameArray } from '@/utils/helpers'
-import getMonthlyExpenseEvolution from '@/serverActions/getMonthlyExpenseEvolution'
 
 interface MonthlyExpenseEvolutionGraphProps {
   lang: string
@@ -18,21 +17,24 @@ interface MonthlyExpenseEvolutionGraphProps {
   stackedChart: boolean
   timeframe: string
   demo: boolean
-  initialData: MonthlyExpenseEvolution | null
+  initialData: MonthlyExpenseEvolution
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
+  const { lang } = props
+
   const chartWidth = useMatches({
     md: 900,
     sm: 400,
   })
 
+  const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
+    fetch(input).then((res) => res.json())
   const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
-  const fetcher: Fetcher<MonthlyExpenseEvolution | null, string> = () =>
-    getMonthlyExpenseEvolution(year, selMonth, props.lang, props.includeSavings, props.demo)
-  const { data, error, isLoading } = useSWR('/api/budget/getMonthlyExpenseEvolution', fetcher, {
+  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}&demo=${props.demo}`
+  const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher, {
     fallbackData: props.initialData,
   })
 
@@ -84,7 +86,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
             onClick: (event) => {
               const { month } = event.payload
               // get month number from name
-              const selectedMonth = getMonthNameArray(props.lang).indexOf(month) + 1
+              const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
               props.setSelectedMonth(selectedMonth)
               if (
                 props.timeframe === props.dictionary.budgetPage.last12Months &&

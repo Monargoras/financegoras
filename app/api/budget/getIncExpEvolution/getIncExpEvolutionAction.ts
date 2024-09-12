@@ -1,25 +1,15 @@
 'use server'
 
-import { getServerSession } from 'next-auth'
 import { AggregatedIncomeExpenseEvolution } from '@/utils/types'
-import { getIncExpOneMonth } from '@/utils/serverActions/getIncExpEvolutionUtils'
-import { getMonthYearTuples } from '@/utils/serverActions/getMonthlyExpenseEvolutionUtils'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
-import { demoUserId } from '@/utils/CONSTANTS'
+import { getIncExpOneMonth } from './getIncExpEvolutionUtils'
+import { getMonthYearTuples } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 
 export default async function getIncExpEvolution(
+  userId: string,
   year: number,
   month: number | null,
-  lang: string,
-  isDemo: boolean = false
-): Promise<AggregatedIncomeExpenseEvolution | null> {
-  const session = await getServerSession(authOptions)
-  if ((!session || !session.user) && !isDemo) {
-    return null
-  }
-
-  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
-
+  lang: string
+): Promise<AggregatedIncomeExpenseEvolution> {
   const monthsToCompute = getMonthYearTuples(month, year)
   // get the expenses for the last 12 months or the given year
   const expenses = await Promise.all(monthsToCompute.map(([m, y]) => getIncExpOneMonth(m, y, userId, lang)))

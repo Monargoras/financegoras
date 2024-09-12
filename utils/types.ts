@@ -72,9 +72,9 @@ export type MonthlyExpense = {
 export type MonthlyExpenseEvolution = MonthlyExpense[]
 
 export type DashboardData = {
-  monthlyExpenseEvolution: MonthlyExpenseEvolution | null
-  incExpEvolution: AggregatedIncomeExpenseEvolution | null
-  monthlyStats: AggregatedIncomeExpenseTotals | null
-  expensesByCategory: CategoryExpenseData[] | null
-  transactions: Transaction[] | null
+  monthlyExpenseEvolution: MonthlyExpenseEvolution
+  incExpEvolution: AggregatedIncomeExpenseEvolution
+  monthlyStats: AggregatedIncomeExpenseTotals
+  expensesByCategory: CategoryExpenseData[]
+  transactions: Transaction[]
 }
