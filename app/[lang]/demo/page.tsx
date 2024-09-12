@@ -7,10 +7,9 @@ import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
 import getMonthlyData from '@/serverActions/getMonthlyData'
 import getExpensesByCategory from '@/serverActions/getExpensesByCategory'
-import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
-import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
-import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
-import { demoUserId } from '@/utils/CONSTANTS'
+import getIncExpEvolution from '@/serverActions/getIncExpEvolution'
+import getMonthlyExpenseEvolution from '@/serverActions/getMonthlyExpenseEvolution'
+import getTransactions from '@/serverActions/getTransactions'
 
 const englishMetadata = {
   title: 'Demo - Financegoras',

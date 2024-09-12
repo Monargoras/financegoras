@@ -3,7 +3,7 @@
 import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { Categories } from '@/utils/types'
-import { authOptions } from '../app/api/auth/[...nextauth]/authOptions'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 
 export default async function getCategories(): Promise<Categories | null> {
   const session = await getServerSession(authOptions)

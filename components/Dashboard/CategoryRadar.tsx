@@ -13,7 +13,7 @@ interface CategoryRadarProps {
   selectedMonth: number
   selectedYear: number
   demo: boolean
-  initialData: CategoryExpenseData[]
+  initialData: CategoryExpenseData[] | null
 }
 
 export default function CategoryRadar(props: CategoryRadarProps) {

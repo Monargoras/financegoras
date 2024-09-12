@@ -3,9 +3,9 @@
 import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { CategoryExpenseData, getTransactionType, Transaction, TransactionType } from '@/utils/types'
-import { calculateTotalPerMonth, calculateTotalPerYear } from '../utils/calculateTotals'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '@/utils/serverActions/calculateTotals'
 import { demoUserId } from '@/utils/CONSTANTS'
-import { authOptions } from '../app/api/auth/[...nextauth]/authOptions'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 
 export default async function getExpensesByCategory(
   year: number,

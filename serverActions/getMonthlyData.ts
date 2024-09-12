@@ -2,9 +2,9 @@
 
 import { getServerSession } from 'next-auth'
 import { AggregatedIncomeExpenseTotals } from '@/utils/types'
-import { calculateTotalPerMonth, calculateTotalPerYear } from '../utils/calculateTotals'
-import { fetchIncExpSavTransactions } from '../utils/fetchIncExpSavTransactions'
-import { authOptions } from '../app/api/auth/[...nextauth]/authOptions'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '@/utils/serverActions/calculateTotals'
+import { fetchIncExpSavTransactions } from '@/utils/serverActions/fetchIncExpSavTransactions'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { demoUserId } from '@/utils/CONSTANTS'
 
 export default async function getMonthlyData(

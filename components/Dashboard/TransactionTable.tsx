@@ -3,26 +3,24 @@
 import useSWR, { Fetcher } from 'swr'
 import { Flex, Loader, Table, Text, useMantineTheme } from '@mantine/core'
 import { Dictionary, Transaction } from '@/utils/types'
+import getTransactions from '@/serverActions/getTransactions'
 
 interface TransactionTableProps {
   dictionary: Dictionary
   selectedMonth: number
   selectedYear: number
   demo: boolean
-  initialData: Transaction[]
+  initialData: Transaction[] | null
 }
 
 export function TransactionTable(props: TransactionTableProps) {
   const theme = useMantineTheme()
 
-  const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR(
-    `/api/budget/getTransactions?year=${props.selectedYear}&month=${props.selectedMonth}&demo=${props.demo}`,
-    fetcher,
-    {
-      fallbackData: props.initialData,
-    }
-  )
+  const fetcher: Fetcher<Transaction[] | null, string> = () =>
+    getTransactions(props.selectedYear, props.selectedMonth, props.demo)
+  const { data, error, isLoading } = useSWR('/api/budget/getTransactions', fetcher, {
+    fallbackData: props.initialData,
+  })
 
   return (
     <>

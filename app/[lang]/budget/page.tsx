@@ -11,9 +11,9 @@ import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
 import getMonthlyData from '@/serverActions/getMonthlyData'
 import getExpensesByCategory from '@/serverActions/getExpensesByCategory'
-import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
-import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
-import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
+import getIncExpEvolution from '@/serverActions/getIncExpEvolution'
+import getMonthlyExpenseEvolution from '@/serverActions/getMonthlyExpenseEvolution'
+import getTransactions from '@/serverActions/getTransactions'
 import getCategories from '@/serverActions/getCategories'
 
 const englishMetadata = {
@@ -51,12 +51,11 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
   const includeSavings = false
-  const userId = session.user.id
-  const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings)
-  const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
+  const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(curYear, curMonth, lang, includeSavings)
+  const incExpEvolution = await getIncExpEvolution(curYear, curMonth, lang)
   const monthlyStats = await getMonthlyData(curYear, curMonth)
   const expensesByCategory = await getExpensesByCategory(curYear, curMonth, includeSavings)
-  const transactions = await getTransactions(userId, curYear, curMonth)
+  const transactions = await getTransactions(curYear, curMonth)
 
   return {
     monthlyExpenseEvolution,

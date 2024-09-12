@@ -12,7 +12,7 @@ import TransactionsDetailTable, {
   InitialDetailTableData,
 } from '@/components/TransactionsDetailTable/TransactionsDetailTable'
 import getCategories from '@/serverActions/getCategories'
-import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
+import getAllTransactions from '@/serverActions/getAllTransactions'
 
 const englishMetadata = {
   title: 'Transactions - Financegoras',
@@ -31,12 +31,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 async function getInitialCategories(): Promise<InitialDetailTableData> {
   'use server'
 
-  const session = await getServerSession(authOptions)
-  if (!session?.user) {
-    return { categories: null, transactions: [] }
-  }
   const categories = await getCategories()
-  const transactions = await getAllTransactions(session.user.id)
+  const transactions = await getAllTransactions()
 
   return { categories, transactions }
 }
