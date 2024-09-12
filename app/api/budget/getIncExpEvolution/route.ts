@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import { valueToBoolean } from '../../../../utils/getMonthlyExpenseEvolutionUtils'
 import { demoUserId } from '@/utils/CONSTANTS'
 import getIncExpEvolution from './getIncExpEvolutionAction'
 

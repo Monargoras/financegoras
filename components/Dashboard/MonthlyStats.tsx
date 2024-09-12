@@ -3,27 +3,24 @@
 import useSWR, { Fetcher } from 'swr'
 import { Flex, Loader, Paper, Text, useMantineTheme } from '@mantine/core'
 import { AggregatedIncomeExpenseTotals, Dictionary } from '@/utils/types'
+import getMonthlyData from '@/serverActions/getMonthlyData'
 
 interface MonthlyStatsProps {
   dictionary: Dictionary
   selectedMonth: number
   selectedYear: number
   demo: boolean
-  initialData: AggregatedIncomeExpenseTotals
+  initialData: AggregatedIncomeExpenseTotals | null
 }
 
 export function MonthlyStats(props: MonthlyStatsProps) {
   const theme = useMantineTheme()
 
-  const fetcher: Fetcher<AggregatedIncomeExpenseTotals, string> = (input: RequestInfo | URL) =>
-    fetch(input).then((res) => res.json())
-  const { data, error, isLoading } = useSWR(
-    `/api/budget/getAggregatedTransactions?year=${props.selectedYear}&month=${props.selectedMonth}&demo=${props.demo}`,
-    fetcher,
-    {
-      fallbackData: props.initialData,
-    }
-  )
+  const fetcher: Fetcher<AggregatedIncomeExpenseTotals | null, string> = () =>
+    getMonthlyData(props.selectedYear, props.selectedMonth, props.demo)
+  const { data, error, isLoading } = useSWR('/api/budget/getAggregatedTransactions', fetcher, {
+    fallbackData: props.initialData,
+  })
 
   const paperStyles = {
     shadow: 'sm',

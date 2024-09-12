@@ -9,12 +9,12 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
-import getMonthlyData from '@/app/api/budget/getAggregatedTransactions/getMonthlyDataAction'
-import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExpensesByCategoryAction'
+import getMonthlyData from '@/serverActions/getMonthlyData'
+import getExpensesByCategory from '@/serverActions/getExpensesByCategory'
 import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
 import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
-import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import getCategories from '@/serverActions/getCategories'
 
 const englishMetadata = {
   title: 'Budget Book - Financegoras',
@@ -54,8 +54,8 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   const userId = session.user.id
   const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings)
   const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
-  const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings)
+  const monthlyStats = await getMonthlyData(curYear, curMonth)
+  const expensesByCategory = await getExpensesByCategory(curYear, curMonth, includeSavings)
   const transactions = await getTransactions(userId, curYear, curMonth)
 
   return {
@@ -74,7 +74,7 @@ async function getInitialCategories(): Promise<Categories | null> {
   if (!session?.user) {
     return null
   }
-  const categories = await getCategories(session.user.id)
+  const categories = await getCategories()
 
   return categories
 }

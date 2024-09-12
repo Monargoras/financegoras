@@ -11,7 +11,7 @@ import en from '@/dictionaries/en.json'
 import TransactionsDetailTable, {
   InitialDetailTableData,
 } from '@/components/TransactionsDetailTable/TransactionsDetailTable'
-import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import getCategories from '@/serverActions/getCategories'
 import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
 
 const englishMetadata = {
@@ -35,7 +35,7 @@ async function getInitialCategories(): Promise<InitialDetailTableData> {
   if (!session?.user) {
     return { categories: null, transactions: [] }
   }
-  const categories = await getCategories(session.user.id)
+  const categories = await getCategories()
   const transactions = await getAllTransactions(session.user.id)
 
   return { categories, transactions }

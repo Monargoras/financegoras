@@ -1,8 +1,8 @@
 'use server'
 
 import { AggregatedIncomeExpenseEvolution } from '@/utils/types'
-import { getIncExpOneMonth } from './getIncExpEvolutionUtils'
-import { getMonthYearTuples } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import { getIncExpOneMonth } from '../../../../utils/getIncExpEvolutionUtils'
+import { getMonthYearTuples } from '../../../../utils/getMonthlyExpenseEvolutionUtils'
 
 export default async function getIncExpEvolution(
   userId: string,

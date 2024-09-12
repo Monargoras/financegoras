@@ -1,7 +1,7 @@
 'use server'
 
 import { MonthlyExpenseEvolution } from '@/utils/types'
-import { getMonthlyExpenseDataOneMonth, getMonthYearTuples } from './getMonthlyExpenseEvolutionUtils'
+import { getMonthlyExpenseDataOneMonth, getMonthYearTuples } from '../../../../utils/getMonthlyExpenseEvolutionUtils'
 
 export default async function getMonthlyExpenseEvolution(
   userId: string,

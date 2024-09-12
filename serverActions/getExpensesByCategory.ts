@@ -1,15 +1,25 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { CategoryExpenseData, getTransactionType, Transaction, TransactionType } from '@/utils/types'
-import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '../utils/calculateTotals'
+import { demoUserId } from '@/utils/CONSTANTS'
+import { authOptions } from '../app/api/auth/[...nextauth]/authOptions'
 
 export default async function getExpensesByCategory(
-  userId: string,
   year: number,
   month: number | null,
-  includeSavings: boolean
-): Promise<CategoryExpenseData[]> {
+  includeSavings: boolean,
+  isDemo: boolean = false
+): Promise<CategoryExpenseData[] | null> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && !isDemo) {
+    return null
+  }
+
+  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
+
   let expenseQuery = db
     .selectFrom('transactions')
     .selectAll()

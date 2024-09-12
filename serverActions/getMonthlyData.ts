@@ -1,14 +1,24 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { AggregatedIncomeExpenseTotals } from '@/utils/types'
-import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
-import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '../utils/calculateTotals'
+import { fetchIncExpSavTransactions } from '../utils/fetchIncExpSavTransactions'
+import { authOptions } from '../app/api/auth/[...nextauth]/authOptions'
+import { demoUserId } from '@/utils/CONSTANTS'
 
 export default async function getMonthlyData(
-  userId: string,
   year: number,
-  month: number | null
-): Promise<AggregatedIncomeExpenseTotals> {
+  month: number | null,
+  isDemo: boolean = false
+): Promise<AggregatedIncomeExpenseTotals | null> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && !isDemo) {
+    return null
+  }
+
+  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
+
   const { incomeTransactions, expenseTransactions, savingsTransactions } = await fetchIncExpSavTransactions(
     userId,
     year,
