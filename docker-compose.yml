@@ -1,0 +1,9 @@
+version: '3'
+services:
+   nextjs:
+     build: ./
+     env_file: "prod.env"
+   nginx:
+     build: ./nginx
+     ports:
+       - 80:80
