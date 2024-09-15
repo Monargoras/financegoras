@@ -103,7 +103,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       setNameError(true)
       isValid = false
     }
-    if (amount === 0) {
+    if (!amount || amount === 0) {
       setAmountError(true)
       isValid = false
     }
