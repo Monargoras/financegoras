@@ -18,6 +18,34 @@ Financegoras is a web application that helps users to manage their finances. It 
 - Run `yarn install` to install all the dependencies
 - Run `yarn dev` to start the application in development mode or `yarn build` to build the application and then `yarn start` to start the application in production mode
 
+## Deploy using NGINX and Docker
+
+- Database needed to run the application is not included in the repository
+- To setup SQL database, a MYSQL dump file to setup a new DB correctly is provided in the root directory of the project `financegoras.sql`
+- Environment variables required in file `prod.env` (in project root) on the server to run the application, a list of needed variables is provided in the root directory of the project `sample.env`
+- For SSL, a `cert.pem` and `pkey.pem` file is required in the `nginx` directory
+- Then run the following commands in the project root to deploy the application:
+
+```bash
+# Stop all running containers if needed
+docker-compose down
+```
+
+```bash
+# Run the application
+docker-compose up -d
+```
+
+```bash
+# Run the application with build
+docker-compose up --build -d
+```
+
+```bash
+# Remove images and cache from disk if needed
+docker system prune
+```
+
 ## Deploy using Docker
 
 - Database needed to run the application is not included in the repository
@@ -39,7 +67,7 @@ docker run -p 80:3003 -e DB_URL -e GITHUB_ID -e GITHUB_SECRET -e NEXTAUTH_URL -e
 ```
 
 ```bash
-# remove images and cache from disk if needed
+# Remove images and cache from disk if needed
 docker system prune
 ```
 
