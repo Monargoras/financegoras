@@ -80,9 +80,7 @@ export default function TransactionForm(props: TransactionFormProps) {
           position: 'bottom-right',
         })
         // refresh all transaction related data after updating categories
-        mutate(
-          (key) => typeof key === 'string' && key.startsWith('/api/budget/') && key !== '/api/budget/getCategories'
-        )
+        mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
         mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
       } else {
         notifications.show({
@@ -142,7 +140,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         icon: <IconCheck />,
         position: 'bottom-right',
       })
-      mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/') && key !== '/api/budget/getCategories')
       mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
       return true
     }
