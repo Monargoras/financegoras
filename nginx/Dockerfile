@@ -11,7 +11,7 @@ COPY ./cert.pem /etc/cert/financegoras.com/cert.pem
 COPY ./pkey.pem /etc/cert/financegoras.com/pkey.pem
 
 # Expose the listening port
-EXPOSE 80
+EXPOSE 443
 
 # Launch NGINX
 CMD [ "nginx", "-g", "daemon off;" ]
