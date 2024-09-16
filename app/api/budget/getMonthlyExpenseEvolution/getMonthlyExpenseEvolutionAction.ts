@@ -8,12 +8,13 @@ export default async function getMonthlyExpenseEvolution(
   year: number,
   month: number | null,
   lang: string,
-  includeSavings: boolean
+  includeSavings: boolean,
+  grouped: boolean
 ): Promise<MonthlyExpenseEvolution> {
   const monthsToCompute = getMonthYearTuples(month, year)
   // get the expenses for the last 12 months or the given year
   const expenses = await Promise.all(
-    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, includeSavings, userId, lang))
+    monthsToCompute.map(([m, y]) => getMonthlyExpenseDataOneMonth(m, y, includeSavings, userId, lang, grouped))
   )
 
   return expenses

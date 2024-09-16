@@ -14,8 +14,8 @@ interface MonthlyExpenseEvolutionGraphProps {
   setSelectedMonth: (month: number) => void
   selectedYear: number
   setSelectedYear: (year: number) => void
-  stackedChart: boolean
   timeframe: string
+  grouped: boolean
   demo: boolean
   initialData: MonthlyExpenseEvolution
 }
@@ -33,7 +33,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year =
     props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
-  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&lang=${lang}&demo=${props.demo}`
+  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&grouped=${props.grouped}&lang=${lang}&demo=${props.demo}`
   const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher, {
     fallbackData: props.initialData,
   })
@@ -72,12 +72,12 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
           h={200}
           data={data}
           dataKey="month"
-          type={props.percentage ? 'percent' : props.stackedChart ? 'stacked' : 'default'}
+          type={props.percentage ? 'percent' : 'stacked'}
           series={getSeries(data)}
           valueFormatter={(value) => `${value.toFixed(2)}€`}
           barChartProps={{
             barGap: 1,
-            barCategoryGap: props.stackedChart || props.percentage ? 5 : 10,
+            barCategoryGap: 5,
           }}
           tooltipProps={{
             wrapperStyle: { zIndex: 1000 },

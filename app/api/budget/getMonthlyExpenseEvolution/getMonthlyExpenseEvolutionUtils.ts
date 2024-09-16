@@ -1,12 +1,15 @@
 import { db } from '@/utils/database'
-import { getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
+import { Categories, getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
+import getCategories from '../getCategories/getCategoriesAction'
+import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 
 export const getMonthlyExpenseDataOneMonth = async (
   month: number,
   year: number,
   includeSavings: boolean,
   userId: string,
-  lang: string
+  lang: string,
+  grouped: boolean
 ) => {
   let expenseQuery = db
     .selectFrom('transactions')
@@ -29,26 +32,44 @@ export const getMonthlyExpenseDataOneMonth = async (
     transactionType: getTransactionType(transaction.transactionType),
   }))
 
-  const expensesPerCategory = expenseTransactions.reduce(
-    (acc, transaction) => {
-      const { category } = transaction
-      // timeframe month: annual transactions are divided by 12
-      if (month && transaction.transactionType === TransactionType.Annual) {
-        acc[category] = (acc[category] || 0) + transaction.amount / 12
-        return acc
-      }
-      // timeframe year: monthly transactions are multiplied by 12
-      if (!month && transaction.transactionType === TransactionType.Monthly) {
-        acc[category] = (acc[category] || 0) + transaction.amount * 12
-        return acc
-      }
-      acc[category] = (acc[category] || 0) + transaction.amount
-      return acc
-    },
-    {} as Record<string, number>
-  )
+  let expensesPerGroupedSet = {} as Record<string, number>
 
-  const expensesOneMonthArray = Object.entries(expensesPerCategory).map(([category, total]) => ({
+  if (grouped) {
+    const categories = await getCategories(userId)
+    if (categories) {
+      const groups = categories.map((cat) => cat.group)
+      for (const group of groups) {
+        const groupTransactions = expenseTransactions.filter(
+          (transaction) => getGroupFromCategory(transaction.category, categories) === group
+        )
+        const totalGroup = month
+          ? parseFloat(calculateTotalPerMonth(groupTransactions))
+          : parseFloat(calculateTotalPerYear(groupTransactions, year))
+        if (totalGroup > 0) expensesPerGroupedSet[group] = totalGroup
+      }
+    }
+  } else {
+    expensesPerGroupedSet = expenseTransactions.reduce(
+      (acc, transaction) => {
+        const { category } = transaction
+        // timeframe month: annual transactions are divided by 12
+        if (month && transaction.transactionType === TransactionType.Annual) {
+          acc[category] = (acc[category] || 0) + transaction.amount / 12
+          return acc
+        }
+        // timeframe year: monthly transactions are multiplied by 12
+        if (!month && transaction.transactionType === TransactionType.Monthly) {
+          acc[category] = (acc[category] || 0) + transaction.amount * 12
+          return acc
+        }
+        acc[category] = (acc[category] || 0) + transaction.amount
+        return acc
+      },
+      {} as Record<string, number>
+    )
+  }
+
+  const expensesOneMonthArray = Object.entries(expensesPerGroupedSet).map(([category, total]) => ({
     [category]: total.toFixed(2),
   }))
 
@@ -111,4 +132,9 @@ export const valueToBoolean = (value: string | null) => {
     return false
   }
   return null
+}
+
+export const getGroupFromCategory = (category: string, categories: Categories): string => {
+  const categoryData = categories.find((cat) => cat.items.includes(category))
+  return categoryData?.group || 'NULL'
 }

@@ -23,16 +23,16 @@ export default function Dashboard(props: DashboardProps) {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [timeframe, setTimeframe] = useState(props.dictionary.budgetPage.last12Months)
-  const [stackedChart, setStackedChart] = useState(true)
+  const [grouped, setGrouped] = useState(false)
 
   return (
     <Flex direction="column">
       <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }} wrap="wrap">
         <Switch
-          checked={stackedChart}
-          onChange={(event) => setStackedChart(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.stackedChart}
-          offLabel={props.dictionary.budgetPage.normalChart}
+          checked={grouped}
+          onChange={(event) => setGrouped(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.groups}
+          offLabel={props.dictionary.budgetPage.categories}
           size="xl"
         />
         <Switch
@@ -67,7 +67,7 @@ export default function Dashboard(props: DashboardProps) {
           setSelectedMonth={setSelectedMonth}
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
-          stackedChart={stackedChart}
+          grouped={grouped}
           timeframe={timeframe}
           demo={props.demo}
           initialData={props.initialData.monthlyExpenseEvolution}
@@ -78,6 +78,7 @@ export default function Dashboard(props: DashboardProps) {
           includeSavings={includeSavings}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
+          grouped={grouped}
           demo={props.demo}
           initialData={props.initialData.expensesByCategory}
         />
@@ -99,7 +100,6 @@ export default function Dashboard(props: DashboardProps) {
             setSelectedYear={setSelectedYear}
             timeframe={timeframe}
             percentage={percentage}
-            stackedChart={stackedChart}
             demo={props.demo}
             initialData={props.initialData.incExpEvolution}
           />

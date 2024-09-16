@@ -39,6 +39,7 @@
     "isIncomeExpense": "Income/Expense",
     "category": "Category",
     "categories": "Categories",
+    "groups": "Groups",
     "createdAt": "Created",
     "stoppedAt": "Stopped",
     "addSingleTransaction": "Add Transaction",

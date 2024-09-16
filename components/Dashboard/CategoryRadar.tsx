@@ -9,6 +9,7 @@ interface CategoryRadarProps {
   lang: string
   dictionary: Dictionary
   includeSavings: boolean
+  grouped: boolean
   selectedMonth: number
   selectedYear: number
   demo: boolean
@@ -16,9 +17,10 @@ interface CategoryRadarProps {
 }
 
 export default function CategoryRadar(props: CategoryRadarProps) {
+  const { selectedYear, selectedMonth, includeSavings, grouped, demo } = props
   const fetcher: Fetcher<CategoryExpenseData[], string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
-  const params = `?year=${props.selectedYear}&month=${props.selectedMonth}&includeSavings=${props.includeSavings}&demo=${props.demo}`
+  const params = `?year=${selectedYear}&month=${selectedMonth}&includeSavings=${includeSavings}&grouped=${grouped}&demo=${demo}`
   const { data, error, isLoading } = useSWR(`/api/budget/getExpensesByCategory${params}`, fetcher, {
     fallbackData: props.initialData,
   })
