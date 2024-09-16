@@ -136,5 +136,5 @@ export const valueToBoolean = (value: string | null) => {
 
 export const getGroupFromCategory = (category: string, categories: Categories): string => {
   const categoryData = categories.find((cat) => cat.items.includes(category))
-  return categoryData?.group || 'NULL'
+  return categoryData?.group || '-'
 }
