@@ -1,7 +1,5 @@
-import { Container, Flex } from '@mantine/core'
 import { DashboardData, PageProps, TransactionType } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
-import Dashboard from '@/components/Dashboard/Dashboard'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
@@ -12,6 +10,8 @@ import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolut
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
 import { demoUserId } from '@/utils/CONSTANTS'
 import generateDemoTransactions from '@/serverActions/generateDemoTransactions'
+import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 
 const englishMetadata = {
   title: 'Demo - Financegoras',
@@ -58,6 +58,7 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
   const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
   const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false)
   const transactions = await getTransactions(userId, curYear, curMonth)
+  const categories = await getCategories(userId)
 
   return {
     monthlyExpenseEvolution,
@@ -65,6 +66,7 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     monthlyStats,
     expensesByCategory,
     transactions,
+    categories,
   }
 }
 
@@ -74,11 +76,7 @@ export default async function DemoPage({ params: { lang } }: PageProps) {
 
   return (
     <PageTransitionProvider>
-      <Container fluid>
-        <Flex gap="md" justify="center" align="center" direction="column">
-          <Dashboard lang={lang} dictionary={dict} demo initialData={initialData} />
-        </Flex>
-      </Container>
+      <DashboardContainer lang={lang} dict={dict} demo initialData={initialData} />
     </PageTransitionProvider>
   )
 }

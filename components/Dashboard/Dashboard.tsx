@@ -14,16 +14,34 @@ interface DashboardProps {
   lang: string
   dictionary: Dictionary
   demo: boolean
-  initialData: DashboardData
+  data: DashboardData
+  grouped: boolean
+  setGrouped: (grouped: boolean) => void
+  includeSavings: boolean
+  setIncludeSavings: (includeSavings: boolean) => void
+  selectedMonth: number
+  setSelectedMonth: (selectedMonth: number) => void
+  selectedYear: number
+  setSelectedYear: (selectedYear: number) => void
+  timeframe: string
+  setTimeframe: (timeframe: string) => void
 }
 
 export default function Dashboard(props: DashboardProps) {
+  const {
+    data,
+    grouped,
+    setGrouped,
+    includeSavings,
+    setIncludeSavings,
+    selectedMonth,
+    setSelectedMonth,
+    selectedYear,
+    setSelectedYear,
+    timeframe,
+    setTimeframe,
+  } = props
   const [percentage, setPercentage] = useState(false)
-  const [includeSavings, setIncludeSavings] = useState(false)
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
-  const [timeframe, setTimeframe] = useState(props.dictionary.budgetPage.last12Months)
-  const [grouped, setGrouped] = useState(false)
 
   return (
     <Flex direction="column">
@@ -63,53 +81,36 @@ export default function Dashboard(props: DashboardProps) {
           lang={props.lang}
           dictionary={props.dictionary}
           percentage={percentage}
-          includeSavings={includeSavings}
           setSelectedMonth={setSelectedMonth}
-          selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
-          grouped={grouped}
           timeframe={timeframe}
-          demo={props.demo}
-          initialData={props.initialData.monthlyExpenseEvolution}
+          data={data.monthlyExpenseEvolution}
         />
         <CategoryRadar
           lang={props.lang}
-          dictionary={props.dictionary}
-          includeSavings={includeSavings}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
-          grouped={grouped}
-          demo={props.demo}
-          initialData={props.initialData.expensesByCategory}
+          data={data.expensesByCategory}
         />
       </Flex>
       <Flex gap="md" justify="center" direction="row" wrap="wrap">
         <Flex gap="md" align="center" direction="column" wrap="wrap">
-          <MonthlyStats
-            dictionary={props.dictionary}
-            selectedMonth={selectedMonth}
-            selectedYear={selectedYear}
-            demo={props.demo}
-            initialData={props.initialData.monthlyStats}
-          />
+          <MonthlyStats dictionary={props.dictionary} data={data.monthlyStats} />
           <AggregatedIncExpEvolutionGraph
             lang={props.lang}
             dictionary={props.dictionary}
             setSelectedMonth={setSelectedMonth}
-            selectedYear={selectedYear}
             setSelectedYear={setSelectedYear}
             timeframe={timeframe}
             percentage={percentage}
-            demo={props.demo}
-            initialData={props.initialData.incExpEvolution}
+            data={data.incExpEvolution}
           />
         </Flex>
         <TransactionTable
           dictionary={props.dictionary}
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
           demo={props.demo}
-          initialData={props.initialData.transactions}
+          data={data.transactions}
+          categories={data.categories}
         />
       </Flex>
     </Flex>

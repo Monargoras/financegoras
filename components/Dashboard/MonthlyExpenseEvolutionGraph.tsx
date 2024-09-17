@@ -1,8 +1,7 @@
 'use client'
 
-import { Flex, Loader, Text, useMatches } from '@mantine/core'
+import { useMatches } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
-import useSWR, { Fetcher } from 'swr'
 import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { colorsHex, getMonthNameArray } from '@/utils/helpers'
 
@@ -10,14 +9,10 @@ interface MonthlyExpenseEvolutionGraphProps {
   lang: string
   dictionary: Dictionary
   percentage: boolean
-  includeSavings: boolean
   setSelectedMonth: (month: number) => void
-  selectedYear: number
   setSelectedYear: (year: number) => void
   timeframe: string
-  grouped: boolean
-  demo: boolean
-  initialData: MonthlyExpenseEvolution
+  data: MonthlyExpenseEvolution
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -26,16 +21,6 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   const chartWidth = useMatches({
     md: 900,
     sm: 400,
-  })
-
-  const fetcher: Fetcher<MonthlyExpenseEvolution, string> = (input: RequestInfo | URL) =>
-    fetch(input).then((res) => res.json())
-  const selMonth = props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
-  const year =
-    props.timeframe === props.dictionary.budgetPage.last12Months ? new Date().getFullYear() : props.selectedYear
-  const params = `?year=${year}&month=${selMonth}&includeSavings=${props.includeSavings}&grouped=${props.grouped}&lang=${lang}&demo=${props.demo}`
-  const { data, error, isLoading } = useSWR(`/api/budget/getMonthlyExpenseEvolution${params}`, fetcher, {
-    fallbackData: props.initialData,
   })
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
@@ -55,55 +40,41 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   }
 
   return (
-    <>
-      {!data && isLoading && (
-        <Flex justify="center" align="center" w={chartWidth} h={200}>
-          <Loader color="blue" type="dots" />
-        </Flex>
-      )}
-      {error && (
-        <Flex justify="center" align="center" w={chartWidth} h={200}>
-          <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
-        </Flex>
-      )}
-      {data && (
-        <BarChart
-          w={chartWidth}
-          h={200}
-          data={data}
-          dataKey="month"
-          type={props.percentage ? 'percent' : 'stacked'}
-          series={getSeries(data)}
-          valueFormatter={(value) => `${value.toFixed(2)}€`}
-          barChartProps={{
-            barGap: 1,
-            barCategoryGap: 5,
-          }}
-          tooltipProps={{
-            wrapperStyle: { zIndex: 1000 },
-          }}
-          barProps={{
-            onClick: (event) => {
-              const { month } = event.payload
-              // get month number from name
-              const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
-              props.setSelectedMonth(selectedMonth)
-              if (
-                props.timeframe === props.dictionary.budgetPage.last12Months &&
-                selectedMonth > new Date().getMonth() + 1
-              ) {
-                props.setSelectedYear(new Date().getFullYear() - 1)
-              }
-              if (
-                props.timeframe === props.dictionary.budgetPage.last12Months &&
-                selectedMonth < new Date().getMonth() + 1
-              ) {
-                props.setSelectedYear(new Date().getFullYear())
-              }
-            },
-          }}
-        />
-      )}
-    </>
+    <BarChart
+      w={chartWidth}
+      h={200}
+      data={props.data}
+      dataKey="month"
+      type={props.percentage ? 'percent' : 'stacked'}
+      series={getSeries(props.data)}
+      valueFormatter={(value) => `${value.toFixed(2)}€`}
+      barChartProps={{
+        barGap: 1,
+        barCategoryGap: 5,
+      }}
+      tooltipProps={{
+        wrapperStyle: { zIndex: 1000 },
+      }}
+      barProps={{
+        onClick: (event) => {
+          const { month } = event.payload
+          // get month number from name
+          const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
+          props.setSelectedMonth(selectedMonth)
+          if (
+            props.timeframe === props.dictionary.budgetPage.last12Months &&
+            selectedMonth > new Date().getMonth() + 1
+          ) {
+            props.setSelectedYear(new Date().getFullYear() - 1)
+          }
+          if (
+            props.timeframe === props.dictionary.budgetPage.last12Months &&
+            selectedMonth < new Date().getMonth() + 1
+          ) {
+            props.setSelectedYear(new Date().getFullYear())
+          }
+        },
+      }}
+    />
   )
 }

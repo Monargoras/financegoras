@@ -77,4 +77,5 @@ export type DashboardData = {
   monthlyStats: AggregatedIncomeExpenseTotals
   expensesByCategory: CategoryExpenseData[]
   transactions: Transaction[]
+  categories: Categories | null
 }

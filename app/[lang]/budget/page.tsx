@@ -1,9 +1,6 @@
-import { Container, Divider, Flex } from '@mantine/core'
 import { getServerSession } from 'next-auth'
-import { Categories, DashboardData, PageProps } from '@/utils/types'
+import { DashboardData, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
-import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
-import Dashboard from '@/components/Dashboard/Dashboard'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
@@ -15,6 +12,7 @@ import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvo
 import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 
 const englishMetadata = {
   title: 'Budget Book - Financegoras',
@@ -45,6 +43,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
       },
       expensesByCategory: [],
       transactions: [],
+      categories: null,
     }
   }
 
@@ -64,6 +63,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
   const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false)
   const transactions = await getTransactions(userId, curYear, curMonth)
+  const categories = await getCategories(userId)
 
   return {
     monthlyExpenseEvolution,
@@ -71,37 +71,19 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     monthlyStats,
     expensesByCategory,
     transactions,
+    categories,
   }
-}
-
-async function getInitialCategories(): Promise<Categories | null> {
-  'use server'
-
-  const session = await getServerSession(authOptions)
-  if (!session?.user) {
-    return null
-  }
-  const categories = await getCategories(session.user.id)
-
-  return categories
 }
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const initialData = await getInitialDashboardData({ lang })
-  const initialCategories = await getInitialCategories()
 
   return (
     <PageTransitionProvider>
       {session?.user ? (
-        <Container fluid>
-          <Flex gap="md" justify="center" align="center" direction="column">
-            <IncomeExpenseForm dictionary={dict} initialData={initialCategories} />
-            <Divider size="lg" w="100%" />
-            <Dashboard lang={lang} dictionary={dict} demo={false} initialData={initialData} />
-          </Flex>
-        </Container>
+        <DashboardContainer lang={lang} dict={dict} demo={false} initialData={initialData} />
       ) : (
         <AuthenticationPrompt dictionary={dict} />
       )}
