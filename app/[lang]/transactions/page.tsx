@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return params.lang === 'de' ? germanMetadata : englishMetadata
 }
 
-async function getInitialCategories(): Promise<InitialDetailTableData> {
+async function getInitialData(): Promise<InitialDetailTableData> {
   'use server'
 
   const session = await getServerSession(authOptions)
@@ -44,7 +44,7 @@ async function getInitialCategories(): Promise<InitialDetailTableData> {
 export default async function TransactionsPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
-  const initialData = await getInitialCategories()
+  const initialData = await getInitialData()
 
   return (
     <PageTransitionProvider>
