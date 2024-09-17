@@ -1,5 +1,5 @@
 import { Container, Flex } from '@mantine/core'
-import { DashboardData, PageProps } from '@/utils/types'
+import { DashboardData, PageProps, TransactionType } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import Dashboard from '@/components/Dashboard/Dashboard'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
@@ -11,6 +11,7 @@ import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvo
 import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
 import { demoUserId } from '@/utils/CONSTANTS'
+import generateDemoTransactions from '@/serverActions/generateDemoTransactions'
 
 const englishMetadata = {
   title: 'Demo - Financegoras',
@@ -33,6 +34,18 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
   const curYear = new Date().getFullYear()
   const includeSavings = false
   const userId = demoUserId
+
+  // get demo transactions for current month
+  const tmpTransactions = await getTransactions(userId, curYear, curMonth)
+  // remove monthly and annual transactions
+  const filteredTransactions = tmpTransactions.filter(
+    (t) => t.transactionType !== TransactionType.Monthly && t.transactionType !== TransactionType.Annual
+  )
+  // if there are no transactions for the current month, generate some
+  if (filteredTransactions.length === 0) {
+    await generateDemoTransactions(curYear, curMonth)
+  }
+
   const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(
     userId,
     curYear,
