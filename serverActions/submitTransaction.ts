@@ -41,6 +41,6 @@ export default async function submitTransaction(
       stoppedAt: date,
     }),
   }
-  await db.insertInto('transactions').values(transaction).executeTakeFirst()
-  return true
+  const res = await db.insertInto('transactions').values(transaction).executeTakeFirst()
+  return Number(res.numInsertedOrUpdatedRows) > 0
 }

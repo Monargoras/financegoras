@@ -33,7 +33,7 @@ export default async function updateTransaction(
     return false
   }
 
-  await db
+  const res = await db
     .updateTable('transactions')
     .set({
       id,
@@ -48,5 +48,5 @@ export default async function updateTransaction(
     })
     .where((eb) => eb.and([eb('id', '=', id), eb('userId', '=', session.user.id)]))
     .executeTakeFirst()
-  return true
+  return Number(res.numUpdatedRows) > 0
 }

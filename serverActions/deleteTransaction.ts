@@ -10,9 +10,10 @@ export default async function deleteTransaction(id: string) {
     return false
   }
 
-  await db
+  const res = await db
     .deleteFrom('transactions')
     .where((eb) => eb.and([eb('id', '=', id), eb('userId', '=', session.user.id)]))
     .executeTakeFirst()
-  return true
+
+  return Number(res.numDeletedRows) > 0
 }

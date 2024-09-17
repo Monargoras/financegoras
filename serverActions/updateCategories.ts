@@ -16,16 +16,16 @@ export default async function updateCategories(categories: Categories) {
   // check if user has already set categories
   const userData = await db.selectFrom('userData').selectAll().where('userId', '=', id).executeTakeFirst()
   if (!userData) {
-    await db
+    const res = await db
       .insertInto('userData')
       .values({ userId: id, categories: JSON.stringify(categories) })
       .executeTakeFirst()
-  } else {
-    await db
-      .updateTable('userData')
-      .set({ categories: JSON.stringify(categories) })
-      .where('userId', '=', id)
-      .executeTakeFirst()
+    return Number(res.numInsertedOrUpdatedRows) > 0
   }
-  return true
+  const res = await db
+    .updateTable('userData')
+    .set({ categories: JSON.stringify(categories) })
+    .where('userId', '=', id)
+    .executeTakeFirst()
+  return Number(res.numUpdatedRows) > 0
 }
