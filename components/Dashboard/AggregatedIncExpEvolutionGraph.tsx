@@ -32,6 +32,13 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
       }}
+      yAxisProps={{
+        domain: ([dataMin, dataMax]) => [
+          dataMin,
+          // round up to nearest 100
+          Math.ceil(dataMax / 100) * 100,
+        ],
+      }}
       series={[
         // remove total income for readability, replaced by remaining income
         // { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
