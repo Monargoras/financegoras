@@ -20,7 +20,7 @@ export function TransactionTable(props: TransactionTableProps) {
 
   return (
     <>
-      <Table.ScrollContainer mah="45dvh" minWidth={250} style={{ margin: 8 }}>
+      <Table.ScrollContainer mah="45dvh" minWidth={300}>
         <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
           <Table.Thead>
             <Table.Tr>
