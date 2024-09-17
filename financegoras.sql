@@ -40,61 +40,224 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 -- Dumping data for table financegoras.transactions: ~28 rows (approximately)
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
 INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'zRZsBdTnqP2hP7iN', b'0', b'0', 25, 'Oishii', 'Restaurants', 'Single', '2024-08-19 13:08:15', '2024-08-19 13:08:15');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'g0cSphjvcXYDeMgI', b'0', b'0', 11.99, 'Youtube Premium', 'Subscriptions', 'Monthly', '2023-11-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'qPLU0zZFZJA5T-oS', b'0', b'0', 89.9, 'Amazon Prime', 'Subscriptions', 'Annual', '2024-04-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'DD9pTKl4hYudmMde', b'0', b'0', 49, 'Train Ticket', 'Subscriptions', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '9rW8wdPmV-AU-ts9', b'0', b'0', 20, 'Google One', 'Subscriptions', 'Annual', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 't6l58vgA-JkIzTdx', b'0', b'0', 10.99, 'Spotify', 'Subscriptions', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'w1cGt9HpqXiBAcAr', b'0', b'0', 75, 'Europa Park', 'Activities', 'Single', '2024-06-12 22:00:00', '2024-06-12 22:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'gAE0W9YnlaXxW8Wg', b'0', b'0', 20, 'Rewe', 'Groceries', 'Single', '2024-07-01 22:00:00', '2024-07-01 22:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'EuYu5mFPBAX3Wl-j', b'0', b'0', 17, 'Edeka', 'Groceries', 'Single', '2024-07-15 22:00:00', '2024-07-15 22:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'R9QN7hbDcX0WBD9P', b'0', b'0', 21, 'Jamies', 'Restaurants', 'Single', '2024-08-19 13:37:28', '2024-08-19 13:37:28');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'yK9WilZPcvPLmAMk', b'1', b'0', 2337.42, 'Company X', 'Salary', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'YwqL8J6DAim17L6e', b'1', b'0', 999, 'Christmas Bonus', 'Bonus', 'Single', '2023-12-24 09:27:44', '2023-12-24 09:27:44');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '-tkp_4l3DMcKJPPc', b'0', b'1', 750, 'ETFs', 'Investment', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '2PBE1KOOdWfwF3Mf', b'0', b'1', 250, 'Savings account', 'Investment', 'Monthly', '2023-11-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'v4GkvnNSUbg3Ovke', b'0', b'1', 250, 'Savings account bonus', 'Investment', 'Single', '2023-12-24 00:00:00', '2023-12-24 00:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '9JeYJZQaUHNl2iwp', b'0', b'0', 14.99, 'Netflix', 'Subscriptions', 'Monthly', '2024-02-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'GmzXD-w7PGey-t31', b'0', b'0', 553, 'Shorttrip Vienna', 'Vacation', 'Single', '2024-05-23 00:00:00', '2024-05-23 00:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 't7GVIelq4JIXWpvz', b'0', b'0', 36, 'Liability insurance', 'Insurance', 'Annual', '2024-02-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'C6gbJ7SJPWsxxWCS', b'0', b'0', 700, 'Car insurance', 'Insurance', 'Annual', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'GW5-Qsd7KNTsr2OJ', b'0', b'0', 310, 'Rent', 'Rent', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'THLvIHbq1WyS0YSl', b'0', b'0', 70, 'Europa Park', 'Activities', 'Single', '2024-06-13 00:00:00', '2024-06-13 00:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'AQfHCxmO14f2oSOq', b'0', b'0', 40, 'Escape Room', 'Activities', 'Single', '2024-03-06 00:00:00', '2024-03-06 00:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'GnwEibt61altfSHc', b'0', b'0', 75, 'New Years', 'Socializing', 'Single', '2023-12-31 00:00:00', '2023-12-31 00:00:00');
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
+	('DEMO', '-I8LNwol-sXdwi8G', b'0', b'0', 47, 'Health insurance', 'Insurance', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', '-qwUAU5BMEX1PBTT', b'0', b'0', 33, 'Gifts 6', 'Gifts', 'Single', '2023-11-06 00:00:00', '2023-11-06 00:00:00'),
+	('DEMO', '-tkp_4l3DMcKJPPc', b'0', b'1', 750, 'ETFs', 'Investment', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', '01F0xEboaYrXhP3o', b'0', b'0', 62, 'Cash 22', 'Cash', 'Single', '2024-02-22 00:00:00', '2024-02-22 00:00:00'),
+	('DEMO', '09JtSINi_vpcPMVu', b'0', b'0', 32, 'Clothes 2', 'Clothes', 'Single', '2024-08-02 00:00:00', '2024-08-02 00:00:00'),
+	('DEMO', '0pvhuLbLzy4gWTP3', b'0', b'0', 25, 'Cash 21', 'Cash', 'Single', '2024-09-21 00:00:00', '2024-09-21 00:00:00'),
+	('DEMO', '0RJx5QT8PigyC6Lj', b'0', b'0', 47, 'Investment 25', 'Investment', 'Single', '2024-02-25 00:00:00', '2024-02-25 00:00:00'),
+	('DEMO', '1f4nxTuyDJmjEd7q', b'0', b'0', 8, 'Gifts 17', 'Gifts', 'Single', '2024-09-17 00:00:00', '2024-09-17 00:00:00'),
+	('DEMO', '1lBvwjqcXBy-4o5V', b'0', b'0', 66, 'Upkeep 27', 'Upkeep', 'Single', '2024-08-27 00:00:00', '2024-08-27 00:00:00'),
+	('DEMO', '2KDcb9_FLKBj9rKh', b'0', b'0', 59, 'Clothes 22', 'Clothes', 'Single', '2023-12-22 00:00:00', '2023-12-22 00:00:00'),
+	('DEMO', '2PBE1KOOdWfwF3Mf', b'0', b'1', 250, 'Savings account', 'Investment', 'Monthly', '2023-11-01 00:00:00', NULL),
+	('DEMO', '2Yr8TAWBgOrLZeKO', b'0', b'0', 70, 'Socializing 6', 'Socializing', 'Single', '2024-01-06 00:00:00', '2024-01-06 00:00:00'),
+	('DEMO', '3hEqAGh5lWRfWcdR', b'1', b'0', 1537, 'Christmas Bonus', 'Bonus', 'Single', '2023-12-24 00:00:00', '2023-12-24 00:00:00'),
+	('DEMO', '3M3XV2KMRfwxMrbY', b'0', b'0', 59, 'Groceries 4', 'Groceries', 'Single', '2024-04-04 00:00:00', '2024-04-04 00:00:00'),
+	('DEMO', '3uecSzUN1MuqvDKx', b'0', b'0', 32, 'Cash 14', 'Cash', 'Single', '2023-10-14 00:00:00', '2023-10-14 00:00:00'),
+	('DEMO', '3ZYGO1fQdlKzzABG', b'0', b'0', 45, 'Vacation 21', 'Vacation', 'Single', '2024-08-21 00:00:00', '2024-08-21 00:00:00'),
+	('DEMO', '4CUi8eptCb4opoB9', b'0', b'0', 23, 'Groceries 19', 'Groceries', 'Single', '2023-12-19 00:00:00', '2023-12-19 00:00:00'),
+	('DEMO', '4Eqn26mV93vpwUC8', b'0', b'0', 26, 'Vacation 5', 'Vacation', 'Single', '2023-10-05 00:00:00', '2023-10-05 00:00:00'),
+	('DEMO', '4gQUcYu-24Cq1tXx', b'0', b'0', 46, 'Socializing 12', 'Socializing', 'Single', '2024-09-12 00:00:00', '2024-09-12 00:00:00'),
+	('DEMO', '4s8FuGWQ1eVUc_PD', b'0', b'0', 44, 'Socializing 22', 'Socializing', 'Single', '2024-01-22 00:00:00', '2024-01-22 00:00:00'),
+	('DEMO', '4SqDTmXm7z-XVsFi', b'0', b'0', 67, 'Gifts 11', 'Gifts', 'Single', '2023-12-11 00:00:00', '2023-12-11 00:00:00'),
+	('DEMO', '52mFjJUOMexirP5U', b'0', b'0', 41, 'Clothes 16', 'Clothes', 'Single', '2024-07-16 00:00:00', '2024-07-16 00:00:00'),
+	('DEMO', '5KEkYFTas_Lof2pq', b'0', b'0', 25, 'Cash 28', 'Cash', 'Single', '2023-10-28 00:00:00', '2023-10-28 00:00:00'),
+	('DEMO', '5rrurdi8hswUn6Cb', b'0', b'0', 70, 'Rent 27', 'Rent', 'Single', '2024-03-27 00:00:00', '2024-03-27 00:00:00'),
+	('DEMO', '5zEHcWXFQN_bu2_R', b'0', b'0', 32, 'Cash 7', 'Cash', 'Single', '2024-06-07 00:00:00', '2024-06-07 00:00:00'),
+	('DEMO', '60VBVeDhokR3sBN3', b'0', b'0', 20, 'Clothes 2', 'Clothes', 'Single', '2024-05-02 00:00:00', '2024-05-02 00:00:00'),
+	('DEMO', '6fp-L8aYhc2dv8yp', b'0', b'0', 56, 'Vacation 19', 'Vacation', 'Single', '2023-08-19 00:00:00', '2023-08-19 00:00:00'),
+	('DEMO', '6K3btqfaSu8gOBb8', b'0', b'0', 150, 'Groceries', 'Groceries', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', '6Tth690XwREREXzy', b'0', b'0', 36, 'Cash 4', 'Cash', 'Single', '2024-02-04 00:00:00', '2024-02-04 00:00:00'),
+	('DEMO', '7HEWM9yNn9QLpHD-', b'0', b'0', 18, 'Cash 14', 'Cash', 'Single', '2024-04-14 00:00:00', '2024-04-14 00:00:00'),
+	('DEMO', '7zLg_JOKycJZzijC', b'0', b'0', 65, 'Groceries 20', 'Groceries', 'Single', '2023-08-20 00:00:00', '2023-08-20 00:00:00'),
+	('DEMO', '8oPpI0tiVpQXjDyq', b'0', b'0', 61, 'Restaurants 11', 'Restaurants', 'Single', '2024-04-11 00:00:00', '2024-04-11 00:00:00'),
+	('DEMO', '8xQPk9OEt7Z4WdZe', b'0', b'0', 63, 'Investment 7', 'Investment', 'Single', '2023-10-07 00:00:00', '2023-10-07 00:00:00'),
+	('DEMO', '95HEyOygPdhgXx--', b'0', b'0', 59, 'Rent 19', 'Rent', 'Single', '2024-05-19 00:00:00', '2024-05-19 00:00:00'),
+	('DEMO', '9JeYJZQaUHNl2iwp', b'0', b'0', 14.99, 'Netflix', 'Subscriptions', 'Monthly', '2024-02-01 00:00:00', NULL),
+	('DEMO', '9MnbfAlr0EYdSLoR', b'0', b'0', 62, 'Activities 24', 'Activities', 'Single', '2023-12-24 00:00:00', '2023-12-24 00:00:00'),
+	('DEMO', '9QELUzyODouOCcgS', b'0', b'0', 4, 'Rent 21', 'Rent', 'Single', '2023-09-21 00:00:00', '2023-09-21 00:00:00'),
+	('DEMO', '9rW8wdPmV-AU-ts9', b'0', b'0', 20, 'Google One', 'Subscriptions', 'Annual', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'A9n73LAjhv_BU6p-', b'0', b'0', 70, 'Clothes 25', 'Clothes', 'Single', '2024-02-25 00:00:00', '2024-02-25 00:00:00'),
+	('DEMO', 'a9sUyr5KXORGd2Wn', b'0', b'0', 53, 'Socializing 1', 'Socializing', 'Single', '2024-01-01 00:00:00', '2024-01-01 00:00:00'),
+	('DEMO', 'Ac-Qf-9O3_YEkbIT', b'0', b'0', 69, 'Cash 11', 'Cash', 'Single', '2023-11-11 00:00:00', '2023-11-11 00:00:00'),
+	('DEMO', 'ad9xx927NKHLa0jr', b'0', b'0', 68, 'Socializing 5', 'Socializing', 'Single', '2024-06-05 00:00:00', '2024-06-05 00:00:00'),
+	('DEMO', 'aqIO9ixL-gCI0784', b'0', b'0', 6, 'Rent 2', 'Rent', 'Single', '2023-10-02 00:00:00', '2023-10-02 00:00:00'),
+	('DEMO', 'B8Mw85EEa_Bp20TZ', b'0', b'0', 37, 'Rent 4', 'Rent', 'Single', '2024-05-04 00:00:00', '2024-05-04 00:00:00'),
+	('DEMO', 'bqH3hretxKQ0eJYV', b'0', b'0', 35, 'Socializing 3', 'Socializing', 'Single', '2023-10-03 00:00:00', '2023-10-03 00:00:00'),
+	('DEMO', 'bX3t9fGsPcSJOShb', b'0', b'0', 33, 'Cash 15', 'Cash', 'Single', '2023-11-15 00:00:00', '2023-11-15 00:00:00'),
+	('DEMO', 'Bz1lKMOWTaMDyySi', b'0', b'0', 52, 'Clothes 19', 'Clothes', 'Single', '2024-06-19 00:00:00', '2024-06-19 00:00:00'),
+	('DEMO', 'c2nQ4MtFDrjuayXO', b'0', b'0', 15, 'Clothes 19', 'Clothes', 'Single', '2023-09-19 00:00:00', '2023-09-19 00:00:00'),
+	('DEMO', 'C66NoBO9MO4EF2JH', b'0', b'0', 7, 'Insurance 21', 'Insurance', 'Single', '2024-08-21 00:00:00', '2024-08-21 00:00:00'),
+	('DEMO', 'C6gbJ7SJPWsxxWCS', b'0', b'0', 700, 'Car insurance', 'Insurance', 'Annual', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'cb4UdFWF6NhyR_ay', b'0', b'0', 56, 'Cash 28', 'Cash', 'Single', '2023-09-28 00:00:00', '2023-09-28 00:00:00'),
+	('DEMO', 'CeOlVuOqc6TuEdgT', b'0', b'0', 11, 'Groceries 11', 'Groceries', 'Single', '2024-08-11 00:00:00', '2024-08-11 00:00:00'),
+	('DEMO', 'CLLcJcbo7Xou3gMG', b'0', b'0', 35, 'Rent 13', 'Rent', 'Single', '2024-09-13 00:00:00', '2024-09-13 00:00:00'),
+	('DEMO', 'Coc3V08kw4lW35fU', b'0', b'0', 68, 'Rent 13', 'Rent', 'Single', '2023-08-13 00:00:00', '2023-08-13 00:00:00'),
+	('DEMO', 'CqPF0yisp19OJI3Z', b'0', b'0', 47, 'Rent 28', 'Rent', 'Single', '2023-12-28 00:00:00', '2023-12-28 00:00:00'),
+	('DEMO', 'CrJMLpMGrDsKVi0v', b'0', b'0', 8, 'Clothes 24', 'Clothes', 'Single', '2024-07-24 00:00:00', '2024-07-24 00:00:00'),
+	('DEMO', 'cWkBrhyw47mg8Gcf', b'0', b'0', 18, 'Clothes 3', 'Clothes', 'Single', '2023-09-03 00:00:00', '2023-09-03 00:00:00'),
+	('DEMO', 'd0sEfs25OyJRQM8g', b'0', b'0', 47, 'Gifts 6', 'Gifts', 'Single', '2024-01-06 00:00:00', '2024-01-06 00:00:00'),
+	('DEMO', 'D7uOkCvDIFhrJcUc', b'1', b'0', 1337, 'Tax Return', 'Infrequent', 'Single', '2024-05-15 00:00:00', '2024-05-15 00:00:00'),
+	('DEMO', 'DAW0XCXK-Q8cRV9i', b'0', b'0', 28, 'Investment 6', 'Investment', 'Single', '2024-08-06 00:00:00', '2024-08-06 00:00:00'),
+	('DEMO', 'DbjKdivlvJpKK8ZG', b'0', b'0', 41, 'Clothes 20', 'Clothes', 'Single', '2024-01-20 00:00:00', '2024-01-20 00:00:00'),
+	('DEMO', 'DD9pTKl4hYudmMde', b'0', b'0', 49, 'Train Ticket', 'Subscriptions', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'df0jwvGZULNMoHQY', b'0', b'0', 42, 'Clothes 2', 'Clothes', 'Single', '2024-03-02 00:00:00', '2024-03-02 00:00:00'),
+	('DEMO', 'DGW5L3Wpk9akGWHr', b'0', b'0', 56, 'Cash 13', 'Cash', 'Single', '2024-01-13 00:00:00', '2024-01-13 00:00:00'),
+	('DEMO', 'DOzGDPt1sx_Z_Vv1', b'0', b'0', 3, 'Upkeep 5', 'Upkeep', 'Single', '2024-01-05 00:00:00', '2024-01-05 00:00:00'),
+	('DEMO', 'ED7GYg7Z0qf7_BDK', b'0', b'0', 5, 'Subscriptions 6', 'Subscriptions', 'Single', '2023-11-06 00:00:00', '2023-11-06 00:00:00'),
+	('DEMO', 'ejDJjE_Sk04YhRmB', b'0', b'0', 26, 'Rent 23', 'Rent', 'Single', '2023-12-23 00:00:00', '2023-12-23 00:00:00'),
+	('DEMO', 'ejkx-o5AE3UpgnWX', b'0', b'0', 42, 'Clothes 24', 'Clothes', 'Single', '2024-09-24 00:00:00', '2024-09-24 00:00:00'),
+	('DEMO', 'EJTjQ63p0IxzG7Ke', b'0', b'0', 54, 'Restaurants 20', 'Restaurants', 'Single', '2024-02-20 00:00:00', '2024-02-20 00:00:00'),
+	('DEMO', 'EkHo_t0e3hdEujc4', b'0', b'0', 30, 'Clothes 1', 'Clothes', 'Single', '2023-09-01 00:00:00', '2023-09-01 00:00:00'),
+	('DEMO', 'enKLuUgHHJ4M-qx7', b'0', b'0', 3, 'Vacation 14', 'Vacation', 'Single', '2023-10-14 00:00:00', '2023-10-14 00:00:00'),
+	('DEMO', 'EO0HfwEaKGoTMHwl', b'0', b'0', 50, 'Gifts 18', 'Gifts', 'Single', '2023-09-18 00:00:00', '2023-09-18 00:00:00'),
+	('DEMO', 'f1GGk7Dn2-9yNs-X', b'0', b'0', 19, 'Gifts 21', 'Gifts', 'Single', '2024-08-21 00:00:00', '2024-08-21 00:00:00'),
+	('DEMO', 'f81qAxWMOZcX--Rf', b'0', b'0', 52, 'Insurance 11', 'Insurance', 'Single', '2023-09-11 00:00:00', '2023-09-11 00:00:00'),
+	('DEMO', 'FBHJu_fZqqEsYS95', b'0', b'0', 57, 'Cash 9', 'Cash', 'Single', '2024-06-09 00:00:00', '2024-06-09 00:00:00'),
+	('DEMO', 'fJ2QdZ1244gnwAWK', b'0', b'0', 39, 'Upkeep 22', 'Upkeep', 'Single', '2023-10-22 00:00:00', '2023-10-22 00:00:00'),
+	('DEMO', 'FnAA_FSDPI7oCUh5', b'0', b'0', 54, 'Upkeep 9', 'Upkeep', 'Single', '2024-03-09 00:00:00', '2024-03-09 00:00:00'),
+	('DEMO', 'fud4rnz4aJLjM7dW', b'0', b'0', 16, 'Investment 19', 'Investment', 'Single', '2023-11-19 00:00:00', '2023-11-19 00:00:00'),
+	('DEMO', 'FzYUaQxI_DDqQksf', b'0', b'0', 37, 'Subscriptions 9', 'Subscriptions', 'Single', '2024-08-09 00:00:00', '2024-08-09 00:00:00'),
+	('DEMO', 'F_OIxj4e705Phhz4', b'0', b'0', 61, 'Clothes 6', 'Clothes', 'Single', '2023-08-06 00:00:00', '2023-08-06 00:00:00'),
+	('DEMO', 'g0cSphjvcXYDeMgI', b'0', b'0', 11.99, 'Youtube Premium', 'Subscriptions', 'Monthly', '2023-11-01 00:00:00', NULL),
+	('DEMO', 'G9bI0HkywFfFInTK', b'0', b'0', 15, 'Subscriptions 25', 'Subscriptions', 'Single', '2023-12-25 00:00:00', '2023-12-25 00:00:00'),
+	('DEMO', 'GFfPJNZIU8gMnbCc', b'0', b'0', 35, 'Cash 7', 'Cash', 'Single', '2024-02-07 00:00:00', '2024-02-07 00:00:00'),
+	('DEMO', 'gIaHvegczrIFA4ht', b'0', b'0', 59, 'Insurance 5', 'Insurance', 'Single', '2024-09-05 00:00:00', '2024-09-05 00:00:00'),
+	('DEMO', 'gPdjEEMmGvMLULB5', b'0', b'0', 45, 'Groceries 20', 'Groceries', 'Single', '2023-09-20 00:00:00', '2023-09-20 00:00:00'),
+	('DEMO', 'gPQtiEi8OLMYKAdj', b'0', b'0', 43, 'Clothes 7', 'Clothes', 'Single', '2023-10-07 00:00:00', '2023-10-07 00:00:00'),
+	('DEMO', 'gqQpW6QDe_ojuO_N', b'0', b'0', 24, 'Clothes 28', 'Clothes', 'Single', '2024-02-28 00:00:00', '2024-02-28 00:00:00'),
+	('DEMO', 'GW5-Qsd7KNTsr2OJ', b'0', b'0', 310, 'Rent', 'Rent', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'GXPQJL-hCMRUvNhh', b'0', b'0', 25, 'Vacation 23', 'Vacation', 'Single', '2023-08-23 00:00:00', '2023-08-23 00:00:00'),
+	('DEMO', 'h-Nxo7eNhul8lvp1', b'0', b'0', 40, 'Subscriptions 28', 'Subscriptions', 'Single', '2023-12-28 00:00:00', '2023-12-28 00:00:00'),
+	('DEMO', 'h4-xu19W1ODN09E5', b'0', b'0', 9, 'Clothes 4', 'Clothes', 'Single', '2024-09-04 00:00:00', '2024-09-04 00:00:00'),
+	('DEMO', 'hIx9nJRRtak1mi1n', b'0', b'0', 3, 'Gifts 17', 'Gifts', 'Single', '2023-08-17 00:00:00', '2023-08-17 00:00:00'),
+	('DEMO', 'HMxWlQDai_hA72U9', b'0', b'0', 54, 'Cash 9', 'Cash', 'Single', '2023-10-09 00:00:00', '2023-10-09 00:00:00'),
+	('DEMO', 'hOcahKl7xIK0wqBl', b'0', b'0', 27, 'Investment 23', 'Investment', 'Single', '2023-12-23 00:00:00', '2023-12-23 00:00:00'),
+	('DEMO', 'huDF8gRpGI_lIQgI', b'0', b'0', 38, 'Clothes 4', 'Clothes', 'Single', '2023-10-04 00:00:00', '2023-10-04 00:00:00'),
+	('DEMO', 'i-MtzicQj9PEYW-h', b'0', b'0', 30, 'Rent 14', 'Rent', 'Single', '2024-04-14 00:00:00', '2024-04-14 00:00:00'),
+	('DEMO', 'i1wtzQDm5VKKJq3-', b'0', b'0', 10, 'Investment 6', 'Investment', 'Single', '2024-02-06 00:00:00', '2024-02-06 00:00:00'),
+	('DEMO', 'i5PWFUNyNnfJGVxw', b'0', b'0', 17, 'Rent 18', 'Rent', 'Single', '2024-08-18 00:00:00', '2024-08-18 00:00:00'),
+	('DEMO', 'iBBvi3W-v7eSzWar', b'0', b'0', 27, 'Vacation 25', 'Vacation', 'Single', '2023-08-25 00:00:00', '2023-08-25 00:00:00'),
+	('DEMO', 'IbNC8pC_Yz98lM_I', b'0', b'0', 59, 'Clothes 14', 'Clothes', 'Single', '2024-03-14 00:00:00', '2024-03-14 00:00:00'),
+	('DEMO', 'IfKRH9aYA1F9YUEn', b'0', b'0', 31, 'Clothes 27', 'Clothes', 'Single', '2024-08-27 00:00:00', '2024-08-27 00:00:00'),
+	('DEMO', 'IH2MAVkva62B-dC9', b'0', b'0', 31, 'Gifts 20', 'Gifts', 'Single', '2023-09-20 00:00:00', '2023-09-20 00:00:00'),
+	('DEMO', 'ind3nAr4iKP8pfOx', b'0', b'0', 46, 'Socializing 24', 'Socializing', 'Single', '2023-10-24 00:00:00', '2023-10-24 00:00:00'),
+	('DEMO', 'IO5MFjdTroUXGlrw', b'0', b'0', 59, 'Gifts 5', 'Gifts', 'Single', '2023-12-05 00:00:00', '2023-12-05 00:00:00'),
+	('DEMO', 'iXndq-4Clarqhcbq', b'0', b'0', 50, 'Socializing 16', 'Socializing', 'Single', '2023-12-16 00:00:00', '2023-12-16 00:00:00'),
+	('DEMO', 'iyIWBBqYqRmY9wP4', b'0', b'0', 65, 'Socializing 7', 'Socializing', 'Single', '2024-05-07 00:00:00', '2024-05-07 00:00:00'),
+	('DEMO', 'j3Cwhsl5q2EiULvl', b'0', b'0', 35, 'Socializing 5', 'Socializing', 'Single', '2024-01-05 00:00:00', '2024-01-05 00:00:00'),
+	('DEMO', 'j3nOfMPPwHo5qd_5', b'0', b'0', 5, 'Restaurants 26', 'Restaurants', 'Single', '2023-10-26 00:00:00', '2023-10-26 00:00:00'),
+	('DEMO', 'j8WzINq-HXJ5Sq9s', b'0', b'0', 41, 'Vacation 22', 'Vacation', 'Single', '2023-12-22 00:00:00', '2023-12-22 00:00:00'),
+	('DEMO', 'j9VNe9tJk_1bzzkZ', b'0', b'0', 13, 'Rent 11', 'Rent', 'Single', '2024-02-11 00:00:00', '2024-02-11 00:00:00'),
+	('DEMO', 'jgPUcGHDEMyAPaA9', b'0', b'0', 1, 'Gifts 16', 'Gifts', 'Single', '2024-01-16 00:00:00', '2024-01-16 00:00:00'),
+	('DEMO', 'jj8tkWjinuwgUZRI', b'0', b'0', 26, 'Upkeep 10', 'Upkeep', 'Single', '2024-05-10 00:00:00', '2024-05-10 00:00:00'),
+	('DEMO', 'jP_Ad4QIt-xZorEq', b'0', b'0', 62, 'Upkeep 25', 'Upkeep', 'Single', '2024-09-25 00:00:00', '2024-09-25 00:00:00'),
+	('DEMO', 'jqvOH9h2q_9d2PJ3', b'0', b'0', 49, 'Clothes 18', 'Clothes', 'Single', '2024-05-18 00:00:00', '2024-05-18 00:00:00'),
+	('DEMO', 'K09drK29YWr0j49X', b'0', b'0', 54, 'Clothes 22', 'Clothes', 'Single', '2023-11-22 00:00:00', '2023-11-22 00:00:00'),
+	('DEMO', 'KK6tsmkWTTzerxRd', b'0', b'0', 35, 'Clothes 20', 'Clothes', 'Single', '2023-12-20 00:00:00', '2023-12-20 00:00:00'),
+	('DEMO', 'KnKcjKHXKgfPnmDQ', b'0', b'0', 23, 'Gifts 20', 'Gifts', 'Single', '2024-03-20 00:00:00', '2024-03-20 00:00:00'),
+	('DEMO', 'KOs-SPBrNNUMiED6', b'0', b'0', 56, 'Cash 22', 'Cash', 'Single', '2024-07-22 00:00:00', '2024-07-22 00:00:00'),
+	('DEMO', 'Ks3VL0it5_tmjAl5', b'0', b'0', 66, 'Upkeep 19', 'Upkeep', 'Single', '2024-03-19 00:00:00', '2024-03-19 00:00:00'),
+	('DEMO', 'l-FWiBLoKPwC6Ad1', b'0', b'0', 34, 'Cash 23', 'Cash', 'Single', '2024-06-23 00:00:00', '2024-06-23 00:00:00'),
+	('DEMO', 'L8P59GW5hYqH2oYR', b'0', b'0', 41, 'Vacation 15', 'Vacation', 'Single', '2024-03-15 00:00:00', '2024-03-15 00:00:00'),
+	('DEMO', 'LbjwTruGzJqsMSiu', b'0', b'0', 57, 'Insurance 19', 'Insurance', 'Single', '2024-04-19 00:00:00', '2024-04-19 00:00:00'),
+	('DEMO', 'LPWmFcuGXtlWJQUY', b'0', b'0', 25, 'Cash 21', 'Cash', 'Single', '2024-05-21 00:00:00', '2024-05-21 00:00:00'),
+	('DEMO', 'Lv6SteAIpKSkAyUb', b'0', b'0', 50, 'Clothes 28', 'Clothes', 'Single', '2024-02-28 00:00:00', '2024-02-28 00:00:00'),
+	('DEMO', 'mDrrRheP56Idha0N', b'0', b'0', 70, 'Upkeep 17', 'Upkeep', 'Single', '2024-04-17 00:00:00', '2024-04-17 00:00:00'),
+	('DEMO', 'mhtjAYl1wlpLk2qQ', b'0', b'0', 40, 'Clothes 15', 'Clothes', 'Single', '2024-01-15 00:00:00', '2024-01-15 00:00:00'),
+	('DEMO', 'MiYnNxFpwln_w0rt', b'0', b'0', 43, 'Groceries 20', 'Groceries', 'Single', '2024-02-20 00:00:00', '2024-02-20 00:00:00'),
+	('DEMO', 'mln8y7lTOsh1sSCg', b'0', b'0', 48, 'Cash 7', 'Cash', 'Single', '2023-10-07 00:00:00', '2023-10-07 00:00:00'),
+	('DEMO', 'mVl2-QIc3jYCo2AY', b'0', b'0', 61, 'Upkeep 3', 'Upkeep', 'Single', '2023-11-03 00:00:00', '2023-11-03 00:00:00'),
+	('DEMO', 'n492SJIUP9jIa730', b'0', b'0', 45, 'Cash 3', 'Cash', 'Single', '2023-11-03 00:00:00', '2023-11-03 00:00:00'),
+	('DEMO', 'Nk5i4kSMlNNxk3nt', b'0', b'0', 65, 'Restaurants 27', 'Restaurants', 'Single', '2024-08-27 00:00:00', '2024-08-27 00:00:00'),
+	('DEMO', 'ob-rT-x_YzqGzvbC', b'0', b'0', 51, 'Activities 1', 'Activities', 'Single', '2024-05-01 00:00:00', '2024-05-01 00:00:00'),
+	('DEMO', 'Ok9PUvfRUl-hPJKU', b'0', b'0', 19, 'Cash 5', 'Cash', 'Single', '2024-06-05 00:00:00', '2024-06-05 00:00:00'),
+	('DEMO', 'olGVh3BAQl4-Q9nS', b'0', b'1', 750, 'Savings account bonus', 'Investment', 'Single', '2023-12-26 00:00:00', '2023-12-26 00:00:00'),
+	('DEMO', 'oOCv930ceeedh6mg', b'0', b'0', 26, 'Clothes 11', 'Clothes', 'Single', '2023-12-11 00:00:00', '2023-12-11 00:00:00'),
+	('DEMO', 'oOEtHnydD7nHfSR_', b'0', b'0', 46, 'Clothes 1', 'Clothes', 'Single', '2023-09-01 00:00:00', '2023-09-01 00:00:00'),
+	('DEMO', 'OP9vgRpExe8LVNAc', b'0', b'0', 38, 'Clothes 6', 'Clothes', 'Single', '2024-03-06 00:00:00', '2024-03-06 00:00:00'),
+	('DEMO', 'P6OycVqf-92hfqDd', b'0', b'0', 24, 'Vacation 22', 'Vacation', 'Single', '2023-12-22 00:00:00', '2023-12-22 00:00:00'),
+	('DEMO', 'PCx2wpjRRjn_YNs0', b'0', b'0', 53, 'Subscriptions 27', 'Subscriptions', 'Single', '2024-08-27 00:00:00', '2024-08-27 00:00:00'),
+	('DEMO', 'PPe6blAyt1Y8mJVk', b'0', b'0', 7, 'Clothes 9', 'Clothes', 'Single', '2024-04-09 00:00:00', '2024-04-09 00:00:00'),
+	('DEMO', 'psqHdZ15YT-qGsve', b'0', b'0', 56, 'Groceries 23', 'Groceries', 'Single', '2024-07-23 00:00:00', '2024-07-23 00:00:00'),
+	('DEMO', 'PuKyvsSjiSlZr41z', b'0', b'0', 62, 'Clothes 25', 'Clothes', 'Single', '2023-10-25 00:00:00', '2023-10-25 00:00:00'),
+	('DEMO', 'pvjgrJqkH9uL7As5', b'0', b'0', 19, 'Clothes 15', 'Clothes', 'Single', '2024-04-15 00:00:00', '2024-04-15 00:00:00'),
+	('DEMO', 'pyWkvRMLIMGTi0HN', b'0', b'0', 15, 'Activities 12', 'Activities', 'Single', '2023-08-12 00:00:00', '2023-08-12 00:00:00'),
+	('DEMO', 'q0rU_w_1cErxC5vH', b'0', b'0', 47, 'Subscriptions 17', 'Subscriptions', 'Single', '2023-09-17 00:00:00', '2023-09-17 00:00:00'),
+	('DEMO', 'q8Mk1Dd6YBinRjTw', b'0', b'0', 26, 'Socializing 18', 'Socializing', 'Single', '2023-08-18 00:00:00', '2023-08-18 00:00:00'),
+	('DEMO', 'QkW72HQLxWE_BgJK', b'0', b'0', 70, 'Socializing 14', 'Socializing', 'Single', '2023-10-14 00:00:00', '2023-10-14 00:00:00'),
+	('DEMO', 'QleiKfA75Yazv_wh', b'0', b'0', 42, 'Cash 7', 'Cash', 'Single', '2023-09-07 00:00:00', '2023-09-07 00:00:00'),
+	('DEMO', 'qPLU0zZFZJA5T-oS', b'0', b'0', 89.9, 'Amazon Prime', 'Subscriptions', 'Annual', '2024-04-01 00:00:00', NULL),
+	('DEMO', 'Qt-CQsIdbEkAzIRB', b'0', b'0', 42, 'Restaurants 16', 'Restaurants', 'Single', '2023-09-16 00:00:00', '2023-09-16 00:00:00'),
+	('DEMO', 'qt5daYBMpSLiNvwn', b'0', b'0', 8, 'Investment 13', 'Investment', 'Single', '2024-09-13 00:00:00', '2024-09-13 00:00:00'),
+	('DEMO', 'QvBioNVbcF6m0RWS', b'0', b'0', 44, 'Investment 17', 'Investment', 'Single', '2024-07-17 00:00:00', '2024-07-17 00:00:00'),
+	('DEMO', 'r18aIuG7G-WORwhy', b'0', b'0', 15, 'Vacation 9', 'Vacation', 'Single', '2023-11-09 00:00:00', '2023-11-09 00:00:00'),
+	('DEMO', 'R2IRJzgW1uSypKLq', b'0', b'0', 35, 'Restaurant Testing', 'Restaurants', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'rBErEj8lEuimpEWM', b'0', b'0', 29, 'Upkeep 8', 'Upkeep', 'Single', '2024-09-08 00:00:00', '2024-09-08 00:00:00'),
+	('DEMO', 'rds_yIPOiij_qSfj', b'0', b'0', 34, 'Cash 23', 'Cash', 'Single', '2024-02-23 00:00:00', '2024-02-23 00:00:00'),
+	('DEMO', 'reoINsZK0joaJSvM', b'0', b'0', 23, 'Rent 2', 'Rent', 'Single', '2024-08-02 00:00:00', '2024-08-02 00:00:00'),
+	('DEMO', 'RMR8LOC25UIyBZhQ', b'0', b'0', 59, 'Vacation 24', 'Vacation', 'Single', '2023-09-24 00:00:00', '2023-09-24 00:00:00'),
+	('DEMO', 'rnBtfjaZUaTObeWV', b'0', b'0', 41, 'Rent 20', 'Rent', 'Single', '2024-01-20 00:00:00', '2024-01-20 00:00:00'),
+	('DEMO', 'rVGYgoU52WbGmsg3', b'0', b'0', 57, 'Clothes 6', 'Clothes', 'Single', '2024-06-06 00:00:00', '2024-06-06 00:00:00'),
+	('DEMO', 'RzbX6g9thkBwhVSy', b'0', b'0', 68, 'Rent 13', 'Rent', 'Single', '2024-08-13 00:00:00', '2024-08-13 00:00:00'),
+	('DEMO', 'R_mCiySIsFEftDu9', b'0', b'0', 62, 'Cash 26', 'Cash', 'Single', '2023-11-26 00:00:00', '2023-11-26 00:00:00'),
+	('DEMO', 'R_T6EjXUyHwgXYOK', b'0', b'0', 60, 'Rent 9', 'Rent', 'Single', '2024-06-09 00:00:00', '2024-06-09 00:00:00'),
+	('DEMO', 'sSQHoUacLF79bM8_', b'0', b'0', 33, 'Gifts 15', 'Gifts', 'Single', '2024-03-15 00:00:00', '2024-03-15 00:00:00'),
+	('DEMO', 'SXUibL0k2_K1p3GN', b'0', b'0', 61, 'Gifts 13', 'Gifts', 'Single', '2024-05-13 00:00:00', '2024-05-13 00:00:00'),
+	('DEMO', 't6l58vgA-JkIzTdx', b'0', b'0', 10.99, 'Spotify', 'Subscriptions', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', 't7GVIelq4JIXWpvz', b'0', b'0', 36, 'Liability insurance', 'Insurance', 'Annual', '2024-02-01 00:00:00', NULL),
+	('DEMO', 'TBAGt-vFweasCGmQ', b'0', b'0', 53, 'Restaurants 18', 'Restaurants', 'Single', '2023-12-18 00:00:00', '2023-12-18 00:00:00'),
+	('DEMO', 'tG8h82XjJvkIO43x', b'0', b'0', 10, 'Subscriptions 16', 'Subscriptions', 'Single', '2024-07-16 00:00:00', '2024-07-16 00:00:00'),
+	('DEMO', 'tNZcZdX1dNLuVh0P', b'0', b'0', 27, 'Restaurants 2', 'Restaurants', 'Single', '2024-01-02 00:00:00', '2024-01-02 00:00:00'),
+	('DEMO', 'tWOAxJ8m9EsLWSIP', b'0', b'0', 11, 'Socializing 24', 'Socializing', 'Single', '2023-11-24 00:00:00', '2023-11-24 00:00:00'),
+	('DEMO', 'U1rSGALpZEVhpPfs', b'0', b'0', 31, 'Gifts 27', 'Gifts', 'Single', '2023-09-27 00:00:00', '2023-09-27 00:00:00'),
+	('DEMO', 'U22gm_TdAt3krv7m', b'0', b'0', 4, 'Clothes 11', 'Clothes', 'Single', '2024-09-11 00:00:00', '2024-09-11 00:00:00'),
+	('DEMO', 'U55OioSCfKDqf1C-', b'0', b'0', 46, 'Gifts 21', 'Gifts', 'Single', '2024-04-21 00:00:00', '2024-04-21 00:00:00'),
+	('DEMO', 'U5sCh1jF3G535GHD', b'0', b'0', 9, 'Subscriptions 13', 'Subscriptions', 'Single', '2024-07-13 00:00:00', '2024-07-13 00:00:00'),
+	('DEMO', 'umt7gHNqgva0GggT', b'0', b'0', 15, 'Gifts 2', 'Gifts', 'Single', '2024-08-02 00:00:00', '2024-08-02 00:00:00'),
+	('DEMO', 'up-Z5EBH8hOdDxPz', b'0', b'0', 2, 'Investment 8', 'Investment', 'Single', '2023-11-08 00:00:00', '2023-11-08 00:00:00'),
+	('DEMO', 'uq8BJRBO6NRn25fn', b'0', b'0', 58, 'Clothes 6', 'Clothes', 'Single', '2023-11-06 00:00:00', '2023-11-06 00:00:00'),
+	('DEMO', 'uwyWbDtQDjV1xY_M', b'0', b'0', 51, 'Rent 12', 'Rent', 'Single', '2024-02-12 00:00:00', '2024-02-12 00:00:00'),
+	('DEMO', 'VB32SvkbxmzhwPId', b'0', b'0', 65, 'Socializing 4', 'Socializing', 'Single', '2024-07-04 00:00:00', '2024-07-04 00:00:00'),
+	('DEMO', 'VDQGY4A0h_xlh6f3', b'0', b'0', 32, 'Activities 24', 'Activities', 'Single', '2024-03-24 00:00:00', '2024-03-24 00:00:00'),
+	('DEMO', 'VVQbZJAJApDWz_Sb', b'0', b'0', 39, 'Cash 9', 'Cash', 'Single', '2024-02-09 00:00:00', '2024-02-09 00:00:00'),
+	('DEMO', 'w8pGhZjmPDNuLhQf', b'0', b'0', 48, 'Cash 10', 'Cash', 'Single', '2024-09-10 00:00:00', '2024-09-10 00:00:00'),
+	('DEMO', 'w9aDJ_2RvOlack6T', b'0', b'0', 25, 'Vacation 27', 'Vacation', 'Single', '2024-05-27 00:00:00', '2024-05-27 00:00:00'),
+	('DEMO', 'WaX4yR4oN2nhbjin', b'0', b'0', 50, 'Clothes 21', 'Clothes', 'Single', '2024-03-21 00:00:00', '2024-03-21 00:00:00'),
+	('DEMO', 'WezYMkAtEFzv8XjK', b'0', b'0', 16, 'Socializing 4', 'Socializing', 'Single', '2024-06-04 00:00:00', '2024-06-04 00:00:00'),
+	('DEMO', 'WJqwrMa_Pz7aTuyY', b'0', b'1', 500, 'Savings account bonus', 'Investment', 'Single', '2024-05-17 00:00:00', '2024-05-17 00:00:00'),
+	('DEMO', 'WJutmVKdCp3YEcnz', b'0', b'0', 60, 'Cash 8', 'Cash', 'Single', '2023-08-08 00:00:00', '2023-08-08 00:00:00'),
+	('DEMO', 'WKCm4-A4OvInbp6L', b'0', b'0', 6, 'Clothes 23', 'Clothes', 'Single', '2024-02-23 00:00:00', '2024-02-23 00:00:00'),
+	('DEMO', 'WMRkO1IgO_vj7M7U', b'0', b'0', 54, 'Insurance 15', 'Insurance', 'Single', '2023-11-15 00:00:00', '2023-11-15 00:00:00'),
+	('DEMO', 'WTGsLN5aaoZw1Kzi', b'0', b'0', 44, 'Groceries 13', 'Groceries', 'Single', '2023-12-13 00:00:00', '2023-12-13 00:00:00'),
+	('DEMO', 'WU9TGI9slaAfetOh', b'0', b'0', 13, 'Groceries 28', 'Groceries', 'Single', '2024-01-28 00:00:00', '2024-01-28 00:00:00'),
+	('DEMO', 'wUDVZb9yCn7RZv36', b'0', b'0', 14, 'Rent 9', 'Rent', 'Single', '2023-10-09 00:00:00', '2023-10-09 00:00:00'),
+	('DEMO', 'wyhDS54f7g7f8TRk', b'0', b'0', 31, 'Groceries 6', 'Groceries', 'Single', '2024-01-06 00:00:00', '2024-01-06 00:00:00'),
+	('DEMO', 'Xd4ojtGDle3HGGYK', b'0', b'0', 26, 'Activities 25', 'Activities', 'Single', '2024-09-25 00:00:00', '2024-09-25 00:00:00'),
+	('DEMO', 'XFGt6rcTiAO90EUv', b'0', b'0', 3, 'Rent 13', 'Rent', 'Single', '2024-07-13 00:00:00', '2024-07-13 00:00:00'),
+	('DEMO', 'xgQKp6OUpqOvG_sr', b'0', b'0', 63, 'Socializing 11', 'Socializing', 'Single', '2024-07-11 00:00:00', '2024-07-11 00:00:00'),
+	('DEMO', 'XiE5kv8W7oW5RJzS', b'0', b'0', 16, 'Cash 17', 'Cash', 'Single', '2024-09-17 00:00:00', '2024-09-17 00:00:00'),
+	('DEMO', 'XIpauoZ4C1SGTyFF', b'0', b'0', 2, 'Vacation 3', 'Vacation', 'Single', '2024-02-03 00:00:00', '2024-02-03 00:00:00'),
+	('DEMO', 'xzxUEqBPrhTx1tBB', b'0', b'0', 52, 'Gifts 27', 'Gifts', 'Single', '2024-04-27 00:00:00', '2024-04-27 00:00:00'),
+	('DEMO', 'y5awu6_zvBgex2h8', b'0', b'0', 21, 'Cash 18', 'Cash', 'Single', '2023-08-18 00:00:00', '2023-08-18 00:00:00'),
+	('DEMO', 'YFE3epO1tS0NyNJ9', b'0', b'0', 13, 'Clothes 11', 'Clothes', 'Single', '2024-01-11 00:00:00', '2024-01-11 00:00:00'),
+	('DEMO', 'yfltGTDVUKi8Tawr', b'0', b'0', 57, 'Socializing 25', 'Socializing', 'Single', '2023-11-25 00:00:00', '2023-11-25 00:00:00'),
+	('DEMO', 'yK9WilZPcvPLmAMk', b'1', b'0', 2337.42, 'Company X', 'Salary', 'Monthly', '2023-09-01 00:00:00', NULL),
+	('DEMO', 'YuTRKeGD2HVyh3dS', b'0', b'0', 42, 'Groceries 25', 'Groceries', 'Single', '2023-10-25 00:00:00', '2023-10-25 00:00:00'),
+	('DEMO', 'yY5rFfcCpxWXZT5M', b'0', b'0', 30, 'Clothes 14', 'Clothes', 'Single', '2023-10-14 00:00:00', '2023-10-14 00:00:00'),
+	('DEMO', 'z33_BPDj2SprYVeH', b'0', b'0', 14, 'Cash 17', 'Cash', 'Single', '2024-04-17 00:00:00', '2024-04-17 00:00:00'),
+	('DEMO', 'Z7tCu4etG042yGd0', b'0', b'0', 19, 'Investment 11', 'Investment', 'Single', '2024-01-11 00:00:00', '2024-01-11 00:00:00'),
+	('DEMO', 'Z7ywEd3HatQHcdk1', b'0', b'0', 24, 'Rent 20', 'Rent', 'Single', '2024-09-20 00:00:00', '2024-09-20 00:00:00'),
+	('DEMO', 'ZBPGyKdFc0lrMeZw', b'0', b'0', 38, 'Socializing 16', 'Socializing', 'Single', '2024-04-16 00:00:00', '2024-04-16 00:00:00'),
+	('DEMO', 'ZlqeaTkcX2LZ2xcI', b'0', b'0', 20, 'Upkeep 5', 'Upkeep', 'Single', '2024-03-05 00:00:00', '2024-03-05 00:00:00'),
+	('DEMO', 'zpf-he0NrcXBLBpn', b'0', b'0', 10, 'Cash 20', 'Cash', 'Single', '2024-03-20 00:00:00', '2024-03-20 00:00:00'),
+	('DEMO', 'zVk2DXHtWkM4C6a-', b'0', b'0', 36, 'Upkeep 25', 'Upkeep', 'Single', '2024-06-25 00:00:00', '2024-06-25 00:00:00'),
+	('DEMO', 'Zz038GjoiJS65EGr', b'0', b'0', 34, 'Subscriptions 21', 'Subscriptions', 'Single', '2023-12-21 00:00:00', '2023-12-21 00:00:00'),
+	('DEMO', 'ZZy-R7xT6XJlDDfb', b'0', b'0', 68, 'Insurance 20', 'Insurance', 'Single', '2023-09-20 00:00:00', '2023-09-20 00:00:00'),
+	('DEMO', '_aAtf3WJTaJy_kcD', b'0', b'0', 25, 'Cash 11', 'Cash', 'Single', '2024-08-11 00:00:00', '2024-08-11 00:00:00'),
+	('DEMO', '_Dl6oNqj2C-P1oae', b'0', b'0', 44, 'Gifts 4', 'Gifts', 'Single', '2024-04-04 00:00:00', '2024-04-04 00:00:00'),
 	('DEMO', '_lulFS76SNX_b3Yk', b'0', b'0', 24, 'Oishii', 'Restaurants', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'R2IRJzgW1uSypKLq', b'0', b'0', 35, 'Restaurant Testing', 'Restaurants', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '6K3btqfaSu8gOBb8', b'0', b'0', 150, 'Groceries', 'Groceries', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', '-I8LNwol-sXdwi8G', b'0', b'0', 47, 'Health insurance', 'Insurance', 'Monthly', '2023-09-01 00:00:00', NULL);
-INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amount`, `name`, `category`, `transactionType`, `createdAt`, `stoppedAt`) VALUES
-	('DEMO', 'fJ95Txm8PVBCIuqY', b'0', b'0', 55, 'Krü', 'Restaurants', 'Single', '2024-07-13 00:00:00', '2024-07-13 00:00:00');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 
 -- Dumping structure for table financegoras.userdata
