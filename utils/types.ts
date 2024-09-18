@@ -71,6 +71,11 @@ export type MonthlyExpense = {
 
 export type MonthlyExpenseEvolution = MonthlyExpense[]
 
+export type CategorySankeyData = {
+  nodes: { name: string; type: 'savings' | 'income' | 'expenses' }[]
+  links: { source: number; target: number; value: number; type: 'savings' | 'income' | 'expenses' }[]
+}
+
 export type DashboardData = {
   monthlyExpenseEvolution: MonthlyExpenseEvolution
   incExpEvolution: AggregatedIncomeExpenseEvolution
