@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `userData` (
 
 -- Dumping data for table financegoras.userdata: ~1 rows (approximately)
 INSERT INTO `userdata` (`userId`, `categories`) VALUES
-	('DEMO', '[{"group":"Freetime","items":["Restaurants","Activities","Socializing","Gifts","Vacation"]},{"group":"Recurring","items":["Rent","Groceries","Upkeep","Subscriptions","Investment","Insurance"]},{"group":"Income","items":["Salary","Bonus","Infrequent"]},{"group":"Rest","items":["Clothes","Cash"]}]');
+	('DEMO', '[{"group":"Freetime","items":["Restaurants","Activities","Socializing","Gifts","Vacation"]},{"group":"Recurring","items":["Rent","Groceries","Upkeep","Subscriptions","Investment","Insurance","Salary","Bonus","Infrequent"]},{"group":"Rest","items":["Clothes","Cash"]}]');
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
