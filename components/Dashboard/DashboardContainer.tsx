@@ -24,7 +24,8 @@ export default function DashboardContainer(props: DashboardContainerProps) {
   const fetcher: Fetcher<DashboardData, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const selMonth = timeframe === props.dict.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year = timeframe === props.dict.budgetPage.last12Months ? new Date().getFullYear() : selectedYear
-  const params = `?year=${year}&month=${selMonth}&includeSavings=${includeSavings}&grouped=${grouped}&lang=${props.lang}&demo=${props.demo}`
+  const params = `?year=${year}&month=${selMonth}&selectedMonth=${selectedMonth}
+    &includeSavings=${includeSavings}&grouped=${grouped}&lang=${props.lang}&demo=${props.demo}`
   const { data, error, isLoading } = useSWR(`/api/budget/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
   })

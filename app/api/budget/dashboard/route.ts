@@ -15,6 +15,7 @@ import getCategories from '../getCategories/getCategoriesAction'
  * This endpoint returns the evolution of expenses per category the last 12 months or the given year
  * @allowedMethods GET
  * @param month - the month of the year (optional)
+ * @param selectedMonth - the selected month
  * @param year - the year
  * @param includeSavings - if true, the expenses are calculated with savings combined
  * @param lang - the current language used by user for month names
@@ -32,25 +33,27 @@ export async function GET(request: NextRequest) {
   const userId = session && session.user && !isDemo ? session.user.id : demoUserId
 
   const monthString = request.nextUrl.searchParams.get('month')
+  const selectedMonthString = request.nextUrl.searchParams.get('selectedMonth')
   const yearString = request.nextUrl.searchParams.get('year')
   const includeSavings = valueToBoolean(request.nextUrl.searchParams.get('includeSavings'))
   const grouped = valueToBoolean(request.nextUrl.searchParams.get('grouped'))
   const lang = request.nextUrl.searchParams.get('lang') ?? 'en'
 
-  if (!yearString || includeSavings === null || grouped === null) {
+  if (!yearString || includeSavings === null || grouped === null || selectedMonthString === null) {
     return new Response('More fields are required', { status: 400 })
   }
 
   const month = monthString ? parseInt(monthString, 10) : null
+  const selectedMonth = parseInt(selectedMonthString, 10)
   const year = parseInt(yearString, 10)
 
   // get all dashoard data sets as promises all
   const res = await Promise.all([
     getMonthlyExpenseEvolution(userId, year, month, lang, includeSavings, grouped),
     getIncExpEvolution(userId, year, month, lang),
-    getMonthlyData(userId, year, month),
-    getExpensesByCategory(userId, year, month, includeSavings, grouped),
-    getTransactions(userId, year, month),
+    getMonthlyData(userId, year, selectedMonth),
+    getExpensesByCategory(userId, year, selectedMonth, includeSavings, grouped),
+    getTransactions(userId, year, selectedMonth),
     getCategories(userId),
   ])
 
