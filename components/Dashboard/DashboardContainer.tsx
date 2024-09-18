@@ -28,6 +28,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
     &includeSavings=${includeSavings}&grouped=${grouped}&lang=${props.lang}&demo=${props.demo}`
   const { data, error, isLoading } = useSWR(`/api/budget/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
+    keepPreviousData: true,
   })
 
   return (
