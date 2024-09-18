@@ -85,8 +85,6 @@ function CustomSankeyNode({ containerWidth, x, y, width, height, index, payload 
   )
 }
 
-// recharts has no documentation for custom links
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function CustomSankeyLink({
   sourceX,
   targetX,
@@ -97,6 +95,8 @@ function CustomSankeyLink({
   linkWidth,
   index,
   payload,
+  // recharts has no documentation for custom links
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   const theme = useMantineTheme()
   const { colorScheme } = useMantineColorScheme()
