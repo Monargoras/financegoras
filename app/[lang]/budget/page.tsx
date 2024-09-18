@@ -61,7 +61,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   )
   const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
   const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false)
+  const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false, true)
   const transactions = await getTransactions(userId, curYear, curMonth)
   const categories = await getCategories(userId)
 

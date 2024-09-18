@@ -98,6 +98,9 @@
     "stackedChart": "Stacked graphs",
     "normalChart": "Normal graphs",
     "noGroup": "Placeholder group",
-    "noCategory": "Click 'Edit' to add a category"
+    "noCategory": "Click 'Edit' to add a category",
+    "includeEmptyCategories": "All Categories",
+    "excludeEmptyCategories": "Used Categories",
+    "radarChart": "Radar Chart:"
   }
 }

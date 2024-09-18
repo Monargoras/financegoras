@@ -25,6 +25,8 @@ interface DashboardProps {
   setSelectedYear: (selectedYear: number) => void
   timeframe: string
   setTimeframe: (timeframe: string) => void
+  includeEmptyCategories: boolean
+  setIncludeEmptyCategories: (includeEmptyCategories: boolean) => void
 }
 
 export default function Dashboard(props: DashboardProps) {
@@ -40,6 +42,8 @@ export default function Dashboard(props: DashboardProps) {
     setSelectedYear,
     timeframe,
     setTimeframe,
+    includeEmptyCategories,
+    setIncludeEmptyCategories,
   } = props
   const [percentage, setPercentage] = useState(false)
 
@@ -74,6 +78,15 @@ export default function Dashboard(props: DashboardProps) {
           dictionary={props.dictionary}
           timeframe={timeframe}
           setTimeframe={setTimeframe}
+        />
+        <Switch
+          checked={includeEmptyCategories}
+          onChange={(event) => setIncludeEmptyCategories(event.currentTarget.checked)}
+          onLabel={props.dictionary.budgetPage.includeEmptyCategories}
+          offLabel={props.dictionary.budgetPage.excludeEmptyCategories}
+          label={props.dictionary.budgetPage.radarChart}
+          labelPosition="left"
+          size="xl"
         />
       </Flex>
       <Flex direction="row" justify="center" align="center" gap="md" wrap="wrap">

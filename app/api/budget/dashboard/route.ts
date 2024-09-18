@@ -21,6 +21,7 @@ import getCategories from '../getCategories/getCategoriesAction'
  * @param includeSavings - if true, the expenses are calculated with savings combined
  * @param lang - the current language used by user for month names
  * @param grouped - if true, the expenses are grouped by category group
+ * @param includeEmptyCategories - if true, empty categories are included in the radar plot data
  * @param demo - set if demo data is requested
  * @returns body containing DasboardData
  */
@@ -39,6 +40,7 @@ export async function GET(request: NextRequest) {
   const selectedYearString = request.nextUrl.searchParams.get('selectedYear')
   const includeSavings = valueToBoolean(request.nextUrl.searchParams.get('includeSavings'))
   const grouped = valueToBoolean(request.nextUrl.searchParams.get('grouped'))
+  const includeEmptyCategories = valueToBoolean(request.nextUrl.searchParams.get('includeEmptyCategories'))
   const lang = request.nextUrl.searchParams.get('lang') ?? 'en'
 
   if (
@@ -46,7 +48,8 @@ export async function GET(request: NextRequest) {
     includeSavings === null ||
     grouped === null ||
     selectedMonthString === null ||
-    selectedYearString === null
+    selectedYearString === null ||
+    includeEmptyCategories === null
   ) {
     return new Response('More fields are required', { status: 400 })
   }
@@ -61,7 +64,7 @@ export async function GET(request: NextRequest) {
     getMonthlyExpenseEvolution(userId, year, month, lang, includeSavings, grouped),
     getIncExpEvolution(userId, year, month, lang),
     getMonthlyData(userId, selectedYear, selectedMonth),
-    getExpensesByCategory(userId, selectedYear, selectedMonth, includeSavings, grouped),
+    getExpensesByCategory(userId, selectedYear, selectedMonth, includeSavings, grouped, includeEmptyCategories),
     getTransactions(userId, selectedYear, selectedMonth),
     getCategories(userId),
   ])

@@ -97,6 +97,9 @@
     "stackedChart": "Gestapelte Graphen",
     "normalChart": "Normale Graphen",
     "noGroup": "Platzhalter Gruppe",
-    "noCategory": "Klicke auf 'Bearbeiten' um eine Kategorie hinzuzufügen"
+    "noCategory": "Klicke auf 'Bearbeiten' um eine Kategorie hinzuzufügen",
+    "includeEmptyCategories": "Alle Kategorien",
+    "excludeEmptyCategories": "Genutzte Kategorien",
+    "radarChart": "Radardiagramm:"
   }
 }

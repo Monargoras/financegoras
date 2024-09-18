@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/utils/database'
-import { CategoryExpenseData, getTransactionType, Transaction, TransactionType } from '@/utils/types'
+import { CategoryExpenseData, getTransactionType, Transaction } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
 import { getGroupFromCategory } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
@@ -11,7 +11,8 @@ export default async function getExpensesByCategory(
   year: number,
   month: number | null,
   includeSavings: boolean,
-  grouped: boolean
+  grouped: boolean,
+  includeEmptyCategories: boolean
 ): Promise<CategoryExpenseData[]> {
   let expenseQuery = db
     .selectFrom('transactions')
@@ -35,10 +36,10 @@ export default async function getExpensesByCategory(
     transactionType: getTransactionType(transaction.transactionType),
   }))
 
-  let aggregatedTransactions = {} as Record<string, number>
+  const aggregatedTransactions = {} as Record<string, number>
+  const categories = await getCategories(userId)
 
   if (grouped) {
-    const categories = await getCategories(userId)
     if (categories) {
       const groups = categories.map((cat) => cat.group)
       for (const group of groups) {
@@ -48,33 +49,23 @@ export default async function getExpensesByCategory(
         const totalGroup = month
           ? parseFloat(calculateTotalPerMonth(groupTransactions))
           : parseFloat(calculateTotalPerYear(groupTransactions, year))
-        if (totalGroup > 0) aggregatedTransactions[group] = totalGroup
+        if (totalGroup > 0 || includeEmptyCategories) {
+          aggregatedTransactions[group] = totalGroup
+        }
       }
     }
-  } else {
-    aggregatedTransactions = expenseTransactions.reduce(
-      (acc, transaction) => {
-        const { category } = transaction
-        // timeframe month: annual transactions are divided by 12
-        if (month && transaction.transactionType === TransactionType.Annual) {
-          acc[category] = (acc[category] || 0) + transaction.amount / 12
-          return acc
+  } else if (categories) {
+    for (const group of categories) {
+      for (const category of group.items) {
+        const categoryTransactions = expenseTransactions.filter((transaction) => transaction.category === category)
+        const totalCategory = month
+          ? parseFloat(calculateTotalPerMonth(categoryTransactions))
+          : parseFloat(calculateTotalPerYear(categoryTransactions, year))
+        if (totalCategory > 0 || includeEmptyCategories) {
+          aggregatedTransactions[category] = totalCategory
         }
-        // timeframe year: monthly transactions are multiplied by 12 minus the months the transaction was inactive
-        if (!month && transaction.transactionType === TransactionType.Monthly) {
-          const { createdAt, stoppedAt } = transaction
-          const monthsActive =
-            12 -
-            (createdAt.getFullYear() === year ? createdAt.getMonth() : 0) -
-            (stoppedAt?.getFullYear() === year ? 12 - stoppedAt.getMonth() : 0)
-          acc[category] = (acc[category] || 0) + transaction.amount * monthsActive
-          return acc
-        }
-        acc[category] = (acc[category] || 0) + transaction.amount
-        return acc
-      },
-      {} as Record<string, number>
-    )
+      }
+    }
   }
 
   const totalExpense = month
