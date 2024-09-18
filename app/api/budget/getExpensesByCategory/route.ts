@@ -13,6 +13,7 @@ import getExpensesByCategory from './getExpensesByCategoryAction'
  * @param includeSavings - if true, the expenses are calculated with savings combined
  * @param grouped - if true, the expenses are aggregated by groups of categories
  * @param demo - set if demo data is requested
+ * @param includeEmptyCategories - if true, empty categories are included in the radar plot data
  * @returns body containing CategoryExpenseData[]
  */
 export async function GET(request: NextRequest) {
@@ -28,15 +29,16 @@ export async function GET(request: NextRequest) {
   const yearString = request.nextUrl.searchParams.get('year')
   const includeSavings = valueToBoolean(request.nextUrl.searchParams.get('includeSavings'))
   const grouped = valueToBoolean(request.nextUrl.searchParams.get('grouped'))
+  const includeEmptyCategories = valueToBoolean(request.nextUrl.searchParams.get('includeEmptyCategories'))
 
-  if (!yearString || includeSavings === null || grouped === null) {
+  if (!yearString || includeSavings === null || grouped === null || includeEmptyCategories === null) {
     return new Response('More fields required', { status: 400 })
   }
 
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const res = await getExpensesByCategory(userId, year, month, includeSavings, grouped)
+  const res = await getExpensesByCategory(userId, year, month, includeSavings, grouped, includeEmptyCategories)
 
   return new Response(JSON.stringify(res), { status: 200 })
 }
