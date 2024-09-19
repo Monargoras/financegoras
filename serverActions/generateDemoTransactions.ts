@@ -6,7 +6,7 @@ import { db } from '@/utils/database'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 
 export default async function generateDemoTransactions(year: number, month: number) {
-  const categories = (await getCategories('DEMO'))?.filter((c) => c.group !== 'Income')
+  const categories = await getCategories('DEMO')
 
   if (!categories) {
     return false
@@ -86,6 +86,11 @@ export default async function generateDemoTransactions(year: number, month: numb
 
   // get random number between 10 and 20
   const numberOfTransactions = Math.floor(Math.random() * 10) + 10
+
+  // filter "Investment","Salary","Bonus","Infrequent" as they dont make sense for expenses
+  categories.forEach((c) => {
+    c.items = c.items.filter((i) => !['Investment', 'Salary', 'Bonus', 'Infrequent'].includes(i))
+  })
 
   for (let i = 0; i < numberOfTransactions; i += 1) {
     const id = nanoid(16)
