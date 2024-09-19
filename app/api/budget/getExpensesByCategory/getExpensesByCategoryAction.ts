@@ -5,6 +5,7 @@ import { CategoryExpenseData, getTransactionType, Transaction } from '@/utils/ty
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
 import { getGroupFromCategory } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import getUsedCategories from '../getCategories/getUsedCategoriesAction'
 
 export default async function getExpensesByCategory(
   userId: string,
@@ -38,31 +39,37 @@ export default async function getExpensesByCategory(
 
   const aggregatedTransactions = {} as Record<string, number>
   const categories = await getCategories(userId)
+  const usedCategories = await getUsedCategories(userId, includeSavings)
 
   if (grouped) {
-    if (categories) {
+    if (categories && usedCategories) {
       const groups = categories.map((cat) => cat.group)
       for (const group of groups) {
-        const groupTransactions = expenseTransactions.filter(
-          (transaction) => getGroupFromCategory(transaction.category, categories) === group
-        )
-        const totalGroup = month
-          ? parseFloat(calculateTotalPerMonth(groupTransactions))
-          : parseFloat(calculateTotalPerYear(groupTransactions, year))
-        if (totalGroup > 0 || includeEmptyCategories) {
-          aggregatedTransactions[group] = totalGroup
+        // check if any item in the group is in the used categories
+        if (categories[groups.indexOf(group)].items.some((item) => usedCategories.includes(item))) {
+          const groupTransactions = expenseTransactions.filter(
+            (transaction) => getGroupFromCategory(transaction.category, categories) === group
+          )
+          const totalGroup = month
+            ? parseFloat(calculateTotalPerMonth(groupTransactions))
+            : parseFloat(calculateTotalPerYear(groupTransactions, year))
+          if (totalGroup > 0 || includeEmptyCategories) {
+            aggregatedTransactions[group] = totalGroup
+          }
         }
       }
     }
-  } else if (categories) {
+  } else if (categories && usedCategories) {
     for (const group of categories) {
       for (const category of group.items) {
-        const categoryTransactions = expenseTransactions.filter((transaction) => transaction.category === category)
-        const totalCategory = month
-          ? parseFloat(calculateTotalPerMonth(categoryTransactions))
-          : parseFloat(calculateTotalPerYear(categoryTransactions, year))
-        if (totalCategory > 0 || includeEmptyCategories) {
-          aggregatedTransactions[category] = totalCategory
+        if (usedCategories.includes(category)) {
+          const categoryTransactions = expenseTransactions.filter((transaction) => transaction.category === category)
+          const totalCategory = month
+            ? parseFloat(calculateTotalPerMonth(categoryTransactions))
+            : parseFloat(calculateTotalPerYear(categoryTransactions, year))
+          if (totalCategory > 0 || includeEmptyCategories) {
+            aggregatedTransactions[category] = totalCategory
+          }
         }
       }
     }

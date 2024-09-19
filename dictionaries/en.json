@@ -99,8 +99,8 @@
     "normalChart": "Normal graphs",
     "noGroup": "Placeholder group",
     "noCategory": "Click 'Edit' to add a category",
-    "includeEmptyCategories": "All Categories",
-    "excludeEmptyCategories": "Used Categories",
-    "radarChart": "Radar Chart:"
+    "includeEmptyCategories": "All time",
+    "excludeEmptyCategories": "This month",
+    "radarChart": "Radar chart:"
   }
 }
