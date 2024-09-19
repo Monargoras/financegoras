@@ -20,7 +20,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [timeframe, setTimeframe] = useState(props.dict.budgetPage.last12Months)
   const [grouped, setGrouped] = useState(false)
-  const [includeEmptyCategories, setIncludeEmptyCategories] = useState(true)
+  const [includeEmptyCategories, setIncludeEmptyCategories] = useState(false)
 
   const fetcher: Fetcher<DashboardData, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const selMonth = timeframe === props.dict.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
