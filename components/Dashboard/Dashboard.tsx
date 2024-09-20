@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { Flex, Switch } from '@mantine/core'
 import { DashboardData, Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
@@ -9,6 +8,7 @@ import { MonthlyStats } from './MonthlyStats'
 import { TransactionTable } from './TransactionTable'
 import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
 import TimeframeSelect from './TimeframeSelect'
+import updateUserSettings from '@/serverActions/updateUserSettings'
 
 interface DashboardProps {
   lang: string
@@ -27,15 +27,15 @@ interface DashboardProps {
   setTimeframe: (timeframe: string) => void
   includeEmptyCategories: boolean
   setIncludeEmptyCategories: (includeEmptyCategories: boolean) => void
+  percentage: boolean
+  setPercentage: (percentage: boolean) => void
 }
 
 export default function Dashboard(props: DashboardProps) {
   const {
     data,
     grouped,
-    setGrouped,
     includeSavings,
-    setIncludeSavings,
     selectedMonth,
     setSelectedMonth,
     selectedYear,
@@ -43,9 +43,39 @@ export default function Dashboard(props: DashboardProps) {
     timeframe,
     setTimeframe,
     includeEmptyCategories,
-    setIncludeEmptyCategories,
+    percentage,
   } = props
-  const [percentage, setPercentage] = useState(false)
+
+  const updateDatabaseUserSettings = async (
+    newGrouped: boolean,
+    newPercentage: boolean,
+    newIncludeSavings: boolean,
+    newIncludeEmptyCategories: boolean
+  ) => {
+    if (!props.demo) {
+      await updateUserSettings(newGrouped, newPercentage, newIncludeSavings, newIncludeEmptyCategories)
+    }
+  }
+
+  const setGrouped = (val: boolean) => {
+    updateDatabaseUserSettings(val, percentage, includeSavings, includeEmptyCategories)
+    props.setGrouped(val)
+  }
+
+  const setPercentage = (val: boolean) => {
+    updateDatabaseUserSettings(grouped, val, includeSavings, includeEmptyCategories)
+    props.setPercentage(val)
+  }
+
+  const setIncludeSavings = (val: boolean) => {
+    updateDatabaseUserSettings(grouped, percentage, val, includeEmptyCategories)
+    props.setIncludeSavings(val)
+  }
+
+  const setIncludeEmptyCategories = (val: boolean) => {
+    updateDatabaseUserSettings(grouped, percentage, includeSavings, val)
+    props.setIncludeEmptyCategories(val)
+  }
 
   return (
     <Flex direction="column">

@@ -43,6 +43,10 @@ export type TransactionUpdate = Updateable<TransactionsTable>
 export interface UserDataTable {
   userId: string
   categories: string
+  grouped: ColumnType<boolean, boolean | null, boolean | null>
+  percentage: ColumnType<boolean, boolean | null, boolean | null>
+  includeSavings: ColumnType<boolean, boolean | null, boolean | null>
+  includeEmptyCategories: ColumnType<boolean, boolean | null, boolean | null>
 }
 
 export type UserData = Selectable<UserDataTable>

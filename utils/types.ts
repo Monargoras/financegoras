@@ -76,6 +76,13 @@ export type CategorySankeyData = {
   links: { source: number; target: number; value: number; type: 'savings' | 'income' | 'expenses' }[]
 }
 
+export type UserSettings = {
+  grouped: boolean
+  percentage: boolean
+  includeSavings: boolean
+  includeEmptyCategories: boolean
+}
+
 export type DashboardData = {
   monthlyExpenseEvolution: MonthlyExpenseEvolution
   incExpEvolution: AggregatedIncomeExpenseEvolution
@@ -83,4 +90,5 @@ export type DashboardData = {
   expensesByCategory: CategoryExpenseData[]
   transactions: Transaction[]
   categories: Categories | null
+  settings: UserSettings
 }

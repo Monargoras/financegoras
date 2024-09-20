@@ -13,6 +13,7 @@ import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolut
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
+import getUserSettings from '@/serverActions/getUserSettings'
 
 const englishMetadata = {
   title: 'Budget Book - Financegoras',
@@ -44,12 +45,24 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
       expensesByCategory: [],
       transactions: [],
       categories: null,
+      settings: {
+        grouped: false,
+        percentage: false,
+        includeSavings: false,
+        includeEmptyCategories: false,
+      },
     }
   }
 
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
-  const includeSavings = false
+
+  const userSettings = await getUserSettings()
+  const includeSavings = userSettings ? userSettings.includeSavings : false
+  const grouped = userSettings ? userSettings.grouped : false
+  const percentage = userSettings ? userSettings.percentage : false
+  const includeEmptyCategories = userSettings ? userSettings.includeEmptyCategories : false
+
   const userId = session.user.id
   const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(
     userId,
@@ -57,11 +70,18 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     curMonth,
     lang,
     includeSavings,
-    false
+    grouped
   )
   const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
   const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false, false)
+  const expensesByCategory = await getExpensesByCategory(
+    userId,
+    curYear,
+    curMonth,
+    includeSavings,
+    grouped,
+    includeEmptyCategories
+  )
   const transactions = await getTransactions(userId, curYear, curMonth)
   const categories = await getCategories(userId)
 
@@ -72,6 +92,12 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     expensesByCategory,
     transactions,
     categories,
+    settings: {
+      grouped,
+      percentage,
+      includeSavings,
+      includeEmptyCategories,
+    },
   }
 }
 

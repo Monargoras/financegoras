@@ -32,7 +32,12 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
 
   const curMonth = new Date().getMonth() + 1
   const curYear = new Date().getFullYear()
+
   const includeSavings = false
+  const grouped = false
+  const percentage = false
+  const includeEmptyCategories = false
+
   const userId = demoUserId
 
   // get demo transactions for current month
@@ -52,11 +57,18 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     curMonth,
     lang,
     includeSavings,
-    false
+    grouped
   )
   const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
   const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(userId, curYear, curMonth, includeSavings, false, false)
+  const expensesByCategory = await getExpensesByCategory(
+    userId,
+    curYear,
+    curMonth,
+    includeSavings,
+    grouped,
+    includeEmptyCategories
+  )
   const transactions = await getTransactions(userId, curYear, curMonth)
   const categories = await getCategories(userId)
 
@@ -67,6 +79,12 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     expensesByCategory,
     transactions,
     categories,
+    settings: {
+      grouped,
+      percentage,
+      includeSavings,
+      includeEmptyCategories,
+    },
   }
 }
 
