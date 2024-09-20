@@ -59,13 +59,31 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <Link href="/" className={classes.control}>
+        <Link
+          href="/"
+          className={classes.control}
+          onClick={() => {
+            toggle()
+          }}
+        >
           {props.dictionary.appbar.home}
         </Link>
-        <Link href="/budget" className={classes.control}>
+        <Link
+          href="/budget"
+          className={classes.control}
+          onClick={() => {
+            toggle()
+          }}
+        >
           {props.dictionary.appbar.budget}
         </Link>
-        <Link href="/transactions" className={classes.control}>
+        <Link
+          href="/transactions"
+          className={classes.control}
+          onClick={() => {
+            toggle()
+          }}
+        >
           {props.dictionary.appbar.transactions}
         </Link>
         <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom-start">
