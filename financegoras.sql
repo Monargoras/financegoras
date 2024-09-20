@@ -254,12 +254,16 @@ INSERT IGNORE INTO `transactions` (`userId`, `id`, `isIncome`, `isSavings`, `amo
 CREATE TABLE IF NOT EXISTS `userData` (
   `userId` varchar(50) NOT NULL,
   `categories` mediumtext,
+	`grouped` bit(1) NOT NULL,
+  `percentage` bit(1) NOT NULL,
+	`includeSavings` bit(1) NOT NULL,
+  `includeEmptyCategories` bit(1) NOT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- Dumping data for table financegoras.userdata: ~1 rows (approximately)
 INSERT INTO `userdata` (`userId`, `categories`) VALUES
-	('DEMO', '[{"group":"Freetime","items":["Restaurants","Activities","Socializing","Gifts","Vacation"]},{"group":"Recurring","items":["Rent","Groceries","Upkeep","Subscriptions","Investment","Insurance","Salary","Bonus","Infrequent"]},{"group":"Rest","items":["Clothes","Cash"]}]');
+	('DEMO', '[{"group":"Freetime","items":["Restaurants","Activities","Socializing","Gifts","Vacation"]},{"group":"Recurring","items":["Rent","Groceries","Upkeep","Subscriptions","Investment","Insurance","Salary","Bonus","Infrequent"]},{"group":"Rest","items":["Clothes","Cash"]}]', b'0', b'0', b'0', b'0');
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
