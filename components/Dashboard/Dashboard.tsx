@@ -1,6 +1,6 @@
 'use client'
 
-import { Flex, Switch } from '@mantine/core'
+import { Flex, Switch, Tooltip } from '@mantine/core'
 import { DashboardData, Dictionary } from '@/utils/types'
 import CategoryRadar from './CategoryRadar'
 import MonthlyExpenseEvolutionGraph from './MonthlyExpenseEvolutionGraph'
@@ -9,6 +9,7 @@ import { TransactionTable } from './TransactionTable'
 import AggregatedIncExpEvolutionGraph from './AggregatedIncExpEvolutionGraph'
 import TimeframeSelect from './TimeframeSelect'
 import updateUserSettings from '@/serverActions/updateUserSettings'
+import FloatingSettingsMenu from './FloatingSettingsMenu'
 
 interface DashboardProps {
   lang: string
@@ -79,28 +80,45 @@ export default function Dashboard(props: DashboardProps) {
 
   return (
     <Flex direction="column">
-      <Flex direction="row" justify="center" align="center" gap="md" style={{ marginBottom: 8 }} wrap="wrap">
-        <Switch
-          checked={grouped}
-          onChange={(event) => setGrouped(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.groups}
-          offLabel={props.dictionary.budgetPage.categories}
-          size="xl"
-        />
-        <Switch
-          checked={percentage}
-          onChange={(event) => setPercentage(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.percentage}
-          offLabel={props.dictionary.budgetPage.sum}
-          size="xl"
-        />
-        <Switch
-          checked={includeSavings}
-          onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.includeSavings}
-          offLabel={props.dictionary.budgetPage.excludeSavings}
-          size="xl"
-        />
+      <Flex
+        direction="row"
+        justify="center"
+        align="center"
+        gap="md"
+        style={{ marginBottom: 8 }}
+        wrap="wrap"
+        visibleFrom="sm"
+      >
+        <Tooltip
+          refProp="rootRef"
+          maw={250}
+          multiline
+          label={props.dictionary.budgetPage.groupedTooltip}
+          position="bottom"
+        >
+          <Switch
+            checked={grouped}
+            onChange={(event) => setGrouped(event.currentTarget.checked)}
+            onLabel={props.dictionary.budgetPage.groups}
+            offLabel={props.dictionary.budgetPage.categories}
+            size="xl"
+          />
+        </Tooltip>
+        <Tooltip
+          refProp="rootRef"
+          maw={250}
+          multiline
+          label={props.dictionary.budgetPage.percentageTooltip}
+          position="bottom"
+        >
+          <Switch
+            checked={percentage}
+            onChange={(event) => setPercentage(event.currentTarget.checked)}
+            onLabel={props.dictionary.budgetPage.percentage}
+            offLabel={props.dictionary.budgetPage.sum}
+            size="xl"
+          />
+        </Tooltip>
         <TimeframeSelect
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
@@ -109,15 +127,36 @@ export default function Dashboard(props: DashboardProps) {
           timeframe={timeframe}
           setTimeframe={setTimeframe}
         />
-        <Switch
-          checked={includeEmptyCategories}
-          onChange={(event) => setIncludeEmptyCategories(event.currentTarget.checked)}
-          onLabel={props.dictionary.budgetPage.includeEmptyCategories}
-          offLabel={props.dictionary.budgetPage.excludeEmptyCategories}
-          label={props.dictionary.budgetPage.radarChart}
-          labelPosition="left"
-          size="xl"
-        />
+        <Tooltip
+          refProp="rootRef"
+          maw={250}
+          multiline
+          label={props.dictionary.budgetPage.includeSavingsTooltip}
+          position="bottom"
+        >
+          <Switch
+            checked={includeSavings}
+            onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
+            onLabel={props.dictionary.budgetPage.includeSavings}
+            offLabel={props.dictionary.budgetPage.excludeSavings}
+            size="xl"
+          />
+        </Tooltip>
+        <Tooltip
+          refProp="rootRef"
+          maw={250}
+          multiline
+          label={props.dictionary.budgetPage.includeEmptyCategoriesTooltip}
+          position="bottom"
+        >
+          <Switch
+            checked={includeEmptyCategories}
+            onChange={(event) => setIncludeEmptyCategories(event.currentTarget.checked)}
+            onLabel={props.dictionary.budgetPage.includeEmptyCategories}
+            offLabel={props.dictionary.budgetPage.excludeEmptyCategories}
+            size="xl"
+          />
+        </Tooltip>
       </Flex>
       <Flex direction="row" justify="center" align="center" gap="md" wrap="wrap">
         <MonthlyExpenseEvolutionGraph
@@ -156,6 +195,23 @@ export default function Dashboard(props: DashboardProps) {
           categories={data.categories}
         />
       </Flex>
+      <FloatingSettingsMenu
+        dictionary={props.dictionary}
+        lang={props.lang}
+        grouped={grouped}
+        setGrouped={setGrouped}
+        percentage={percentage}
+        setPercentage={setPercentage}
+        includeSavings={includeSavings}
+        setIncludeSavings={setIncludeSavings}
+        setSelectedMonth={setSelectedMonth}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
+        includeEmptyCategories={includeEmptyCategories}
+        setIncludeEmptyCategories={setIncludeEmptyCategories}
+      />
     </Flex>
   )
 }

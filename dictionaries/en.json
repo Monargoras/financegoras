@@ -101,6 +101,9 @@
     "noCategory": "Click 'Edit' to add a category",
     "includeEmptyCategories": "All time",
     "excludeEmptyCategories": "This month",
-    "radarChart": "Radar chart:"
+    "groupedTooltip": "Aggregates all categories by their group",
+    "percentageTooltip": "Scales the bar and line chart to 100%",
+    "includeSavingsTooltip": "Include savings in the graphs",
+    "includeEmptyCategoriesTooltip": "Includes all categories that you have used in the past, even if they are not used this month for better comparison"
   }
 }

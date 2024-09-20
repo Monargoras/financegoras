@@ -100,6 +100,9 @@
     "noCategory": "Klicke auf 'Bearbeiten' um eine Kategorie hinzuzufügen",
     "includeEmptyCategories": "Insgesamt",
     "excludeEmptyCategories": "Diesen Monat",
-    "radarChart": "Radardiagramm:"
+    "groupedTooltip": "Fasst alle Kategorien in einer Gruppe zusammen",
+    "percentageTooltip": "Skaliert das Balken- und Liniendiagramm auf 100%",
+    "includeSavingsTooltip": "Zeigt die Spartransaktionen mit in den Graphen an",
+    "includeEmptyCategoriesTooltip": "Zeigt im Radardiagramm alle bereits verwendeten Kategorien an, auch wenn sie in diesem Monat nicht verwendet wurden um besser vergleichen zu können"
   }
 }
