@@ -27,4 +27,4 @@ const DemoButtonRef = forwardRef<HTMLButtonElement, DemoButtonProps>((props, ref
   )
 })
 
-export default motion(DemoButtonRef)
+export default motion.create(DemoButtonRef)
