@@ -122,6 +122,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                   <br />
                 </>
               ))}
+              {item.items.length < 1 && <>-</>}
             </Text>
             {props.dictionary.budgetPage.deleteModalGroupText3}
           </Text>
