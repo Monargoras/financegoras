@@ -47,7 +47,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
     <Popover opened={opened} onChange={setOpened} transitionProps={{ transition: 'fade-up', duration: 150 }}>
       <Popover.Target>
         <Affix position={{ bottom: 20, right: 20 }} hiddenFrom="sm">
-          <ActionIcon color="blue" radius="xl" size={60} onClick={() => setOpened((o) => !o)}>
+          <ActionIcon color="blue" radius="xl" size={50} onClick={() => setOpened((o) => !o)}>
             <IconSettings stroke={1.5} size={30} />
           </ActionIcon>
         </Affix>
@@ -64,6 +64,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
             setTimeframe={setTimeframe}
           />
           <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+            <MobileTooltipPopover label={props.dictionary.budgetPage.groupedTooltip} />
             <Switch
               checked={grouped}
               onChange={(event) => setGrouped(event.currentTarget.checked)}
@@ -71,9 +72,9 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               offLabel={props.dictionary.budgetPage.categories}
               size="xl"
             />
-            <MobileTooltipPopover label={props.dictionary.budgetPage.groupedTooltip} />
           </Flex>
           <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+            <MobileTooltipPopover label={props.dictionary.budgetPage.percentageTooltip} />
             <Switch
               checked={percentage}
               onChange={(event) => setPercentage(event.currentTarget.checked)}
@@ -81,9 +82,9 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               offLabel={props.dictionary.budgetPage.sum}
               size="xl"
             />
-            <MobileTooltipPopover label={props.dictionary.budgetPage.percentageTooltip} />
           </Flex>
           <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+            <MobileTooltipPopover label={props.dictionary.budgetPage.includeSavingsTooltip} />
             <Switch
               checked={includeSavings}
               onChange={(event) => setIncludeSavings(event.currentTarget.checked)}
@@ -91,9 +92,9 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               offLabel={props.dictionary.budgetPage.excludeSavings}
               size="xl"
             />
-            <MobileTooltipPopover label={props.dictionary.budgetPage.includeSavingsTooltip} />
           </Flex>
           <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+            <MobileTooltipPopover label={props.dictionary.budgetPage.includeEmptyCategoriesTooltip} />
             <Switch
               checked={includeEmptyCategories}
               onChange={(event) => setIncludeEmptyCategories(event.currentTarget.checked)}
@@ -101,7 +102,6 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               offLabel={props.dictionary.budgetPage.excludeEmptyCategories}
               size="xl"
             />
-            <MobileTooltipPopover label={props.dictionary.budgetPage.includeEmptyCategoriesTooltip} />
           </Flex>
         </Flex>
       </Popover.Dropdown>
