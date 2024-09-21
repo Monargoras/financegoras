@@ -40,7 +40,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
   return (
     <Accordion.Item key={item.group} value={item.group}>
       <Center>
-        <Accordion.Control {...props}>
+        <Accordion.Control>
           {editing === item.group ? (
             <Flex dir="row" onClick={(e) => e.stopPropagation()}>
               <FocusTrap>
@@ -49,10 +49,16 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                   onChange={(event) => setEditingValue(event.currentTarget.value)}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
+                      const prevOpened = opened
                       const success = props.handleRenameGroup(editingValue)
                       if (success) {
                         setEditing(null)
                         setEditingValue('')
+                        if (prevOpened) {
+                          open()
+                        } else {
+                          close()
+                        }
                       }
                     }
                   }}
@@ -64,10 +70,16 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                 variant="subtle"
                 color="green"
                 onClick={() => {
+                  const prevOpened = opened
                   const success = props.handleRenameGroup(editingValue)
                   if (success) {
                     setEditing(null)
                     setEditingValue('')
+                    if (prevOpened) {
+                      open()
+                    } else {
+                      close()
+                    }
                   }
                 }}
               >
@@ -114,16 +126,20 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
         <Modal opened={opened} onClose={close} title={props.dictionary.budgetPage.deleteModalGroupTitle} centered>
           <Text>
             {props.dictionary.budgetPage.deleteModalGroupText1} &quot;{item.group}&quot; <br />{' '}
-            {props.dictionary.budgetPage.deleteModalGroupText2}
-            <Text style={{ marginLeft: 12 }}>
+            {props.dictionary.budgetPage.deleteModalGroupText2} <br />
+            <span>
               {item.items.map((c) => (
-                <>
+                <span key={c} style={{ marginLeft: 12 }}>
                   - {c}
                   <br />
-                </>
+                </span>
               ))}
-              {item.items.length < 1 && <>-</>}
-            </Text>
+              {item.items.length < 1 && (
+                <span style={{ marginLeft: 12 }}>
+                  -<br />
+                </span>
+              )}
+            </span>
             {props.dictionary.budgetPage.deleteModalGroupText3}
           </Text>
           <Flex gap="md" justify="end">
