@@ -75,6 +75,24 @@ export default async function getExpensesByCategory(
     }
   }
 
+  if (categories && usedCategories) {
+    const groups = categories.map((cat) => cat.group)
+    // get the rest of the categories that were deleted but still have transactions
+    const restCategories = usedCategories.filter(
+      (category) => !groups.some((group) => categories[groups.indexOf(group)].items.includes(category))
+    )
+    // add these as their own group or category no matter the grouping
+    for (const category of restCategories) {
+      const categoryTransactions = expenseTransactions.filter((transaction) => transaction.category === category)
+      const totalCategory = month
+        ? parseFloat(calculateTotalPerMonth(categoryTransactions))
+        : parseFloat(calculateTotalPerYear(categoryTransactions, year))
+      if (totalCategory > 0 || includeEmptyCategories) {
+        aggregatedTransactions[category] = totalCategory
+      }
+    }
+  }
+
   const totalExpense = month
     ? parseFloat(calculateTotalPerMonth(expenseTransactions))
     : parseFloat(calculateTotalPerYear(expenseTransactions, year))
