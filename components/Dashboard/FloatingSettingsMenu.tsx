@@ -63,7 +63,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
             timeframe={timeframe}
             setTimeframe={setTimeframe}
           />
-          <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+          <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.groupedTooltip} />
             <Switch
               checked={grouped}
@@ -73,7 +73,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               size="xl"
             />
           </Flex>
-          <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+          <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.percentageTooltip} />
             <Switch
               checked={percentage}
@@ -83,7 +83,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               size="xl"
             />
           </Flex>
-          <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+          <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.includeSavingsTooltip} />
             <Switch
               checked={includeSavings}
@@ -93,7 +93,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
               size="xl"
             />
           </Flex>
-          <Flex direction="row" justify="space-between" w="100%" align="center" gap="md">
+          <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.includeEmptyCategoriesTooltip} />
             <Switch
               checked={includeEmptyCategories}

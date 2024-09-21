@@ -29,6 +29,7 @@ export default function TimeframeSelect(props: TimeframeSelectProps) {
         allowDeselect={false}
         clearable={false}
         value={props.timeframe}
+        maw={160}
         onChange={(value) => {
           if (value === props.dictionary.budgetPage.selectYear) {
             open()
