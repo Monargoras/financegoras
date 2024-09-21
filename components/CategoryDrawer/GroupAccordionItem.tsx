@@ -42,7 +42,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
       <Center>
         <Accordion.Control>
           {editing === item.group ? (
-            <Flex dir="row" onClick={(e) => e.stopPropagation()}>
+            <Flex dir="row" onClick={(e) => e.stopPropagation()} aria-modal>
               <FocusTrap>
                 <TextInput
                   value={editingValue}
@@ -107,7 +107,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
         )}
         <Menu>
           <Menu.Target>
-            <ActionIcon size="lg" variant="subtle" color="gray">
+            <ActionIcon size="lg" variant="subtle" color="gray" aria-modal>
               <IconDots />
             </ActionIcon>
           </Menu.Target>
