@@ -65,42 +65,46 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                   style={{ width: '100%' }}
                 />
               </FocusTrap>
-              <ActionIcon
-                size="lg"
-                variant="subtle"
-                color="green"
-                onClick={() => {
-                  const prevOpened = opened
-                  const success = props.handleRenameGroup(editingValue)
-                  if (success) {
-                    setEditing(null)
-                    setEditingValue('')
-                    if (prevOpened) {
-                      open()
-                    } else {
-                      close()
-                    }
-                  }
-                }}
-              >
-                <IconCheck />
-              </ActionIcon>
-              <ActionIcon
-                size="lg"
-                variant="subtle"
-                color="red"
-                onClick={() => {
-                  setEditing(null)
-                  setEditingValue('')
-                }}
-              >
-                <IconX />
-              </ActionIcon>
             </Flex>
           ) : (
             <Text>{item.group}</Text>
           )}
         </Accordion.Control>
+        {editing === item.group && (
+          <Flex>
+            <ActionIcon
+              size="lg"
+              variant="subtle"
+              color="green"
+              onClick={() => {
+                const prevOpened = opened
+                const success = props.handleRenameGroup(editingValue)
+                if (success) {
+                  setEditing(null)
+                  setEditingValue('')
+                  if (prevOpened) {
+                    open()
+                  } else {
+                    close()
+                  }
+                }
+              }}
+            >
+              <IconCheck />
+            </ActionIcon>
+            <ActionIcon
+              size="lg"
+              variant="subtle"
+              color="red"
+              onClick={() => {
+                setEditing(null)
+                setEditingValue('')
+              }}
+            >
+              <IconX />
+            </ActionIcon>
+          </Flex>
+        )}
         <Menu>
           <Menu.Target>
             <ActionIcon size="lg" variant="subtle" color="gray">
