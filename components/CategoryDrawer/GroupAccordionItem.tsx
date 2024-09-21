@@ -136,7 +136,8 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
               ))}
               {item.items.length < 1 && (
                 <span style={{ marginLeft: 12 }}>
-                  -<br />
+                  -
+                  <br />
                 </span>
               )}
             </span>
