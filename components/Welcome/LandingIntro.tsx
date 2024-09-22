@@ -29,7 +29,7 @@ export default function LandingIntro(props: LandingIntroProps) {
             alt="Financegoras Dashboard"
             style={{
               width: 'max(min(30dvw, 600px), 400px)',
-              height: 'max(min(25dvw, 500px), 325px)',
+              height: 'max(min(20dvw, 400px), 280px)',
               borderRadius: '10%',
               display: 'block',
               border: '3px solid #fff',
