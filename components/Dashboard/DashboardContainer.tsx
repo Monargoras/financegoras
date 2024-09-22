@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import useSWR, { Fetcher } from 'swr'
 import { Container, Divider, Flex, Loader, Text } from '@mantine/core'
 import Dashboard from './Dashboard'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import { DashboardData, Dictionary } from '@/utils/types'
-import getUserSettings from '@/serverActions/getUserSettings'
 
 interface DashboardContainerProps {
   lang: string
@@ -35,18 +34,6 @@ export default function DashboardContainer(props: DashboardContainerProps) {
     fallbackData: props.initialData,
     keepPreviousData: true,
   })
-
-  // workaround because serevr actions are not fired on parent page file when navigating between pages, only on full reloads
-  useEffect(() => {
-    getUserSettings().then((res) => {
-      if (res) {
-        setIncludeSavings(res.includeSavings)
-        setGrouped(res.grouped)
-        setIncludeEmptyCategories(res.includeEmptyCategories)
-        setPercentage(res.percentage)
-      }
-    })
-  }, [])
 
   return (
     <Container fluid>
