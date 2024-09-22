@@ -62,6 +62,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
             dictionary={props.dictionary}
             timeframe={timeframe}
             setTimeframe={setTimeframe}
+            floatingMenu
           />
           <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.groupedTooltip} />

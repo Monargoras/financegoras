@@ -12,6 +12,7 @@ interface TimeframeSelectProps {
   setSelectedMonth: (month: number) => void
   timeframe: string
   setTimeframe: (timeframe: string) => void
+  floatingMenu: boolean
 }
 
 export default function TimeframeSelect(props: TimeframeSelectProps) {
@@ -48,6 +49,7 @@ export default function TimeframeSelect(props: TimeframeSelectProps) {
           props.selectedYear.toString(),
           props.dictionary.budgetPage.selectYear,
         ]}
+        comboboxProps={{ withinPortal: !props.floatingMenu }}
       />
       <Modal opened={opened} onClose={close} size="auto">
         <YearPicker
