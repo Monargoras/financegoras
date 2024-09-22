@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { ActionIcon, Affix, Flex, Popover, Switch } from '@mantine/core'
+import { ActionIcon, Affix, Button, Divider, Flex, Popover, Switch } from '@mantine/core'
+import { YearPicker } from '@mantine/dates'
 import { IconSettings } from 'tabler-icons'
 import { Dictionary } from '@/utils/types'
-import TimeframeSelect from './TimeframeSelect'
 import MobileTooltipPopover from './MobileTooltipPopover'
 
 interface FloatingSettingsMenuProps {
@@ -43,6 +43,13 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
   } = props
   const [opened, setOpened] = useState(false)
 
+  const selectLast12Months = () => {
+    setTimeframe(props.dictionary.budgetPage.last12Months)
+    setSelectedYear(new Date().getFullYear())
+    setSelectedMonth(new Date().getMonth() + 1)
+    setOpened(false)
+  }
+
   return (
     <Popover opened={opened} onChange={setOpened} transitionProps={{ transition: 'fade-up', duration: 150 }}>
       <Popover.Target>
@@ -54,16 +61,23 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
       </Popover.Target>
 
       <Popover.Dropdown>
-        <Flex direction="column" justify="center" align="flex-start" gap="md">
-          <TimeframeSelect
-            selectedYear={selectedYear}
-            setSelectedYear={setSelectedYear}
-            setSelectedMonth={setSelectedMonth}
-            dictionary={props.dictionary}
-            timeframe={timeframe}
-            setTimeframe={setTimeframe}
-            floatingMenu
-          />
+        <Flex direction="column" justify="center" align="flex-start" gap="xs">
+          <Flex direction="column" justify="center" align="flex-start">
+            <Button variant="subtle" color="gray" w="100%" onClick={selectLast12Months}>
+              {props.dictionary.budgetPage.last12Months}
+            </Button>
+            <YearPicker
+              value={timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(selectedYear, 0, 1)}
+              onChange={(date) => {
+                if (!date) return
+                setSelectedYear(date.getFullYear())
+                setSelectedMonth(12)
+                setTimeframe(date.getFullYear().toString())
+                setOpened(false)
+              }}
+            />
+          </Flex>
+          <Divider w="100%" size="md" />
           <Flex direction="row" justify="flex-start" w="100%" align="center" gap="md">
             <MobileTooltipPopover label={props.dictionary.budgetPage.groupedTooltip} />
             <Switch

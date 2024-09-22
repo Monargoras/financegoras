@@ -1,8 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { YearPicker } from '@mantine/dates'
-import { useDisclosure } from '@mantine/hooks'
-import { Modal, Select } from '@mantine/core'
+import { Button, Popover } from '@mantine/core'
 import { Dictionary } from '@/utils/types'
 
 interface TimeframeSelectProps {
@@ -12,57 +12,42 @@ interface TimeframeSelectProps {
   setSelectedMonth: (month: number) => void
   timeframe: string
   setTimeframe: (timeframe: string) => void
-  floatingMenu: boolean
 }
 
 export default function TimeframeSelect(props: TimeframeSelectProps) {
-  const [opened, { open, close }] = useDisclosure(false)
+  const [opened, setOpened] = useState(false)
 
   const selectLast12Months = () => {
     props.setTimeframe(props.dictionary.budgetPage.last12Months)
     props.setSelectedYear(new Date().getFullYear())
     props.setSelectedMonth(new Date().getMonth() + 1)
+    setOpened(false)
   }
 
   return (
-    <>
-      <Select
-        allowDeselect={false}
-        clearable={false}
-        value={props.timeframe}
-        maw={160}
-        onChange={(value) => {
-          if (value === props.dictionary.budgetPage.selectYear) {
-            open()
-            props.setTimeframe(props.dictionary.budgetPage.selectYear)
-          } else if (value === props.dictionary.budgetPage.last12Months) {
-            selectLast12Months()
-            props.setTimeframe(props.dictionary.budgetPage.last12Months)
-          } else if (value) {
-            props.setTimeframe(value)
-            props.setSelectedYear(parseInt(value, 10))
-            props.setSelectedMonth(12)
-          }
-        }}
-        data={[
-          props.dictionary.budgetPage.last12Months,
-          props.selectedYear.toString(),
-          props.dictionary.budgetPage.selectYear,
-        ]}
-        comboboxProps={{ withinPortal: !props.floatingMenu }}
-      />
-      <Modal opened={opened} onClose={close} size="auto">
+    <Popover opened={opened} onChange={setOpened}>
+      <Popover.Target>
+        <Button onClick={() => setOpened((o) => !o)} variant="outline" color="gray" w={160}>
+          {props.timeframe}
+        </Button>
+      </Popover.Target>
+      <Popover.Dropdown>
+        <Button variant="subtle" color="gray" w="100%" onClick={selectLast12Months}>
+          {props.dictionary.budgetPage.last12Months}
+        </Button>
         <YearPicker
-          value={new Date(props.selectedYear, 0, 1)}
+          value={
+            props.timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(props.selectedYear, 0, 1)
+          }
           onChange={(date) => {
             if (!date) return
             props.setSelectedYear(date.getFullYear())
             props.setSelectedMonth(12)
             props.setTimeframe(date.getFullYear().toString())
-            close()
+            setOpened(false)
           }}
         />
-      </Modal>
-    </>
+      </Popover.Dropdown>
+    </Popover>
   )
 }

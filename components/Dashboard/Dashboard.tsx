@@ -126,7 +126,6 @@ export default function Dashboard(props: DashboardProps) {
           dictionary={props.dictionary}
           timeframe={timeframe}
           setTimeframe={setTimeframe}
-          floatingMenu={false}
         />
         <Tooltip
           refProp="rootRef"
