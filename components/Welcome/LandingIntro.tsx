@@ -1,12 +1,13 @@
 'use client'
 
-import { Text, Flex, Paper, em, useMantineTheme } from '@mantine/core'
+import { Text, Flex, Paper, em, useMantineTheme, useMantineColorScheme } from '@mantine/core'
 import Image from 'next/image'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconLock } from 'tabler-icons'
 import classes from './Welcome.module.css'
 import { Dictionary } from '@/utils/types'
 import FinancegorasImage from '@/assets/FinancegorasDashboard.png'
+import FinancegorasImageLight from '@/assets/FinancegorasDashboardLight.png'
 
 interface LandingIntroProps {
   dictionary: Dictionary
@@ -15,6 +16,7 @@ interface LandingIntroProps {
 export default function LandingIntro(props: LandingIntroProps) {
   const isMobile = useMediaQuery(`(max-width: ${em(1200)})`)
   const theme = useMantineTheme()
+  const { colorScheme } = useMantineColorScheme()
 
   return (
     <>
@@ -25,14 +27,14 @@ export default function LandingIntro(props: LandingIntroProps) {
           </Text>
           <Image
             priority
-            src={FinancegorasImage}
+            src={colorScheme === 'dark' ? FinancegorasImage : FinancegorasImageLight}
             alt="Financegoras Dashboard"
             style={{
               width: 'max(min(30dvw, 600px), 400px)',
               height: 'max(min(20dvw, 400px), 280px)',
               borderRadius: '10%',
               display: 'block',
-              border: '3px solid #fff',
+              border: `3px solid ${colorScheme === 'dark' ? theme.white : theme.black}`,
               marginLeft: isMobile ? 0 : 24,
             }}
           />
