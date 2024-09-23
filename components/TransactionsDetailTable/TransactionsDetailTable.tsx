@@ -27,6 +27,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     fetch(input).then((res) => res.json())
   const categoryRes = useSWR('/api/budget/getCategories', categoryFetcher, {
     fallbackData: props.initialData.categories ?? [],
+    keepPreviousData: true,
   })
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher, {
     fallbackData: props.initialData.transactions,
+    keepPreviousData: true,
   })
 
   // filter/sorting
