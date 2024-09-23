@@ -20,7 +20,6 @@ interface TransactionsDetailTableProps {
 export default function TransactionsDetailTable(props: TransactionsDetailTableProps) {
   const theme = useMantineTheme()
   const [opened, { open, close }] = useDisclosure(false)
-  const [categories, setCategories] = useState<Categories | null>(null)
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null)
 
   const categoryFetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) =>
@@ -29,12 +28,6 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     fallbackData: props.initialData.categories ?? [],
     keepPreviousData: true,
   })
-
-  useEffect(() => {
-    if (categoryRes.data) {
-      setCategories(categoryRes.data)
-    }
-  }, [categoryRes.data])
 
   const fetcher: Fetcher<Transaction[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/api/transactions/getAllTransactions', fetcher, {
@@ -180,7 +173,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
                 close()
               }}
               transaction={editTransaction}
-              categories={categories ?? []}
+              categories={categoryRes.data ?? []}
             />
           )}
         </Flex>
