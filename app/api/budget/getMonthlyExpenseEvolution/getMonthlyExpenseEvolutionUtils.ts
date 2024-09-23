@@ -1,5 +1,5 @@
 import { db } from '@/utils/database'
-import { Categories, getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
+import { getGroupFromCategory, getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 
@@ -132,9 +132,4 @@ export const valueToBoolean = (value: string | null) => {
     return false
   }
   return null
-}
-
-export const getGroupFromCategory = (category: string, categories: Categories): string => {
-  const categoryData = categories.find((cat) => cat.items.includes(category))
-  return categoryData?.group || '-'
 }

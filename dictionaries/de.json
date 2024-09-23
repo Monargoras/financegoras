@@ -3,7 +3,7 @@
     "home": "Start",
     "budget": "Haushaltsbuch",
     "transactions": "Transaktionen",
-    "portfolio": "Portfolio",
+    "analysis": "Analyse",
     "logout": "Abmelden",
     "login": "Anmelden",
     "comingSoon": "Kommt bald"
@@ -104,5 +104,10 @@
     "percentageTooltip": "Skaliert das Balken- und Liniendiagramm auf 100%",
     "includeSavingsTooltip": "Zeigt die Spartransaktionen mit in den Graphen an",
     "includeEmptyCategoriesTooltip": "Zeigt im Radardiagramm alle bereits verwendeten Kategorien an, auch wenn sie in diesem Monat nicht verwendet wurden um besser vergleichen zu können"
+  },
+  "analysisPage": {
+    "searchName": "Suche Name",
+    "searchCategory": "Suche Kategorie",
+    "searchGroup": "Suche Gruppe"
   }
 }

@@ -1,10 +1,9 @@
 'use server'
 
 import { db } from '@/utils/database'
-import { CategoryExpenseData, getTransactionType, Transaction } from '@/utils/types'
+import { CategoryExpenseData, getGroupFromCategory, getTransactionType, Transaction } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
-import { getGroupFromCategory } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import getUsedCategories from '../getCategories/getUsedCategoriesAction'
 
 export default async function getExpensesByCategory(

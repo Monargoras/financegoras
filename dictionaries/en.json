@@ -3,7 +3,7 @@
     "home": "Home",
     "budget": "Budget Book",
     "transactions": "Transactions",
-    "portfolio": "Portfolio",
+    "analysis": "Analysis",
     "logout": "Logout",
     "login": "Login",
     "comingSoon": "Coming soon"
@@ -105,5 +105,10 @@
     "percentageTooltip": "Scales the bar and line chart to 100%",
     "includeSavingsTooltip": "Includes savings in the graphs",
     "includeEmptyCategoriesTooltip": "Includes all categories that you have used in the past, even if they are not used this month for better comparison"
+  },
+  "analysisPage": {
+    "searchName": "Search name",
+    "searchCategory": "Search category",
+    "searchGroup": "Search group"
   }
 }

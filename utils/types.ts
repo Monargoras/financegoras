@@ -51,6 +51,11 @@ export type CategoryExpenseData = {
   value: number
 }
 
+export const getGroupFromCategory = (category: string, categories: Categories): string => {
+  const categoryData = categories.find((cat) => cat.items.includes(category))
+  return categoryData?.group || '-'
+}
+
 export type AggregatedIncomeExpenseTotals = {
   totalIncome: number
   totalExpenses: number
@@ -91,4 +96,9 @@ export type DashboardData = {
   transactions: Transaction[]
   categories: Categories | null
   settings: UserSettings
+}
+
+export type AnalysisDashboardData = {
+  categories: Categories | null
+  transactions: Transaction[]
 }

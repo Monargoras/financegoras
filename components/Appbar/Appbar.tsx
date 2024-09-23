@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, AppShell, Burger, Group, rem, Tooltip, UnstyledButton, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, AppShell, Burger, Group, rem, useMantineColorScheme } from '@mantine/core'
 import Link from 'next/link'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
 import { IconSunMoon } from '@tabler/icons-react'
@@ -43,9 +43,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <Link href="/transactions" className={classes.control}>
                 {props.dictionary.appbar.transactions}
               </Link>
-              <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom" withArrow>
-                <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
-              </Tooltip>
+              <Link href="/analysis" className={classes.control}>
+                {props.dictionary.appbar.analysis}
+              </Link>
               <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
@@ -86,9 +86,15 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         >
           {props.dictionary.appbar.transactions}
         </Link>
-        <Tooltip label={props.dictionary.appbar.comingSoon} position="bottom-start">
-          <UnstyledButton className={classes.disabledControl}>{props.dictionary.appbar.portfolio}</UnstyledButton>
-        </Tooltip>
+        <Link
+          href="/analysis"
+          className={classes.control}
+          onClick={() => {
+            toggle()
+          }}
+        >
+          {props.dictionary.appbar.analysis}
+        </Link>
         <Group style={{ marginTop: 24 }}>
           <AuthMenu dictionary={props.dictionary} unstyled />
         </Group>
