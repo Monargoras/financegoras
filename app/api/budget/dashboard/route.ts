@@ -12,7 +12,7 @@ import { DashboardData } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 
 /**
- * This endpoint returns the evolution of expenses per category the last 12 months or the given year
+ * This endpoint returns the all data needed for the dashboard
  * @allowedMethods GET
  * @param month - the month of the year (optional)
  * @param selectedMonth - the selected month
