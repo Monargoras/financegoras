@@ -89,6 +89,7 @@ export const getMonthlyExpenseDataOneMonth = async (
   return expensesOneMonth as MonthlyExpense
 }
 
+// returns the month year tuples of the last 12 months from the given month and year
 export const getMonthYearTuples = (month: number | null, year: number) => {
   if (!month) {
     return [
@@ -116,6 +117,27 @@ export const getMonthYearTuples = (month: number | null, year: number) => {
     index += 1
   }
   return array.reverse()
+}
+
+// calculates the list of month year tuples from a given start date until a given end date
+export const getDynamicMonthYearTuples = (startDate: Date, endDate: Date) => {
+  const startMonth = startDate.getMonth()
+  const startYear = startDate.getFullYear()
+  const endMonth = endDate.getMonth()
+  const endYear = endDate.getFullYear()
+
+  let curMonth = startMonth
+  let curYear = startYear
+  const array = []
+  while (curMonth !== endMonth || curYear !== endYear) {
+    array.push([curMonth, curYear])
+    curMonth = (curMonth + 1) % 12
+    if (curMonth === 0) {
+      curYear += 1
+    }
+  }
+  array.push([endMonth, endYear])
+  return array
 }
 
 export const valueToBoolean = (value: string | null) => {
