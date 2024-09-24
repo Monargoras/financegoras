@@ -155,3 +155,48 @@ export const valueToBoolean = (value: string | null) => {
   }
   return null
 }
+
+export const getCategoryEvolutionOneMonth = async (
+  month: number,
+  year: number,
+  lang: string,
+  transactions: Transaction[]
+) => {
+  const expensesPerGroupedSet = transactions.reduce(
+    (acc, transaction) => {
+      const { category } = transaction
+      // timeframe month: annual transactions are divided by 12
+      if (month && transaction.transactionType === TransactionType.Annual) {
+        acc[category] = (acc[category] || 0) + transaction.amount / 12
+        return acc
+      }
+      // timeframe year: monthly transactions are multiplied by 12
+      if (!month && transaction.transactionType === TransactionType.Monthly) {
+        acc[category] = (acc[category] || 0) + transaction.amount * 12
+        return acc
+      }
+      acc[category] = (acc[category] || 0) + transaction.amount
+      return acc
+    },
+    {} as Record<string, number>
+  )
+
+  const expensesOneMonthArray = Object.entries(expensesPerGroupedSet).map(([category, total]) => ({
+    [category]: total.toFixed(2),
+  }))
+
+  // transform array to object with all categories for the given month
+  const expensesOneMonth = expensesOneMonthArray.reduce(
+    (acc, obj) => {
+      const key = Object.keys(obj)[0]
+      acc[key] = parseFloat(obj[key])
+      return acc
+    },
+    { month: new Date(`${year}-${month}-01`).toLocaleString(lang, { month: 'long' }) } as Record<
+      string,
+      number | string
+    >
+  )
+
+  return expensesOneMonth as MonthlyExpense
+}

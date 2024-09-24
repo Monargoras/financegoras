@@ -1,6 +1,6 @@
 'use client'
 
-import { ComboboxItem, Flex, MultiSelect, OptionsFilter, Switch } from '@mantine/core'
+import { ComboboxItem, Flex, MultiSelect, OptionsFilter } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
 import { Dictionary, TransactionType } from '@/utils/types'
 
@@ -9,8 +9,6 @@ interface AnalysisControlsProps {
   listOfNames: string[]
   listOfCategories: string[]
   listOfGroups: string[]
-  hideStopped: boolean
-  setHideStopped: (newValue: boolean) => void
   nameSearch: string[]
   setNameSearch: (newValue: string[]) => void
   categorySearch: string[]
@@ -86,11 +84,6 @@ export default function AnalysisControls(props: AnalysisControlsProps) {
         value={props.dateRange}
         onChange={props.setDateRange}
         clearable
-      />
-      <Switch
-        checked={props.hideStopped}
-        onChange={(event) => props.setHideStopped(event.currentTarget.checked)}
-        label={props.dictionary.transactionsPage.hideStopped}
       />
     </Flex>
   )

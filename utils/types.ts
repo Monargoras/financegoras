@@ -98,7 +98,15 @@ export type DashboardData = {
   settings: UserSettings
 }
 
+export type CategoryEvolution = {
+  month: string
+} & Record<string, number>
+
+export type CategoryEvolutionLineChartData = CategoryEvolution[]
+
 export type AnalysisDashboardData = {
   categories: Categories | null
   transactions: Transaction[]
+  listOfNames: string[]
+  categoryEvolutionData: CategoryEvolutionLineChartData
 }

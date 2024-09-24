@@ -7,8 +7,7 @@ import AuthenticationPrompt from '@/components/AuthenticationPrompt/Authenticati
 import de from '@/dictionaries/de.json'
 import en from '@/dictionaries/en.json'
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
-import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
-import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
+import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
 
 const englishMetadata = {
   title: 'Analysis - Financegoras',
@@ -27,14 +26,20 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 async function getInitialAnalysisData(): Promise<AnalysisDashboardData> {
   'use server'
 
+  const emptyData = {
+    categories: [],
+    transactions: [],
+    listOfNames: [],
+    categoryEvolutionData: [],
+  }
+
   const session = await getServerSession(authOptions)
   if (!session?.user) {
-    return { categories: null, transactions: [] }
+    return emptyData
   }
-  const categories = await getCategories(session.user.id)
-  const transactions = await getAllTransactions(session.user.id)
+  const data = await getAnalysisDashbaordData(session.user.id, [], [], [], [], null, null, 'en')
 
-  return { categories, transactions }
+  return data ?? emptyData
 }
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {

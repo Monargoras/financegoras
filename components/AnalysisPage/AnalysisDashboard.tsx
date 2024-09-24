@@ -3,6 +3,7 @@
 import { Flex } from '@mantine/core'
 import { AnalysisDashboardData, Dictionary } from '@/utils/types'
 import { TransactionTable } from '@/components/Dashboard/TransactionTable'
+import CategoryEvolutionLineChart from './CategoryEvolutionLineChart'
 
 interface AnalysisDashboardProps {
   locale: string
@@ -14,6 +15,7 @@ interface AnalysisDashboardProps {
 export default function AnalysisDashboard(props: AnalysisDashboardProps) {
   return (
     <Flex direction="column">
+      <CategoryEvolutionLineChart data={props.data.categoryEvolutionData} />
       <TransactionTable
         dictionary={props.dictionary}
         demo={props.demo}
