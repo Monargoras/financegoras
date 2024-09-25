@@ -1,5 +1,12 @@
 import { db } from '@/utils/database'
-import { getGroupFromCategory, getTransactionType, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
+import {
+  CategoryEvolution,
+  getGroupFromCategory,
+  getTransactionType,
+  MonthlyExpense,
+  Transaction,
+  TransactionType,
+} from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 
@@ -130,13 +137,13 @@ export const getDynamicMonthYearTuples = (startDate: Date, endDate: Date) => {
   let curYear = startYear
   const array = []
   while (curMonth !== endMonth || curYear !== endYear) {
-    array.push([curMonth, curYear])
+    array.push([curMonth + 1, curYear])
     curMonth = (curMonth + 1) % 12
     if (curMonth === 0) {
       curYear += 1
     }
   }
-  array.push([endMonth, endYear])
+  array.push([endMonth + 1, endYear])
   return array
 }
 
@@ -165,14 +172,9 @@ export const getCategoryEvolutionOneMonth = async (
   const expensesPerGroupedSet = transactions.reduce(
     (acc, transaction) => {
       const { category } = transaction
-      // timeframe month: annual transactions are divided by 12
-      if (month && transaction.transactionType === TransactionType.Annual) {
+      // annual transactions are divided by 12
+      if (transaction.transactionType === TransactionType.Annual) {
         acc[category] = (acc[category] || 0) + transaction.amount / 12
-        return acc
-      }
-      // timeframe year: monthly transactions are multiplied by 12
-      if (!month && transaction.transactionType === TransactionType.Monthly) {
-        acc[category] = (acc[category] || 0) + transaction.amount * 12
         return acc
       }
       acc[category] = (acc[category] || 0) + transaction.amount
@@ -198,5 +200,5 @@ export const getCategoryEvolutionOneMonth = async (
     >
   )
 
-  return expensesOneMonth as MonthlyExpense
+  return expensesOneMonth as CategoryEvolution
 }
