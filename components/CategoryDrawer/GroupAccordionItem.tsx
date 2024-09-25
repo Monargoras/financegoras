@@ -28,7 +28,7 @@ interface GroupAccordionItemProps {
   dictionary: Dictionary
   handleRenameGroup: (newName: string) => boolean
   handleDeleteGroup: (group: string) => boolean
-  handleAddCategory: (groupName: string) => boolean
+  handleAddCategory: (groupName: string, color: string) => boolean
   handleRenameCategory: (newName: string) => boolean
   handleDeleteCategory: (category: string) => boolean
 }
@@ -133,8 +133,8 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
             {props.dictionary.budgetPage.deleteModalGroupText2} <br />
             <span>
               {item.items.map((c) => (
-                <span key={c} style={{ marginLeft: 12 }}>
-                  - {c}
+                <span key={c.name} style={{ marginLeft: 12 }}>
+                  - {c.name}
                   <br />
                 </span>
               ))}
@@ -163,7 +163,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
       </Center>
       {item.items.map((category) => (
         <CategoryItem
-          key={category}
+          key={category.name}
           category={category}
           editing={editing}
           editingValue={editingValue}
@@ -174,7 +174,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
           handleDeleteCategory={props.handleDeleteCategory}
         />
       ))}
-      <Accordion.Panel onClick={() => props.handleAddCategory(item.group)}>
+      <Accordion.Panel onClick={() => props.handleAddCategory(item.group, '#454545')}>
         <Flex direction="row" align="center">
           <ActionIcon size="sm" variant="subtle">
             <IconPlus />

@@ -89,7 +89,7 @@ export default async function generateDemoTransactions(year: number, month: numb
 
   // filter "Investment","Salary","Bonus","Infrequent" as they dont make sense for expenses
   categories.forEach((c) => {
-    c.items = c.items.filter((i) => !['Investment', 'Salary', 'Bonus', 'Infrequent'].includes(i))
+    c.items = c.items.filter((i) => !['Investment', 'Salary', 'Bonus', 'Infrequent'].includes(i.name))
   })
 
   for (let i = 0; i < numberOfTransactions; i += 1) {
@@ -106,7 +106,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       isSavings: false,
       amount,
       name,
-      category,
+      category: category.name,
       userId: 'DEMO',
       id,
       createdAt: date,

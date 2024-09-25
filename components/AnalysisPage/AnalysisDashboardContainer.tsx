@@ -57,7 +57,14 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
               dateRange={dateRange}
               setDateRange={setDateRange}
               listOfNames={data.listOfNames}
-              listOfCategories={data.categories ? data.categories.map((c) => c.items).flat() : []}
+              listOfCategories={
+                data.categories
+                  ? data.categories
+                      .map((c) => c.items)
+                      .flat()
+                      .map((i) => i.name)
+                  : []
+              }
               listOfGroups={data.categories ? data.categories.map((c) => c.group) : []}
               dictionary={props.dictionary}
             />

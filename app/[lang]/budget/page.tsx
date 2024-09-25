@@ -14,6 +14,7 @@ import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAct
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getUserSettings from '@/serverActions/getUserSettings'
+import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 
 const englishMetadata = {
   title: 'Budget Book - Financegoras',
@@ -51,6 +52,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
         includeSavings: false,
         includeEmptyCategories: false,
       },
+      colorMap: {},
     }
   }
 
@@ -64,26 +66,24 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   const includeEmptyCategories = userSettings ? userSettings.includeEmptyCategories : false
 
   const userId = session.user.id
-  const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(
-    userId,
-    curYear,
-    curMonth,
-    lang,
-    includeSavings,
-    grouped
-  )
-  const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
-  const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(
-    userId,
-    curYear,
-    curMonth,
-    includeSavings,
-    grouped,
-    includeEmptyCategories
-  )
-  const transactions = await getTransactions(userId, curYear, curMonth)
-  const categories = await getCategories(userId)
+
+  const [
+    monthlyExpenseEvolution,
+    incExpEvolution,
+    monthlyStats,
+    expensesByCategory,
+    transactions,
+    categories,
+    colorMap,
+  ] = await Promise.all([
+    getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
+    getIncExpEvolution(userId, curYear, curMonth, lang),
+    getMonthlyData(userId, curYear, curMonth),
+    getExpensesByCategory(userId, curYear, curMonth, includeSavings, grouped, includeEmptyCategories),
+    getTransactions(userId, curYear, curMonth),
+    getCategories(userId),
+    getColorMap(userId),
+  ])
 
   return {
     monthlyExpenseEvolution,
@@ -98,6 +98,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
       includeSavings,
       includeEmptyCategories,
     },
+    colorMap,
   }
 }
 

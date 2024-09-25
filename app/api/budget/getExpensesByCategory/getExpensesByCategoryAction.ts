@@ -45,7 +45,7 @@ export default async function getExpensesByCategory(
       const groups = categories.map((cat) => cat.group)
       for (const group of groups) {
         // check if any item in the group is in the used categories
-        if (categories[groups.indexOf(group)].items.some((item) => usedCategories.includes(item))) {
+        if (categories[groups.indexOf(group)].items.some((item) => usedCategories.includes(item.name))) {
           const groupTransactions = expenseTransactions.filter(
             (transaction) => getGroupFromCategory(transaction.category, categories) === group
           )
@@ -61,13 +61,15 @@ export default async function getExpensesByCategory(
   } else if (categories && usedCategories) {
     for (const group of categories) {
       for (const category of group.items) {
-        if (usedCategories.includes(category)) {
-          const categoryTransactions = expenseTransactions.filter((transaction) => transaction.category === category)
+        if (usedCategories.includes(category.name)) {
+          const categoryTransactions = expenseTransactions.filter(
+            (transaction) => transaction.category === category.name
+          )
           const totalCategory = month
             ? parseFloat(calculateTotalPerMonth(categoryTransactions))
             : parseFloat(calculateTotalPerYear(categoryTransactions, year))
           if (totalCategory > 0 || includeEmptyCategories) {
-            aggregatedTransactions[category] = totalCategory
+            aggregatedTransactions[category.name] = totalCategory
           }
         }
       }
@@ -78,7 +80,8 @@ export default async function getExpensesByCategory(
     const groups = categories.map((cat) => cat.group)
     // get the rest of the categories that were deleted but still have transactions
     const restCategories = usedCategories.filter(
-      (category) => !groups.some((group) => categories[groups.indexOf(group)].items.includes(category))
+      (category) =>
+        !groups.some((group) => categories[groups.indexOf(group)].items.some((item) => item.name === category))
     )
     // add these as their own group or category no matter the grouping
     for (const category of restCategories) {

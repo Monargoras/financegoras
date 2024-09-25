@@ -10,6 +10,7 @@ import getExpensesByCategory from '../getExpensesByCategory/getExpensesByCategor
 import getTransactions from '../getTransactions/getTransactionsAction'
 import { DashboardData } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
+import getColorMap from '../getColorMap/getColorMapAction'
 
 /**
  * This endpoint returns the all data needed for the dashboard
@@ -67,6 +68,7 @@ export async function GET(request: NextRequest) {
     getExpensesByCategory(userId, selectedYear, selectedMonth, includeSavings, grouped, includeEmptyCategories),
     getTransactions(userId, selectedYear, selectedMonth),
     getCategories(userId),
+    getColorMap(userId),
   ])
 
   return new Response(
@@ -77,6 +79,7 @@ export async function GET(request: NextRequest) {
       expensesByCategory: res[3],
       transactions: res[4],
       categories: res[5],
+      colorMap: res[6],
     } as DashboardData),
     { status: 200 }
   )

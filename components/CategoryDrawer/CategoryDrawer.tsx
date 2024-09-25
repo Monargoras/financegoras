@@ -25,11 +25,11 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   // array holding all group names and categories to check for duplicates when adding new ones
   const allCategories = props.categories.reduce<string[]>((acc, item) => {
     acc.push(item.group)
-    acc.push(...item.items)
+    acc.push(...item.items.map((category) => category.name))
     return acc
   }, [])
 
-  const handleAddCategory = (groupName: string) => {
+  const handleAddCategory = (groupName: string, color: string) => {
     // check if the default category name is already in use
     if (allCategories.includes(props.dictionary.budgetPage.defaultCategoryName)) {
       notifications.show({
@@ -47,7 +47,11 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       // find the index of the group in the array
       const index = props.categories.indexOf(group)
       // create a new group object with the new category
-      const newGroup = { group: group.group, items: [...group.items, props.dictionary.budgetPage.defaultCategoryName] }
+      const newGroup = {
+        group: group.group,
+        color: group.color,
+        items: [...group.items, { name: props.dictionary.budgetPage.defaultCategoryName, color }],
+      }
       // create a new categories array with the new group object
       const newCategories = [...props.categories]
       newCategories[index] = newGroup
@@ -78,7 +82,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       return false
     }
     // find the group that is being edited
-    const group = props.categories.find((item) => item.items.includes(editing))
+    const group = props.categories.find((item) => item.items.some((category) => category.name === editing))
     if (group) {
       const success = updateTransactionCategories(editing, newName)
       if (!success) {
@@ -87,9 +91,9 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       // find the index of the category in the array
       const index = props.categories.indexOf(group)
       // create a new category array with the new name
-      const newItems = group.items.map((item) => (item === editing ? newName : item))
+      const newItems = group.items.map((item) => (item.name === editing ? { name: newName, color: item.color } : item))
       // create a new category object with the new items array
-      const newCategory = { group: group.group, items: newItems }
+      const newCategory = { group: group.group, color: group.color, items: newItems }
       // create a new categories array with the new category object
       const newCategories = [...props.categories]
       newCategories[index] = newCategory
@@ -103,14 +107,14 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
 
   const handleDeleteCategory = (category: string) => {
     // find the group of to be deleted category
-    const group = props.categories.find((item) => item.items.includes(category))
+    const group = props.categories.find((g) => g.items.some((item) => item.name === category))
     if (group) {
       // find the index of the category in the array
       const index = props.categories.indexOf(group)
       // create a new category array with the new name
-      const newItems = group.items.filter((item) => item !== category)
+      const newItems = group.items.filter((item) => item.name !== category)
       // create a new category object with the new items array
-      const newCategory = { group: group.group, items: newItems }
+      const newCategory = { group: group.group, color: group.color, items: newItems }
       // create a new categories array with the new category object
       const newCategories = [...props.categories]
       newCategories[index] = newCategory
@@ -135,7 +139,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       return false
     }
     // add a new group with a default name {props, dictionary.budgetPage.defaultGroupName}
-    const newGroup = { group: props.dictionary.budgetPage.defaultGroupName, items: [] }
+    const newGroup = { group: props.dictionary.budgetPage.defaultGroupName, color: '#454545', items: [] }
     props.setCategories([...props.categories, newGroup])
     setEditing(props.dictionary.budgetPage.defaultGroupName)
     setEditingValue(props.dictionary.budgetPage.defaultGroupName)
@@ -165,7 +169,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       // find the index of the group in the array
       const index = props.categories.indexOf(group)
       // create a new group object with the new name
-      const newGroup = { group: newName, items: group.items }
+      const newGroup = { group: newName, color: group.color, items: group.items }
       // create a new array with the new group object
       const newCategories = [...props.categories]
       newCategories[index] = newGroup

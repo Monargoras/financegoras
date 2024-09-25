@@ -39,9 +39,15 @@ export type Transaction = {
   stoppedAt: Date | null
 }
 
+export type Category = {
+  name: string
+  color: string
+}
+
 export type CategoryGroup = {
   group: string
-  items: string[]
+  color: string
+  items: Category[]
 }
 
 export type Categories = CategoryGroup[]
@@ -52,7 +58,7 @@ export type CategoryExpenseData = {
 }
 
 export const getGroupFromCategory = (category: string, categories: Categories): string => {
-  const categoryData = categories.find((cat) => cat.items.includes(category))
+  const categoryData = categories.find((cat) => cat.items.some((item) => item.name === category))
   return categoryData?.group || '-'
 }
 
@@ -69,6 +75,10 @@ export type AggregatedIncomeExpenseEvolution = {
   totalSavings: number
   remainingIncome: number
 }[]
+
+export type ColorMap = {
+  [key: string]: string
+}
 
 export type MonthlyExpense = {
   month: string
@@ -96,6 +106,7 @@ export type DashboardData = {
   transactions: Transaction[]
   categories: Categories | null
   settings: UserSettings
+  colorMap: ColorMap
 }
 
 export type CategoryEvolution = {

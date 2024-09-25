@@ -2,8 +2,8 @@
 
 import { useMatches } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
-import { Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
-import { colorsHex, getMonthNameArray } from '@/utils/helpers'
+import { ColorMap, Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
+import { getMonthNameArray } from '@/utils/helpers'
 
 interface MonthlyExpenseEvolutionGraphProps {
   lang: string
@@ -13,6 +13,7 @@ interface MonthlyExpenseEvolutionGraphProps {
   setSelectedYear: (year: number) => void
   timeframe: string
   data: MonthlyExpenseEvolution
+  colorMap: ColorMap
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -32,9 +33,9 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
     }
     categorySet.delete('month')
 
-    const res = Array.from(categorySet).map((category, index) => ({
+    const res = Array.from(categorySet).map((category) => ({
       name: category,
-      color: colorsHex[index],
+      color: props.colorMap[category] || '#fff',
     }))
     return res
   }

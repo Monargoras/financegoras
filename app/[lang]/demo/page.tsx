@@ -12,6 +12,7 @@ import { demoUserId } from '@/utils/CONSTANTS'
 import generateDemoTransactions from '@/serverActions/generateDemoTransactions'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
+import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 
 const englishMetadata = {
   title: 'Demo - Financegoras',
@@ -51,26 +52,23 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     await generateDemoTransactions(curYear, curMonth)
   }
 
-  const monthlyExpenseEvolution = await getMonthlyExpenseEvolution(
-    userId,
-    curYear,
-    curMonth,
-    lang,
-    includeSavings,
-    grouped
-  )
-  const incExpEvolution = await getIncExpEvolution(userId, curYear, curMonth, lang)
-  const monthlyStats = await getMonthlyData(userId, curYear, curMonth)
-  const expensesByCategory = await getExpensesByCategory(
-    userId,
-    curYear,
-    curMonth,
-    includeSavings,
-    grouped,
-    includeEmptyCategories
-  )
-  const transactions = await getTransactions(userId, curYear, curMonth)
-  const categories = await getCategories(userId)
+  const [
+    monthlyExpenseEvolution,
+    incExpEvolution,
+    monthlyStats,
+    expensesByCategory,
+    transactions,
+    categories,
+    colorMap,
+  ] = await Promise.all([
+    getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
+    getIncExpEvolution(userId, curYear, curMonth, lang),
+    getMonthlyData(userId, curYear, curMonth),
+    getExpensesByCategory(userId, curYear, curMonth, includeSavings, grouped, includeEmptyCategories),
+    getTransactions(userId, curYear, curMonth),
+    getCategories(userId),
+    getColorMap(userId),
+  ])
 
   return {
     monthlyExpenseEvolution,
@@ -85,6 +83,7 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
       includeSavings,
       includeEmptyCategories,
     },
+    colorMap,
   }
 }
 

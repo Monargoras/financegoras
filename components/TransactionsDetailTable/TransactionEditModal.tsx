@@ -187,7 +187,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             {...form.getInputProps('name', { type: 'input' })}
           />
           <Select
-            data={props.categories}
+            data={props.categories.map((c) => ({ group: c.group, items: c.items.map((i) => i.name) }))}
             label={props.dictionary.budgetPage.category}
             maxDropdownHeight={400}
             allowDeselect={false}

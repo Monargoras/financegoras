@@ -167,6 +167,7 @@ export default function Dashboard(props: DashboardProps) {
           setSelectedYear={setSelectedYear}
           timeframe={timeframe}
           data={data.monthlyExpenseEvolution}
+          colorMap={data.colorMap}
         />
         <CategoryRadar
           lang={props.lang}

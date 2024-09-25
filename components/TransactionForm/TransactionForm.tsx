@@ -56,13 +56,13 @@ export default function TransactionForm(props: TransactionFormProps) {
   useEffect(() => {
     if (data) {
       setCategories(data)
-      setCategory(data[0].items[0])
+      setCategory(data[0].items[0].name)
     }
   }, [data])
 
   useEffect(() => {
     if (categories) {
-      setCategory(categories[0].items[0])
+      setCategory(categories[0].items[0].name)
     }
   }, [categories])
 
@@ -130,7 +130,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       setName('')
       setAmount('')
       if (categories) {
-        setCategory(categories[0].items[0])
+        setCategory(categories[0].items[0].name)
       }
       setIsIncome(false)
       notifications.show({
@@ -204,7 +204,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <Select
           data={
-            categories ?? [
+            categories?.map((c) => ({ group: c.group, items: c.items.map((i) => i.name) })) ?? [
               { group: props.dictionary.budgetPage.noGroup, items: [props.dictionary.budgetPage.noCategory] },
             ]
           }

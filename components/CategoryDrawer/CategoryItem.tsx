@@ -3,10 +3,10 @@
 import { Accordion, ActionIcon, Flex, FocusTrap, Menu, rem, Text, TextInput } from '@mantine/core'
 import { IconTrashX } from '@tabler/icons-react'
 import { IconCheck, IconDots, IconPencil, IconX } from 'tabler-icons'
-import { Dictionary } from '@/utils/types'
+import { Category, Dictionary } from '@/utils/types'
 
 interface CateforyItemProps {
-  category: string
+  category: Category
   editing: string | null
   editingValue: string
   setEditing: (value: string | null) => void
@@ -20,9 +20,9 @@ export default function CategoryItem(props: CateforyItemProps) {
   const { category, editing, editingValue, setEditing, setEditingValue } = props
 
   return (
-    <Accordion.Panel key={category} style={{ marginRight: -15 }}>
+    <Accordion.Panel key={category.name} style={{ marginRight: -15 }}>
       <Flex dir="row" justify="space-between">
-        {editing === category ? (
+        {editing === category.name ? (
           <Flex style={{ width: '100%' }}>
             <FocusTrap>
               <TextInput
@@ -67,7 +67,7 @@ export default function CategoryItem(props: CateforyItemProps) {
             </ActionIcon>
           </Flex>
         ) : (
-          <Text>{category}</Text>
+          <Text>{category.name}</Text>
         )}
         <Menu>
           <Menu.Target>
@@ -80,8 +80,8 @@ export default function CategoryItem(props: CateforyItemProps) {
               leftSection={<IconPencil style={{ width: rem(14), height: rem(14) }} />}
               c="blue"
               onClick={() => {
-                setEditing(category)
-                setEditingValue(category)
+                setEditing(category.name)
+                setEditingValue(category.name)
               }}
             >
               {props.dictionary.budgetPage.edit}
@@ -89,7 +89,7 @@ export default function CategoryItem(props: CateforyItemProps) {
             <Menu.Item
               leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
               c="red"
-              onClick={() => props.handleDeleteCategory(category)}
+              onClick={() => props.handleDeleteCategory(category.name)}
             >
               {props.dictionary.budgetPage.delete}
             </Menu.Item>
