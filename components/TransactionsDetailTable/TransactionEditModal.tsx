@@ -97,6 +97,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       })
       mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
       mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/analysis/'))
       return true
     }
     notifications.show({
@@ -121,6 +122,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       })
       mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
       mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/analysis/'))
       return true
     }
     notifications.show({
