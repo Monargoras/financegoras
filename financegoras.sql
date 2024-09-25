@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `userData` (
 
 -- Dumping data for table financegoras.userdata: ~1 rows (approximately)
 INSERT INTO `userdata` (`userId`, `categories`) VALUES
-	('DEMO', '[{"group":"Freetime","items":["Restaurants","Activities","Socializing","Gifts","Vacation"]},{"group":"Recurring","items":["Rent","Groceries","Upkeep","Subscriptions","Investment","Insurance","Salary","Bonus","Infrequent"]},{"group":"Rest","items":["Clothes","Cash"]}]', b'0', b'0', b'0', b'0');
+	('DEMO', '[{"color":"#006266","group":"Freetime","items":[{"color":"#D980FA","name":"Restaurants"},{"color":"#A3CB38","name":"Activities"},{"color":"#12CBC4","name":"Socializing"},{"color":"#FDA7DF","name":"Gifts"},{"color":"#ED4C67","name":"Vacation"}]},{"color":"#0652DD","group":"Recurring","items":[{"color":"#F79F1F","name":"Rent"},{"color":"#C4E538","name":"Groceries"},{"color":"#009432","name":"Upkeep"},{"color":"#5758BB","name":"Subscriptions"},{"color":"#5758BB","name":"Investment"},{"color":"#9980FA","name":"Insurance"},{"color":"#B53471","name":"Salary"},{"color":"#009432","name":"Bonus"},{"color":"#1289A7","name":"Infrequent"}]},{"color":"#A3CB38","group":"Rest","items":[{"color":"#6F1E51","name":"Clothes"},{"color":"#ED4C67","name":"Cash"}]}]', b'0', b'0', b'0', b'0');
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
