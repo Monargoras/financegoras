@@ -1,7 +1,7 @@
 export const colorsHex = [
-  '#2e2e2e',
   '#868e96',
   '#fa5252',
+  '#f783ac',
   '#e64980',
   '#be4bdb',
   '#7950f2',
