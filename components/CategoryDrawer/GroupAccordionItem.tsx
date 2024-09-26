@@ -34,7 +34,7 @@ interface GroupAccordionItemProps {
   handleUpdateGroup: (newName: string, newColor: string) => boolean
   handleDeleteGroup: (group: string) => boolean
   handleAddCategory: (groupName: string, color: string) => boolean
-  handleRenameCategory: (newName: string) => boolean
+  handleUpdateCategory: (newName: string, newColor: string) => boolean
   handleDeleteCategory: (category: string) => boolean
 }
 
@@ -200,10 +200,12 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
           category={category}
           editing={editing}
           editingValue={editingValue}
+          editingColor={editingColor}
           setEditing={setEditing}
           setEditingValue={setEditingValue}
+          setEditingColor={setEditingColor}
           dictionary={props.dictionary}
-          handleRenameCategory={props.handleRenameCategory}
+          handleUpdateCategory={props.handleUpdateCategory}
           handleDeleteCategory={props.handleDeleteCategory}
         />
       ))}

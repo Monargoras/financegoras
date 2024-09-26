@@ -66,13 +66,9 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return false
   }
 
-  const handleRenameCategory = (newName: string) => {
-    // if value was not changed, close the editing mode
-    if (newName === editing) {
-      return true
-    }
+  const handleUpdateCategory = (newName: string, newColor: string) => {
     // check if the new name is already in use
-    if (allCategories.includes(newName) || !editing || !editingValue) {
+    if (allCategories.filter((el) => el !== editing).includes(newName) || !editing || !editingValue) {
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddGroupErrorTitle,
         message: props.dictionary.budgetPage.feedbackAddGroupErrorMessage,
@@ -92,7 +88,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       // find the index of the category in the array
       const index = props.categories.indexOf(group)
       // create a new category array with the new name
-      const newItems = group.items.map((item) => (item.name === editing ? { name: newName, color: item.color } : item))
+      const newItems = group.items.map((item) => (item.name === editing ? { name: newName, color: newColor } : item))
       // create a new category object with the new items array
       const newCategory = { group: group.group, color: group.color, items: newItems }
       // create a new categories array with the new category object
@@ -203,7 +199,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       handleUpdateGroup={handleUpdateGroup}
       handleDeleteGroup={handleDeleteGroup}
       handleAddCategory={handleAddCategory}
-      handleRenameCategory={handleRenameCategory}
+      handleUpdateCategory={handleUpdateCategory}
       handleDeleteCategory={handleDeleteCategory}
     />
   ))

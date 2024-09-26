@@ -1,23 +1,26 @@
 'use client'
 
-import { Accordion, ActionIcon, Flex, FocusTrap, Menu, rem, Text, TextInput } from '@mantine/core'
+import { Accordion, ActionIcon, ColorPicker, Flex, FocusTrap, Menu, Popover, rem, Text, TextInput } from '@mantine/core'
 import { IconTrashX } from '@tabler/icons-react'
-import { IconCheck, IconDots, IconPencil, IconX } from 'tabler-icons'
+import { IconCheck, IconColorPicker, IconDots, IconPencil, IconX } from 'tabler-icons'
 import { Category, Dictionary } from '@/utils/types'
+import { colorsHex } from '@/utils/helpers'
 
 interface CateforyItemProps {
   category: Category
   editing: string | null
   editingValue: string
+  editingColor: string
   setEditing: (value: string | null) => void
   setEditingValue: (value: string) => void
+  setEditingColor: (value: string) => void
   dictionary: Dictionary
-  handleRenameCategory: (newName: string) => boolean
+  handleUpdateCategory: (newName: string, newColor: string) => boolean
   handleDeleteCategory: (category: string) => boolean
 }
 
 export default function CategoryItem(props: CateforyItemProps) {
-  const { category, editing, editingValue, setEditing, setEditingValue } = props
+  const { category, editing, editingValue, editingColor, setEditing, setEditingValue, setEditingColor } = props
 
   return (
     <Accordion.Panel key={category.name} style={{ marginRight: -15 }}>
@@ -30,25 +33,44 @@ export default function CategoryItem(props: CateforyItemProps) {
                 onChange={(event) => setEditingValue(event.currentTarget.value)}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
-                    const success = props.handleRenameCategory(editingValue)
+                    const success = props.handleUpdateCategory(editingValue, editingColor)
                     if (success) {
                       setEditing(null)
                       setEditingValue('')
+                      setEditingColor('')
                     }
                   }
                 }}
                 style={{ width: '100%' }}
               />
             </FocusTrap>
+            <Popover withArrow shadow="md">
+              <Popover.Target>
+                <ActionIcon
+                  size="lg"
+                  variant="subtle"
+                  color="gray"
+                  tabIndex={-1}
+                  style={{ backgroundColor: editingColor }}
+                  radius={20}
+                >
+                  <IconColorPicker />
+                </ActionIcon>
+              </Popover.Target>
+              <Popover.Dropdown>
+                <ColorPicker value={editingColor} onChange={setEditingColor} format="hex" swatches={colorsHex} />
+              </Popover.Dropdown>
+            </Popover>
             <ActionIcon
               size="lg"
               variant="subtle"
               color="green"
               onClick={() => {
-                const success = props.handleRenameCategory(editingValue)
+                const success = props.handleUpdateCategory(editingValue, editingColor)
                 if (success) {
                   setEditing(null)
                   setEditingValue('')
+                  setEditingColor('')
                 }
               }}
             >
@@ -61,13 +83,22 @@ export default function CategoryItem(props: CateforyItemProps) {
               onClick={() => {
                 setEditing(null)
                 setEditingValue('')
+                setEditingColor('')
               }}
             >
               <IconX />
             </ActionIcon>
           </Flex>
         ) : (
-          <Text>{category.name}</Text>
+          <Flex align="center" w="100%">
+            <Text>{category.name}</Text>
+            <Flex
+              ml="auto"
+              mr={15}
+              tabIndex={-1}
+              style={{ backgroundColor: category.color, borderRadius: 20, height: 20, width: 20 }}
+            />
+          </Flex>
         )}
         <Menu>
           <Menu.Target>
@@ -82,6 +113,7 @@ export default function CategoryItem(props: CateforyItemProps) {
               onClick={() => {
                 setEditing(category.name)
                 setEditingValue(category.name)
+                setEditingColor(category.color)
               }}
             >
               {props.dictionary.budgetPage.edit}
