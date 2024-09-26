@@ -8,6 +8,7 @@ import { IconX } from 'tabler-icons'
 import { Categories, Dictionary } from '@/utils/types'
 import GroupAccordionItem from './GroupAccordionItem'
 import updateTransactionCategories from '@/serverActions/updateTransactionCategories'
+import { colorsHex } from '@/utils/helpers'
 
 interface CategoryDrawerProps {
   dictionary: Dictionary
@@ -30,6 +31,8 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return acc
   }, [])
 
+  const randomColor = () => colorsHex[Math.floor(Math.random() * colorsHex.length)]
+
   const handleAddCategory = (groupName: string) => {
     // check if the default category name is already in use
     if (allCategories.includes(props.dictionary.budgetPage.defaultCategoryName)) {
@@ -47,11 +50,12 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     if (group) {
       // find the index of the group in the array
       const index = props.categories.indexOf(group)
+      const newColor = randomColor()
       // create a new group object with the new category
       const newGroup = {
         group: group.group,
         color: group.color,
-        items: [...group.items, { name: props.dictionary.budgetPage.defaultCategoryName, color: '#454545' }],
+        items: [...group.items, { name: props.dictionary.budgetPage.defaultCategoryName, color: newColor }],
       }
       // create a new categories array with the new group object
       const newCategories = [...props.categories]
@@ -60,7 +64,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       props.setCategories(newCategories)
       setEditing(props.dictionary.budgetPage.defaultCategoryName)
       setEditingValue(props.dictionary.budgetPage.defaultCategoryName)
-      setEditingColor('#454545')
+      setEditingColor(newColor)
       props.setUpdateBackendCategories(true)
       return true
     }
@@ -136,12 +140,13 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       })
       return false
     }
-    // add a new group with a default name {props, dictionary.budgetPage.defaultGroupName}
-    const newGroup = { group: props.dictionary.budgetPage.defaultGroupName, color: '#454545', items: [] }
+    const newColor = randomColor()
+    // add a new group with a default name {props.dictionary.budgetPage.defaultGroupName}
+    const newGroup = { group: props.dictionary.budgetPage.defaultGroupName, color: newColor, items: [] }
     props.setCategories([...props.categories, newGroup])
     setEditing(props.dictionary.budgetPage.defaultGroupName)
     setEditingValue(props.dictionary.budgetPage.defaultGroupName)
-    setEditingColor('#454545')
+    setEditingColor(newColor)
     props.setUpdateBackendCategories(true)
     return true
   }
