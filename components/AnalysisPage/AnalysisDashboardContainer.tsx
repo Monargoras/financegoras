@@ -19,7 +19,11 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const [categorySearch, setCategorySearch] = useState<string[]>([])
   const [groupSearch, setGroupSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
+  // set initial range to one year ago until today
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+    new Date(),
+  ])
 
   const fetcher: Fetcher<AnalysisDashboardData, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
