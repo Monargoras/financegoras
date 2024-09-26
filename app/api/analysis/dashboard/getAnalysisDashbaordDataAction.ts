@@ -10,6 +10,7 @@ import {
 import getCategoryEvolution from './getCategoryEvolutionAction'
 import getAllTransactions from '../../transactions/getAllTransactions/getAllTransactionsAction'
 import getCategories from '../../budget/getCategories/getCategoriesAction'
+import getColorMap from '../../budget/getColorMap/getColorMapAction'
 
 export default async function getAnalysisDashbaordData(
   userId: string,
@@ -62,8 +63,9 @@ export default async function getAnalysisDashbaordData(
 
   const filteredTransactions = filterData(allTransactions)
 
-  const [categoryEvolution] = await Promise.all([
+  const [categoryEvolution, colorMap] = await Promise.all([
     getCategoryEvolution(filteredTransactions, saveStartDate, saveEndDate, lang),
+    getColorMap(userId),
   ])
 
   return {
@@ -71,5 +73,6 @@ export default async function getAnalysisDashbaordData(
     transactions: filteredTransactions,
     listOfNames,
     categoryEvolutionData: categoryEvolution,
+    colorMap,
   }
 }

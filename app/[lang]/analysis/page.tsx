@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return params.lang === 'de' ? germanMetadata : englishMetadata
 }
 
-async function getInitialAnalysisData(): Promise<AnalysisDashboardData> {
+async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
   'use server'
 
   const emptyData = {
@@ -31,13 +31,14 @@ async function getInitialAnalysisData(): Promise<AnalysisDashboardData> {
     transactions: [],
     listOfNames: [],
     categoryEvolutionData: [],
+    colorMap: {},
   }
 
   const session = await getServerSession(authOptions)
   if (!session?.user) {
     return emptyData
   }
-  const data = await getAnalysisDashbaordData(session.user.id, [], [], [], [], null, null, 'en')
+  const data = await getAnalysisDashbaordData(session.user.id, [], [], [], [], null, null, lang)
 
   return data ?? emptyData
 }
@@ -45,7 +46,7 @@ async function getInitialAnalysisData(): Promise<AnalysisDashboardData> {
 export default async function BudgetPage({ params: { lang } }: PageProps) {
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
-  const initialData = await getInitialAnalysisData()
+  const initialData = await getInitialAnalysisData(lang)
 
   return (
     <PageTransitionProvider>

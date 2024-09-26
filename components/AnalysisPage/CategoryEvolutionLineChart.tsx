@@ -2,11 +2,11 @@
 
 import { useMatches } from '@mantine/core'
 import { LineChart } from '@mantine/charts'
-import { CategoryEvolutionLineChartData } from '@/utils/types'
-import { colorsHex } from '@/utils/helpers'
+import { CategoryEvolutionLineChartData, ColorMap } from '@/utils/types'
 
 interface CategoryEvolutionLineChartProps {
   data: CategoryEvolutionLineChartData
+  colorMap: ColorMap
 }
 
 export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineChartProps) {
@@ -24,9 +24,9 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
     }
     categorySet.delete('month')
 
-    const res = Array.from(categorySet).map((category, index) => ({
+    const res = Array.from(categorySet).map((category) => ({
       name: category,
-      color: colorsHex[index],
+      color: props.colorMap[category],
     }))
     return res
   }

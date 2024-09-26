@@ -120,4 +120,5 @@ export type AnalysisDashboardData = {
   transactions: Transaction[]
   listOfNames: string[]
   categoryEvolutionData: CategoryEvolutionLineChartData
+  colorMap: ColorMap
 }
