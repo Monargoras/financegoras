@@ -53,6 +53,7 @@ export default function CategoryItem(props: CateforyItemProps) {
                   tabIndex={-1}
                   style={{ backgroundColor: editingColor }}
                   radius={20}
+                  ml={4}
                 >
                   <IconColorPicker />
                 </ActionIcon>
