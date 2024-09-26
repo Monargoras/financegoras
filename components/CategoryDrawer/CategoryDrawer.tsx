@@ -20,6 +20,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   const [opened, { open, close }] = useDisclosure(false)
   // key of the category or group that is being edited
   const [editing, setEditing] = useState<string | null>(null)
+  const [editingColor, setEditingColor] = useState<string>('')
   const [editingValue, setEditingValue] = useState<string>('')
 
   // array holding all group names and categories to check for duplicates when adding new ones
@@ -147,13 +148,9 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return true
   }
 
-  const handleRenameGroup = (newName: string) => {
-    // if value was not changed, close the editing mode
-    if (newName === editing) {
-      return true
-    }
+  const handleUpdateGroup = (newName: string, newColor: string) => {
     // check if the new name is already in use
-    if (allCategories.includes(newName) || !editingValue) {
+    if (allCategories.filter((el) => el !== editing).includes(newName) || !editingValue) {
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddGroupErrorTitle,
         message: props.dictionary.budgetPage.feedbackAddGroupErrorMessage,
@@ -169,7 +166,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       // find the index of the group in the array
       const index = props.categories.indexOf(group)
       // create a new group object with the new name
-      const newGroup = { group: newName, color: group.color, items: group.items }
+      const newGroup = { group: newName, color: newColor, items: group.items }
       // create a new array with the new group object
       const newCategories = [...props.categories]
       newCategories[index] = newGroup
@@ -198,10 +195,12 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       item={item}
       editing={editing}
       editingValue={editingValue}
+      editingColor={editingColor}
       setEditing={setEditing}
       setEditingValue={setEditingValue}
+      setEditingColor={setEditingColor}
       dictionary={props.dictionary}
-      handleRenameGroup={handleRenameGroup}
+      handleUpdateGroup={handleUpdateGroup}
       handleDeleteGroup={handleDeleteGroup}
       handleAddCategory={handleAddCategory}
       handleRenameCategory={handleRenameCategory}

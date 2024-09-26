@@ -12,21 +12,26 @@ import {
   FocusTrap,
   Modal,
   Button,
+  ColorPicker,
+  Popover,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconCheck, IconDots, IconPencil, IconPlus, IconX } from 'tabler-icons'
+import { IconCheck, IconDots, IconPencil, IconPlus, IconX, IconColorPicker } from 'tabler-icons'
 import { IconTrashX } from '@tabler/icons-react'
 import { CategoryGroup, Dictionary } from '@/utils/types'
 import CategoryItem from './CategoryItem'
+import { colorsHex } from '@/utils/helpers'
 
 interface GroupAccordionItemProps {
   item: CategoryGroup
   editing: string | null
   editingValue: string
+  editingColor: string
   setEditing: (value: string | null) => void
   setEditingValue: (value: string) => void
+  setEditingColor: (value: string) => void
   dictionary: Dictionary
-  handleRenameGroup: (newName: string) => boolean
+  handleUpdateGroup: (newName: string, newColor: string) => boolean
   handleDeleteGroup: (group: string) => boolean
   handleAddCategory: (groupName: string, color: string) => boolean
   handleRenameCategory: (newName: string) => boolean
@@ -34,7 +39,7 @@ interface GroupAccordionItemProps {
 }
 
 export default function GroupAccordionItem(props: GroupAccordionItemProps) {
-  const { item, editing, editingValue, setEditing, setEditingValue } = props
+  const { item, editing, editingValue, editingColor, setEditing, setEditingValue, setEditingColor } = props
   const [opened, { open, close }] = useDisclosure(false)
 
   return (
@@ -50,10 +55,11 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       const prevOpened = opened
-                      const success = props.handleRenameGroup(editingValue)
+                      const success = props.handleUpdateGroup(editingValue, editingColor)
                       if (success) {
                         setEditing(null)
                         setEditingValue('')
+                        setEditingColor('')
                         if (prevOpened) {
                           open()
                         } else {
@@ -67,21 +73,46 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
               </FocusTrap>
             </Flex>
           ) : (
-            <Text>{item.group}</Text>
+            <Flex>
+              <Text>{item.group}</Text>
+              <Flex
+                ml="auto"
+                tabIndex={-1}
+                style={{ backgroundColor: item.color, borderRadius: 20, height: 20, width: 20 }}
+              />
+            </Flex>
           )}
         </Accordion.Control>
         {editing === item.group && (
           <Flex>
+            <Popover withArrow shadow="md">
+              <Popover.Target>
+                <ActionIcon
+                  size="lg"
+                  variant="subtle"
+                  color="gray"
+                  tabIndex={-1}
+                  style={{ backgroundColor: editingColor }}
+                  radius={20}
+                >
+                  <IconColorPicker />
+                </ActionIcon>
+              </Popover.Target>
+              <Popover.Dropdown>
+                <ColorPicker value={editingColor} onChange={setEditingColor} format="hex" swatches={colorsHex} />
+              </Popover.Dropdown>
+            </Popover>
             <ActionIcon
               size="lg"
               variant="subtle"
               color="green"
               onClick={() => {
                 const prevOpened = opened
-                const success = props.handleRenameGroup(editingValue)
+                const success = props.handleUpdateGroup(editingValue, editingColor)
                 if (success) {
                   setEditing(null)
                   setEditingValue('')
+                  setEditingColor('')
                   if (prevOpened) {
                     open()
                   } else {
@@ -99,6 +130,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
               onClick={() => {
                 setEditing(null)
                 setEditingValue('')
+                setEditingColor('')
               }}
             >
               <IconX />
@@ -118,6 +150,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
               onClick={() => {
                 setEditing(item.group)
                 setEditingValue(item.group)
+                setEditingColor(item.color)
               }}
             >
               {props.dictionary.budgetPage.edit}
