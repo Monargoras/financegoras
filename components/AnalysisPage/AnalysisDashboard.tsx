@@ -14,7 +14,7 @@ interface AnalysisDashboardProps {
 
 export default function AnalysisDashboard(props: AnalysisDashboardProps) {
   return (
-    <Flex direction="column">
+    <Flex direction="column" gap="md">
       <CategoryEvolutionLineChart data={props.data.categoryEvolutionData} colorMap={props.data.colorMap} />
       <TransactionTable
         dictionary={props.dictionary}
