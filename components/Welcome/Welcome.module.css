@@ -11,7 +11,7 @@
 
 .textLeft {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-size: rem(18px);
+  font-size: rem(16px);
   margin-left: auto;
 
   @media (max-width: 75em) {
@@ -23,7 +23,7 @@
 
 .textRight {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-size: rem(18px);
+  font-size: rem(16px);
 
   @media (max-width: 75em) {
     font-size: rem(14px);
