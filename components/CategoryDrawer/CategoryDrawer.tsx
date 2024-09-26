@@ -30,7 +30,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     return acc
   }, [])
 
-  const handleAddCategory = (groupName: string, color: string) => {
+  const handleAddCategory = (groupName: string) => {
     // check if the default category name is already in use
     if (allCategories.includes(props.dictionary.budgetPage.defaultCategoryName)) {
       notifications.show({
@@ -51,7 +51,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       const newGroup = {
         group: group.group,
         color: group.color,
-        items: [...group.items, { name: props.dictionary.budgetPage.defaultCategoryName, color }],
+        items: [...group.items, { name: props.dictionary.budgetPage.defaultCategoryName, color: '#454545' }],
       }
       // create a new categories array with the new group object
       const newCategories = [...props.categories]
@@ -60,6 +60,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       props.setCategories(newCategories)
       setEditing(props.dictionary.budgetPage.defaultCategoryName)
       setEditingValue(props.dictionary.budgetPage.defaultCategoryName)
+      setEditingColor('#454545')
       props.setUpdateBackendCategories(true)
       return true
     }
@@ -140,6 +141,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     props.setCategories([...props.categories, newGroup])
     setEditing(props.dictionary.budgetPage.defaultGroupName)
     setEditingValue(props.dictionary.budgetPage.defaultGroupName)
+    setEditingColor('#454545')
     props.setUpdateBackendCategories(true)
     return true
   }

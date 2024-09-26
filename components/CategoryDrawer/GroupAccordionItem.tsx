@@ -33,7 +33,7 @@ interface GroupAccordionItemProps {
   dictionary: Dictionary
   handleUpdateGroup: (newName: string, newColor: string) => boolean
   handleDeleteGroup: (group: string) => boolean
-  handleAddCategory: (groupName: string, color: string) => boolean
+  handleAddCategory: (groupName: string) => boolean
   handleUpdateCategory: (newName: string, newColor: string) => boolean
   handleDeleteCategory: (category: string) => boolean
 }
@@ -209,7 +209,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
           handleDeleteCategory={props.handleDeleteCategory}
         />
       ))}
-      <Accordion.Panel onClick={() => props.handleAddCategory(item.group, '#454545')}>
+      <Accordion.Panel onClick={() => props.handleAddCategory(item.group)}>
         <Flex direction="row" align="center">
           <ActionIcon size="sm" variant="subtle">
             <IconPlus />
