@@ -74,6 +74,11 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     if (res.hasErrors) {
       return false
     }
+    // set created and stopped dates to 12 noon to avoid timezone issues
+    form.setFieldValue('createdAt', new Date(form.values.createdAt.setHours(12, 0, 0, 0)))
+    if (form.values.stoppedAt) {
+      form.setFieldValue('stoppedAt', new Date(form.values.stoppedAt.setHours(12, 0, 0, 0)))
+    }
     const { name, amount, category, transactionType, createdAt, stoppedAt, isIncome, isSavings } = form.values
 
     const success = await updateTransaction(
