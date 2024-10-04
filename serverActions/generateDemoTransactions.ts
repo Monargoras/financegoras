@@ -98,7 +98,7 @@ export default async function generateDemoTransactions(year: number, month: numb
     const amount = Math.floor(Math.random() * 70) + 1
     const randomGroup = Math.floor(Math.random() * categories.length)
     const randomCategory = Math.floor(Math.random() * categories[randomGroup].items.length)
-    const category = categories[randomGroup].items[randomCategory]
+    const category = categories[randomGroup].items[randomCategory].name
     const name = `${category} ${randomDay}`
     const date = new Date(year, month - 1, randomDay)
     const transaction = {
@@ -106,7 +106,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       isSavings: false,
       amount,
       name,
-      category: category.name,
+      category,
       userId: 'DEMO',
       id,
       createdAt: date,
