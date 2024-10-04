@@ -118,8 +118,7 @@ export default function TransactionForm(props: TransactionFormProps) {
     }
 
     // set date to 12 noon to avoid timezone issues
-    const dateObj = new Date(date ?? new Date())
-    dateObj.setHours(12, 0, 0, 0)
+    date && date.setHours(12, 0, 0, 0)
 
     const success = await submitTransaction(
       isIncome,
