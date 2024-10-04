@@ -112,13 +112,16 @@ export default function TransactionForm(props: TransactionFormProps) {
     return isValid
   }
 
-  const handleAddTransaction = async (transactionType: TransactionType, date?: Date) => {
+  const handleAddTransaction = async (transactionType: TransactionType, inputDate?: Date) => {
     if (!validData()) {
       return false
     }
 
     // set date to 12 noon to avoid timezone issues
-    date && date.setHours(12, 0, 0, 0)
+    const date = inputDate ? new Date(inputDate) : undefined
+    if (date) {
+      date.setHours(12, 0, 0, 0)
+    }
 
     const success = await submitTransaction(
       isIncome,

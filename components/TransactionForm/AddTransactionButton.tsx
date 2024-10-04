@@ -8,7 +8,7 @@ import { Dictionary, TransactionType } from '@/utils/types'
 
 interface AddTransactionButtonProps {
   dictionary: Dictionary
-  handleAddTransaction: (transactionType: TransactionType, date?: Date) => Promise<boolean>
+  handleAddTransaction: (transactionType: TransactionType, inputDate?: Date) => Promise<boolean>
 }
 
 export function AddTransactionButton(props: AddTransactionButtonProps) {
