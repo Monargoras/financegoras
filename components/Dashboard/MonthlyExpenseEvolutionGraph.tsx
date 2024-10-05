@@ -53,6 +53,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
         barGap: 1,
         barCategoryGap: 5,
       }}
+      tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
       }}

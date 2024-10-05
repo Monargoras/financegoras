@@ -39,6 +39,7 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
       dataKey="month"
       type="default"
       legendProps={{ verticalAlign: 'bottom' }}
+      tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
       }}
