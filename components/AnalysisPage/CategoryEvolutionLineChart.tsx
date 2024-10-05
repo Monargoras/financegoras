@@ -43,7 +43,7 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
         wrapperStyle: { zIndex: 1000 },
       }}
       series={getSeries(props.data)}
-      valueFormatter={(value) => (value ? `${value.toFixed(2)}€` : '-')}
+      valueFormatter={(value) => (value ? `${value.toFixed(2)}€` : '0€')}
     />
   )
 }
