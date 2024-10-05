@@ -5,6 +5,7 @@ import {
   getCategoryEvolutionOneMonth,
   getDynamicMonthYearTuples,
 } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
+import getUsedCategories from '../../budget/getCategories/getUsedCategoriesAction'
 
 function getTransactionsInMonth(
   transactions: Transaction[],
@@ -31,13 +32,21 @@ export default async function getCategoryEvolution(
   transactions: Transaction[],
   startDate: Date,
   endDate: Date,
-  lang: string
+  lang: string,
+  userId: string
 ): Promise<CategoryEvolutionLineChartData> {
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
-  // get the expenses for the last 12 months or the given year
+  const usedCategories = await getUsedCategories(userId, false)
+
   const expenses = await Promise.all(
     monthsToCompute.map(([m, y]) =>
-      getCategoryEvolutionOneMonth(m, y, lang, getTransactionsInMonth(transactions, m, y, startDate, endDate))
+      getCategoryEvolutionOneMonth(
+        m,
+        y,
+        lang,
+        getTransactionsInMonth(transactions, m, y, startDate, endDate),
+        usedCategories
+      )
     )
   )
 

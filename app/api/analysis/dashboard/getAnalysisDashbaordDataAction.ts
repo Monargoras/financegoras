@@ -64,7 +64,7 @@ export default async function getAnalysisDashbaordData(
   const filteredTransactions = filterData(allTransactions)
 
   const [categoryEvolution, colorMap] = await Promise.all([
-    getCategoryEvolution(filteredTransactions, saveStartDate, saveEndDate, lang),
+    getCategoryEvolution(filteredTransactions, saveStartDate, saveEndDate, lang, userId),
     getColorMap(userId),
   ])
 

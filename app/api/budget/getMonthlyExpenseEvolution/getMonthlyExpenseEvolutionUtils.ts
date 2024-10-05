@@ -167,7 +167,8 @@ export const getCategoryEvolutionOneMonth = async (
   month: number,
   year: number,
   lang: string,
-  transactions: Transaction[]
+  transactions: Transaction[],
+  usedCategories: string[] | null = null
 ) => {
   const expensesPerGroupedSet = transactions.reduce(
     (acc, transaction) => {
@@ -182,6 +183,15 @@ export const getCategoryEvolutionOneMonth = async (
     },
     {} as Record<string, number>
   )
+
+  // add 0 values for unused categories
+  if (usedCategories) {
+    usedCategories.forEach((category) => {
+      if (!expensesPerGroupedSet[category]) {
+        expensesPerGroupedSet[category] = 0
+      }
+    })
+  }
 
   const expensesOneMonthArray = Object.entries(expensesPerGroupedSet).map(([category, total]) => ({
     [category]: total.toFixed(2),
