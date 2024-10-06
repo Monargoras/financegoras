@@ -8,6 +8,8 @@ import { IconArrowRight } from 'tabler-icons'
 
 interface DemoButtonProps {
   title: string
+  size: 'sm' | 'md' | 'lg' | 'xl'
+  href: string
 }
 
 const DemoButtonRef = forwardRef<HTMLButtonElement, DemoButtonProps>((props, ref) => {
@@ -16,10 +18,10 @@ const DemoButtonRef = forwardRef<HTMLButtonElement, DemoButtonProps>((props, ref
   return (
     <Button
       ref={ref}
-      size="xl"
+      size={props.size}
       rightSection={<IconArrowRight size={28} />}
       onClick={() => {
-        router.push('/demo')
+        router.push(props.href)
       }}
     >
       {props.title}
