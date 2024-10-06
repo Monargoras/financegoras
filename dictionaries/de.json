@@ -106,6 +106,7 @@
     "includeEmptyCategoriesTooltip": "Zeigt im Radardiagramm alle bereits verwendeten Kategorien an, auch wenn sie in diesem Monat nicht verwendet wurden um besser vergleichen zu können"
   },
   "analysisPage": {
+    "analysisDemo": "Analysedemo",
     "searchName": "Suche Name",
     "searchCategory": "Suche Kategorie",
     "searchGroup": "Suche Gruppe"

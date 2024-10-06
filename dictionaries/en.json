@@ -107,6 +107,7 @@
     "includeEmptyCategoriesTooltip": "Includes all categories that you have used in the past, even if they are not used this month for better comparison"
   },
   "analysisPage": {
+    "analysisDemo": "Analysis demo",
     "searchName": "Search name",
     "searchCategory": "Search category",
     "searchGroup": "Search group"

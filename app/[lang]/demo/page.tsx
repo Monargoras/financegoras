@@ -1,3 +1,4 @@
+import { Flex } from '@mantine/core'
 import { DashboardData, PageProps, TransactionType } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
@@ -13,6 +14,7 @@ import generateDemoTransactions from '@/serverActions/generateDemoTransactions'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
+import DemoButton from '@/components/Welcome/DemoButton'
 
 const englishMetadata = {
   title: 'Demo - Financegoras',
@@ -94,6 +96,16 @@ export default async function DemoPage({ params: { lang } }: PageProps) {
   return (
     <PageTransitionProvider>
       <DashboardContainer lang={lang} dict={dict} demo initialData={initialData} />
+      <Flex justify="center" mt={16}>
+        <DemoButton
+          title={dict.analysisPage.analysisDemo}
+          size="md"
+          href="/demo/analysis"
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        />
+      </Flex>
     </PageTransitionProvider>
   )
 }
