@@ -24,7 +24,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
   'use server'
 
-  const data = await getAnalysisDashbaordData(demoUserId, [], [], [], [], null, null, lang)
+  const data = await getAnalysisDashbaordData(
+    demoUserId,
+    [],
+    [],
+    [],
+    [],
+    new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+    new Date(),
+    lang
+  )
 
   return data ?? { categories: [], transactions: [], listOfNames: [], categoryEvolutionData: [], colorMap: {} }
 }

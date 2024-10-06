@@ -38,7 +38,16 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
   if (!session?.user) {
     return emptyData
   }
-  const data = await getAnalysisDashbaordData(session.user.id, [], [], [], [], null, null, lang)
+  const data = await getAnalysisDashbaordData(
+    session.user.id,
+    [],
+    [],
+    [],
+    [],
+    new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+    new Date(),
+    lang
+  )
 
   return data ?? emptyData
 }
