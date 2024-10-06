@@ -16,14 +16,15 @@ function getTransactionsInMonth(
 ) {
   const curMonth = transactions.filter(
     (transaction) =>
-      new Date(transaction.createdAt).getMonth() + 1 === month && new Date(transaction.createdAt).getFullYear() === year
+      transaction.createdAt < new Date(year, month, 1) &&
+      (transaction.stoppedAt === null || transaction.stoppedAt >= new Date(year, month - 1, 1))
   )
   // filter for exakt day if month and year are either the start or end date
   if (startDate.getMonth() + 1 === month && startDate.getFullYear() === year) {
-    return curMonth.filter((transaction) => new Date(transaction.createdAt) >= startDate)
+    return curMonth.filter((transaction) => transaction.createdAt >= startDate)
   }
   if (endDate.getMonth() + 1 === month && endDate.getFullYear() === year) {
-    return curMonth.filter((transaction) => new Date(transaction.createdAt) <= endDate)
+    return curMonth.filter((transaction) => transaction.createdAt <= endDate)
   }
   return curMonth
 }
