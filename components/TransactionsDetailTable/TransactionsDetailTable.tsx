@@ -8,6 +8,7 @@ import { IconDots } from 'tabler-icons'
 import { Categories, Dictionary, getTransactionType, Transaction, TransactionType } from '@/utils/types'
 import TableControls from './TableControls'
 import TransactionEditModal from './TransactionEditModal'
+import generalClasses from '@/utils/general.module.css'
 
 export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] }
 
@@ -104,7 +105,13 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
             dateRange={dateRange}
             setDateRange={setDateRange}
           />
-          <Table.ScrollContainer mah="73dvh" minWidth={400} w="95dvw" style={{ margin: 8 }}>
+          <Table.ScrollContainer
+            mah="73dvh"
+            minWidth={400}
+            w="95dvw"
+            style={{ margin: 8 }}
+            className={generalClasses.styledScroll}
+          >
             <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
               <Table.Thead>
                 <Table.Tr>

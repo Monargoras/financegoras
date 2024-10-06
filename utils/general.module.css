@@ -1,0 +1,5 @@
+.styledScroll {
+  & :global(.mantine-ScrollArea-thumb) {
+    z-index: 1;
+  }
+}

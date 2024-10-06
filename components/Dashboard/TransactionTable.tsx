@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Table, useMantineTheme } from '@mantine/core'
 import { Categories, Dictionary, Transaction } from '@/utils/types'
 import TransactionEditModal from '../TransactionsDetailTable/TransactionEditModal'
+import generalClasses from '@/utils/general.module.css'
 
 interface TransactionTableProps {
   dictionary: Dictionary
@@ -20,7 +21,7 @@ export function TransactionTable(props: TransactionTableProps) {
 
   return (
     <>
-      <Table.ScrollContainer mah="45dvh" minWidth={300}>
+      <Table.ScrollContainer h="45dvh" minWidth={300} className={generalClasses.styledScroll}>
         <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
           <Table.Thead>
             <Table.Tr>
