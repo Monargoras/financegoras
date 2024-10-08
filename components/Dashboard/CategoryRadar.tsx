@@ -1,5 +1,3 @@
-'use client'
-
 import { Flex, Text } from '@mantine/core'
 import { RadarChart } from '@mantine/charts'
 import { CategoryExpenseData } from '@/utils/types'
