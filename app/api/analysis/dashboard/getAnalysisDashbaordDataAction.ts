@@ -34,7 +34,7 @@ export default async function getAnalysisDashbaordData(
   const saveEndDate = endDate ?? allTransactions[0].createdAt
 
   const filterData = (rawData: Transaction[]) => {
-    let res = rawData.filter((ta) => ta.isIncome === false && ta.isSavings === false)
+    let res = rawData
     if (names.length > 0) {
       res = res.filter((ta) => names.includes(ta.name))
     }
