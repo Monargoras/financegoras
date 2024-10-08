@@ -115,6 +115,38 @@ export type CategoryEvolution = {
 
 export type CategoryEvolutionLineChartData = CategoryEvolution[]
 
+export type StatsBoardData = {
+  totalFiltered: {
+    expenses: number
+    income: number
+    savings: number
+  }
+  averagePerMonth: {
+    expenses: number
+    expensesPercentage: number
+    income: number
+    incomePercentage: number
+    savings: number
+    savingsPercentage: number
+  }
+  maximumOneMonth: {
+    expenses: number
+    expensesPercentage: number
+    income: number
+    incomePercentage: number
+    savings: number
+    savingsPercentage: number
+  }
+  minimumOneMonth: {
+    expenses: number
+    expensesPercentage: number
+    income: number
+    incomePercentage: number
+    savings: number
+    savingsPercentage: number
+  }
+}
+
 export type AnalysisDashboardData = {
   categories: Categories | null
   transactions: Transaction[]
