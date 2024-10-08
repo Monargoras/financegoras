@@ -39,6 +39,11 @@ export default async function getCategoryEvolution(
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
   const usedCategories = await getUsedCategories(userId, false)
 
+  // get intersection of used categories and categories in transactions
+  const filteredCategories = usedCategories
+    ? usedCategories.filter((category) => transactions.some((transaction) => transaction.category === category))
+    : []
+
   const expenses = await Promise.all(
     monthsToCompute.map(([m, y]) =>
       getCategoryEvolutionOneMonth(
@@ -46,7 +51,7 @@ export default async function getCategoryEvolution(
         y,
         lang,
         getTransactionsInMonth(transactions, m, y, startDate, endDate),
-        usedCategories
+        filteredCategories
       )
     )
   )
