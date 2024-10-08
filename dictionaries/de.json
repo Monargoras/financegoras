@@ -109,6 +109,16 @@
     "analysisDemo": "Analysedemo",
     "searchName": "Suche Name",
     "searchCategory": "Suche Kategorie",
-    "searchGroup": "Suche Gruppe"
+    "searchGroup": "Suche Gruppe",
+    "expenses": "Ausgaben",
+    "income": "Einnahmen",
+    "savings": "Sparen",
+    "total": "Gesamt gefiltert",
+    "averageMonth": "Durchschnitt monatlich",
+    "averagePercentageMonth": "Durchschnitt der Ausgaben",
+    "maxMonth": "Maximal monatlich",
+    "maxPercentageMonth": "Maximaler Anteil der Ausgaben",
+    "minMonth": "Minimal monatlich",
+    "minPercentageMonth": "Minimaler Anteil der Ausgaben"
   }
 }

@@ -22,11 +22,11 @@ export default function StatsBoard(props: StatsBoardProps) {
   return (
     <Flex gap="md" justify="center" direction="column">
       <Paper {...paperStyles}>
-        <Text>Total filtered</Text>
+        <Text>{props.dict.analysisPage.total}</Text>
         <Flex gap="md" justify="space-around" direction="row">
-          <Text>Expenses</Text>
-          <Text>Income</Text>
-          <Text>Savings</Text>
+          <Text>{props.dict.analysisPage.expenses}</Text>
+          <Text>{props.dict.analysisPage.income}</Text>
+          <Text>{props.dict.analysisPage.savings}</Text>
         </Flex>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
@@ -44,8 +44,8 @@ export default function StatsBoard(props: StatsBoardProps) {
         </Flex>
       </Paper>
       <Paper {...paperStyles}>
-        <Text>Average Per Month</Text>
-        <Text>Average Percentage of expenses</Text>
+        <Text>{props.dict.analysisPage.averageMonth}</Text>
+        <Text>{props.dict.analysisPage.averagePercentageMonth}</Text>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
           <Flex justify="center" align="center" direction="column">
@@ -65,8 +65,8 @@ export default function StatsBoard(props: StatsBoardProps) {
         </Flex>
       </Paper>
       <Paper {...paperStyles}>
-        <Text>Maximum One Month</Text>
-        <Text>Maximum Percentage of expenses that month</Text>
+        <Text>{props.dict.analysisPage.maxMonth}</Text>
+        <Text>{props.dict.analysisPage.maxPercentageMonth}</Text>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
           <Flex justify="center" align="center" direction="column">
@@ -86,8 +86,8 @@ export default function StatsBoard(props: StatsBoardProps) {
         </Flex>
       </Paper>
       <Paper {...paperStyles}>
-        <Text>Minimum One Month</Text>
-        <Text>Minimum Percentage of expenses that month</Text>
+        <Text>{props.dict.analysisPage.minMonth}</Text>
+        <Text>{props.dict.analysisPage.minPercentageMonth}</Text>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
           <Flex justify="center" align="center" direction="column">

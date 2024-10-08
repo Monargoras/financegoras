@@ -110,6 +110,16 @@
     "analysisDemo": "Analysis demo",
     "searchName": "Search name",
     "searchCategory": "Search category",
-    "searchGroup": "Search group"
+    "searchGroup": "Search group",
+    "expenses": "Expenses",
+    "income": "Income",
+    "savings": "Savings",
+    "total": "Total filtered",
+    "averageMonth": "Average monthly",
+    "averagePercentageMonth": "Average Percentage of expenses",
+    "maxMonth": "Maximum monthly",
+    "maxPercentageMonth": "Maximum percentage of expenses",
+    "minMonth": "Minimum monthly",
+    "minPercentageMonth": "Minimum percentage of expenses"
   }
 }
