@@ -35,7 +35,43 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     lang
   )
 
-  return data ?? { categories: [], transactions: [], listOfNames: [], categoryEvolutionData: [], colorMap: {} }
+  return (
+    data ?? {
+      categories: [],
+      transactions: [],
+      listOfNames: [],
+      categoryEvolutionData: [],
+      colorMap: {},
+      statsBoardData: {
+        totalFiltered: {
+          expenses: 0,
+          income: 0,
+          savings: 0,
+        },
+        averagePerMonth: {
+          expenses: 0,
+          expensesPercentage: 0,
+          income: 0,
+          savings: 0,
+          savingsPercentage: 0,
+        },
+        maximumOneMonth: {
+          expenses: 0,
+          expensesPercentage: 0,
+          income: 0,
+          savings: 0,
+          savingsPercentage: 0,
+        },
+        minimumOneMonth: {
+          expenses: 0,
+          expensesPercentage: 0,
+          income: 0,
+          savings: 0,
+          savingsPercentage: 0,
+        },
+      },
+    }
+  )
 }
 
 export default async function BudgetPage({ params: { lang } }: PageProps) {
