@@ -115,10 +115,10 @@
     "savings": "Sparen",
     "total": "Gesamt gefiltert",
     "averageMonth": "Durchschnitt monatlich",
-    "averagePercentageMonth": "Durchschnitt der Ausgaben",
+    "averagePercentageMonth": "Durchschnitt % der Einnahmen",
     "maxMonth": "Maximal monatlich",
-    "maxPercentageMonth": "Maximaler Anteil der Ausgaben",
+    "maxPercentageMonth": "Maximaler % der Einnahmen",
     "minMonth": "Minimal monatlich",
-    "minPercentageMonth": "Minimaler Anteil der Ausgaben"
+    "minPercentageMonth": "Minimaler % der Einnahmen"
   }
 }

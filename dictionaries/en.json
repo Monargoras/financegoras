@@ -116,10 +116,10 @@
     "savings": "Savings",
     "total": "Total filtered",
     "averageMonth": "Average monthly",
-    "averagePercentageMonth": "Average Percentage of expenses",
+    "averagePercentageMonth": "Average % of income",
     "maxMonth": "Maximum monthly",
-    "maxPercentageMonth": "Maximum percentage of expenses",
+    "maxPercentageMonth": "Maximum % of income",
     "minMonth": "Minimum monthly",
-    "minPercentageMonth": "Minimum percentage of expenses"
+    "minPercentageMonth": "Minimum % of income"
   }
 }
