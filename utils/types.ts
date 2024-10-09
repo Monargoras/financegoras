@@ -125,7 +125,6 @@ export type StatsBoardData = {
     expenses: number
     expensesPercentage: number
     income: number
-    incomePercentage: number
     savings: number
     savingsPercentage: number
   }
@@ -133,7 +132,6 @@ export type StatsBoardData = {
     expenses: number
     expensesPercentage: number
     income: number
-    incomePercentage: number
     savings: number
     savingsPercentage: number
   }
@@ -141,7 +139,6 @@ export type StatsBoardData = {
     expenses: number
     expensesPercentage: number
     income: number
-    incomePercentage: number
     savings: number
     savingsPercentage: number
   }

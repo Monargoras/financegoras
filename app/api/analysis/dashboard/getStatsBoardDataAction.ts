@@ -4,7 +4,7 @@ import { StatsBoardData, Transaction, TransactionType } from '@/utils/types'
 import { getDynamicMonthYearTuples } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { getTransactionsInMonth } from './analysisDashboardUtils'
 
-const getStats = (transactions: Transaction[], monthsToCompute: number[][]) => {
+const getStats = (transactions: Transaction[], monthsToCompute: number[][], incomeValues: number[] | undefined) => {
   const totalsPerMonth = monthsToCompute.map(([m, y]) =>
     getTransactionsInMonth(transactions, m, y).reduce((acc, cur) => {
       if (cur.transactionType === TransactionType.Annual) {
@@ -15,33 +15,41 @@ const getStats = (transactions: Transaction[], monthsToCompute: number[][]) => {
   )
 
   const total = totalsPerMonth.reduce((acc, cur) => acc + cur, 0)
+  const percentages = incomeValues ? totalsPerMonth.map((value, index) => (value / incomeValues[index]) * 100) : []
   const average = total / totalsPerMonth.length
+  const averagePercentage = percentages.reduce((acc, cur) => acc + cur, 0) / percentages.length
   const maximum = Math.max(...totalsPerMonth)
+  const maximumPercentage = Math.max(...percentages)
   const minimum = Math.min(...totalsPerMonth)
+  const minimumPercentage = Math.min(...percentages)
 
   return {
     totalsPerMonth,
     total,
     average,
+    averagePercentage,
     maximum,
+    maximumPercentage,
     minimum,
+    minimumPercentage,
   }
 }
 
 export default async function getStatsBoardData(
   transactions: Transaction[],
+  allIncomeTransactions: Transaction[],
   startDate: Date,
   endDate: Date
 ): Promise<StatsBoardData> {
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
 
-  const incomeTransactions = transactions.filter((transaction) => transaction.isIncome)
+  const incomeTransactions = allIncomeTransactions
   const savingsTransactions = transactions.filter((transaction) => transaction.isSavings)
   const expensesTransactions = transactions.filter((transaction) => !transaction.isIncome && !transaction.isSavings)
 
-  const income = getStats(incomeTransactions, monthsToCompute)
-  const savings = getStats(savingsTransactions, monthsToCompute)
-  const expenses = getStats(expensesTransactions, monthsToCompute)
+  const income = getStats(incomeTransactions, monthsToCompute, undefined)
+  const savings = getStats(savingsTransactions, monthsToCompute, income.totalsPerMonth)
+  const expenses = getStats(expensesTransactions, monthsToCompute, income.totalsPerMonth)
 
   return {
     totalFiltered: {
@@ -51,27 +59,24 @@ export default async function getStatsBoardData(
     },
     averagePerMonth: {
       expenses: expenses.average,
-      expensesPercentage: Math.round((expenses.average / income.average) * 100),
+      expensesPercentage: expenses.averagePercentage,
       income: income.average,
-      incomePercentage: 100,
       savings: savings.average,
-      savingsPercentage: Math.round((savings.average / income.average) * 100),
+      savingsPercentage: savings.averagePercentage,
     },
     maximumOneMonth: {
       expenses: expenses.maximum,
-      expensesPercentage: Math.round((expenses.maximum / income.average) * 100),
+      expensesPercentage: expenses.maximumPercentage,
       income: income.maximum,
-      incomePercentage: 100,
       savings: savings.maximum,
-      savingsPercentage: Math.round((savings.maximum / income.average) * 100),
+      savingsPercentage: savings.maximumPercentage,
     },
     minimumOneMonth: {
       expenses: expenses.minimum,
-      expensesPercentage: Math.round((expenses.minimum / income.average) * 100),
+      expensesPercentage: expenses.minimumPercentage,
       income: income.minimum,
-      incomePercentage: 100,
       savings: savings.minimum,
-      savingsPercentage: Math.round((savings.minimum / income.average) * 100),
+      savingsPercentage: savings.minimumPercentage,
     },
   }
 }
