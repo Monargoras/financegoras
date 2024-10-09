@@ -48,7 +48,7 @@ const mockData: StatsBoardData = {
 export default function AnalysisDashboard(props: AnalysisDashboardProps) {
   return (
     <Flex direction="row" gap="md" wrap="wrap-reverse">
-      <Flex direction="column" gap="md" miw={400}>
+      <Flex direction="column" gap="md">
         <CategoryEvolutionLineChart data={props.data.categoryEvolutionData} colorMap={props.data.colorMap} />
         <TransactionTable
           dictionary={props.dictionary}
