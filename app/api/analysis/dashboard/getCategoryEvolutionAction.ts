@@ -15,7 +15,7 @@ export default async function getCategoryEvolution(
   lang: string,
   userId: string
 ): Promise<CategoryEvolutionLineChartData> {
-  const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate, -120)
+  const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
   const usedCategories = await getUsedCategories(userId, false)
 
   // get intersection of used categories and categories in transactions
