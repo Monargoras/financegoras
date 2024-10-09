@@ -23,11 +23,11 @@ export default async function getCategoryEvolution(
     ? usedCategories.filter((category) => transactions.some((transaction) => transaction.category === category))
     : []
 
-  const expenses = await Promise.all(
+  const series = await Promise.all(
     monthsToCompute.map(([m, y]) =>
       getCategoryEvolutionOneMonth(m, y, lang, getTransactionsInMonth(transactions, m, y), filteredCategories)
     )
   )
 
-  return expenses
+  return series
 }
