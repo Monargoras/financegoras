@@ -153,4 +153,5 @@ export type AnalysisDashboardData = {
   listOfNames: string[]
   categoryEvolutionData: CategoryEvolutionLineChartData
   colorMap: ColorMap
+  statsBoardData: StatsBoardData
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { Flex } from '@mantine/core'
-import { AnalysisDashboardData, Dictionary, StatsBoardData } from '@/utils/types'
+import { AnalysisDashboardData, Dictionary } from '@/utils/types'
 import { TransactionTable } from '@/components/Dashboard/TransactionTable'
 import CategoryEvolutionLineChart from './CategoryEvolutionLineChart'
 import StatsBoard from './StatsBoard'
@@ -11,38 +11,6 @@ interface AnalysisDashboardProps {
   dictionary: Dictionary
   data: AnalysisDashboardData
   demo: boolean
-}
-
-const mockData: StatsBoardData = {
-  totalFiltered: {
-    expenses: 10234.54,
-    income: 23945.98,
-    savings: 3456.78,
-  },
-  averagePerMonth: {
-    expenses: 735.45,
-    expensesPercentage: 27,
-    income: 2394.59,
-    incomePercentage: 154,
-    savings: 345.67,
-    savingsPercentage: 12,
-  },
-  maximumOneMonth: {
-    expenses: 2134.54,
-    expensesPercentage: 27,
-    income: 2775.98,
-    incomePercentage: 154,
-    savings: 3456.78,
-    savingsPercentage: 12,
-  },
-  minimumOneMonth: {
-    expenses: 0,
-    expensesPercentage: 0,
-    income: 0,
-    incomePercentage: 0,
-    savings: 0,
-    savingsPercentage: 0,
-  },
 }
 
 export default function AnalysisDashboard(props: AnalysisDashboardProps) {
@@ -57,7 +25,7 @@ export default function AnalysisDashboard(props: AnalysisDashboardProps) {
           categories={props.data.categories}
         />
       </Flex>
-      <StatsBoard dict={props.dictionary} data={mockData} />
+      <StatsBoard dict={props.dictionary} data={props.data.statsBoardData} />
     </Flex>
   )
 }

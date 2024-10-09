@@ -11,6 +11,7 @@ import getCategoryEvolution from './getCategoryEvolutionAction'
 import getAllTransactions from '../../transactions/getAllTransactions/getAllTransactionsAction'
 import getCategories from '../../budget/getCategories/getCategoriesAction'
 import getColorMap from '../../budget/getColorMap/getColorMapAction'
+import getStatsBoardData from './getStatsBoardDataAction'
 
 export default async function getAnalysisDashbaordData(
   userId: string,
@@ -30,8 +31,8 @@ export default async function getAnalysisDashbaordData(
     return null
   }
 
-  const saveStartDate = startDate ?? allTransactions[allTransactions.length - 1].createdAt
-  const saveEndDate = endDate ?? allTransactions[0].createdAt
+  const safeStartDate = startDate ?? allTransactions[allTransactions.length - 1].createdAt
+  const safeEndDate = endDate ?? allTransactions[0].createdAt
 
   const filterData = (rawData: Transaction[]) => {
     let res = rawData
@@ -63,9 +64,10 @@ export default async function getAnalysisDashbaordData(
 
   const filteredTransactions = filterData(allTransactions)
 
-  const [categoryEvolution, colorMap] = await Promise.all([
-    getCategoryEvolution(filteredTransactions, saveStartDate, saveEndDate, lang, userId),
+  const [categoryEvolution, colorMap, statsBoardData] = await Promise.all([
+    getCategoryEvolution(filteredTransactions, safeStartDate, safeEndDate, lang, userId),
     getColorMap(userId),
+    getStatsBoardData(filteredTransactions, safeStartDate, safeEndDate),
   ])
 
   return {
@@ -74,5 +76,6 @@ export default async function getAnalysisDashbaordData(
     listOfNames,
     categoryEvolutionData: categoryEvolution,
     colorMap,
+    statsBoardData,
   }
 }
