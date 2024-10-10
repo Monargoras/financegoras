@@ -27,11 +27,14 @@ const getStats = (transactions: Transaction[], monthsToCompute: number[][], inco
     totalsPerMonth,
     total,
     average,
-    averagePercentage,
+    averagePercentage:
+      Number.isNaN(averagePercentage) || !Number.isFinite(averagePercentage) ? undefined : averagePercentage,
     maximum,
-    maximumPercentage,
+    maximumPercentage:
+      Number.isNaN(maximumPercentage) || !Number.isFinite(maximumPercentage) ? undefined : maximumPercentage,
     minimum,
-    minimumPercentage,
+    minimumPercentage:
+      Number.isNaN(minimumPercentage) || !Number.isFinite(minimumPercentage) ? undefined : minimumPercentage,
   }
 }
 
@@ -59,24 +62,24 @@ export default async function getStatsBoardData(
     },
     averagePerMonth: {
       expenses: expenses.average,
-      expensesPercentage: expenses.averagePercentage,
+      expensesPercentage: expenses.averagePercentage || 0,
       income: income.average,
       savings: savings.average,
-      savingsPercentage: savings.averagePercentage,
+      savingsPercentage: savings.averagePercentage || 0,
     },
     maximumOneMonth: {
       expenses: expenses.maximum,
-      expensesPercentage: expenses.maximumPercentage,
+      expensesPercentage: expenses.maximumPercentage || 0,
       income: income.maximum,
       savings: savings.maximum,
-      savingsPercentage: savings.maximumPercentage,
+      savingsPercentage: savings.maximumPercentage || 0,
     },
     minimumOneMonth: {
       expenses: expenses.minimum,
-      expensesPercentage: expenses.minimumPercentage,
+      expensesPercentage: expenses.minimumPercentage || 0,
       income: income.minimum,
       savings: savings.minimum,
-      savingsPercentage: savings.minimumPercentage,
+      savingsPercentage: savings.minimumPercentage || 0,
     },
   }
 }
