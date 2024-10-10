@@ -44,11 +44,11 @@ export type Transaction = {
   isIncome: boolean
   isSavings: boolean
   amount: number
-  createdAt: string
+  createdAt: Date
   name: string
   category: string
   transactionType: TransactionType
-  stoppedAt: string | null
+  stoppedAt: Date | null
 }
 
 export type Category = {

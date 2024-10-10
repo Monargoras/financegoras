@@ -20,8 +20,8 @@ export const calculateTotalPerYear = (transactions: Transaction[], year: number)
       const { createdAt, stoppedAt } = transaction
       const monthsActive =
         12 -
-        (new Date(createdAt).getFullYear() === year ? new Date(createdAt).getMonth() : 0) -
-        (stoppedAt && new Date(stoppedAt).getFullYear() === year ? 12 - new Date(stoppedAt).getMonth() : 0)
+        (createdAt.getFullYear() === year ? createdAt.getMonth() : 0) -
+        (stoppedAt && stoppedAt.getFullYear() === year ? 12 - stoppedAt.getMonth() : 0)
       sum += transaction.amount * monthsActive
     } else {
       sum += transaction.amount

@@ -29,6 +29,4 @@ export const parseDatabaseTransactionsArray = (transactions: DatabaseTransaction
   transactions.map((transaction) => ({
     ...transaction,
     transactionType: getTransactionType(transaction.transactionType),
-    createdAt: new Date(transaction.createdAt).toUTCString(),
-    stoppedAt: transaction.stoppedAt ? new Date(transaction.stoppedAt).toUTCString() : null,
   }))
