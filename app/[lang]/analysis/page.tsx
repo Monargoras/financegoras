@@ -72,8 +72,8 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     [],
     [],
     [],
-    new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-    new Date(),
+    new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toUTCString(),
+    new Date().toUTCString(),
     lang
   )
 

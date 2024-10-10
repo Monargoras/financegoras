@@ -89,8 +89,12 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       name,
       category ?? '',
       transactionType,
-      createdAt,
-      transactionType === TransactionType[TransactionType.Single] ? createdAt : stoppedAt
+      createdAt.toUTCString(),
+      transactionType === TransactionType[TransactionType.Single]
+        ? createdAt.toUTCString()
+        : stoppedAt
+          ? stoppedAt.toUTCString()
+          : null
     )
     if (success) {
       notifications.show({

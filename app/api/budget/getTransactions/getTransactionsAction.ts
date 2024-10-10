@@ -1,7 +1,8 @@
 'use server'
 
 import { db } from '@/utils/database'
-import { getTransactionType, Transaction } from '@/utils/types'
+import { parseDatabaseTransactionsArray } from '@/utils/helpers'
+import { Transaction } from '@/utils/types'
 
 export default async function getTransactions(
   userId: string,
@@ -19,10 +20,7 @@ export default async function getTransactions(
     .select(['id', 'name', 'amount', 'category', 'isIncome', 'isSavings', 'transactionType', 'createdAt', 'stoppedAt'])
     .execute()
 
-  const res: Transaction[] = transactions.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const res = parseDatabaseTransactionsArray(transactions)
 
   return res
 }

@@ -1,5 +1,5 @@
 import { db } from '@/utils/database'
-import { getTransactionType, Transaction } from '@/utils/types'
+import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 
 export const fetchIncExpSavTransactions = async (userId: string, year: number, month: number | null) => {
   const incomeRes = await db
@@ -38,20 +38,11 @@ export const fetchIncExpSavTransactions = async (userId: string, year: number, m
     .execute()
 
   // transform transaction type to enum
-  const incomeTransactions: Transaction[] = incomeRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const incomeTransactions = parseDatabaseTransactionsArray(incomeRes)
 
-  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const expenseTransactions = parseDatabaseTransactionsArray(expenseRes)
 
-  const savingsTransactions: Transaction[] = savingsRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const savingsTransactions = parseDatabaseTransactionsArray(savingsRes)
 
   return { incomeTransactions, expenseTransactions, savingsTransactions }
 }

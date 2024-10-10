@@ -13,7 +13,7 @@ export default async function submitTransaction(
   name: string,
   category: string,
   transactionType: TransactionType,
-  date: Date = new Date()
+  date: string = new Date().toUTCString()
 ) {
   const session = await getServerSession(authOptions)
   if (!session || !session.user) {
@@ -35,10 +35,10 @@ export default async function submitTransaction(
     category,
     userId: session.user.id,
     id,
-    createdAt: date,
+    createdAt: new Date(date),
     transactionType: TransactionType[transactionType],
     ...(transactionType === TransactionType.Single && {
-      stoppedAt: date,
+      stoppedAt: new Date(date),
     }),
   }
   const res = await db.insertInto('transactions').values(transaction).executeTakeFirst()

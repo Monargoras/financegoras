@@ -28,7 +28,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const fetcher: Fetcher<AnalysisDashboardData, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?demo=${props.demo}&names=${nameSearch.join(',')}&categories=${categorySearch.join(',')}&groups=${groupSearch.join(',')}\
-&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toISOString()}&endDate=${dateRange[1].toISOString()}` : ''}`
+&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}`
   const { data, error, isLoading } = useSWR(`/api/analysis/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
     keepPreviousData: true,

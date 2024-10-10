@@ -130,7 +130,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       name,
       category ?? '',
       transactionType,
-      date
+      date?.toUTCString()
     )
     if (success) {
       setName('')

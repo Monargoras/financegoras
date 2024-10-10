@@ -27,7 +27,7 @@ export enum TransactionType {
   Annual,
 }
 
-export type Transaction = {
+export type DatabaseTransactionType = {
   id: string
   isIncome: boolean
   isSavings: boolean
@@ -35,8 +35,20 @@ export type Transaction = {
   createdAt: Date
   name: string
   category: string
-  transactionType: TransactionType
+  transactionType: string
   stoppedAt: Date | null
+}
+
+export type Transaction = {
+  id: string
+  isIncome: boolean
+  isSavings: boolean
+  amount: number
+  createdAt: string
+  name: string
+  category: string
+  transactionType: TransactionType
+  stoppedAt: string | null
 }
 
 export type Category = {

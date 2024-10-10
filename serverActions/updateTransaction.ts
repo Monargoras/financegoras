@@ -13,8 +13,8 @@ export default async function updateTransaction(
   name: string,
   category: string,
   transactionType: string,
-  createdAt: Date,
-  stoppedAt: Date | null
+  createdAt: string,
+  stoppedAt: string | null
 ) {
   const session = await getServerSession(authOptions)
   if (!session || !session.user) {
@@ -29,7 +29,7 @@ export default async function updateTransaction(
   if (!createdAt) {
     return false
   }
-  if (transactionType === TransactionType[TransactionType.Single] && createdAt.getTime() !== stoppedAt?.getTime()) {
+  if (transactionType === TransactionType[TransactionType.Single] && createdAt !== stoppedAt) {
     return false
   }
 
@@ -43,8 +43,8 @@ export default async function updateTransaction(
       name,
       category,
       transactionType,
-      createdAt,
-      stoppedAt,
+      createdAt: new Date(createdAt),
+      stoppedAt: stoppedAt ? new Date(stoppedAt) : null,
     })
     .where((eb) => eb.and([eb('id', '=', id), eb('userId', '=', session.user.id)]))
     .executeTakeFirst()

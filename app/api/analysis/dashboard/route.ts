@@ -39,10 +39,17 @@ export async function GET(request: NextRequest) {
   const categories = categoriesString ? categoriesString.split(',') : []
   const groups = groupsString ? groupsString.split(',') : []
   const types = typesString ? typesString.split(',') : []
-  const startDate = startDateString ? new Date(startDateString) : null
-  const endDate = endDateString ? new Date(endDateString) : null
 
-  const res = await getAnalysisDashbaordData(userId, names, categories, groups, types, startDate, endDate, lang)
+  const res = await getAnalysisDashbaordData(
+    userId,
+    names,
+    categories,
+    groups,
+    types,
+    startDateString,
+    endDateString,
+    lang
+  )
 
   return new Response(JSON.stringify(res), { status: 200 })
 }

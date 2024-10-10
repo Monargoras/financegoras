@@ -1,10 +1,11 @@
 'use server'
 
 import { db } from '@/utils/database'
-import { CategoryExpenseData, getGroupFromCategory, getTransactionType, Transaction } from '@/utils/types'
+import { CategoryExpenseData, getGroupFromCategory } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
 import getUsedCategories from '../getCategories/getUsedCategoriesAction'
+import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 
 export default async function getExpensesByCategory(
   userId: string,
@@ -31,10 +32,7 @@ export default async function getExpensesByCategory(
   const expenseRes = await expenseQuery.execute()
 
   // transform transaction type to enum
-  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const expenseTransactions = parseDatabaseTransactionsArray(expenseRes)
 
   const aggregatedTransactions = {} as Record<string, number>
   const categories = await getCategories(userId)

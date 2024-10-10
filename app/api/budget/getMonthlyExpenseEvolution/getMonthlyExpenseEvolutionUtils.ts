@@ -1,14 +1,8 @@
 import { db } from '@/utils/database'
-import {
-  CategoryEvolution,
-  getGroupFromCategory,
-  getTransactionType,
-  MonthlyExpense,
-  Transaction,
-  TransactionType,
-} from '@/utils/types'
+import { CategoryEvolution, getGroupFromCategory, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
+import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 
 export const getMonthlyExpenseDataOneMonth = async (
   month: number,
@@ -34,10 +28,7 @@ export const getMonthlyExpenseDataOneMonth = async (
 
   const expenseRes = await expenseQuery.execute()
 
-  const expenseTransactions: Transaction[] = expenseRes.map((transaction) => ({
-    ...transaction,
-    transactionType: getTransactionType(transaction.transactionType),
-  }))
+  const expenseTransactions = parseDatabaseTransactionsArray(expenseRes)
 
   let expensesPerGroupedSet = {} as Record<string, number>
 

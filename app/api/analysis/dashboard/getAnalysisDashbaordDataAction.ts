@@ -19,8 +19,8 @@ export default async function getAnalysisDashbaordData(
   categories: string[],
   groups: string[],
   types: string[],
-  startDate: Date | null,
-  endDate: Date | null,
+  startDate: string | null,
+  endDate: string | null,
   lang: string
 ): Promise<AnalysisDashboardData | null> {
   const [allCategories, allTransactions] = await Promise.all([getCategories(userId), getAllTransactions(userId)])
@@ -33,8 +33,8 @@ export default async function getAnalysisDashbaordData(
     return null
   }
 
-  const safeStartDate = startDate ?? allTransactions[allTransactions.length - 1].createdAt
-  const safeEndDate = endDate ?? allTransactions[0].createdAt
+  const safeStartDate = new Date(startDate ?? allTransactions[allTransactions.length - 1].createdAt)
+  const safeEndDate = new Date(endDate ?? allTransactions[0].createdAt)
 
   const filterData = (rawData: Transaction[]) => {
     let res = rawData
@@ -57,8 +57,8 @@ export default async function getAnalysisDashbaordData(
         const createdAt = new Date(ta.createdAt)
         const stoppedAt = ta.stoppedAt ? new Date(ta.stoppedAt) : null
         // add 24 hours to the end date to include the whole day
-        const rangeEnd = new Date(endDate.getTime() + 86400000)
-        return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= startDate)
+        const rangeEnd = new Date(safeEndDate.getTime() + 86400000)
+        return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= safeStartDate)
       })
     }
     return res
