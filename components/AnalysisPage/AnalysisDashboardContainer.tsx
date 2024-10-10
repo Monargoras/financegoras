@@ -21,7 +21,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   // set initial range to one year ago until today
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+    new Date(new Date().setMonth(new Date().getMonth() - 6)),
     new Date(),
   ])
 
