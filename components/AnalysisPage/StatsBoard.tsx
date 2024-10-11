@@ -15,6 +15,7 @@ export default function StatsBoard(props: StatsBoardProps) {
     radius: 'md',
     withBorder: true,
     p: 'md',
+    pt: 8,
     m: 'xs',
     align: 'center',
   }
