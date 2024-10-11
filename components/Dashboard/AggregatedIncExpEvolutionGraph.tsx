@@ -1,6 +1,6 @@
 'use client'
 
-import { useMatches } from '@mantine/core'
+import { Paper, useMatches, Text, useMantineColorScheme, Flex, useMantineTheme } from '@mantine/core'
 import { AreaChart } from '@mantine/charts'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
@@ -13,6 +13,60 @@ interface AggregatedIncExpEvolutionGraphProps {
   timeframe: string
   percentage: boolean
   data: AggregatedIncomeExpenseEvolution
+}
+
+interface ChartTooltipProps {
+  label: string
+  payload: Record<string, unknown>[] | undefined
+  dict: Dictionary
+}
+
+function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
+  if (!payload) return null
+  // reverse and remove duplicates
+  const sortedPayload = [...payload]
+    .reverse()
+    .filter((item, index, self) => self.findIndex((t) => t.name === item.name) === index)
+
+  const colorScheme = useMantineColorScheme()
+  const theme = useMantineTheme()
+  const textColor = colorScheme.colorScheme === 'dark' ? 'white' : 'black'
+
+  const series = {
+    totalExpenses: { label: dict.budgetPage.monthlyExpenses, color: theme.colors.red[5] },
+    totalSavings: { label: dict.budgetPage.monthlySavings, color: theme.colors.blue[5] },
+    remainingIncome: { label: dict.budgetPage.remainingIncome, color: theme.colors.cyan[5] },
+  }
+
+  return (
+    <Paper px="md" py="sm" withBorder shadow="md" radius="md">
+      <Text fw={500} mb={5} c={textColor}>
+        {label}
+      </Text>
+      <Flex gap={6} direction="column">
+        {sortedPayload.map((item) => (
+          <Flex key={item.name as string} align="center">
+            {series[item.name as 'totalExpenses' | 'totalSavings' | 'remainingIncome'].color && (
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: 5,
+                  backgroundColor: series[item.name as 'totalExpenses' | 'totalSavings' | 'remainingIncome'].color,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Text fz="sm">{series[item.name as 'totalExpenses' | 'totalSavings' | 'remainingIncome'].label}</Text>
+            <Flex ml={36} />
+            <Text ml="auto" fz="sm" c={textColor}>
+              {(item.value as number).toFixed(2)}€
+            </Text>
+          </Flex>
+        ))}
+      </Flex>
+    </Paper>
+  )
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
@@ -32,6 +86,9 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
+        content: ({ label, payload }) => (
+          <ChartTooltip label={label} payload={payload as Record<string, number>[]} dict={props.dictionary} />
+        ),
       }}
       yAxisProps={{
         domain: ([dataMin, dataMax]) => [

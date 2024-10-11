@@ -1,6 +1,6 @@
 'use client'
 
-import { useMatches } from '@mantine/core'
+import { Flex, Paper, useMantineColorScheme, useMatches, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import { ColorMap, Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
@@ -14,6 +14,49 @@ interface MonthlyExpenseEvolutionGraphProps {
   timeframe: string
   data: MonthlyExpenseEvolution
   colorMap: ColorMap
+}
+
+interface ChartTooltipProps {
+  label: string
+  payload: Record<string, unknown>[] | undefined
+}
+
+function ChartTooltip({ label, payload }: ChartTooltipProps) {
+  if (!payload) return null
+  const sortedPayload = [...payload].reverse()
+
+  const theme = useMantineColorScheme()
+  const textColor = theme.colorScheme === 'dark' ? 'white' : 'black'
+
+  return (
+    <Paper px="md" py="sm" withBorder shadow="md" radius="md">
+      <Text fw={500} mb={5} c={textColor}>
+        {label}
+      </Text>
+      <Flex gap={6} direction="column">
+        {sortedPayload.map((item) => (
+          <Flex key={item.name as string} align="center">
+            {(item.color as string) && (
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: 5,
+                  backgroundColor: item.color as string,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Text fz="sm">{item.name as string}</Text>
+            <Flex ml={36} />
+            <Text ml="auto" fz="sm" c={textColor}>
+              {(item.value as number).toFixed(2)}€
+            </Text>
+          </Flex>
+        ))}
+      </Flex>
+    </Paper>
+  )
 }
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
@@ -56,6 +99,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
+        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload as Record<string, number>[]} />,
       }}
       barProps={{
         onClick: (event) => {
