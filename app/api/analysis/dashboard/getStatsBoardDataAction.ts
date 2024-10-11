@@ -41,13 +41,14 @@ const getStats = (transactions: Transaction[], monthsToCompute: number[][], inco
 export default async function getStatsBoardData(
   transactions: Transaction[],
   allIncomeTransactions: Transaction[],
+  allSavingsTransactions: Transaction[],
   startDate: Date,
   endDate: Date
 ): Promise<StatsBoardData> {
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
 
   const incomeTransactions = allIncomeTransactions
-  const savingsTransactions = transactions.filter((transaction) => transaction.isSavings)
+  const savingsTransactions = allSavingsTransactions
   const expensesTransactions = transactions.filter((transaction) => !transaction.isIncome && !transaction.isSavings)
 
   const income = getStats(incomeTransactions, monthsToCompute, undefined)

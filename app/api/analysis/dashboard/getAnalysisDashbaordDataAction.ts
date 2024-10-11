@@ -28,6 +28,7 @@ export default async function getAnalysisDashbaordData(
   const listOfNames = Array.from(new Set(allTransactions.map((ta) => ta.name)))
 
   const allIncomeTransactions = allTransactions.filter((ta) => ta.isIncome)
+  const allSavingsTransactions = allTransactions.filter((ta) => ta.isSavings && !ta.isIncome)
 
   if (!allCategories) {
     return null
@@ -66,10 +67,12 @@ export default async function getAnalysisDashbaordData(
 
   const filteredTransactions = filterData(allTransactions)
 
+  const filteredWithoutIncSav = filteredTransactions.filter((ta) => !ta.isIncome && !ta.isSavings)
+
   const [categoryEvolution, colorMap, statsBoardData] = await Promise.all([
-    getCategoryEvolution(filteredTransactions, safeStartDate, safeEndDate, lang, userId),
+    getCategoryEvolution(filteredWithoutIncSav, safeStartDate, safeEndDate, lang, userId),
     getColorMap(userId),
-    getStatsBoardData(filteredTransactions, allIncomeTransactions, safeStartDate, safeEndDate),
+    getStatsBoardData(filteredTransactions, allIncomeTransactions, allSavingsTransactions, safeStartDate, safeEndDate),
   ])
 
   return {
