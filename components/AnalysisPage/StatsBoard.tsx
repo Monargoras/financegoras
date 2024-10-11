@@ -23,22 +23,20 @@ export default function StatsBoard(props: StatsBoardProps) {
     <Flex gap="md" justify="center" direction="column">
       <Paper {...paperStyles}>
         <Text>{props.dict.analysisPage.total}</Text>
-        <Flex gap="md" justify="space-around" direction="row">
-          <Text>{props.dict.analysisPage.expenses}</Text>
-          <Text>{props.dict.analysisPage.income}</Text>
-          <Text>{props.dict.analysisPage.savings}</Text>
-        </Flex>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
           <Flex justify="center" align="center" direction="column">
+            <Text>{props.dict.analysisPage.expenses}</Text>
             <Text c={theme.colors.red[5]}>{props.data.totalFiltered.expenses.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
+            <Text>{props.dict.analysisPage.income}</Text>
             <Text c={theme.colors.green[5]}>{props.data.totalFiltered.income.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
+            <Text>{props.dict.analysisPage.savings}</Text>
             <Text c={theme.colors.blue[5]}>{props.data.totalFiltered.savings.toFixed(2)}€</Text>
           </Flex>
         </Flex>
