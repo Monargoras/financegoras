@@ -1,6 +1,4 @@
-'use client'
-
-import { Text, Paper, useMatches, Flex, useMantineColorScheme } from '@mantine/core'
+import { Text, Paper, Flex, useMantineColorScheme } from '@mantine/core'
 import { LineChart } from '@mantine/charts'
 import { CategoryEvolutionLineChartData, ColorMap } from '@/utils/types'
 
@@ -55,11 +53,6 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 }
 
 export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineChartProps) {
-  const chartWidth = useMatches({
-    md: 900,
-    sm: 400,
-  })
-
   const getSeries = (d: CategoryEvolutionLineChartData) => {
     const categorySet = new Set<string>()
     for (const month of d) {
@@ -78,8 +71,15 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
 
   return (
     <LineChart
-      w={chartWidth}
-      h={280}
+      w={{
+        xl: 1300,
+        md: 900,
+        sm: 400,
+      }}
+      h={{
+        xl: 400,
+        md: 300,
+      }}
       data={props.data}
       dataKey="month"
       type="default"

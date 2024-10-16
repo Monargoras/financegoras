@@ -21,7 +21,12 @@ export function TransactionTable(props: TransactionTableProps) {
 
   return (
     <>
-      <Table.ScrollContainer h="45dvh" minWidth={300} className={generalClasses.styledScroll}>
+      <Table.ScrollContainer
+        h="45dvh"
+        miw={{ xl: 600, md: 300 }}
+        minWidth={300}
+        className={generalClasses.styledScroll}
+      >
         <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
           <Table.Thead>
             <Table.Tr>

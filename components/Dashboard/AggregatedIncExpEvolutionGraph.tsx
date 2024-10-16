@@ -1,6 +1,4 @@
-'use client'
-
-import { Paper, useMatches, Text, useMantineColorScheme, Flex, useMantineTheme } from '@mantine/core'
+import { Paper, Text, useMantineColorScheme, Flex, useMantineTheme } from '@mantine/core'
 import { AreaChart } from '@mantine/charts'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
@@ -70,15 +68,17 @@ function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
-  const chartWidth = useMatches({
-    md: 900,
-    sm: 400,
-  })
-
   return (
     <AreaChart
-      w={chartWidth}
-      h={280}
+      w={{
+        xl: 1300,
+        md: 900,
+        sm: 400,
+      }}
+      h={{
+        xl: 400,
+        md: 300,
+      }}
       data={props.data}
       dataKey="month"
       type={props.percentage ? 'percent' : 'stacked'}

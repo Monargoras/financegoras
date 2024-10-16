@@ -16,8 +16,14 @@ export default function CategoryRadar(props: CategoryRadarProps) {
         {new Date(`${props.selectedYear}-${props.selectedMonth}-01`).toLocaleString(props.lang, { month: 'long' })}
       </Text>
       <RadarChart
-        w={300}
-        h={200}
+        w={{
+          xl: 600,
+          md: 300,
+        }}
+        h={{
+          xl: 400,
+          md: 300,
+        }}
         data={props.data}
         dataKey="category"
         series={[{ name: 'value', color: 'blue.5', opacity: 0.2 }]}

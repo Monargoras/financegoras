@@ -1,6 +1,4 @@
-'use client'
-
-import { Flex, Paper, useMantineColorScheme, useMatches, Text } from '@mantine/core'
+import { Flex, Paper, useMantineColorScheme, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import { ColorMap, Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
@@ -62,11 +60,6 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
   const { lang } = props
 
-  const chartWidth = useMatches({
-    md: 900,
-    sm: 400,
-  })
-
   const getSeries = (d: MonthlyExpenseEvolution) => {
     const categorySet = new Set<string>()
     for (const month of d) {
@@ -85,8 +78,15 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
 
   return (
     <BarChart
-      w={chartWidth}
-      h={200}
+      w={{
+        xl: 1300,
+        md: 900,
+        sm: 400,
+      }}
+      h={{
+        xl: 400,
+        md: 300,
+      }}
       data={props.data}
       dataKey="month"
       type={props.percentage ? 'percent' : 'stacked'}
