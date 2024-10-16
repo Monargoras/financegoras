@@ -22,9 +22,9 @@ export function TransactionTable(props: TransactionTableProps) {
   return (
     <>
       <Table.ScrollContainer
-        h="45dvh"
-        miw={{ xl: 600, md: 300 }}
-        minWidth={300}
+        h="40dvh"
+        miw={{ xl: 600, md: 350 }}
+        minWidth={350}
         className={generalClasses.styledScroll}
       >
         <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>

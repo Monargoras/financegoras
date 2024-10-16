@@ -77,7 +77,9 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       }}
       h={{
         xl: 400,
-        md: 300,
+        md: 220,
+        sm: 220,
+        base: 220,
       }}
       data={props.data}
       dataKey="month"

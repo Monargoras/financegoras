@@ -85,7 +85,8 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       }}
       h={{
         xl: 400,
-        md: 300,
+        md: 280,
+        base: 280,
       }}
       data={props.data}
       dataKey="month"

@@ -18,11 +18,13 @@ export default function CategoryRadar(props: CategoryRadarProps) {
       <RadarChart
         w={{
           xl: 600,
-          md: 300,
+          md: 350,
+          base: 350,
         }}
         h={{
           xl: 400,
-          md: 300,
+          md: 280,
+          base: 280,
         }}
         data={props.data}
         dataKey="category"

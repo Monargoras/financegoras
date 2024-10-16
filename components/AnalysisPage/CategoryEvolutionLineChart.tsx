@@ -79,6 +79,7 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
       h={{
         xl: 400,
         md: 300,
+        base: 300,
       }}
       data={props.data}
       dataKey="month"
