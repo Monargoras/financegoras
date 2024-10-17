@@ -113,6 +113,8 @@
     "expenses": "Ausgaben",
     "income": "Einnahmen",
     "savings": "Sparen",
+    "average": "Durchschnitt / Monat",
+    "sum": "Summe",
     "total": "Gesamt gefiltert",
     "averageMonth": "Durchschnitt monatlich",
     "averagePercentageMonth": "Durchschnitt % der Einnahmen",

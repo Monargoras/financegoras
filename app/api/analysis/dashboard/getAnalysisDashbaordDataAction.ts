@@ -12,6 +12,7 @@ import getAllTransactions from '../../transactions/getAllTransactions/getAllTran
 import getCategories from '../../budget/getCategories/getCategoriesAction'
 import getColorMap from '../../budget/getColorMap/getColorMapAction'
 import getStatsBoardData from './getStatsBoardDataAction'
+import getCategoryAggregationData from './getCategoryAggregationDataAction'
 
 export default async function getAnalysisDashbaordData(
   userId: string,
@@ -69,10 +70,11 @@ export default async function getAnalysisDashbaordData(
 
   const filteredWithoutIncSav = filteredTransactions.filter((ta) => !ta.isIncome && !ta.isSavings)
 
-  const [categoryEvolution, colorMap, statsBoardData] = await Promise.all([
+  const [categoryEvolution, colorMap, statsBoardData, categoryAggregationData] = await Promise.all([
     getCategoryEvolution(filteredWithoutIncSav, safeStartDate, safeEndDate, lang, userId),
     getColorMap(userId),
     getStatsBoardData(filteredTransactions, allIncomeTransactions, allSavingsTransactions, safeStartDate, safeEndDate),
+    getCategoryAggregationData(filteredTransactions, safeStartDate, safeEndDate),
   ])
 
   return {
@@ -82,5 +84,6 @@ export default async function getAnalysisDashbaordData(
     categoryEvolutionData: categoryEvolution,
     colorMap,
     statsBoardData,
+    categoryAggregationData,
   }
 }

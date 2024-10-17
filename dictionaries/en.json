@@ -114,6 +114,8 @@
     "expenses": "Expenses",
     "income": "Income",
     "savings": "Savings",
+    "average": "Average / month",
+    "sum": "Sum",
     "total": "Total filtered",
     "averageMonth": "Average monthly",
     "averagePercentageMonth": "Average % of income",

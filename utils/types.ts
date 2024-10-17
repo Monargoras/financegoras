@@ -156,6 +156,15 @@ export type StatsBoardData = {
   }
 }
 
+export type CategoryAggregationData = {
+  id: string
+  name: string
+  isSavings: boolean
+  isIncome: boolean
+  average: number
+  total: number
+}[]
+
 export type AnalysisDashboardData = {
   categories: Categories | null
   transactions: Transaction[]
@@ -163,4 +172,5 @@ export type AnalysisDashboardData = {
   categoryEvolutionData: CategoryEvolutionLineChartData
   colorMap: ColorMap
   statsBoardData: StatsBoardData
+  categoryAggregationData: CategoryAggregationData
 }
