@@ -60,6 +60,7 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
         savingsPercentage: 0,
       },
     },
+    categoryAggregationData: [],
   }
 
   const session = await getServerSession(authOptions)

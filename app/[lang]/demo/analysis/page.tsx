@@ -70,6 +70,7 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
           savingsPercentage: 0,
         },
       },
+      categoryAggregationData: [],
     }
   )
 }
