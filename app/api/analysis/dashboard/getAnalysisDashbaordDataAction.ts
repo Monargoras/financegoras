@@ -68,10 +68,8 @@ export default async function getAnalysisDashbaordData(
 
   const filteredTransactions = filterData(allTransactions)
 
-  const filteredWithoutIncSav = filteredTransactions.filter((ta) => !ta.isIncome && !ta.isSavings)
-
   const [categoryEvolution, colorMap, statsBoardData, categoryAggregationData] = await Promise.all([
-    getCategoryEvolution(filteredWithoutIncSav, safeStartDate, safeEndDate, lang, userId),
+    getCategoryEvolution(filteredTransactions, safeStartDate, safeEndDate, lang, userId),
     getColorMap(userId),
     getStatsBoardData(filteredTransactions, allIncomeTransactions, allSavingsTransactions, safeStartDate, safeEndDate),
     getCategoryAggregationData(filteredTransactions, safeStartDate, safeEndDate),
