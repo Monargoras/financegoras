@@ -24,11 +24,13 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
     new Date(new Date().setMonth(new Date().getMonth() - 11)),
     new Date(),
   ])
+  const [onlyExpenses, setOnlyExpenses] = useState<boolean>(true)
 
   const fetcher: Fetcher<AnalysisDashboardData, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?demo=${props.demo}&names=${nameSearch.join(',')}&categories=${categorySearch.join(',')}&groups=${groupSearch.join(',')}\
-&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}`
+&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}\
+&onlyExpenses=${onlyExpenses}&lang=${props.locale}`
   const { data, error, isLoading } = useSWR(`/api/analysis/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
     keepPreviousData: true,
@@ -71,6 +73,8 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
               }
               listOfGroups={data.categories ? data.categories.map((c) => c.group) : []}
               dictionary={props.dictionary}
+              onlyExpenses={onlyExpenses}
+              setOnlyExpenses={setOnlyExpenses}
             />
             <Divider size="lg" w="100%" />
             <AnalysisDashboard locale={props.locale} dictionary={props.dictionary} demo={props.demo} data={data} />

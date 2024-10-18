@@ -1,6 +1,6 @@
 'use client'
 
-import { ComboboxItem, Flex, MultiSelect, OptionsFilter } from '@mantine/core'
+import { ComboboxItem, Flex, MultiSelect, OptionsFilter, Switch } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
 import { Dictionary, TransactionType } from '@/utils/types'
 
@@ -19,6 +19,8 @@ interface AnalysisControlsProps {
   setTypeFilter: (newValue: string[]) => void
   dateRange: [Date | null, Date | null]
   setDateRange: (newValue: [Date | null, Date | null]) => void
+  onlyExpenses: boolean
+  setOnlyExpenses: (newValue: boolean) => void
 }
 
 const optionsFilter: OptionsFilter = ({ options, search }) => {
@@ -84,6 +86,11 @@ export default function AnalysisControls(props: AnalysisControlsProps) {
         value={props.dateRange}
         onChange={props.setDateRange}
         clearable
+      />
+      <Switch
+        checked={props.onlyExpenses}
+        onChange={(event) => props.setOnlyExpenses(event.currentTarget.checked)}
+        label={props.dictionary.analysisPage.onlyExpenses}
       />
     </Flex>
   )

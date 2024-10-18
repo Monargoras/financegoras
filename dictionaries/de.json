@@ -121,6 +121,7 @@
     "maxMonth": "Maximal monatlich",
     "maxPercentageMonth": "Maximaler % der Einnahmen",
     "minMonth": "Minimal monatlich",
-    "minPercentageMonth": "Minimaler % der Einnahmen"
+    "minPercentageMonth": "Minimaler % der Einnahmen",
+    "onlyExpenses": "Nur Ausgaben in Graph/Tabellen einbeziehen"
   }
 }

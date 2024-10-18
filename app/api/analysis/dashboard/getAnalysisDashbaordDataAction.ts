@@ -22,6 +22,7 @@ export default async function getAnalysisDashbaordData(
   types: string[],
   startDate: string | null,
   endDate: string | null,
+  onlyExpenses: boolean,
   lang: string
 ): Promise<AnalysisDashboardData | null> {
   const [allCategories, allTransactions] = await Promise.all([getCategories(userId), getAllTransactions(userId)])
@@ -40,6 +41,9 @@ export default async function getAnalysisDashbaordData(
 
   const filterData = (rawData: Transaction[]) => {
     let res = rawData
+    if (onlyExpenses) {
+      res = res.filter((ta) => !ta.isIncome && !ta.isSavings)
+    }
     if (names.length > 0) {
       res = res.filter((ta) => names.includes(ta.name))
     }

@@ -14,6 +14,7 @@ import getAnalysisDashbaordData from './getAnalysisDashbaordDataAction'
  * @param types - array of transaction types
  * @param startDate - start date of the date range
  * @param endDate - end date of the date range
+ * @param onlyExpenses - set if only expenses are requested
  * @param lang - the current language used by user for month names
  * @param demo - set if demo data is requested
  * @returns body containing DasboardData
@@ -33,6 +34,7 @@ export async function GET(request: NextRequest) {
   const typesString = request.nextUrl.searchParams.get('types')
   const startDateString = request.nextUrl.searchParams.get('startDate')
   const endDateString = request.nextUrl.searchParams.get('endDate')
+  const onlyExpenses = valueToBoolean(request.nextUrl.searchParams.get('onlyExpenses')) ?? true
   const lang = request.nextUrl.searchParams.get('lang') ?? 'en'
 
   const names = namesString ? namesString.split(',') : []
@@ -48,6 +50,7 @@ export async function GET(request: NextRequest) {
     types,
     startDateString,
     endDateString,
+    onlyExpenses,
     lang
   )
 

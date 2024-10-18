@@ -32,6 +32,7 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     [],
     new Date(new Date().setMonth(new Date().getMonth() - 11)).toUTCString(),
     new Date().toUTCString(),
+    true,
     lang
   )
 

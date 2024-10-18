@@ -122,6 +122,7 @@
     "maxMonth": "Maximum monthly",
     "maxPercentageMonth": "Maximum % of income",
     "minMonth": "Minimum monthly",
-    "minPercentageMonth": "Minimum % of income"
+    "minPercentageMonth": "Minimum % of income",
+    "onlyExpenses": "Only include expenses in graph and tables"
   }
 }
