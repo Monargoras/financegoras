@@ -121,7 +121,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
           }
           if (
             props.timeframe === props.dictionary.budgetPage.last12Months &&
-            selectedMonth < new Date().getMonth() + 1
+            selectedMonth <= new Date().getMonth() + 1
           ) {
             props.setSelectedYear(new Date().getFullYear())
           }
