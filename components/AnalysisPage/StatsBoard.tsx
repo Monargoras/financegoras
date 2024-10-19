@@ -26,7 +26,7 @@ export default function StatsBoard(props: StatsBoardProps) {
         <Text>{props.dict.analysisPage.total}</Text>
         <Divider />
         <Flex gap="md" justify="space-evenly" direction="row">
-          <Flex justify="center" align="center" direction="column">
+          <Flex justify="flex-end" align="center" direction="column">
             <Text>{props.dict.analysisPage.expenses}</Text>
             <Divider w="100%" />
             <Text c={theme.colors.red[5]}>{props.data.totalFiltered.expenses.toFixed(2)}€</Text>
@@ -35,11 +35,13 @@ export default function StatsBoard(props: StatsBoardProps) {
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
             <Text>{props.dict.analysisPage.income}</Text>
+            <Text>{props.dict.analysisPage.remaining}</Text>
             <Divider w="100%" />
             <Text c={theme.colors.green[5]}>{props.data.totalFiltered.income.toFixed(2)}€</Text>
+            <Text c={theme.colors.cyan[5]}>{props.data.totalFiltered.remainingIncome.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
-          <Flex justify="center" align="center" direction="column">
+          <Flex justify="flex-end" align="center" direction="column">
             <Text>{props.dict.analysisPage.savings}</Text>
             <Divider w="100%" />
             <Text c={theme.colors.blue[5]}>{props.data.totalFiltered.savings.toFixed(2)}€</Text>
@@ -59,6 +61,7 @@ export default function StatsBoard(props: StatsBoardProps) {
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
             <Text c={theme.colors.green[5]}>{props.data.averagePerMonth.income.toFixed(2)}€</Text>
+            <Text c={theme.colors.cyan[5]}>{props.data.averagePerMonth.remainingIncome.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
@@ -79,6 +82,7 @@ export default function StatsBoard(props: StatsBoardProps) {
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
             <Text c={theme.colors.green[5]}>{props.data.maximumOneMonth.income.toFixed(2)}€</Text>
+            <Text c={theme.colors.cyan[5]}>{props.data.maximumOneMonth.remainingIncome.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
@@ -99,6 +103,7 @@ export default function StatsBoard(props: StatsBoardProps) {
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
             <Text c={theme.colors.green[5]}>{props.data.minimumOneMonth.income.toFixed(2)}€</Text>
+            <Text c={theme.colors.cyan[5]}>{props.data.minimumOneMonth.remainingIncome.toFixed(2)}€</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">

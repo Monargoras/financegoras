@@ -55,11 +55,20 @@ export default async function getStatsBoardData(
   const savings = getStats(savingsTransactions, monthsToCompute, income.totalsPerMonth)
   const expenses = getStats(expensesTransactions, monthsToCompute, income.totalsPerMonth)
 
+  const remainingValues = monthsToCompute.map((_, index) => {
+    const incomeValue = income.totalsPerMonth[index]
+    const savingsValue = savings.totalsPerMonth[index]
+    const expensesValue = expenses.totalsPerMonth[index]
+
+    return incomeValue - savingsValue - expensesValue
+  })
+
   return {
     totalFiltered: {
       expenses: expenses.total,
       expensesPercentage: income.total ? (expenses.total / income.total) * 100 : 0,
       income: income.total,
+      remainingIncome: remainingValues.reduce((acc, cur) => acc + cur, 0),
       savings: savings.total,
       savingsPercentage: income.total ? (savings.total / income.total) * 100 : 0,
     },
@@ -67,6 +76,7 @@ export default async function getStatsBoardData(
       expenses: expenses.average,
       expensesPercentage: expenses.averagePercentage || 0,
       income: income.average,
+      remainingIncome: remainingValues.reduce((acc, cur) => acc + cur, 0) / remainingValues.length,
       savings: savings.average,
       savingsPercentage: savings.averagePercentage || 0,
     },
@@ -74,6 +84,7 @@ export default async function getStatsBoardData(
       expenses: expenses.maximum,
       expensesPercentage: expenses.maximumPercentage || 0,
       income: income.maximum,
+      remainingIncome: Math.max(...remainingValues),
       savings: savings.maximum,
       savingsPercentage: savings.maximumPercentage || 0,
     },
@@ -81,6 +92,7 @@ export default async function getStatsBoardData(
       expenses: expenses.minimum,
       expensesPercentage: expenses.minimumPercentage || 0,
       income: income.minimum,
+      remainingIncome: Math.min(...remainingValues),
       savings: savings.minimum,
       savingsPercentage: savings.minimumPercentage || 0,
     },
