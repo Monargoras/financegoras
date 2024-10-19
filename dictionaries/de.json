@@ -116,6 +116,7 @@
     "average": "Durchschnitt / Monat",
     "sum": "Summe",
     "total": "Gesamt gefiltert",
+    "totalPercentage": "Gesamt % der Einnahmen",
     "averageMonth": "Durchschnitt monatlich",
     "averagePercentageMonth": "Durchschnitt % der Einnahmen",
     "maxMonth": "Maximal monatlich",

@@ -30,6 +30,7 @@ export default function StatsBoard(props: StatsBoardProps) {
             <Text>{props.dict.analysisPage.expenses}</Text>
             <Divider w="100%" />
             <Text c={theme.colors.red[5]}>{props.data.totalFiltered.expenses.toFixed(2)}€</Text>
+            <Text c={theme.colors.red[5]}>{props.data.totalFiltered.expensesPercentage.toFixed(2)}%</Text>
           </Flex>
           <Divider orientation="vertical" />
           <Flex justify="center" align="center" direction="column">
@@ -42,6 +43,7 @@ export default function StatsBoard(props: StatsBoardProps) {
             <Text>{props.dict.analysisPage.savings}</Text>
             <Divider w="100%" />
             <Text c={theme.colors.blue[5]}>{props.data.totalFiltered.savings.toFixed(2)}€</Text>
+            <Text c={theme.colors.blue[5]}>{props.data.totalFiltered.savingsPercentage.toFixed(2)}%</Text>
           </Flex>
         </Flex>
       </Paper>

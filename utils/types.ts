@@ -130,8 +130,10 @@ export type CategoryEvolutionLineChartData = CategoryEvolution[]
 export type StatsBoardData = {
   totalFiltered: {
     expenses: number
+    expensesPercentage: number
     income: number
     savings: number
+    savingsPercentage: number
   }
   averagePerMonth: {
     expenses: number

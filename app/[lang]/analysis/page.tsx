@@ -35,8 +35,10 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     statsBoardData: {
       totalFiltered: {
         expenses: 0,
+        expensesPercentage: 0,
         income: 0,
         savings: 0,
+        savingsPercentage: 0,
       },
       averagePerMonth: {
         expenses: 0,

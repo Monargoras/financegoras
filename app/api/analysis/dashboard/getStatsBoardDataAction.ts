@@ -58,8 +58,10 @@ export default async function getStatsBoardData(
   return {
     totalFiltered: {
       expenses: expenses.total,
+      expensesPercentage: income.total ? (expenses.total / income.total) * 100 : 0,
       income: income.total,
       savings: savings.total,
+      savingsPercentage: income.total ? (savings.total / income.total) * 100 : 0,
     },
     averagePerMonth: {
       expenses: expenses.average,

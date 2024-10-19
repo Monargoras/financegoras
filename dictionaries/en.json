@@ -117,6 +117,7 @@
     "average": "Average / month",
     "sum": "Sum",
     "total": "Total filtered",
+    "totalPercentage": "Total % of income",
     "averageMonth": "Average monthly",
     "averagePercentageMonth": "Average % of income",
     "maxMonth": "Maximum monthly",
