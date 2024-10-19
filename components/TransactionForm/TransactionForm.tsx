@@ -139,6 +139,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         setCategory(categories[0].items[0].name)
       }
       setIsIncome(false)
+      setIsSavings(false)
       notifications.show({
         title: props.dictionary.budgetPage.feedbackAddTransactionSuccessTitle,
         message: props.dictionary.budgetPage.feedbackAddTransactionSuccessMessage,
