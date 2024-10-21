@@ -81,7 +81,7 @@ export type AggregatedIncomeExpenseTotals = {
 }
 
 export type AggregatedIncomeExpenseEvolution = {
-  maxPercentageOfIncomUsed: number
+  maxPercentageOfIncomeUsed: number
   series: {
     month: string
     totalIncome: number

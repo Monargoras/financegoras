@@ -29,7 +29,7 @@ export default async function getIncExpEvolution(
     ) + 1
 
   return {
-    maxPercentageOfIncomUsed: maxPercentage > 1 ? maxPercentage : 1,
+    maxPercentageOfIncomeUsed: maxPercentage > 1 ? maxPercentage : 1,
     series: fixedTypes,
   }
 }

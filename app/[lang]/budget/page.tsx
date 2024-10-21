@@ -38,7 +38,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     return {
       monthlyExpenseEvolution: [],
       incExpEvolution: {
-        maxPercentageOfIncomUsed: 0,
+        maxPercentageOfIncomeUsed: 0,
         series: [],
       },
       monthlyStats: {

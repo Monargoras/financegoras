@@ -96,7 +96,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
         domain: ([dataMin, dataMax]) => [
           dataMin,
           // round up to nearest 100
-          props.percentage ? props.data.maxPercentageOfIncomUsed : Math.ceil(dataMax / 100) * 100,
+          props.percentage ? props.data.maxPercentageOfIncomeUsed : Math.ceil(dataMax / 100) * 100,
         ],
       }}
       series={[
