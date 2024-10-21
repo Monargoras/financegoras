@@ -37,7 +37,10 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   if (!session?.user) {
     return {
       monthlyExpenseEvolution: [],
-      incExpEvolution: [],
+      incExpEvolution: {
+        maxPercentageOfIncomUsed: 0,
+        series: [],
+      },
       monthlyStats: {
         totalIncome: 0,
         totalExpenses: 0,

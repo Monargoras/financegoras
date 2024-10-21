@@ -22,5 +22,14 @@ export default async function getIncExpEvolution(
     remainingIncome: parseFloat(e.remainingIncome),
   }))
 
-  return fixedTypes
+  // calculates the maximum percetnage of income used
+  const maxPercentage =
+    Math.max(
+      ...fixedTypes.filter((e) => e.remainingIncome < 0).map((e) => Math.abs(e.remainingIncome) / e.totalIncome)
+    ) + 1
+
+  return {
+    maxPercentageOfIncomUsed: maxPercentage > 1 ? maxPercentage : 1,
+    series: fixedTypes,
+  }
 }

@@ -81,12 +81,15 @@ export type AggregatedIncomeExpenseTotals = {
 }
 
 export type AggregatedIncomeExpenseEvolution = {
-  month: string
-  totalIncome: number
-  totalExpenses: number
-  totalSavings: number
-  remainingIncome: number
-}[]
+  maxPercentageOfIncomUsed: number
+  series: {
+    month: string
+    totalIncome: number
+    totalExpenses: number
+    totalSavings: number
+    remainingIncome: number
+  }[]
+}
 
 export type ColorMap = {
   [key: string]: string

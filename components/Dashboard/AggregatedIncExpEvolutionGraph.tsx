@@ -81,7 +81,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
         sm: 220,
         base: 220,
       }}
-      data={props.data}
+      data={props.data.series}
       dataKey="month"
       type={props.percentage ? 'percent' : 'stacked'}
       legendProps={{ verticalAlign: 'bottom' }}
@@ -96,7 +96,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
         domain: ([dataMin, dataMax]) => [
           dataMin,
           // round up to nearest 100
-          props.percentage ? dataMax : Math.ceil(dataMax / 100) * 100,
+          props.percentage ? props.data.maxPercentageOfIncomUsed : Math.ceil(dataMax / 100) * 100,
         ],
       }}
       series={[
