@@ -2,8 +2,6 @@ import { Flex } from '@mantine/core'
 import { DashboardData, PageProps, TransactionType } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
 import getMonthlyData from '@/app/api/budget/getAggregatedTransactions/getMonthlyDataAction'
 import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExpensesByCategoryAction'
 import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
@@ -16,18 +14,13 @@ import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 import DemoButton from '@/components/Welcome/DemoButton'
 
-const englishMetadata = {
-  title: 'Demo - Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Demo - Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.budgetPage.metadataDemoTitle,
+    description: dict.landingPage.introText,
+  }
 }
 
 async function getInitialDemoData({ lang }: { lang: string }): Promise<DashboardData> {
@@ -89,7 +82,8 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
   }
 }
 
-export default async function DemoPage({ params: { lang } }: PageProps) {
+export default async function DemoPage(props: { params: PageProps }) {
+  const { lang } = await props.params
   const dict = await getDictionary(lang)
   const initialData = await getInitialDemoData({ lang })
 

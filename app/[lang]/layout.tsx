@@ -11,21 +11,15 @@ import { theme } from '@/theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
+import { PageProps } from '@/utils/types'
 
-const englishMetadata = {
-  title: 'Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.general.appName,
+    description: dict.landingPage.introText,
+  }
 }
 
 export async function generateStaticParams() {

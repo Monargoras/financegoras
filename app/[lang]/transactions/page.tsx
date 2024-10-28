@@ -6,26 +6,19 @@ import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
 import TransactionsDetailTable, {
   InitialDetailTableData,
 } from '@/components/TransactionsDetailTable/TransactionsDetailTable'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
 
-const englishMetadata = {
-  title: 'Transactions - Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Transaktionen - Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.transactionsPage.metadataPageTitle,
+    description: dict.landingPage.introText,
+  }
 }
 
 async function getInitialData(): Promise<InitialDetailTableData> {
@@ -41,7 +34,8 @@ async function getInitialData(): Promise<InitialDetailTableData> {
   return { categories, transactions }
 }
 
-export default async function TransactionsPage({ params: { lang } }: PageProps) {
+export default async function TransactionsPage(props: { params: PageProps }) {
+  const { lang } = await props.params
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const initialData = await getInitialData()

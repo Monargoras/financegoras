@@ -6,7 +6,8 @@ import DemoButton from '@/components/Welcome/DemoButton'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import LandingIntro from '@/components/Welcome/LandingIntro'
 
-export default async function HomePage({ params: { lang } }: PageProps) {
+export default async function HomePage(props: { params: PageProps }) {
+  const { lang } = await props.params
   // get currently used dictionary
   const dict = await getDictionary(lang)
 

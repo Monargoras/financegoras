@@ -9,6 +9,8 @@
     "comingSoon": "Kommt bald"
   },
   "general": {
+    "metadataNotFoundTitle": "Nicht Gefunden - Financegoras",
+    "appName": "Financegoras",
     "logInPrompt": "Anmelden um Inhalt zu sehen",
     "en": "Englisch",
     "de": "Deutsch"
@@ -21,6 +23,7 @@
     "dataSecurityText": "Deine Transaktionen werden in unserer Datenbank zusammen mit deiner gehashten Benutzer-ID gespeichert. Wir speichern keine Daten, die zur Identifizierung von dir verwendet werden könnten, außer den von dir eingegebenen Transaktionsdaten. Die Authentifizierung erfolgt über OAuth-Anwendungen und es werden keine Anmelde- oder Kontodaten von uns gespeichert."
   },
   "transactionsPage": {
+    "metadataPageTitle": "Transaktionen - Financegoras",
     "earliestFirst": "Neueste zuerst",
     "textSearch": "Textsuche",
     "searchPlaceholder": "Suche Name/Kategorie",
@@ -31,6 +34,8 @@
     "editTransaction": "Transaktion bearbeiten"
   },
   "budgetPage": {
+    "metadataPageTitle": "Haushaltsbuch - Financegoras",
+    "metadataDemoTitle": "Demo - Financegoras",
     "budgetBook": "Haushaltsbuch",
     "name": "Name",
     "amount": "Betrag",
@@ -106,6 +111,8 @@
     "includeEmptyCategoriesTooltip": "Zeigt im Radardiagramm alle bereits verwendeten Kategorien an, auch wenn sie in diesem Monat nicht verwendet wurden um besser vergleichen zu können"
   },
   "analysisPage": {
+    "metadataPageTitle": "Analyse - Financegoras",
+    "metadataDemoTitle": "Analysedemo - Financegoras",
     "analysisDemo": "Analysedemo",
     "searchName": "Suche Name",
     "searchCategory": "Suche Kategorie",

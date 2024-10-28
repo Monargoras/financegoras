@@ -4,23 +4,16 @@ import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
 import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
 
-const englishMetadata = {
-  title: 'Analysis - Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Analyse - Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.analysisPage.metadataPageTitle,
+    description: dict.landingPage.introText,
+  }
 }
 
 async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
@@ -88,7 +81,8 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
   return data ?? emptyData
 }
 
-export default async function BudgetPage({ params: { lang } }: PageProps) {
+export default async function BudgetPage(props: { params: PageProps }) {
+  const { lang } = await props.params
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const initialData = await getInitialAnalysisData(lang)

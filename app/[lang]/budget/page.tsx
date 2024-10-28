@@ -4,8 +4,6 @@ import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
 import getMonthlyData from '@/app/api/budget/getAggregatedTransactions/getMonthlyDataAction'
 import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExpensesByCategoryAction'
 import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
@@ -16,18 +14,13 @@ import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getUserSettings from '@/serverActions/getUserSettings'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 
-const englishMetadata = {
-  title: 'Budget Book - Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Haushaltsbuch - Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.budgetPage.metadataPageTitle,
+    description: dict.landingPage.introText,
+  }
 }
 
 async function getInitialDashboardData({ lang }: { lang: string }): Promise<DashboardData> {
@@ -105,7 +98,8 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   }
 }
 
-export default async function BudgetPage({ params: { lang } }: PageProps) {
+export default async function BudgetPage(props: { params: PageProps }) {
+  const { lang } = await props.params
   const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const initialData = await getInitialDashboardData({ lang })

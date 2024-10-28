@@ -9,6 +9,8 @@
     "comingSoon": "Coming soon"
   },
   "general": {
+    "metadataNotFoundTitle": "Not Found - Financegoras",
+    "appName": "Financegoras",
     "logInPrompt": "Log in to view content",
     "en": "English",
     "de": "German"
@@ -21,6 +23,7 @@
     "dataSecurityText": "Your transactions are stored in our database together with your hashed user id. We do not store any data that could be used to identify you, besides what you enter as transaction data. Authentication is done via OAuth Applications and no login or account data is stored by us."
   },
   "transactionsPage": {
+    "metadataPageTitle": "Transactions - Financegoras",
     "earliestFirst": "Newest first",
     "textSearch": "Text search",
     "searchPlaceholder": "Search name/category",
@@ -30,6 +33,8 @@
     "editTransaction": "Edit transaction"
   },
   "budgetPage": {
+    "metadataPageTitle": "Budget Book - Financegoras",
+    "metadataDemoTitle": "Demo - Financegoras",
     "budgetBook": "Budget Book",
     "name": "Name",
     "amount": "Amount",
@@ -107,6 +112,8 @@
     "includeEmptyCategoriesTooltip": "Includes all categories that you have used in the past, even if they are not used this month for better comparison"
   },
   "analysisPage": {
+    "metadataPageTitle": "Analysis - Financegoras",
+    "metadataDemoTitle": "Analysis Demo - Financegoras",
     "analysisDemo": "Analysis demo",
     "searchName": "Search name",
     "searchCategory": "Search category",

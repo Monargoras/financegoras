@@ -1,19 +1,14 @@
 import { notFound } from 'next/navigation'
-import de from '@/dictionaries/de.json'
-import en from '@/dictionaries/en.json'
+import { PageProps } from '@/utils/types'
+import { getDictionary } from '../dictionaries'
 
-const englishMetadata = {
-  title: 'Not Found - Financegoras',
-  description: en.landingPage.introText,
-}
-
-const germanMetadata = {
-  title: 'Nicht Gefunden - Financegoras',
-  description: de.landingPage.introText,
-}
-
-export async function generateMetadata({ params }: { params: { lang: string } }) {
-  return params.lang === 'de' ? germanMetadata : englishMetadata
+export async function generateMetadata(props: { params: PageProps }) {
+  const { lang } = await props.params
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.general.metadataNotFoundTitle,
+    description: dict.landingPage.introText,
+  }
 }
 
 export default async function CatchAllPage() {
