@@ -3260,12 +3260,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^14.2.15":
-  version: 14.2.15
-  resolution: "@next/bundle-analyzer@npm:14.2.15"
+"@next/bundle-analyzer@npm:^14.2.16":
+  version: 14.2.16
+  resolution: "@next/bundle-analyzer@npm:14.2.16"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/4a5838d91165ccee468d66e6dc7b8bb9a908b7188c47988c6acacdd74ddc09fb6e722576c6ded356db39879ff7232e3e928dd5973c46f9a9024861688f70090a
+  checksum: 10/b50bce49756a9345e3b023b7803808348363a968e3449b9f76a9b643335bdb4b126709f162ed682d1515985aebff0e50ca918b58a44d9852ce73c16eb82a7b7d
   languageName: node
   linkType: hard
 
@@ -3276,12 +3276,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:^14.2.15":
-  version: 14.2.15
-  resolution: "@next/eslint-plugin-next@npm:14.2.15"
+"@next/eslint-plugin-next@npm:^14.2.16":
+  version: 14.2.16
+  resolution: "@next/eslint-plugin-next@npm:14.2.16"
   dependencies:
     glob: "npm:10.3.10"
-  checksum: 10/eb48c5c08c9f4d0f14a0978b39fcb2fa3925a2fcfd368044039a988b389973328fb8493d192b90e0884789a9b42d0d005b91930cb47e2357b746773ae4e12ca6
+  checksum: 10/fd43835748bda531fdcf56688f6f0280aaecd5fcbb3f5f66778882043bb67e18055052831cc1c6a8edefbc8e3deaf9443c8617db521306721bf1e7c1114ee002
   languageName: node
   linkType: hard
 
@@ -9274,8 +9274,8 @@ __metadata:
     "@mantine/form": "npm:^7.13.4"
     "@mantine/hooks": "npm:7.13.4"
     "@mantine/notifications": "npm:^7.13.4"
-    "@next/bundle-analyzer": "npm:^14.2.15"
-    "@next/eslint-plugin-next": "npm:^14.2.15"
+    "@next/bundle-analyzer": "npm:^14.2.16"
+    "@next/eslint-plugin-next": "npm:^14.2.16"
     "@storybook/addon-essentials": "npm:^8.3.6"
     "@storybook/addon-styling-webpack": "npm:^1.0.0"
     "@storybook/blocks": "npm:^8.3.6"

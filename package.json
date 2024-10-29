@@ -30,7 +30,7 @@
     "@mantine/form": "^7.13.4",
     "@mantine/hooks": "7.13.4",
     "@mantine/notifications": "^7.13.4",
-    "@next/bundle-analyzer": "^14.2.15",
+    "@next/bundle-analyzer": "^14.2.16",
     "@tabler/icons-react": "^3.21.0",
     "dayjs": "^1.11.13",
     "eslint-plugin-prettier": "^5.2.1",
@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
-    "@next/eslint-plugin-next": "^14.2.15",
+    "@next/eslint-plugin-next": "^14.2.16",
     "@storybook/addon-essentials": "^8.3.6",
     "@storybook/addon-styling-webpack": "^1.0.0",
     "@storybook/blocks": "^8.3.6",

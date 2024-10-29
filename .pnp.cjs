@@ -35,8 +35,8 @@ const RAW_RUNTIME_STATE =
           ["@mantine/form", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
           ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
-          ["@next/bundle-analyzer", "npm:14.2.15"],\
-          ["@next/eslint-plugin-next", "npm:14.2.15"],\
+          ["@next/bundle-analyzer", "npm:14.2.16"],\
+          ["@next/eslint-plugin-next", "npm:14.2.16"],\
           ["@storybook/addon-essentials", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.3.6"],\
           ["@storybook/addon-styling-webpack", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.0.0"],\
           ["@storybook/blocks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.3.6"],\
@@ -5208,10 +5208,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@next/bundle-analyzer", [\
-      ["npm:14.2.15", {\
-        "packageLocation": "./.yarn/cache/@next-bundle-analyzer-npm-14.2.15-b5b3b9cf25-4a5838d911.zip/node_modules/@next/bundle-analyzer/",\
+      ["npm:14.2.16", {\
+        "packageLocation": "./.yarn/cache/@next-bundle-analyzer-npm-14.2.16-705b9a1166-b50bce4975.zip/node_modules/@next/bundle-analyzer/",\
         "packageDependencies": [\
-          ["@next/bundle-analyzer", "npm:14.2.15"],\
+          ["@next/bundle-analyzer", "npm:14.2.16"],\
           ["webpack-bundle-analyzer", "npm:4.10.1"]\
         ],\
         "linkType": "HARD"\
@@ -5227,10 +5227,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@next/eslint-plugin-next", [\
-      ["npm:14.2.15", {\
-        "packageLocation": "./.yarn/cache/@next-eslint-plugin-next-npm-14.2.15-badab5de56-eb48c5c08c.zip/node_modules/@next/eslint-plugin-next/",\
+      ["npm:14.2.16", {\
+        "packageLocation": "./.yarn/cache/@next-eslint-plugin-next-npm-14.2.16-f28a7eebca-fd43835748.zip/node_modules/@next/eslint-plugin-next/",\
         "packageDependencies": [\
-          ["@next/eslint-plugin-next", "npm:14.2.15"],\
+          ["@next/eslint-plugin-next", "npm:14.2.16"],\
           ["glob", "npm:10.3.10"]\
         ],\
         "linkType": "HARD"\
@@ -13025,8 +13025,8 @@ const RAW_RUNTIME_STATE =
           ["@mantine/form", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
           ["@mantine/hooks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
           ["@mantine/notifications", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.13.4"],\
-          ["@next/bundle-analyzer", "npm:14.2.15"],\
-          ["@next/eslint-plugin-next", "npm:14.2.15"],\
+          ["@next/bundle-analyzer", "npm:14.2.16"],\
+          ["@next/eslint-plugin-next", "npm:14.2.16"],\
           ["@storybook/addon-essentials", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.3.6"],\
           ["@storybook/addon-styling-webpack", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.0.0"],\
           ["@storybook/blocks", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:8.3.6"],\
