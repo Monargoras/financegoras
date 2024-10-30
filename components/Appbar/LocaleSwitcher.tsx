@@ -31,6 +31,7 @@ export default function LocaleSwitcher(props: LocaleSwitcherProps) {
       onChange={(value) => {
         if (!value) return
         router.push(redirectedPathName(value))
+        router.refresh()
       }}
     />
   )
