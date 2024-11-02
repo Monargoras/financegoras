@@ -26,19 +26,14 @@ export async function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'de' }]
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode
-  params: { lang: string }
-}) {
+export default async function RootLayout({ children, params }: { children: React.ReactNode; params: PageProps }) {
+  const { lang } = await params
   // get currently used dictionary
-  const dict = await getDictionary(params.lang)
+  const dict = await getDictionary(lang)
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang={params.lang} style={{ overflowX: 'hidden' }}>
+    <html lang={lang} style={{ overflowX: 'hidden' }}>
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
@@ -54,7 +49,7 @@ export default async function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <ClientProviders session={session} language={params.lang}>
+          <ClientProviders session={session} language={lang}>
             <Appbar props={{ dictionary: dict }}>{children}</Appbar>
             <Notifications />
           </ClientProviders>
