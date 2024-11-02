@@ -22,15 +22,18 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write"
   },
+  "resolutions": {
+    "react-is": "19.0.0-rc-02c0e824-20241028"
+  },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.5.6",
+    "@formatjs/intl-localematcher": "^0.5.7",
     "@mantine/charts": "^7.13.4",
     "@mantine/core": "7.13.4",
     "@mantine/dates": "^7.13.4",
     "@mantine/form": "^7.13.4",
     "@mantine/hooks": "7.13.4",
     "@mantine/notifications": "^7.13.4",
-    "@next/bundle-analyzer": "^14.2.16",
+    "@next/bundle-analyzer": "^15.0.2",
     "@tabler/icons-react": "^3.21.0",
     "dayjs": "^1.11.13",
     "eslint-plugin-prettier": "^5.2.1",
@@ -39,10 +42,10 @@
     "mysql2": "^3.11.3",
     "nanoid": "^5.0.8",
     "negotiator": "^1.0.0",
-    "next": "14.2.16",
+    "next": "15.0.2",
     "next-auth": "^4.24.10",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
     "recharts": "^2.13.3",
     "sharp": "^0.33.5",
     "swr": "^2.2.5",
@@ -50,7 +53,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
-    "@next/eslint-plugin-next": "^14.2.16",
+    "@next/eslint-plugin-next": "^15.0.2",
     "@storybook/addon-essentials": "^8.4.1",
     "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/blocks": "^8.4.1",
