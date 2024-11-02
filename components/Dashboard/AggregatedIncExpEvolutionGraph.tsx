@@ -84,7 +84,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       data={props.data.series}
       dataKey="month"
       type={props.percentage ? 'percent' : 'stacked'}
-      legendProps={{ verticalAlign: 'bottom' }}
+      withGradient
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
