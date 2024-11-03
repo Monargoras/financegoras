@@ -33,7 +33,7 @@ export default async function RootLayout({ children, params }: { children: React
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang={lang} style={{ overflowX: 'hidden' }} suppressHydrationWarning>
+    <html lang={lang} style={{ overflowX: 'hidden' }}>
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
