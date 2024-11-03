@@ -37,7 +37,7 @@ export default function TimeframeSelect(props: TimeframeSelectProps) {
         </Button>
         <YearPicker
           value={
-            props.timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(props.selectedYear, 0, 1)
+            props.timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(props.selectedYear, 1, 1)
           }
           onChange={(date) => {
             if (!date) return
