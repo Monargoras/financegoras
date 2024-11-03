@@ -41,7 +41,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
       <Flex gap="md" justify="center" align="center" direction="column" w="100%">
         {!data && isLoading && (
           <Flex justify="center" align="center" w="100dvw" h="100%">
-            <Loader color="blue" type="dots" />
+            <Loader type="dots" />
           </Flex>
         )}
         {error && (

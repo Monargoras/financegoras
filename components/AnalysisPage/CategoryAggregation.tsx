@@ -33,12 +33,16 @@ export default function CategoryAggregation(props: CategoryAggregationProps) {
               <Table.Tr key={d.id}>
                 <Table.Td>{d.name}</Table.Td>
                 <Table.Td
-                  c={d.isIncome ? theme.colors.green[5] : d.isSavings ? theme.colors.blue[5] : theme.colors.red[5]}
+                  c={
+                    d.isIncome ? theme.colors.income[5] : d.isSavings ? theme.colors.saving[5] : theme.colors.expense[5]
+                  }
                 >
                   {d.average.toFixed(2)}€
                 </Table.Td>
                 <Table.Td
-                  c={d.isIncome ? theme.colors.green[5] : d.isSavings ? theme.colors.blue[5] : theme.colors.red[5]}
+                  c={
+                    d.isIncome ? theme.colors.income[5] : d.isSavings ? theme.colors.saving[5] : theme.colors.expense[5]
+                  }
                 >
                   {d.total.toFixed(2)}€
                 </Table.Td>

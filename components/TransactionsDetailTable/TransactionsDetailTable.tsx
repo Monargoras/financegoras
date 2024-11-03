@@ -87,7 +87,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
 
   return (
     <Flex justify="center">
-      {!data && isLoading && <Loader color="blue" type="dots" />}
+      {!data && isLoading && <Loader type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
       {filteredData && (
         <Flex justify="center" align="center" direction="column">
@@ -135,7 +135,11 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
                   >
                     <Table.Td
                       c={
-                        ta.isIncome ? theme.colors.green[5] : ta.isSavings ? theme.colors.blue[5] : theme.colors.red[5]
+                        ta.isIncome
+                          ? theme.colors.income[5]
+                          : ta.isSavings
+                            ? theme.colors.saving[5]
+                            : theme.colors.expense[5]
                       }
                     >
                       {ta.isIncome ? '' : '-'}

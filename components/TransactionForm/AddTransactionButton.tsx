@@ -35,7 +35,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
               <IconCalendarMonth
                 style={{ width: rem(16), height: rem(16) }}
                 stroke={1.5}
-                color={theme.colors.blue[5]}
+                color={theme.colors.primary[5]}
               />
             }
             onClick={() => props.handleAddTransaction(TransactionType.Monthly)}
@@ -47,7 +47,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
               <IconCalendarDollar
                 style={{ width: rem(16), height: rem(16) }}
                 stroke={1.5}
-                color={theme.colors.blue[5]}
+                color={theme.colors.primary[5]}
               />
             }
             onClick={() => props.handleAddTransaction(TransactionType.Annual)}
@@ -56,7 +56,7 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
           </Menu.Item>
           <Menu.Item
             leftSection={
-              <IconCalendar style={{ width: rem(16), height: rem(16) }} stroke={1.5} color={theme.colors.blue[5]} />
+              <IconCalendar style={{ width: rem(16), height: rem(16) }} stroke={1.5} color={theme.colors.primary[5]} />
             }
             onClick={open}
           >

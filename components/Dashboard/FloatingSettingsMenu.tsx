@@ -54,7 +54,7 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
     <Popover opened={opened} onChange={setOpened} transitionProps={{ transition: 'fade-up', duration: 150 }}>
       <Popover.Target>
         <Affix position={{ bottom: 20, right: 20 }} hiddenFrom="sm">
-          <ActionIcon color="blue" radius="xl" size={50} onClick={() => setOpened((o) => !o)}>
+          <ActionIcon color="primary" radius="xl" size={50} onClick={() => setOpened((o) => !o)}>
             <IconSettings stroke={1.5} size={30} />
           </ActionIcon>
         </Affix>

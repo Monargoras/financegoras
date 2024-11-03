@@ -28,7 +28,7 @@ export default function CategoryRadar(props: CategoryRadarProps) {
         }}
         data={props.data}
         dataKey="category"
-        series={[{ name: 'value', color: 'blue.5', opacity: 0.2 }]}
+        series={[{ name: 'value', color: 'primary.5', opacity: 0.2 }]}
         polarAngleAxisProps={{
           width: 90,
         }}

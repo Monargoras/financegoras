@@ -146,7 +146,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
           <Menu.Dropdown>
             <Menu.Item
               leftSection={<IconPencil style={{ width: rem(14), height: rem(14) }} />}
-              c="blue"
+              c="primary"
               onClick={() => {
                 setEditing(item.group)
                 setEditingValue(item.group)
@@ -214,7 +214,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
           <ActionIcon size="sm" variant="subtle">
             <IconPlus />
           </ActionIcon>
-          <Text style={{ cursor: 'pointer' }} c="blue">
+          <Text style={{ cursor: 'pointer' }} c="primary">
             {props.dictionary.budgetPage.addCategory}
           </Text>
         </Flex>

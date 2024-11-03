@@ -110,7 +110,7 @@ export default function CategoryItem(props: CateforyItemProps) {
           <Menu.Dropdown>
             <Menu.Item
               leftSection={<IconPencil style={{ width: rem(14), height: rem(14) }} />}
-              c="blue"
+              c="primary"
               onClick={() => {
                 setEditing(category.name)
                 setEditingValue(category.name)

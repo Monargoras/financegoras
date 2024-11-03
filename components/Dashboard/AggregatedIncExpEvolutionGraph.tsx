@@ -31,9 +31,9 @@ function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
   const textColor = colorScheme.colorScheme === 'dark' ? 'white' : 'black'
 
   const series = {
-    totalExpenses: { label: dict.budgetPage.monthlyExpenses, color: theme.colors.red[5] },
-    totalSavings: { label: dict.budgetPage.monthlySavings, color: theme.colors.blue[5] },
-    remainingIncome: { label: dict.budgetPage.remainingIncome, color: theme.colors.cyan[5] },
+    totalExpenses: { label: dict.budgetPage.monthlyExpenses, color: theme.colors.expense[5] },
+    totalSavings: { label: dict.budgetPage.monthlySavings, color: theme.colors.saving[5] },
+    remainingIncome: { label: dict.budgetPage.remainingIncome, color: theme.colors.remaining[5] },
   }
 
   return (
@@ -101,10 +101,10 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       }}
       series={[
         // remove total income for readability, replaced by remaining income
-        // { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'green.5' },
-        { name: 'totalExpenses', label: props.dictionary.budgetPage.monthlyExpenses, color: 'red.5' },
-        { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'blue.5' },
-        { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'cyan.5' },
+        // { name: 'totalIncome', label: props.dictionary.budgetPage.monthlyIncome, color: 'income.5' },
+        { name: 'totalExpenses', label: props.dictionary.budgetPage.monthlyExpenses, color: 'expense.5' },
+        { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'saving.5' },
+        { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'remaining.5' },
       ]}
       valueFormatter={(value) => `${value.toFixed(2)}€`}
       activeDotProps={{

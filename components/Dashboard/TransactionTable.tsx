@@ -47,7 +47,13 @@ export function TransactionTable(props: TransactionTableProps) {
                 style={{ cursor: props.demo ? 'default' : 'pointer' }}
               >
                 <Table.Td
-                  c={ta.isIncome ? theme.colors.green[5] : ta.isSavings ? theme.colors.blue[5] : theme.colors.red[5]}
+                  c={
+                    ta.isIncome
+                      ? theme.colors.income[5]
+                      : ta.isSavings
+                        ? theme.colors.saving[5]
+                        : theme.colors.expense[5]
+                  }
                 >
                   {ta.isIncome ? '' : '-'}
                   {ta.amount.toFixed(2)}€

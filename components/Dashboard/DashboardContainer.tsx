@@ -46,7 +46,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
         )}
         {!data && isLoading && (
           <Flex justify="center" align="center" w="100dvw" h="100%">
-            <Loader color="blue" type="dots" />
+            <Loader type="dots" />
           </Flex>
         )}
         {error && (

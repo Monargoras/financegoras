@@ -223,7 +223,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       </Drawer>
 
       <Text
-        c="blue"
+        c="primary"
         onClick={(e) => {
           e.preventDefault()
           open()
