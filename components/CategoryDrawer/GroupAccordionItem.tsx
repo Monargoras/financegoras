@@ -16,8 +16,7 @@ import {
   Popover,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconCheck, IconDots, IconPencil, IconPlus, IconX, IconColorPicker } from 'tabler-icons'
-import { IconTrashX } from '@tabler/icons-react'
+import { IconCheck, IconDots, IconPencil, IconPlus, IconX, IconColorPicker, IconTrashX } from '@tabler/icons-react'
 import { CategoryGroup, Dictionary } from '@/utils/types'
 import CategoryItem from './CategoryItem'
 import { colorsHex } from '@/utils/helpers'

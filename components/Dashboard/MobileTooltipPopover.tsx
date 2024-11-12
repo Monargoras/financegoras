@@ -1,5 +1,5 @@
 import { ActionIcon, Popover, Text } from '@mantine/core'
-import { IconInfoSquare } from 'tabler-icons'
+import { IconInfoSquare } from '@tabler/icons-react'
 
 interface MobileTooltipPopoverProps {
   label: string

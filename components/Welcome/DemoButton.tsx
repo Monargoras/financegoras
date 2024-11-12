@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 import { Button } from '@mantine/core'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { IconArrowRight } from 'tabler-icons'
+import { IconArrowRight } from '@tabler/icons-react'
 
 interface DemoButtonProps {
   title: string

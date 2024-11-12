@@ -16,7 +16,7 @@ import {
 import useSWR, { Fetcher, useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
-import { IconPlus, IconMinus, IconCheck, IconX } from 'tabler-icons'
+import { IconPlus, IconMinus, IconCheck, IconX } from '@tabler/icons-react'
 import { Categories, Dictionary, TransactionType } from '@/utils/types'
 import { AddTransactionButton } from './AddTransactionButton'
 import CategoryDrawer from '@/components/CategoryDrawer/CategoryDrawer'

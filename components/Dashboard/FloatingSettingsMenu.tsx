@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ActionIcon, Affix, Button, Divider, Flex, Popover, Switch } from '@mantine/core'
 import { YearPicker } from '@mantine/dates'
-import { IconSettings } from 'tabler-icons'
+import { IconSettings } from '@tabler/icons-react'
 import { Dictionary } from '@/utils/types'
 import MobileTooltipPopover from './MobileTooltipPopover'
 

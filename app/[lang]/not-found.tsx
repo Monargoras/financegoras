@@ -2,7 +2,7 @@
 
 import { Button, Title, Text, Container } from '@mantine/core'
 import { useParams, useRouter } from 'next/navigation'
-import { IconArrowBack } from 'tabler-icons'
+import { IconArrowBack } from '@tabler/icons-react'
 
 export default function NotFound() {
   const { lang } = useParams()

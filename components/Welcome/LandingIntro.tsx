@@ -3,7 +3,7 @@
 import { Text, Flex, Paper, em, useMantineTheme } from '@mantine/core'
 import Image from 'next/image'
 import { useMediaQuery } from '@mantine/hooks'
-import { IconLock } from 'tabler-icons'
+import { IconLock } from '@tabler/icons-react'
 import classes from './Welcome.module.css'
 import { Dictionary } from '@/utils/types'
 import FinancegorasImage from '@/assets/FinancegorasDashboard.png'

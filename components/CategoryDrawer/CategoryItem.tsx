@@ -1,8 +1,7 @@
 'use client'
 
 import { Accordion, ActionIcon, ColorPicker, Flex, FocusTrap, Menu, Popover, rem, Text, TextInput } from '@mantine/core'
-import { IconTrashX } from '@tabler/icons-react'
-import { IconCheck, IconColorPicker, IconDots, IconPencil, IconX } from 'tabler-icons'
+import { IconCheck, IconColorPicker, IconDots, IconPencil, IconX, IconTrashX } from '@tabler/icons-react'
 import { Category, Dictionary } from '@/utils/types'
 import { colorsHex } from '@/utils/helpers'
 
