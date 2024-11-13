@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Menu, Group, ActionIcon, rem, useMantineTheme, Select, Modal, Flex } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconCalendarDollar, IconCalendarMonth, IconChevronDown, IconCalendar } from '@tabler/icons-react'
-import { DateInput } from '@mantine/dates'
+import { DateTimePicker } from '@mantine/dates'
 import classes from './AddTransactionButton.module.css'
 import { Dictionary, TransactionType } from '@/utils/types'
 
@@ -65,13 +65,14 @@ export function AddTransactionButton(props: AddTransactionButtonProps) {
         </Menu.Dropdown>
       </Menu>
       <Modal opened={opened} onClose={close} title={props.dictionary.budgetPage.addDateTransaction} centered>
-        <DateInput
+        <DateTimePicker
+          dropdownType="modal"
           value={date}
           onChange={setDate}
           error={dateError}
           placeholder={props.dictionary.budgetPage.pickDate}
           label={props.dictionary.budgetPage.date}
-          valueFormat="DD MMMM YYYY"
+          valueFormat="DD MMMM YYYY HH:mm"
           required
           style={{ marginTop: 20 }}
         />
