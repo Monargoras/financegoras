@@ -15,7 +15,7 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
-import { DateInput } from '@mantine/dates'
+import { DateTimePicker } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
@@ -73,9 +73,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     if (res.hasErrors) {
       return false
     }
-    // set created and stopped dates to 12 noon to avoid timezone issues
-    form.setFieldValue('createdAt', new Date(form.values.createdAt.setHours(12, 0, 0, 0)))
-    if (form.values.stoppedAt) {
+    // set stopped date to 12 noon to avoid timezone issues if it was never set before
+    if (form.values.stoppedAt && !props.transaction.stoppedAt) {
       form.setFieldValue('stoppedAt', new Date(form.values.stoppedAt.setHours(12, 0, 0, 0)))
     }
     const { name, amount, category, transactionType, createdAt, stoppedAt, isIncome, isSavings } = form.values
@@ -214,19 +213,21 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           />
         </Flex>
         <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
-          <DateInput
+          <DateTimePicker
+            dropdownType="modal"
             label={props.dictionary.budgetPage.createdAt}
-            allowDeselect={false}
-            valueFormat="DD MMMM YYYY"
+            valueFormat="DD MMMM YYYY HH:mm"
+            miw={rem(200)}
             key={form.key('createdAt')}
             error={form.errors.createdAt}
             {...form.getInputProps('createdAt', { type: 'input' })}
           />
-          <DateInput
+          <DateTimePicker
+            dropdownType="modal"
             label={props.dictionary.budgetPage.stoppedAt}
             disabled={form.getValues().transactionType === TransactionType[TransactionType.Single]}
-            allowDeselect={false}
-            valueFormat="DD MMMM YYYY"
+            valueFormat="DD MMMM YYYY HH:mm"
+            miw={rem(200)}
             key={form.key('stoppedAt')}
             error={form.errors.stoppedAt}
             {...form.getInputProps('stoppedAt', { type: 'input' })}
