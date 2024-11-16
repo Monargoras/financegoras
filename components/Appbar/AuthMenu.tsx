@@ -1,4 +1,4 @@
-import { Button, useMantineTheme } from '@mantine/core'
+import { Box, Button, useMantineTheme } from '@mantine/core'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useSWRConfig } from 'swr'
 import { Dictionary } from '@/utils/types'
@@ -17,7 +17,7 @@ export default function AuthMenu(props: AuthMenuProps) {
   const clearCache = () => mutate(() => true, undefined, { revalidate: false })
 
   return (
-    <div>
+    <Box>
       {!session && (
         <Button
           size="md"
@@ -43,6 +43,6 @@ export default function AuthMenu(props: AuthMenuProps) {
           {props.dictionary.appbar.logout}
         </Button>
       )}
-    </div>
+    </Box>
   )
 }
