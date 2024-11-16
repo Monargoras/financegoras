@@ -3,13 +3,15 @@
 import { ActionIcon, AppShell, Burger, Group, rem, useMantineColorScheme } from '@mantine/core'
 import Link from 'next/link'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
-import { IconSunMoon } from '@tabler/icons-react'
+import { IconEye, IconEyeOff, IconSunMoon } from '@tabler/icons-react'
+import { useContext } from 'react'
 import Image from 'next/image'
 import logo from '@/public/img/financegoras.png'
 import classes from './Appbar.module.css'
 import { Dictionary } from '@/utils/types'
 import AuthMenu from './AuthMenu'
 import LocaleSwitcher from './LocaleSwitcher'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface AppbarProps {
   dictionary: Dictionary
@@ -19,6 +21,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
   const [opened, { toggle }] = useDisclosure()
   const { toggleColorScheme } = useMantineColorScheme()
   const pinned = useHeadroom({ fixedAt: 120 })
+  const { privacyMode, togglePrivacyMode } = useContext(PrivacyModeContext)
 
   return (
     <AppShell
@@ -49,6 +52,9 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
+              <ActionIcon variant="subtle" aria-label="absolute numbers privacy toggle" color="gray">
+                {privacyMode ? <IconEyeOff onClick={togglePrivacyMode} /> : <IconEye onClick={togglePrivacyMode} />}
+              </ActionIcon>
               <LocaleSwitcher dictionary={props.dictionary} />
               <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
                 <IconSunMoon onClick={toggleColorScheme} />
