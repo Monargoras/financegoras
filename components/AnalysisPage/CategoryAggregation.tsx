@@ -1,8 +1,10 @@
 'use client'
 
+import { useContext } from 'react'
 import { Table, useMantineTheme } from '@mantine/core'
 import { Dictionary, CategoryAggregationData } from '@/utils/types'
 import generalClasses from '@/utils/general.module.css'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface CategoryAggregationProps {
   dictionary: Dictionary
@@ -11,6 +13,7 @@ interface CategoryAggregationProps {
 
 export default function CategoryAggregation(props: CategoryAggregationProps) {
   const theme = useMantineTheme()
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   return (
     <>
@@ -37,14 +40,14 @@ export default function CategoryAggregation(props: CategoryAggregationProps) {
                     d.isIncome ? theme.colors.income[5] : d.isSavings ? theme.colors.saving[5] : theme.colors.expense[5]
                   }
                 >
-                  {d.average.toFixed(2)}€
+                  {privacyMode ? '**.**' : d.average.toFixed(2)}€
                 </Table.Td>
                 <Table.Td
                   c={
                     d.isIncome ? theme.colors.income[5] : d.isSavings ? theme.colors.saving[5] : theme.colors.expense[5]
                   }
                 >
-                  {d.total.toFixed(2)}€
+                  {privacyMode ? '**.**' : d.total.toFixed(2)}€
                 </Table.Td>
               </Table.Tr>
             ))}

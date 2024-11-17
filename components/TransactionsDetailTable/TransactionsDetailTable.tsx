@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Flex, Loader, Text, Table, useMantineTheme } from '@mantine/core'
 import useSWR, { Fetcher } from 'swr'
 import { useDisclosure } from '@mantine/hooks'
@@ -9,6 +9,7 @@ import { Categories, Dictionary, getTransactionType, Transaction, TransactionTyp
 import TableControls from './TableControls'
 import TransactionEditModal from './TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] }
 
@@ -22,6 +23,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   const theme = useMantineTheme()
   const [opened, { open, close }] = useDisclosure(false)
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null)
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   const categoryFetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
@@ -143,7 +145,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
                       }
                     >
                       {ta.isIncome ? '' : '-'}
-                      {ta.amount.toFixed(2)}€
+                      {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
                     </Table.Td>
                     <Table.Td>{ta.name}</Table.Td>
                     <Table.Td>{ta.category}</Table.Td>

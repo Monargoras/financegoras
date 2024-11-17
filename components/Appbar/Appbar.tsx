@@ -53,7 +53,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
             </Group>
             <Group>
               <ActionIcon variant="subtle" aria-label="absolute numbers privacy toggle" color="gray">
-                {privacyMode ? <IconEyeOff onClick={togglePrivacyMode} /> : <IconEye onClick={togglePrivacyMode} />}
+                {privacyMode ? <IconEye onClick={togglePrivacyMode} /> : <IconEyeOff onClick={togglePrivacyMode} />}
               </ActionIcon>
               <LocaleSwitcher dictionary={props.dictionary} />
               <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">

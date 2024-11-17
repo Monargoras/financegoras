@@ -1,11 +1,12 @@
 'use client'
 
 import { useDisclosure } from '@mantine/hooks'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Table, useMantineTheme } from '@mantine/core'
 import { Categories, Dictionary, Transaction } from '@/utils/types'
 import TransactionEditModal from '../TransactionsDetailTable/TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface TransactionTableProps {
   dictionary: Dictionary
@@ -18,6 +19,7 @@ export function TransactionTable(props: TransactionTableProps) {
   const theme = useMantineTheme()
   const [opened, { open, close }] = useDisclosure(false)
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null)
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   return (
     <>
@@ -56,7 +58,7 @@ export function TransactionTable(props: TransactionTableProps) {
                   }
                 >
                   {ta.isIncome ? '' : '-'}
-                  {ta.amount.toFixed(2)}€
+                  {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
                 </Table.Td>
                 <Table.Td>{ta.name}</Table.Td>
               </Table.Tr>

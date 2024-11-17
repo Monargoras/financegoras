@@ -1,7 +1,11 @@
+'use client'
+
+import { useContext } from 'react'
 import { Flex, Paper, useMantineColorScheme, Text } from '@mantine/core'
 import { BarChart } from '@mantine/charts'
 import { ColorMap, Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface MonthlyExpenseEvolutionGraphProps {
   lang: string
@@ -25,6 +29,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 
   const theme = useMantineColorScheme()
   const textColor = theme.colorScheme === 'dark' ? 'white' : 'black'
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">
@@ -48,7 +53,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
             <Text fz="sm">{item.name as string}</Text>
             <Flex ml={36} />
             <Text ml="auto" fz="sm" c={textColor}>
-              {(item.value as number).toFixed(2)}€
+              {privacyMode ? '**.**' : (item.value as number).toFixed(2)}€
             </Text>
           </Flex>
         ))}
@@ -59,6 +64,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 
 export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolutionGraphProps) {
   const { lang } = props
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   const getSeries = (d: MonthlyExpenseEvolution) => {
     const categorySet = new Set<string>()
@@ -92,7 +98,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       dataKey="month"
       type={props.percentage ? 'percent' : 'stacked'}
       series={getSeries(props.data)}
-      valueFormatter={(value) => `${value.toFixed(2)}€`}
+      valueFormatter={(value) => `${privacyMode ? '**.**' : value.toFixed(2)}€`}
       barChartProps={{
         barGap: 1,
         barCategoryGap: 5,

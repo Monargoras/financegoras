@@ -1,7 +1,11 @@
+'use client'
+
+import { useContext } from 'react'
 import { Paper, Text, useMantineColorScheme, Flex, useMantineTheme } from '@mantine/core'
 import { AreaChart } from '@mantine/charts'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface AggregatedIncExpEvolutionGraphProps {
   lang: string
@@ -29,6 +33,7 @@ function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
   const colorScheme = useMantineColorScheme()
   const theme = useMantineTheme()
   const textColor = colorScheme.colorScheme === 'dark' ? 'white' : 'black'
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   const series = {
     totalExpenses: { label: dict.budgetPage.monthlyExpenses, color: theme.colors.expense[5] },
@@ -58,7 +63,7 @@ function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
             <Text fz="sm">{series[item.name as 'totalExpenses' | 'totalSavings' | 'remainingIncome'].label}</Text>
             <Flex ml={36} />
             <Text ml="auto" fz="sm" c={textColor}>
-              {(item.value as number).toFixed(2)}€
+              {privacyMode ? '**.**' : (item.value as number).toFixed(2)}€
             </Text>
           </Flex>
         ))}
@@ -68,6 +73,8 @@ function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
 }
 
 export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEvolutionGraphProps) {
+  const { privacyMode } = useContext(PrivacyModeContext)
+
   return (
     <AreaChart
       w={{
@@ -106,7 +113,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
         { name: 'totalSavings', label: props.dictionary.budgetPage.monthlySavings, color: 'saving.5' },
         { name: 'remainingIncome', label: props.dictionary.budgetPage.remainingIncome, color: 'remaining.5' },
       ]}
-      valueFormatter={(value) => `${value.toFixed(2)}€`}
+      valueFormatter={(value) => `${privacyMode ? '**.**' : value.toFixed(2)}€`}
       activeDotProps={{
         onClick: (_event, payload) => {
           // get month number from name

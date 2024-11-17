@@ -1,6 +1,10 @@
+'use client'
+
+import { useContext } from 'react'
 import { Text, Paper, Flex, useMantineColorScheme } from '@mantine/core'
 import { LineChart } from '@mantine/charts'
 import { CategoryEvolutionLineChartData, ColorMap } from '@/utils/types'
+import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
 interface CategoryEvolutionLineChartProps {
   data: CategoryEvolutionLineChartData
@@ -20,6 +24,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 
   const theme = useMantineColorScheme()
   const textColor = theme.colorScheme === 'dark' ? 'white' : 'black'
+  const { privacyMode } = useContext(PrivacyModeContext)
 
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">
@@ -43,7 +48,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
             <Text fz="sm">{item.name as string}</Text>
             <Flex ml={36} />
             <Text ml="auto" fz="sm" c={textColor}>
-              {(item.value as number).toFixed(2)}€
+              {privacyMode ? '**.**' : (item.value as number).toFixed(2)}€
             </Text>
           </Flex>
         ))}
@@ -53,6 +58,8 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 }
 
 export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineChartProps) {
+  const { privacyMode } = useContext(PrivacyModeContext)
+
   const getSeries = (d: CategoryEvolutionLineChartData) => {
     const categorySet = new Set<string>()
     for (const month of d) {
@@ -91,7 +98,7 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
         content: ({ label, payload }) => <ChartTooltip label={label} payload={payload as Record<string, number>[]} />,
       }}
       series={getSeries(props.data)}
-      valueFormatter={(value) => `${value.toFixed(2)}€`}
+      valueFormatter={(value) => `${privacyMode ? '**.**' : value.toFixed(2)}€`}
     />
   )
 }
