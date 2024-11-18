@@ -54,7 +54,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
             <Group>
               <Tooltip label={props.dictionary.appbar.tooltipPrivacy} position="bottom">
                 <ActionIcon variant="subtle" aria-label="absolute numbers privacy toggle" color="gray">
-                  {privacyMode ? <IconEye onClick={togglePrivacyMode} /> : <IconEyeOff onClick={togglePrivacyMode} />}
+                  {privacyMode ? <IconEyeOff onClick={togglePrivacyMode} /> : <IconEye onClick={togglePrivacyMode} />}
                 </ActionIcon>
               </Tooltip>
               <LocaleSwitcher dictionary={props.dictionary} />
