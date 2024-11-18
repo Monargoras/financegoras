@@ -7,7 +7,7 @@
     "logout": "Abmelden",
     "login": "Anmelden",
     "comingSoon": "Kommt bald",
-    "tooltipPrivacy": "Privaten Modus aktivieren (Blendet absolute Zahlenwerte aus)",
+    "tooltipPrivacy": "Privaten Modus umschalten",
     "tooltipToggleTheme": "Zwischen hellem und dunklem Modus wechseln"
   },
   "general": {

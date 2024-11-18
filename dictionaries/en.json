@@ -7,7 +7,7 @@
     "logout": "Logout",
     "login": "Login",
     "comingSoon": "Coming soon",
-    "tooltipPrivacy": "Enable private mode (Hides absolute numbers)",
+    "tooltipPrivacy": "Toggle privacy mode",
     "tooltipToggleTheme": "Toggle between light and dark theme"
   },
   "general": {
