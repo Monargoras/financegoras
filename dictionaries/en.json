@@ -15,7 +15,10 @@
     "appName": "Financegoras",
     "logInPrompt": "Log in to view content",
     "en": "English",
-    "de": "German"
+    "de": "German",
+    "privacyNotificationTitle": "Privacy mode",
+    "privacyNotificationOn": "Privacy mode is activated. Absolute numbers are hidden.",
+    "privacyNotificationOff": "Privacy mode is deactivated. Absolute numbers are visible."
   },
   "landingPage": {
     "welcome": "Keep your monthly budget in check!",

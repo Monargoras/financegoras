@@ -15,7 +15,10 @@
     "appName": "Financegoras",
     "logInPrompt": "Anmelden um Inhalt zu sehen",
     "en": "Englisch",
-    "de": "Deutsch"
+    "de": "Deutsch",
+    "privacyNotificationTitle": "Privater modus",
+    "privacyNotificationOn": "Der private Modus ist aktiviert. Absolute Zahlenwerte sind ausgeblendet.",
+    "privacyNotificationOff": "Der private Modus ist deaktiviert. Absolute Zahlenwerte sind sichtbar."
   },
   "landingPage": {
     "welcome": "Behalte dein monatliches Budget im Blick!",

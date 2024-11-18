@@ -49,7 +49,7 @@ export default async function RootLayout({ children, params }: { children: React
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <ClientProviders session={session} language={lang}>
+          <ClientProviders session={session} language={lang} dict={dict}>
             <Appbar props={{ dictionary: dict }}>{children}</Appbar>
             <Notifications />
           </ClientProviders>
