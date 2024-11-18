@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, AppShell, Burger, Group, rem, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, AppShell, Burger, Group, rem, Tooltip, useMantineColorScheme } from '@mantine/core'
 import Link from 'next/link'
 import { useDisclosure, useHeadroom } from '@mantine/hooks'
 import { IconEye, IconEyeOff, IconSunMoon } from '@tabler/icons-react'
@@ -52,13 +52,17 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
-              <ActionIcon variant="subtle" aria-label="absolute numbers privacy toggle" color="gray">
-                {privacyMode ? <IconEye onClick={togglePrivacyMode} /> : <IconEyeOff onClick={togglePrivacyMode} />}
-              </ActionIcon>
+              <Tooltip label={props.dictionary.appbar.tooltipPrivacy} position="bottom">
+                <ActionIcon variant="subtle" aria-label="absolute numbers privacy toggle" color="gray">
+                  {privacyMode ? <IconEye onClick={togglePrivacyMode} /> : <IconEyeOff onClick={togglePrivacyMode} />}
+                </ActionIcon>
+              </Tooltip>
               <LocaleSwitcher dictionary={props.dictionary} />
-              <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
-                <IconSunMoon onClick={toggleColorScheme} />
-              </ActionIcon>
+              <Tooltip label={props.dictionary.appbar.tooltipToggleTheme} position="bottom">
+                <ActionIcon variant="subtle" aria-label="light/dark mode toggle" color="gray">
+                  <IconSunMoon onClick={toggleColorScheme} />
+                </ActionIcon>
+              </Tooltip>
             </Group>
           </Group>
         </Group>

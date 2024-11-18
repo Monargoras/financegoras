@@ -6,7 +6,9 @@
     "analysis": "Analysis",
     "logout": "Logout",
     "login": "Login",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "tooltipPrivacy": "Enable private mode (Hides absolute numbers)",
+    "tooltipToggleTheme": "Toggle between light and dark theme"
   },
   "general": {
     "metadataNotFoundTitle": "Not Found - Financegoras",
