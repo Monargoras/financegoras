@@ -19,7 +19,7 @@ export default async function submitTransaction(
   if (!session || !session.user) {
     return false
   }
-  if (name.length === 0) {
+  if (name.length === 0 || name.length > 50) {
     return false
   }
   if (amount === 0) {

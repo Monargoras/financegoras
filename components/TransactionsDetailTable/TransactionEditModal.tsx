@@ -52,7 +52,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     },
     validate: {
       // functions return true if there is an error
-      name: (value) => value.length === 0,
+      name: (value) => value.length === 0 || value.length > 50,
       amount: (value) => value <= 0,
       createdAt: (value) => value === null,
       stoppedAt: (value, formValues) =>
@@ -191,6 +191,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             label={props.dictionary.budgetPage.name}
             key={form.key('name')}
             error={form.errors.name}
+            maxLength={50}
             {...form.getInputProps('name', { type: 'input' })}
           />
           <Select

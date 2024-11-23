@@ -97,7 +97,7 @@ export default function TransactionForm(props: TransactionFormProps) {
 
   const validData = () => {
     let isValid = true
-    if (name.length === 0) {
+    if (name.length === 0 || name.length > 50) {
       setNameError(true)
       isValid = false
     }
@@ -208,6 +208,7 @@ export default function TransactionForm(props: TransactionFormProps) {
             setNameError(false)
             setName(event.currentTarget.value)
           }}
+          maxLength={50}
         />
         <Select
           data={
