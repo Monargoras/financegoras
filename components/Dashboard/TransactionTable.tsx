@@ -2,11 +2,12 @@
 
 import { useDisclosure } from '@mantine/hooks'
 import { useState, useContext } from 'react'
-import { alpha, Table, Tooltip, useMantineTheme } from '@mantine/core'
+import { alpha, Box, Table, Tooltip, useMantineTheme } from '@mantine/core'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import TransactionEditModal from '../TransactionsDetailTable/TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
+import MobileTooltipPopover from './MobileTooltipPopover'
 
 interface TransactionTableProps {
   dictionary: Dictionary
@@ -64,6 +65,19 @@ export function TransactionTable(props: TransactionTableProps) {
             <Table.Tr>
               <Table.Th>{props.dictionary.budgetPage.amount}</Table.Th>
               <Table.Th>{props.dictionary.budgetPage.name}</Table.Th>
+              <Table.Th>
+                <Tooltip
+                  label={props.dictionary.budgetPage.fadedTransactionTooltip}
+                  withArrow
+                  multiline
+                  maw={300}
+                  visibleFrom="sm"
+                >
+                  <Box>
+                    <MobileTooltipPopover label={props.dictionary.budgetPage.fadedTransactionTooltip} />
+                  </Box>
+                </Tooltip>
+              </Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
@@ -71,39 +85,34 @@ export function TransactionTable(props: TransactionTableProps) {
               const alphaValue = isPastDayOfMonth(ta)
               const showFaded = alphaValue !== 1
               return (
-                <Tooltip
+                <Table.Tr
                   key={ta.id}
-                  label={props.dictionary.budgetPage.fadedTransactionTooltip}
-                  withArrow
-                  style={{ display: showFaded ? 'block' : 'none' }}
-                  multiline
-                  maw={300}
+                  onClick={() => {
+                    if (!props.demo) {
+                      setEditTransaction(ta)
+                      open()
+                    }
+                  }}
+                  style={{ cursor: props.demo ? 'default' : 'pointer' }}
                 >
-                  <Table.Tr
-                    onClick={() => {
-                      if (!props.demo) {
-                        setEditTransaction(ta)
-                        open()
-                      }
-                    }}
-                    style={{ cursor: props.demo ? 'default' : 'pointer' }}
+                  <Table.Td
+                    c={alpha(
+                      ta.isIncome
+                        ? theme.colors.income[5]
+                        : ta.isSavings
+                          ? theme.colors.saving[5]
+                          : theme.colors.expense[5],
+                      alphaValue
+                    )}
                   >
-                    <Table.Td
-                      c={alpha(
-                        ta.isIncome
-                          ? theme.colors.income[5]
-                          : ta.isSavings
-                            ? theme.colors.saving[5]
-                            : theme.colors.expense[5],
-                        alphaValue
-                      )}
-                    >
-                      {ta.isIncome ? '' : '-'}
-                      {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
-                    </Table.Td>
-                    <Table.Td c={!showFaded ? undefined : alpha(theme.colors.gray[5], alphaValue)}>{ta.name}</Table.Td>
-                  </Table.Tr>
-                </Tooltip>
+                    {ta.isIncome ? '' : '-'}
+                    {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
+                  </Table.Td>
+                  <Table.Td maw={210} c={!showFaded ? undefined : alpha(theme.colors.gray[5], alphaValue)}>
+                    {ta.name}
+                  </Table.Td>
+                  <Table.Td w={0} />
+                </Table.Tr>
               )
             })}
           </Table.Tbody>
