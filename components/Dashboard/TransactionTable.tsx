@@ -2,8 +2,8 @@
 
 import { useDisclosure } from '@mantine/hooks'
 import { useState, useContext } from 'react'
-import { Table, useMantineTheme } from '@mantine/core'
-import { Categories, Dictionary, Transaction } from '@/utils/types'
+import { alpha, Table, useMantineTheme } from '@mantine/core'
+import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import TransactionEditModal from '../TransactionsDetailTable/TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
@@ -13,6 +13,8 @@ interface TransactionTableProps {
   demo: boolean
   data: Transaction[]
   categories: Categories | null
+  selectedMonth?: number
+  selectedYear?: number
 }
 
 export function TransactionTable(props: TransactionTableProps) {
@@ -20,6 +22,34 @@ export function TransactionTable(props: TransactionTableProps) {
   const [opened, { open, close }] = useDisclosure(false)
   const [editTransaction, setEditTransaction] = useState<Transaction | null>(null)
   const { privacyMode } = useContext(PrivacyModeContext)
+
+  // function that checks if day of month is already in the past and returns the alpha value for the color that should be used
+  // if the transaction is in the future or it is annual and not payed this month, the color is faded
+  const isPastDayOfMonth = (ta: Transaction) => {
+    const currentDate = new Date()
+    // if selected month is current month, use current date, otherwise use last day of selected month
+    const lastDayOfSelectedMonth =
+      currentDate.getFullYear() === props.selectedYear && currentDate.getMonth() === props.selectedMonth
+        ? currentDate
+        : new Date(
+            props.selectedYear ?? currentDate.getFullYear(),
+            (props.selectedMonth ?? currentDate.getMonth()) + 1,
+            0
+          )
+    const createdAt = new Date(ta.createdAt)
+
+    const isCurMonthAndFuture =
+      currentDate.getFullYear() === props.selectedYear &&
+      currentDate.getMonth() === props.selectedMonth &&
+      currentDate.getDate() < createdAt.getDate()
+
+    const isAnnualAndNotThisMonth =
+      ta.transactionType === TransactionType.Annual &&
+      (props.selectedMonth !== createdAt.getMonth() ||
+        (props.selectedMonth === createdAt.getMonth() && lastDayOfSelectedMonth.getDate() < createdAt.getDate()))
+
+    return isCurMonthAndFuture || isAnnualAndNotThisMonth ? 0.6 : 1
+  }
 
   return (
     <>
@@ -49,18 +79,21 @@ export function TransactionTable(props: TransactionTableProps) {
                 style={{ cursor: props.demo ? 'default' : 'pointer' }}
               >
                 <Table.Td
-                  c={
+                  c={alpha(
                     ta.isIncome
                       ? theme.colors.income[5]
                       : ta.isSavings
                         ? theme.colors.saving[5]
-                        : theme.colors.expense[5]
-                  }
+                        : theme.colors.expense[5],
+                    isPastDayOfMonth(ta)
+                  )}
                 >
                   {ta.isIncome ? '' : '-'}
                   {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
                 </Table.Td>
-                <Table.Td>{ta.name}</Table.Td>
+                <Table.Td c={isPastDayOfMonth(ta) === 1 ? undefined : alpha(theme.colors.gray[5], 0.6)}>
+                  {ta.name}
+                </Table.Td>
               </Table.Tr>
             ))}
           </Table.Tbody>

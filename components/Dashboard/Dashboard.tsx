@@ -194,6 +194,9 @@ export default function Dashboard(props: DashboardProps) {
           demo={props.demo}
           data={data.transactions}
           categories={data.categories}
+          // -1 because months are 0-indexed and the selectedMonth is 1-indexed
+          selectedMonth={selectedMonth - 1}
+          selectedYear={selectedYear}
         />
       </Flex>
       <FloatingSettingsMenu
