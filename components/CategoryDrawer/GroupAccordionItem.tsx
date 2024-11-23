@@ -67,6 +67,7 @@ export default function GroupAccordionItem(props: GroupAccordionItemProps) {
                       }
                     }
                   }}
+                  maxLength={50}
                   style={{ width: '100%' }}
                 />
               </FocusTrap>

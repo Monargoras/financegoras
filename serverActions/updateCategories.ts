@@ -11,6 +11,25 @@ export default async function updateCategories(categories: Categories) {
     return false
   }
 
+  // assert that all strings are less than 50 characters
+  for (const group of categories) {
+    if (group.group.length > 50) {
+      return false
+    }
+    for (const category of group.items) {
+      if (category.name.length > 50) {
+        return false
+      }
+    }
+  }
+
+  // assert that all categories are unique
+  const groupsArray = categories.map((group) => group.group)
+  const categoriesArray = categories.map((group) => group.items.map((category) => category.name)).flat()
+  if (new Set(groupsArray).size !== groupsArray.length || new Set(categoriesArray).size !== categoriesArray.length) {
+    return false
+  }
+
   const { id } = session.user
 
   // check if user has already set categories

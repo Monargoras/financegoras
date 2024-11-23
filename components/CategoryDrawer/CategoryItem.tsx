@@ -40,6 +40,7 @@ export default function CategoryItem(props: CateforyItemProps) {
                     }
                   }
                 }}
+                maxLength={50}
                 style={{ width: '100%' }}
               />
             </FocusTrap>
