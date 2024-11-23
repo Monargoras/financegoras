@@ -2,7 +2,7 @@
 
 import { db } from '@/utils/database'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
-import { Transaction } from '@/utils/types'
+import { Transaction, TransactionType } from '@/utils/types'
 
 export default async function getTransactions(
   userId: string,
@@ -22,5 +22,13 @@ export default async function getTransactions(
 
   const res = parseDatabaseTransactionsArray(transactions)
 
-  return res
+  // sort array, first all monthly and single transactions, then annual transactions
+  const nonAnnual = res
+    .filter((ta) => ta.transactionType !== TransactionType.Annual)
+    .sort((a, b) => b.createdAt.getDate() - a.createdAt.getDate())
+  const annual = res
+    .filter((ta) => ta.transactionType === TransactionType.Annual)
+    .sort((a, b) => b.createdAt.getDate() - a.createdAt.getDate())
+
+  return [...nonAnnual, ...annual]
 }
