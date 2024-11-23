@@ -2,7 +2,7 @@
 
 import { useDisclosure } from '@mantine/hooks'
 import { useState, useContext } from 'react'
-import { alpha, Table, useMantineTheme } from '@mantine/core'
+import { alpha, Table, Tooltip, useMantineTheme } from '@mantine/core'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import TransactionEditModal from '../TransactionsDetailTable/TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
@@ -67,35 +67,45 @@ export function TransactionTable(props: TransactionTableProps) {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {props.data.map((ta: Transaction) => (
-              <Table.Tr
-                key={ta.id}
-                onClick={() => {
-                  if (!props.demo) {
-                    setEditTransaction(ta)
-                    open()
-                  }
-                }}
-                style={{ cursor: props.demo ? 'default' : 'pointer' }}
-              >
-                <Table.Td
-                  c={alpha(
-                    ta.isIncome
-                      ? theme.colors.income[5]
-                      : ta.isSavings
-                        ? theme.colors.saving[5]
-                        : theme.colors.expense[5],
-                    isPastDayOfMonth(ta)
-                  )}
+            {props.data.map((ta: Transaction) => {
+              const alphaValue = isPastDayOfMonth(ta)
+              const showFaded = alphaValue !== 1
+              return (
+                <Tooltip
+                  key={ta.id}
+                  label={props.dictionary.budgetPage.fadedTransactionTooltip}
+                  withArrow
+                  style={{ display: showFaded ? 'block' : 'none' }}
+                  multiline
+                  maw={300}
                 >
-                  {ta.isIncome ? '' : '-'}
-                  {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
-                </Table.Td>
-                <Table.Td c={isPastDayOfMonth(ta) === 1 ? undefined : alpha(theme.colors.gray[5], 0.6)}>
-                  {ta.name}
-                </Table.Td>
-              </Table.Tr>
-            ))}
+                  <Table.Tr
+                    onClick={() => {
+                      if (!props.demo) {
+                        setEditTransaction(ta)
+                        open()
+                      }
+                    }}
+                    style={{ cursor: props.demo ? 'default' : 'pointer' }}
+                  >
+                    <Table.Td
+                      c={alpha(
+                        ta.isIncome
+                          ? theme.colors.income[5]
+                          : ta.isSavings
+                            ? theme.colors.saving[5]
+                            : theme.colors.expense[5],
+                        alphaValue
+                      )}
+                    >
+                      {ta.isIncome ? '' : '-'}
+                      {privacyMode ? '**.**' : ta.amount.toFixed(2)}€
+                    </Table.Td>
+                    <Table.Td c={!showFaded ? undefined : alpha(theme.colors.gray[5], alphaValue)}>{ta.name}</Table.Td>
+                  </Table.Tr>
+                </Tooltip>
+              )
+            })}
           </Table.Tbody>
         </Table>
       </Table.ScrollContainer>
