@@ -23,6 +23,7 @@ export default function AuthMenu(props: AuthMenuProps) {
           size="md"
           onClick={() => signIn()}
           variant={props.unstyled ? 'subtle' : 'filled'}
+          pl={props.unstyled ? 16 : 'md'}
           className={props.unstyled ? classes.control : undefined}
         >
           {props.dictionary.appbar.login}
@@ -38,6 +39,7 @@ export default function AuthMenu(props: AuthMenuProps) {
             signOut()
             clearCache()
           }}
+          pl={props.unstyled ? 16 : 'md'}
           className={classes.control}
         >
           {props.dictionary.appbar.logout}
