@@ -8,7 +8,8 @@
     "login": "Login",
     "comingSoon": "Coming soon",
     "tooltipPrivacy": "Toggle privacy mode",
-    "tooltipToggleTheme": "Toggle between light and dark theme"
+    "tooltipToggleTheme": "Toggle between light and dark theme",
+    "tooltipLanguageSwitch": "Switch language"
   },
   "general": {
     "metadataNotFoundTitle": "Not Found - Financegoras",

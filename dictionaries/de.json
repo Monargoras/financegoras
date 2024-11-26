@@ -8,7 +8,8 @@
     "login": "Anmelden",
     "comingSoon": "Kommt bald",
     "tooltipPrivacy": "Privaten Modus umschalten",
-    "tooltipToggleTheme": "Zwischen hellem und dunklem Modus wechseln"
+    "tooltipToggleTheme": "Zwischen hellem und dunklem Modus wechseln",
+    "tooltipLanguageSwitch": "Sprache wechseln"
   },
   "general": {
     "metadataNotFoundTitle": "Nicht Gefunden - Financegoras",
