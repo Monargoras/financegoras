@@ -13803,8 +13803,8 @@ const RAW_RUNTIME_STATE =
           ["next", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:14.2.18"],\
           ["nodemailer", null],\
           ["oauth", "npm:0.9.15"],\
-          ["openid-client", "npm:5.7.0"],\
-          ["preact", "npm:10.24.3"],\
+          ["openid-client", "npm:5.7.1"],\
+          ["preact", "npm:10.25.0"],\
           ["preact-render-to-string", "virtual:81e2d7c80e363c409bc2c2ac929c7a6469f45929fa9a7872d84d5d9fb51850d5e63a5f7797bd8e4d03dcaf3be7d5c9a3ecea3eba9e01b73cdf4b6e48699c5404#npm:5.2.6"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:18.3.1"],\
@@ -14179,10 +14179,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["openid-client", [\
-      ["npm:5.7.0", {\
-        "packageLocation": "./.yarn/cache/openid-client-npm-5.7.0-8a8fbe009d-d30e70082e.zip/node_modules/openid-client/",\
+      ["npm:5.7.1", {\
+        "packageLocation": "./.yarn/cache/openid-client-npm-5.7.1-e8b59fb0f1-188a875ab1.zip/node_modules/openid-client/",\
         "packageDependencies": [\
-          ["openid-client", "npm:5.7.0"],\
+          ["openid-client", "npm:5.7.1"],\
           ["jose", "npm:4.15.9"],\
           ["lru-cache", "npm:6.0.0"],\
           ["object-hash", "npm:2.2.0"],\
@@ -14917,10 +14917,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["preact", [\
-      ["npm:10.24.3", {\
-        "packageLocation": "./.yarn/cache/preact-npm-10.24.3-1e33d81667-e9c4c901a4.zip/node_modules/preact/",\
+      ["npm:10.25.0", {\
+        "packageLocation": "./.yarn/cache/preact-npm-10.25.0-a0336fe873-576700f278.zip/node_modules/preact/",\
         "packageDependencies": [\
-          ["preact", "npm:10.24.3"]\
+          ["preact", "npm:10.25.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14938,7 +14938,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["preact-render-to-string", "virtual:81e2d7c80e363c409bc2c2ac929c7a6469f45929fa9a7872d84d5d9fb51850d5e63a5f7797bd8e4d03dcaf3be7d5c9a3ecea3eba9e01b73cdf4b6e48699c5404#npm:5.2.6"],\
           ["@types/preact", null],\
-          ["preact", "npm:10.24.3"],\
+          ["preact", "npm:10.25.0"],\
           ["pretty-format", "npm:3.8.0"]\
         ],\
         "packagePeers": [\
