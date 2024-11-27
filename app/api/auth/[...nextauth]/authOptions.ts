@@ -46,4 +46,7 @@ export const authOptions = {
       },
     },
   },
+  theme: {
+    logo: '/img/financegoras.png',
+  },
 }
