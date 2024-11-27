@@ -49,7 +49,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <Link href="/analysis" className={classes.control}>
                 {props.dictionary.appbar.analysis}
               </Link>
-              <Divider size="sm" mx="sm" variant="solid" orientation="vertical" />
+              <Divider size="sm" ml="md" mr="xs" variant="solid" orientation="vertical" />
             </Group>
             <Group>
               <Tooltip label={props.dictionary.appbar.tooltipPrivacy} position="bottom">
