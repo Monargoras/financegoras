@@ -49,7 +49,6 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
               <Link href="/analysis" className={classes.control}>
                 {props.dictionary.appbar.analysis}
               </Link>
-              <AuthMenu dictionary={props.dictionary} />
             </Group>
             <Group>
               <Tooltip label={props.dictionary.appbar.tooltipPrivacy} position="bottom">
@@ -63,6 +62,7 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
                   <IconSunMoon onClick={toggleColorScheme} />
                 </ActionIcon>
               </Tooltip>
+              <AuthMenu dictionary={props.dictionary} />
             </Group>
           </Group>
         </Group>
@@ -105,9 +105,6 @@ export function Appbar({ children, props }: { children: React.ReactNode; props: 
         >
           {props.dictionary.appbar.analysis}
         </Link>
-        <Group style={{ marginTop: 24 }}>
-          <AuthMenu dictionary={props.dictionary} unstyled />
-        </Group>
       </AppShell.Navbar>
 
       <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>{children}</AppShell.Main>
