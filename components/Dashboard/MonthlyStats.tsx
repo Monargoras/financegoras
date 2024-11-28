@@ -24,7 +24,17 @@ export function MonthlyStats(props: MonthlyStatsProps) {
   }
 
   return (
-    <Flex gap="md" justify="center" direction="row" wrap="wrap">
+    <Flex
+      gap="md"
+      justify="center"
+      direction="row"
+      wrap="wrap"
+      w={{
+        xl: 1300,
+        md: 900,
+        sm: 400,
+      }}
+    >
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlyIncome}</Text>
         <Text c={theme.colors.income[5]}>{privacyMode ? '**.**' : props.data.totalIncome.toFixed(2)}€</Text>

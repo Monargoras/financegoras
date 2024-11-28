@@ -58,6 +58,7 @@ export function TransactionTable(props: TransactionTableProps) {
         h="40dvh"
         miw={{ xl: 600, md: 350 }}
         minWidth={350}
+        mih={350}
         className={generalClasses.styledScroll}
       >
         <Table striped highlightOnHover stickyHeader withTableBorder stickyHeaderOffset={-1}>
