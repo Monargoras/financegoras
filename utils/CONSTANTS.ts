@@ -1,1 +1,1 @@
-export const demoUserId = 'DEMO'
+export const DEMOUSERID = 'DEMO'

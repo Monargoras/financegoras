@@ -7,7 +7,7 @@ import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExp
 import getIncExpEvolution from '@/app/api/budget/getIncExpEvolution/getIncExpEvolutionAction'
 import getMonthlyExpenseEvolution from '@/app/api/budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
 import getTransactions from '@/app/api/budget/getTransactions/getTransactionsAction'
-import { demoUserId } from '@/utils/CONSTANTS'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 import generateDemoTransactions from '@/serverActions/generateDemoTransactions'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
@@ -34,7 +34,7 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
   const percentage = false
   const includeEmptyCategories = false
 
-  const userId = demoUserId
+  const userId = DEMOUSERID
 
   // get demo transactions for current month
   const tmpTransactions = await getTransactions(userId, curYear, curMonth)

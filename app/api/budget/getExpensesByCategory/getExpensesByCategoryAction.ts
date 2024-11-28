@@ -1,11 +1,14 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { CategoryExpenseData, getGroupFromCategory } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
 import getUsedCategories from '../getCategories/getUsedCategoriesAction'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 export default async function getExpensesByCategory(
   userId: string,
@@ -15,10 +18,16 @@ export default async function getExpensesByCategory(
   grouped: boolean,
   includeEmptyCategories: boolean
 ): Promise<CategoryExpenseData[]> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && userId !== DEMOUSERID) {
+    return []
+  }
+  const validatedUserId = userId === DEMOUSERID ? DEMOUSERID : session && session.user ? session.user.id : DEMOUSERID
+
   let expenseQuery = db
     .selectFrom('transactions')
     .selectAll()
-    .where('userId', '=', userId)
+    .where('userId', '=', validatedUserId)
     .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
       eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))
@@ -35,8 +44,8 @@ export default async function getExpensesByCategory(
   const expenseTransactions = parseDatabaseTransactionsArray(expenseRes)
 
   const aggregatedTransactions = {} as Record<string, number>
-  const categories = await getCategories(userId)
-  const usedCategories = await getUsedCategories(userId, includeSavings)
+  const categories = await getCategories(validatedUserId)
+  const usedCategories = await getUsedCategories(validatedUserId, includeSavings)
 
   if (grouped) {
     if (categories && usedCategories) {

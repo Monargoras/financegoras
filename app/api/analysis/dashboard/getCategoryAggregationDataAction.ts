@@ -1,8 +1,11 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { CategoryAggregationData, Transaction, TransactionType } from '@/utils/types'
 import { getDynamicMonthYearTuples } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { getTransactionsInMonth } from './analysisDashboardUtils'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 const getStatsForCategory = (transactions: Transaction[], monthsToCompute: number[][]) => {
   const totalsPerMonth = monthsToCompute.map(([m, y]) =>
@@ -24,8 +27,14 @@ const getStatsForCategory = (transactions: Transaction[], monthsToCompute: numbe
 export default async function getCategoryAggregationData(
   transactions: Transaction[],
   startDate: Date,
-  endDate: Date
+  endDate: Date,
+  userId: string
 ): Promise<CategoryAggregationData> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && userId !== DEMOUSERID) {
+    return []
+  }
+
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
 
   const incomeTransactions = transactions.filter((transaction) => transaction.isIncome)

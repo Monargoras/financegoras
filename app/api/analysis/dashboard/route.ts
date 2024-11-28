@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 import { authOptions } from '../../auth/[...nextauth]/authOptions'
-import { demoUserId } from '@/utils/CONSTANTS'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 import { valueToBoolean } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import getAnalysisDashbaordData from './getAnalysisDashbaordDataAction'
 
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const userId = session && session.user && !isDemo ? session.user.id : demoUserId
+  const userId = session && session.user && !isDemo ? session.user.id : DEMOUSERID
 
   const namesString = request.nextUrl.searchParams.get('names')
   const categoriesString = request.nextUrl.searchParams.get('categories')

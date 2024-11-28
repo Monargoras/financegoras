@@ -4,9 +4,10 @@ import { nanoid } from 'nanoid'
 import { TransactionType } from '@/utils/types'
 import { db } from '@/utils/database'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 export default async function generateDemoTransactions(year: number, month: number) {
-  const categories = await getCategories('DEMO')
+  const categories = await getCategories(DEMOUSERID)
 
   if (!categories) {
     return false
@@ -22,7 +23,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       amount: 1537,
       name: 'Christmas Bonus',
       category: 'Bonus',
-      userId: 'DEMO',
+      userId: DEMOUSERID,
       id,
       createdAt: date,
       transactionType: TransactionType[TransactionType.Single],
@@ -39,7 +40,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       amount: 750,
       name: 'Savings account bonus',
       category: 'Investment',
-      userId: 'DEMO',
+      userId: DEMOUSERID,
       id: id2,
       createdAt: date2,
       transactionType: TransactionType[TransactionType.Single],
@@ -58,7 +59,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       amount: 1337,
       name: 'Tax Return',
       category: 'Infrequent',
-      userId: 'DEMO',
+      userId: DEMOUSERID,
       id,
       createdAt: date,
       transactionType: TransactionType[TransactionType.Single],
@@ -75,7 +76,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       amount: 500,
       name: 'Savings account bonus',
       category: 'Investment',
-      userId: 'DEMO',
+      userId: DEMOUSERID,
       id: id2,
       createdAt: date2,
       transactionType: TransactionType[TransactionType.Single],
@@ -107,7 +108,7 @@ export default async function generateDemoTransactions(year: number, month: numb
       amount,
       name,
       category,
-      userId: 'DEMO',
+      userId: DEMOUSERID,
       id,
       createdAt: date,
       transactionType: TransactionType[TransactionType.Single],

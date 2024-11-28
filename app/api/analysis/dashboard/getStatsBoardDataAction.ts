@@ -1,8 +1,11 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { StatsBoardData, Transaction, TransactionType } from '@/utils/types'
 import { getDynamicMonthYearTuples } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { getTransactionsInMonth } from './analysisDashboardUtils'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 const getStats = (transactions: Transaction[], monthsToCompute: number[][], incomeValues: number[] | undefined) => {
   const totalsPerMonth = monthsToCompute.map(([m, y]) =>
@@ -43,8 +46,14 @@ export default async function getStatsBoardData(
   allIncomeTransactions: Transaction[],
   allSavingsTransactions: Transaction[],
   startDate: Date,
-  endDate: Date
+  endDate: Date,
+  userId: string
 ): Promise<StatsBoardData> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && userId !== DEMOUSERID) {
+    return placeholder
+  }
+
   const monthsToCompute = getDynamicMonthYearTuples(startDate, endDate)
 
   const incomeTransactions = allIncomeTransactions
@@ -97,4 +106,39 @@ export default async function getStatsBoardData(
       savingsPercentage: savings.minimumPercentage || 0,
     },
   }
+}
+
+const placeholder = {
+  totalFiltered: {
+    expenses: 0,
+    expensesPercentage: 0,
+    income: 0,
+    remainingIncome: 0,
+    savings: 0,
+    savingsPercentage: 0,
+  },
+  averagePerMonth: {
+    expenses: 0,
+    expensesPercentage: 0,
+    income: 0,
+    remainingIncome: 0,
+    savings: 0,
+    savingsPercentage: 0,
+  },
+  maximumOneMonth: {
+    expenses: 0,
+    expensesPercentage: 0,
+    income: 0,
+    remainingIncome: 0,
+    savings: 0,
+    savingsPercentage: 0,
+  },
+  minimumOneMonth: {
+    expenses: 0,
+    expensesPercentage: 0,
+    income: 0,
+    remainingIncome: 0,
+    savings: 0,
+    savingsPercentage: 0,
+  },
 }

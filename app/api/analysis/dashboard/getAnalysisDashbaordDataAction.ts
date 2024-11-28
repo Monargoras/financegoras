@@ -1,5 +1,6 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import {
   AnalysisDashboardData,
   getGroupFromCategory,
@@ -13,6 +14,8 @@ import getCategories from '../../budget/getCategories/getCategoriesAction'
 import getColorMap from '../../budget/getColorMap/getColorMapAction'
 import getStatsBoardData from './getStatsBoardDataAction'
 import getCategoryAggregationData from './getCategoryAggregationDataAction'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 export default async function getAnalysisDashbaordData(
   userId: string,
@@ -25,6 +28,12 @@ export default async function getAnalysisDashbaordData(
   onlyExpenses: boolean,
   lang: string
 ): Promise<AnalysisDashboardData | null> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && userId !== DEMOUSERID) {
+    return null
+  }
+  const validatedUserId = userId === DEMOUSERID ? DEMOUSERID : session && session.user ? session.user.id : DEMOUSERID
+
   const [allCategories, allTransactions] = await Promise.all([getCategories(userId), getAllTransactions(userId)])
 
   const listOfNames = Array.from(new Set(allTransactions.map((ta) => ta.name)))
@@ -73,10 +82,17 @@ export default async function getAnalysisDashbaordData(
   const filteredTransactions = filterData(allTransactions)
 
   const [categoryEvolution, colorMap, statsBoardData, categoryAggregationData] = await Promise.all([
-    getCategoryEvolution(filteredTransactions, safeStartDate, safeEndDate, lang, userId),
-    getColorMap(userId),
-    getStatsBoardData(filteredTransactions, allIncomeTransactions, allSavingsTransactions, safeStartDate, safeEndDate),
-    getCategoryAggregationData(filteredTransactions, safeStartDate, safeEndDate),
+    getCategoryEvolution(filteredTransactions, safeStartDate, safeEndDate, lang, validatedUserId),
+    getColorMap(validatedUserId),
+    getStatsBoardData(
+      filteredTransactions,
+      allIncomeTransactions,
+      allSavingsTransactions,
+      safeStartDate,
+      safeEndDate,
+      validatedUserId
+    ),
+    getCategoryAggregationData(filteredTransactions, safeStartDate, safeEndDate, validatedUserId),
   ])
 
   return {

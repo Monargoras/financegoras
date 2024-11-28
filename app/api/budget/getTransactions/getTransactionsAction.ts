@@ -1,17 +1,26 @@
 'use server'
 
+import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 import { Transaction, TransactionType } from '@/utils/types'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 export default async function getTransactions(
   userId: string,
   year: number,
   month: number | null
 ): Promise<Transaction[]> {
+  const session = await getServerSession(authOptions)
+  if ((!session || !session.user) && userId !== DEMOUSERID) {
+    return []
+  }
+  const validatedUserId = userId === DEMOUSERID ? DEMOUSERID : session && session.user ? session.user.id : DEMOUSERID
+
   const transactions = await db
     .selectFrom('transactions')
-    .where('userId', '=', userId)
+    .where('userId', '=', validatedUserId)
     .where('createdAt', '<', month ? new Date(year, month, 1) : new Date(year + 1, 0, 1))
     .where((eb) =>
       eb('stoppedAt', 'is', null).or('stoppedAt', '>=', month ? new Date(year, month - 1, 1) : new Date(year, 0, 1))

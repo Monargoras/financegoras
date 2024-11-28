@@ -3,7 +3,7 @@ import { getDictionary } from '../../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
 import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
-import { demoUserId } from '@/utils/CONSTANTS'
+import { DEMOUSERID } from '@/utils/CONSTANTS'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -18,7 +18,7 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
   'use server'
 
   const data = await getAnalysisDashbaordData(
-    demoUserId,
+    DEMOUSERID,
     [],
     [],
     [],
