@@ -1,10 +1,9 @@
 'use server'
 
 import { nanoid } from 'nanoid'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { TransactionType } from '@/utils/types'
 import { db } from '@/utils/database'
+import { getUserId } from '@/utils/authUtils'
 
 export default async function submitTransaction(
   isIncome: boolean,
@@ -15,8 +14,8 @@ export default async function submitTransaction(
   transactionType: TransactionType,
   date: string = new Date().toUTCString()
 ) {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return false
   }
   if (name.length === 0 || name.length > 50) {
@@ -33,7 +32,7 @@ export default async function submitTransaction(
     amount,
     name,
     category,
-    userId: session.user.id,
+    userId,
     id,
     createdAt: new Date(date),
     transactionType: TransactionType[transactionType],

@@ -1,14 +1,12 @@
 'use server'
 
-import { getServerSession } from 'next-auth'
 import { db } from '@/utils/database'
 import { CategoryExpenseData, getGroupFromCategory } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import getCategories from '../getCategories/getCategoriesAction'
 import getUsedCategories from '../getCategories/getUsedCategoriesAction'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
-import { DEMOUSERID } from '@/utils/CONSTANTS'
+import { validateUserId } from '@/utils/authUtils'
 
 export default async function getExpensesByCategory(
   userId: string,
@@ -18,11 +16,7 @@ export default async function getExpensesByCategory(
   grouped: boolean,
   includeEmptyCategories: boolean
 ): Promise<CategoryExpenseData[]> {
-  const session = await getServerSession(authOptions)
-  if ((!session || !session.user) && userId !== DEMOUSERID) {
-    return []
-  }
-  const validatedUserId = userId === DEMOUSERID ? DEMOUSERID : session && session.user ? session.user.id : DEMOUSERID
+  const validatedUserId = await validateUserId(userId)
 
   let expenseQuery = db
     .selectFrom('transactions')

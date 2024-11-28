@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { DEMOUSERID } from '@/utils/CONSTANTS'
 import { valueToBoolean } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import getAnalysisDashbaordData from './getAnalysisDashbaordDataAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns the evolution of expenses per category the last 12 months or the given year
@@ -20,13 +19,12 @@ import getAnalysisDashbaordData from './getAnalysisDashbaordDataAction'
  * @returns body containing DasboardData
  */
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions)
+  const uId = await getUserId()
   const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
-  if ((!session || !session.user) && !isDemo) {
+  if (!uId && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
-
-  const userId = session && session.user && !isDemo ? session.user.id : DEMOUSERID
+  const userId = uId && !isDemo ? uId : DEMOUSERID
 
   const namesString = request.nextUrl.searchParams.get('names')
   const categoriesString = request.nextUrl.searchParams.get('categories')

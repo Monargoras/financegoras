@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { DEMOUSERID } from '@/utils/CONSTANTS'
 import getTransactions from './getTransactionsAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns all transactions from the database
@@ -14,13 +13,12 @@ import getTransactions from './getTransactionsAction'
  * @returns body containing the transactions in the timeframe as an array
  */
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions)
+  const uId = await getUserId()
   const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
-  if ((!session || !session.user) && !isDemo) {
+  if (!uId && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
-
-  const userId = session && session.user && !isDemo ? session.user.id : DEMOUSERID
+  const userId = uId && !isDemo ? uId : DEMOUSERID
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')

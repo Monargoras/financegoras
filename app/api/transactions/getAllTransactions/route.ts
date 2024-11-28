@@ -1,6 +1,5 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import getAllTransactions from './getAllTransactionsAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns all transactions from the database
@@ -8,12 +7,12 @@ import getAllTransactions from './getAllTransactionsAction'
  * @returns body containing the transactions for the logged in user
  */
 export async function GET() {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const res = await getAllTransactions(session.user.id)
+  const res = await getAllTransactions(userId)
 
   return Response.json(res, { status: 200 })
 }

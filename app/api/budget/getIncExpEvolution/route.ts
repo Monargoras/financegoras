@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { DEMOUSERID } from '@/utils/CONSTANTS'
 import getIncExpEvolution from './getIncExpEvolutionAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns the evolution of income, expeneses and savings for the last 12 months or the given year.
@@ -15,13 +14,12 @@ import getIncExpEvolution from './getIncExpEvolutionAction'
  * @returns body containing AggregatedIncomeExpenseEvolution
  */
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions)
+  const uId = await getUserId()
   const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
-  if ((!session || !session.user) && !isDemo) {
+  if (!uId && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
-
-  const userId = session && session.user && !isDemo ? session.user.id : DEMOUSERID
+  const userId = uId && !isDemo ? uId : DEMOUSERID
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')

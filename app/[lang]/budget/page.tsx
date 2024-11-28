@@ -1,8 +1,6 @@
-import { getServerSession } from 'next-auth'
 import { DashboardData, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 import getMonthlyData from '@/app/api/budget/getAggregatedTransactions/getMonthlyDataAction'
 import getExpensesByCategory from '@/app/api/budget/getExpensesByCategory/getExpensesByCategoryAction'
@@ -13,6 +11,7 @@ import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getUserSettings from '@/serverActions/getUserSettings'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
+import { getUserId } from '@/utils/authUtils'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -26,8 +25,8 @@ export async function generateMetadata(props: { params: PageProps }) {
 async function getInitialDashboardData({ lang }: { lang: string }): Promise<DashboardData> {
   'use server'
 
-  const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return {
       monthlyExpenseEvolution: [],
       incExpEvolution: {
@@ -60,8 +59,6 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   const grouped = userSettings ? userSettings.grouped : false
   const percentage = userSettings ? userSettings.percentage : false
   const includeEmptyCategories = userSettings ? userSettings.includeEmptyCategories : false
-
-  const userId = session.user.id
 
   const [
     monthlyExpenseEvolution,
@@ -101,12 +98,12 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
 export default async function BudgetPage(props: { params: PageProps }) {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
-  const session = await getServerSession(authOptions)
+  const userId = await getUserId()
   const initialData = await getInitialDashboardData({ lang })
 
   return (
     <PageTransitionProvider>
-      {session?.user ? (
+      {userId ? (
         <DashboardContainer lang={lang} dict={dict} demo={false} initialData={initialData} />
       ) : (
         <AuthenticationPrompt dictionary={dict} />

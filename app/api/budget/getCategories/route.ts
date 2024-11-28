@@ -1,6 +1,5 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import getCategories from './getCategoriesAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns the categories of the user
@@ -8,12 +7,12 @@ import getCategories from './getCategoriesAction'
  * @returns body containing the categories of the user
  */
 export async function GET() {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const res = await getCategories(session.user.id)
+  const res = await getCategories(userId)
 
   if (!res) {
     return new Response('Categories not found', { status: 404 })

@@ -1,9 +1,8 @@
 'use server'
 
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { db } from '@/utils/database'
 import { TransactionType } from '@/utils/types'
+import { getUserId } from '@/utils/authUtils'
 
 export default async function updateTransaction(
   id: string,
@@ -16,8 +15,8 @@ export default async function updateTransaction(
   createdAt: string,
   stoppedAt: string | null
 ) {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return false
   }
   if (name.length === 0 || name.length > 50) {
@@ -46,7 +45,7 @@ export default async function updateTransaction(
       createdAt: new Date(createdAt),
       stoppedAt: stoppedAt ? new Date(stoppedAt) : null,
     })
-    .where((eb) => eb.and([eb('id', '=', id), eb('userId', '=', session.user.id)]))
+    .where((eb) => eb.and([eb('id', '=', id), eb('userId', '=', userId)]))
     .executeTakeFirst()
   return Number(res.numUpdatedRows) > 0
 }

@@ -1,16 +1,15 @@
 import { Container, Divider, Flex } from '@mantine/core'
-import { getServerSession } from 'next-auth'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 import TransactionsDetailTable, {
   InitialDetailTableData,
 } from '@/components/TransactionsDetailTable/TransactionsDetailTable'
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
+import { getUserId } from '@/utils/authUtils'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -24,12 +23,12 @@ export async function generateMetadata(props: { params: PageProps }) {
 async function getInitialData(): Promise<InitialDetailTableData> {
   'use server'
 
-  const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return { categories: null, transactions: [] }
   }
-  const categories = await getCategories(session.user.id)
-  const transactions = await getAllTransactions(session.user.id)
+  const categories = await getCategories(userId)
+  const transactions = await getAllTransactions(userId)
 
   return { categories, transactions }
 }
@@ -37,12 +36,12 @@ async function getInitialData(): Promise<InitialDetailTableData> {
 export default async function TransactionsPage(props: { params: PageProps }) {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
-  const session = await getServerSession(authOptions)
+  const userId = await getUserId()
   const initialData = await getInitialData()
 
   return (
     <PageTransitionProvider>
-      {session?.user ? (
+      {userId ? (
         <Container fluid>
           <Flex gap="md" justify="center" align="center" direction="column">
             <IncomeExpenseForm dictionary={dict} initialData={initialData.categories} />

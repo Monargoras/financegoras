@@ -1,11 +1,10 @@
-import { getServerSession } from 'next-auth'
 import { AnalysisDashboardData, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
 import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
+import { getUserId } from '@/utils/authUtils'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -62,12 +61,12 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     categoryAggregationData: [],
   }
 
-  const session = await getServerSession(authOptions)
-  if (!session?.user) {
+  const userId = await getUserId()
+  if (!userId) {
     return emptyData
   }
   const data = await getAnalysisDashbaordData(
-    session.user.id,
+    userId,
     [],
     [],
     [],
@@ -84,12 +83,12 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
 export default async function BudgetPage(props: { params: PageProps }) {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
-  const session = await getServerSession(authOptions)
+  const userId = await getUserId()
   const initialData = await getInitialAnalysisData(lang)
 
   return (
     <PageTransitionProvider>
-      {session?.user ? (
+      {userId ? (
         <AnalysisDashboardContainer locale={lang} dictionary={dict} initialData={initialData} demo={false} />
       ) : (
         <AuthenticationPrompt dictionary={dict} />

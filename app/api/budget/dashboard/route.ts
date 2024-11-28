@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
-import { authOptions } from '../../auth/[...nextauth]/authOptions'
 import { DEMOUSERID } from '@/utils/CONSTANTS'
 import { valueToBoolean } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import getMonthlyExpenseEvolution from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionAction'
@@ -11,6 +9,7 @@ import getTransactions from '../getTransactions/getTransactionsAction'
 import { DashboardData } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import getColorMap from '../getColorMap/getColorMapAction'
+import { getUserId } from '@/utils/authUtils'
 
 /**
  * This endpoint returns the all data needed for the dashboard
@@ -27,13 +26,12 @@ import getColorMap from '../getColorMap/getColorMapAction'
  * @returns body containing DasboardData
  */
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions)
+  const uId = await getUserId()
   const isDemo = valueToBoolean(request.nextUrl.searchParams.get('demo'))
-  if ((!session || !session.user) && !isDemo) {
+  if (!uId && !isDemo) {
     return new Response('Unauthorized', { status: 401 })
   }
-
-  const userId = session && session.user && !isDemo ? session.user.id : DEMOUSERID
+  const userId = uId && !isDemo ? uId : DEMOUSERID
 
   const monthString = request.nextUrl.searchParams.get('month')
   const selectedMonthString = request.nextUrl.searchParams.get('selectedMonth')
