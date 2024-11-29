@@ -56,13 +56,15 @@ export default function TransactionForm(props: TransactionFormProps) {
   useEffect(() => {
     if (data && data.length > 0 && data[0].items && data[0].items.length > 0) {
       setCategories(data)
-      setCategory(data[0].items[0].name)
     }
   }, [data])
 
   useEffect(() => {
     if (categories && categories.length > 0 && categories[0].items && categories[0].items.length > 0) {
       setCategory(categories[0].items[0].name)
+      setCategoryError(false)
+    } else {
+      setCategory(props.dictionary.budgetPage.noCategory)
     }
   }, [categories])
 
@@ -212,9 +214,9 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <Select
           data={
-            categories?.map((c) => ({ group: c.group, items: c.items.map((i) => i.name) })) ?? [
-              { group: props.dictionary.budgetPage.noGroup, items: [props.dictionary.budgetPage.noCategory] },
-            ]
+            categories && categories.length > 0
+              ? categories.map((c) => ({ group: c.group, items: c.items.map((i) => i.name) }))
+              : [{ group: props.dictionary.budgetPage.noGroup, items: [props.dictionary.budgetPage.noCategory] }]
           }
           label={
             <Flex direction="row" gap="xs">
