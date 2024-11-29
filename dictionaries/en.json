@@ -19,7 +19,8 @@
     "de": "German",
     "privacyNotificationTitle": "Privacy mode",
     "privacyNotificationOn": "Privacy mode is activated. Absolute numbers are hidden.",
-    "privacyNotificationOff": "Privacy mode is deactivated. Absolute numbers are visible."
+    "privacyNotificationOff": "Privacy mode is deactivated. Absolute numbers are visible.",
+    "addFirstTransaction": "Add your custom categories and first transactions to get started!"
   },
   "landingPage": {
     "welcome": "Keep your monthly budget in check!",

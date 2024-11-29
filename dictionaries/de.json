@@ -19,7 +19,8 @@
     "de": "Deutsch",
     "privacyNotificationTitle": "Privater modus",
     "privacyNotificationOn": "Der private Modus ist aktiviert. Absolute Zahlenwerte sind ausgeblendet.",
-    "privacyNotificationOff": "Der private Modus ist deaktiviert. Absolute Zahlenwerte sind sichtbar."
+    "privacyNotificationOff": "Der private Modus ist deaktiviert. Absolute Zahlenwerte sind sichtbar.",
+    "addFirstTransaction": "Füge deine individuellen Kategorien und erste Transaktionen hinzu um zu starten!"
   },
   "landingPage": {
     "welcome": "Behalte dein monatliches Budget im Blick!",
