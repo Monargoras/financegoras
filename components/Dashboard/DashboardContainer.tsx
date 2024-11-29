@@ -6,6 +6,7 @@ import { Container, Divider, Flex, Loader, Text } from '@mantine/core'
 import Dashboard from './Dashboard'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
 import { DashboardData, Dictionary } from '@/utils/types'
+import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
 
 interface DashboardContainerProps {
   lang: string
@@ -54,7 +55,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
             <Text>{props.dict.budgetPage.errorLoadingData}</Text>
           </Flex>
         )}
-        {data && (
+        {data && data.transactions.length > 0 && (
           <Dashboard
             lang={props.lang}
             dictionary={props.dict}
@@ -75,6 +76,9 @@ export default function DashboardContainer(props: DashboardContainerProps) {
             percentage={percentage}
             setPercentage={setPercentage}
           />
+        )}
+        {data && data.transactions.length === 0 && (
+          <AddFirstTransactionView dict={props.dict} categories={props.initialData.categories} onlyText />
         )}
       </Flex>
     </Container>

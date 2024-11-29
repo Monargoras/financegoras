@@ -10,6 +10,7 @@ import TableControls from './TableControls'
 import TransactionEditModal from './TransactionEditModal'
 import generalClasses from '@/utils/general.module.css'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
+import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
 
 export type InitialDetailTableData = { categories: Categories | null; transactions: Transaction[] }
 
@@ -91,7 +92,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     <Flex justify="center">
       {!data && isLoading && <Loader type="dots" />}
       {error && <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>}
-      {filteredData && (
+      {filteredData && filteredData.length > 0 && (
         <Flex justify="center" align="center" direction="column">
           <TableControls
             dictionary={props.dictionary}
@@ -190,6 +191,9 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
             />
           )}
         </Flex>
+      )}
+      {filteredData && filteredData.length === 0 && (
+        <AddFirstTransactionView dict={props.dictionary} categories={categoryRes.data} onlyText />
       )}
     </Flex>
   )

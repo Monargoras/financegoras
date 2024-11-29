@@ -6,6 +6,7 @@ import useSWR, { Fetcher } from 'swr'
 import { AnalysisDashboardData, Dictionary } from '@/utils/types'
 import AnalysisControls from './AnalysisControls'
 import AnalysisDashboard from './AnalysisDashboard'
+import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
 
 interface AnalysisDashboardContainerProps {
   locale: string
@@ -49,7 +50,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
             <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
           </Flex>
         )}
-        {data && (
+        {data && data.transactions.length > 0 && (
           <Flex gap="md" justify="center" align="center" direction="column" w="100%">
             <AnalysisControls
               nameSearch={nameSearch}
@@ -79,6 +80,9 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
             <Divider size="lg" w="100%" />
             <AnalysisDashboard locale={props.locale} dictionary={props.dictionary} demo={props.demo} data={data} />
           </Flex>
+        )}
+        {data && data.transactions.length === 0 && (
+          <AddFirstTransactionView dict={props.dictionary} categories={props.initialData.categories} />
         )}
       </Flex>
     </Container>
