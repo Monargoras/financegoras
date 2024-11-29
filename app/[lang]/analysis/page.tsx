@@ -5,6 +5,7 @@ import AuthenticationPrompt from '@/components/AuthenticationPrompt/Authenticati
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
 import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
 import { getUserId } from '@/utils/authUtils'
+import { emptyData } from '@/app/api/analysis/dashboard/analysisDashboardUtils'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -17,49 +18,6 @@ export async function generateMetadata(props: { params: PageProps }) {
 
 async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
   'use server'
-
-  const emptyData = {
-    categories: [],
-    transactions: [],
-    listOfNames: [],
-    categoryEvolutionData: [],
-    colorMap: {},
-    statsBoardData: {
-      totalFiltered: {
-        expenses: 0,
-        expensesPercentage: 0,
-        income: 0,
-        remainingIncome: 0,
-        savings: 0,
-        savingsPercentage: 0,
-      },
-      averagePerMonth: {
-        expenses: 0,
-        expensesPercentage: 0,
-        income: 0,
-        remainingIncome: 0,
-        savings: 0,
-        savingsPercentage: 0,
-      },
-      maximumOneMonth: {
-        expenses: 0,
-        expensesPercentage: 0,
-        income: 0,
-        remainingIncome: 0,
-        savings: 0,
-        savingsPercentage: 0,
-      },
-      minimumOneMonth: {
-        expenses: 0,
-        expensesPercentage: 0,
-        income: 0,
-        remainingIncome: 0,
-        savings: 0,
-        savingsPercentage: 0,
-      },
-    },
-    categoryAggregationData: [],
-  }
 
   const userId = await getUserId()
   if (!userId) {

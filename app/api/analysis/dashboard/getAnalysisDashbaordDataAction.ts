@@ -14,6 +14,7 @@ import getColorMap from '../../budget/getColorMap/getColorMapAction'
 import getStatsBoardData from './getStatsBoardDataAction'
 import getCategoryAggregationData from './getCategoryAggregationDataAction'
 import { validateUserId } from '@/utils/authUtils'
+import { emptyData } from './analysisDashboardUtils'
 
 export default async function getAnalysisDashbaordData(
   userId: string,
@@ -25,7 +26,7 @@ export default async function getAnalysisDashbaordData(
   endDate: string | null,
   onlyExpenses: boolean,
   lang: string
-): Promise<AnalysisDashboardData | null> {
+): Promise<AnalysisDashboardData> {
   const validatedUserId = await validateUserId(userId)
 
   const [allCategories, allTransactions] = await Promise.all([getCategories(userId), getAllTransactions(userId)])
@@ -36,7 +37,7 @@ export default async function getAnalysisDashbaordData(
   const allSavingsTransactions = allTransactions.filter((ta) => ta.isSavings && !ta.isIncome)
 
   if (!allCategories) {
-    return null
+    return emptyData
   }
 
   const safeStartDate = new Date(startDate ?? allTransactions[allTransactions.length - 1].createdAt)

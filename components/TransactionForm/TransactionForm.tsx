@@ -54,14 +54,14 @@ export default function TransactionForm(props: TransactionFormProps) {
   })
 
   useEffect(() => {
-    if (data) {
+    if (data && data.length > 0 && data[0].items && data[0].items.length > 0) {
       setCategories(data)
       setCategory(data[0].items[0].name)
     }
   }, [data])
 
   useEffect(() => {
-    if (categories) {
+    if (categories && categories.length > 0 && categories[0].items && categories[0].items.length > 0) {
       setCategory(categories[0].items[0].name)
     }
   }, [categories])
