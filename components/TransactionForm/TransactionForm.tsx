@@ -84,6 +84,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         // refresh all transaction related data after updating categories
         mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
         mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+        mutate((key) => typeof key === 'string' && key.startsWith('/api/analysis/'))
       } else {
         notifications.show({
           title: props.dictionary.budgetPage.feedbackUpdateBackendErrorTitle,
@@ -151,6 +152,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       })
       mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/') && key !== '/api/budget/getCategories')
       mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/analysis/'))
       return true
     }
     notifications.show({
