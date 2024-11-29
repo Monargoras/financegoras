@@ -17,7 +17,7 @@ export default function AddFirstTransactionView(props: AddFirstTransactionViewPr
           <Divider size="lg" w="100%" />
         </Flex>
       )}
-      <Text>{props.dict.general.addFirstTransaction}</Text>
+      <Text ta="center">{props.dict.general.addFirstTransaction}</Text>
     </Flex>
   )
 }
