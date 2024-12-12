@@ -41,8 +41,8 @@
     "negotiator": "^1.0.0",
     "next": "14.2.20",
     "next-auth": "^4.24.11",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "recharts": "^2.14.1",
     "sharp": "^0.33.5",
     "swr": "^2.2.5"
@@ -62,7 +62,7 @@
     "@types/jest": "^29.5.14",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^22.10.2",
-    "@types/react": "18.3.16",
+    "@types/react": "19.0.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "babel-loader": "^9.2.1",
@@ -87,7 +87,7 @@
     "storybook": "^8.4.7",
     "storybook-dark-mode": "^4.0.2",
     "stylelint": "^16.11.0",
-    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-config-standard-scss": "^14.0.0",
     "ts-jest": "^29.2.5",
     "typescript": "5.6.3",
     "webpack": "^5.97.1"
