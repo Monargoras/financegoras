@@ -195,6 +195,7 @@ export default function TransactionForm(props: TransactionFormProps) {
           thousandSeparator=" "
           stepHoldDelay={500}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+          maxLength={15}
         />
         <Switch
           checked={isSavings}

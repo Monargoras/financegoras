@@ -176,6 +176,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             key={form.key('amount')}
             error={form.errors.amount}
             {...form.getInputProps('amount', { type: 'input' })}
+            maxLength={15}
           />
           <Switch
             onLabel={props.dictionary.budgetPage.isSavings}

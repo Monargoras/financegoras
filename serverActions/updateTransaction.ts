@@ -22,7 +22,9 @@ export default async function updateTransaction(
   if (name.length === 0 || name.length > 50) {
     return false
   }
-  if (amount === 0) {
+  // 12 digits allow for 999 999 999.99 or even 99 999 999 999 (frontend adds the space and therefore only allows tens of billions without decimals)
+  // (spaces added for readability)
+  if (amount === 0 || amount.toString().length > 12) {
     return false
   }
   if (!createdAt) {
