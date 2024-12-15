@@ -1,4 +1,4 @@
-import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
 import { getServerSession } from 'next-auth'
 import '@/app/[lang]/globals.css'
@@ -33,7 +33,7 @@ export default async function RootLayout({ children, params }: { children: React
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang={lang} style={{ overflowX: 'hidden' }}>
+    <html lang={lang} style={{ overflowX: 'hidden' }} {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
