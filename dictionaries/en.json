@@ -88,6 +88,7 @@
     "remainingIncome": "Remaining income",
     "addCategory": "Add category",
     "addGroup": "Add group",
+    "addFirstCategory": "Add first category",
     "defaultGroupName": "New group",
     "defaultCategoryName": "New category",
     "feedbackAddGroupErrorTitle": "Invalid category or group name!",

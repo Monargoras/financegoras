@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useDisclosure } from '@mantine/hooks'
-import { Accordion, Button, Drawer, Flex, Text } from '@mantine/core'
+import { Accordion, Box, Button, Drawer, Flex, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { IconX } from '@tabler/icons-react'
 import { Categories, Dictionary } from '@/utils/types'
@@ -23,6 +23,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   const [editing, setEditing] = useState<string | null>(null)
   const [editingColor, setEditingColor] = useState<string>('')
   const [editingValue, setEditingValue] = useState<string>('')
+  const [openedAccordion, setOpenedAccordion] = useState<string[]>([])
 
   // array holding all group names and categories to check for duplicates when adding new ones
   const allCategories = props.categories.reduce<string[]>((acc, item) => {
@@ -147,6 +148,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     setEditing(props.dictionary.budgetPage.defaultGroupName)
     setEditingValue(props.dictionary.budgetPage.defaultGroupName)
     setEditingColor(newColor)
+    setOpenedAccordion((prevValue) => [...prevValue, props.dictionary.budgetPage.defaultGroupName])
     props.setUpdateBackendCategories(true)
     return true
   }
@@ -175,6 +177,7 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
       newCategories[index] = newGroup
       // set the new categories array
       props.setCategories(newCategories)
+      setOpenedAccordion((prevValue) => [...prevValue.filter((g) => g !== editing), newName])
       props.setUpdateBackendCategories(true)
       return true
     }
@@ -188,6 +191,24 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
     const filteredCategories = newCategories.filter((item) => item.group !== group)
     // set the new categories array
     props.setCategories(filteredCategories)
+    props.setUpdateBackendCategories(true)
+    return true
+  }
+
+  const handleOnboarding = () => {
+    const newColorGroup = randomColor()
+    const newColorCategory = randomColor()
+    // add a new group with a default name {props.dictionary.budgetPage.defaultGroupName}
+    const newGroup = {
+      group: props.dictionary.budgetPage.defaultGroupName,
+      color: newColorGroup,
+      items: [{ name: props.dictionary.budgetPage.defaultCategoryName, color: newColorCategory }],
+    }
+    props.setCategories([newGroup])
+    setEditing(props.dictionary.budgetPage.defaultCategoryName)
+    setEditingValue(props.dictionary.budgetPage.defaultCategoryName)
+    setEditingColor(newColorCategory)
+    setOpenedAccordion([props.dictionary.budgetPage.defaultGroupName])
     props.setUpdateBackendCategories(true)
     return true
   }
@@ -214,12 +235,27 @@ export default function CategoryDrawer(props: CategoryDrawerProps) {
   return (
     <>
       <Drawer opened={opened} onClose={close} title={props.dictionary.budgetPage.categories} position="right">
-        <Accordion variant="contained" chevronPosition="left">
-          {items}
-        </Accordion>
-        <Flex justify="center" style={{ margin: 4 }}>
-          <Button onClick={handleAddGroup}>{props.dictionary.budgetPage.addGroup}</Button>
-        </Flex>
+        {props.categories.length > 0 && (
+          <Box>
+            <Accordion
+              multiple
+              value={openedAccordion}
+              onChange={setOpenedAccordion}
+              variant="contained"
+              chevronPosition="left"
+            >
+              {items}
+            </Accordion>
+            <Flex justify="center" style={{ margin: 4 }}>
+              <Button onClick={handleAddGroup}>{props.dictionary.budgetPage.addGroup}</Button>
+            </Flex>
+          </Box>
+        )}
+        {props.categories.length === 0 && (
+          <Flex justify="center" style={{ margin: 4 }}>
+            <Button onClick={handleOnboarding}>{props.dictionary.budgetPage.addFirstCategory}</Button>
+          </Flex>
+        )}
       </Drawer>
 
       <Text

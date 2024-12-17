@@ -87,6 +87,7 @@
     "remainingIncome": "Verbleibende Einnahmen",
     "addCategory": "Kategorie hinzufügen",
     "addGroup": "Gruppe hinzufügen",
+    "addFirstCategory": "Erste Kategorie hinzufügen",
     "defaultGroupName": "Neue Gruppe",
     "defaultCategoryName": "Neue Kategorie",
     "feedbackAddGroupErrorTitle": "Ungültiger Name Kategorie- oder Gruppenname!",
