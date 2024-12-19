@@ -265,26 +265,48 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
         }}
       />
       <Collapse in={opened} mb="xl">
-        <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
+        <Flex justify="center" align="center" gap="md" direction="column">
           <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
-            Pause this month / year
+            Pause one month
           </Button>
-          <DatePickerInput
-            type="range"
-            placeholder="Pause from to"
-            valueFormat={
-              form.values.transactionType === TransactionType[TransactionType.Monthly] ? 'MMMM YYYY' : 'YYYY'
-            }
-            value={dateRange}
-            onChange={setDateRange}
-            clearable
-          />
+          <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
+            <DatePickerInput
+              type="range"
+              placeholder="Pause from to"
+              valueFormat={
+                form.values.transactionType === TransactionType[TransactionType.Monthly] ? 'MMMM YYYY' : 'YYYY'
+              }
+              value={dateRange}
+              onChange={setDateRange}
+              clearable
+            />
+            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+              Pause for range
+            </Button>
+          </Flex>
           <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
-            Stop recurring
+            Stop this transaction today
           </Button>
-          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
-            Update price
-          </Button>
+          <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
+            <NumberInput
+              allowNegative={false}
+              prefix="€"
+              decimalScale={2}
+              thousandSeparator=" "
+              stepHoldDelay={500}
+              stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+              key={form.key('amount')}
+              error={form.errors.amount}
+              {...form.getInputProps('amount', { type: 'input' })}
+              maxLength={15}
+            />
+            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+              Update just this months payment
+            </Button>
+            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+              Update price starting this month
+            </Button>
+          </Flex>
         </Flex>
       </Collapse>
       <Divider size="md" style={{ marginTop: 16 }} />
