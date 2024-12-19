@@ -17,7 +17,7 @@ import {
   TextInput,
   Tooltip,
 } from '@mantine/core'
-import { DatePickerInput, DateTimePicker } from '@mantine/dates'
+import { DateTimePicker, MonthPickerInput, YearPickerInput } from '@mantine/dates'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
@@ -270,16 +270,24 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             Pause one month
           </Button>
           <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
-            <DatePickerInput
-              type="range"
-              placeholder="Pause from to"
-              valueFormat={
-                form.values.transactionType === TransactionType[TransactionType.Monthly] ? 'MMMM YYYY' : 'YYYY'
-              }
-              value={dateRange}
-              onChange={setDateRange}
-              clearable
-            />
+            {form.values.transactionType === TransactionType[TransactionType.Annual] && (
+              <YearPickerInput
+                type="range"
+                placeholder="Pause from to"
+                value={dateRange}
+                onChange={setDateRange}
+                clearable
+              />
+            )}
+            {form.values.transactionType === TransactionType[TransactionType.Monthly] && (
+              <MonthPickerInput
+                type="range"
+                placeholder="Pause from to"
+                value={dateRange}
+                onChange={setDateRange}
+                clearable
+              />
+            )}
             <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
               Pause for range
             </Button>
