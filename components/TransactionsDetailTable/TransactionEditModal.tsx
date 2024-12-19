@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   Checkbox,
+  Collapse,
   Divider,
   Flex,
   MantineProvider,
@@ -12,15 +13,16 @@ import {
   rem,
   Select,
   Switch,
+  Text,
   TextInput,
   Tooltip,
 } from '@mantine/core'
-import { DateTimePicker } from '@mantine/dates'
-import { useMediaQuery } from '@mantine/hooks'
+import { DatePickerInput, DateTimePicker } from '@mantine/dates'
+import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
-import { IconCheck, IconDeviceFloppy, IconX, IconTrashX } from '@tabler/icons-react'
+import { IconCheck, IconDeviceFloppy, IconX, IconTrashX, IconChevronRight, IconChevronDown } from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
 import updateTransaction from '@/serverActions/updateTransaction'
@@ -37,6 +39,8 @@ interface TransactionEditModalProps {
 export default function TransactionEditModal(props: TransactionEditModalProps) {
   const { mutate } = useSWRConfig()
   const isMobile = useMediaQuery('(max-width: 50em)')
+  const [opened, { toggle }] = useDisclosure(false)
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
 
   const form = useForm({
     mode: 'controlled',
@@ -65,6 +69,9 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
   useEffect(() => {
     if (form.values.transactionType === TransactionType[TransactionType.Single]) {
       form.setFieldValue('stoppedAt', null)
+      if (opened) {
+        toggle()
+      }
     }
   }, [form.values.transactionType])
 
@@ -236,6 +243,50 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           />
         </Flex>
       </Flex>
+      <Divider
+        onClick={() => {
+          if (form.values.transactionType !== TransactionType[TransactionType.Single]) {
+            toggle()
+          }
+        }}
+        my="md"
+        size="md"
+        label={
+          <Flex direction="row">
+            {opened && <IconChevronDown />}
+            {!opened && <IconChevronRight />}
+            <Text>Advanced options recurring</Text>
+          </Flex>
+        }
+        labelPosition="left"
+        style={{
+          display: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'block' : 'none',
+          cursor: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'pointer' : 'not-allowed',
+        }}
+      />
+      <Collapse in={opened} mb="xl">
+        <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
+          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+            Pause this month / year
+          </Button>
+          <DatePickerInput
+            type="range"
+            placeholder="Pause from to"
+            valueFormat={
+              form.values.transactionType === TransactionType[TransactionType.Monthly] ? 'MMMM YYYY' : 'YYYY'
+            }
+            value={dateRange}
+            onChange={setDateRange}
+            clearable
+          />
+          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+            Stop recurring
+          </Button>
+          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+            Update price
+          </Button>
+        </Flex>
+      </Collapse>
       <Divider size="md" style={{ marginTop: 16 }} />
       <Flex justify="center" align="center" gap="md" style={{ marginTop: 16 }}>
         <Button
