@@ -37,7 +37,14 @@
     "typeFilterPlaceholder": "Filter type",
     "hideStopped": "Only running",
     "pickDatesRange": "Filter date range",
-    "editTransaction": "Edit transaction"
+    "editTransaction": "Edit transaction",
+    "advancedOptions": "Advanced options for recurring transactions",
+    "pauseForOneInterval": "Pause series for current month/year",
+    "pauseRangePlaceholder": "Pause range",
+    "pauseForRange": "Pause series in range",
+    "stopSeries": "Stop series before next payment",
+    "updateOnlyThis": "Only update this transaction in current month/year",
+    "updateFromThisOnward": "Update as new series from current month/year onward"
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",

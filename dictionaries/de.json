@@ -38,7 +38,14 @@
     "hideStopped": "Nur laufende",
     "showStopped": "Auch beendete",
     "pickDatesRange": "Zeitraum filtern",
-    "editTransaction": "Transaktion bearbeiten"
+    "editTransaction": "Transaktion bearbeiten",
+    "advancedOptions": "Erweiterte Optionen für wiederkehrende Transaktionen",
+    "pauseForOneInterval": "Serie in diesem Monat/Jahr pausieren",
+    "pauseRangePlaceholder": "Pausezeitraum",
+    "pauseForRange": "Serie im Zeitraum pausieren",
+    "stopSeries": "Serie vor nächster Zahlung stoppen",
+    "updateOnlyThis": "Nur Transaktion in diesem Monat/Jahr bearbeiten",
+    "updateFromThisOnward": "Als neue Serie von diesem Monat/Jahr an speichern"
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",

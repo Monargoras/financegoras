@@ -35,6 +35,9 @@ import {
   IconChevronDown,
   IconArrowLeftFromArc,
   IconCircleNumber1,
+  IconBarrierBlock,
+  IconClockPause,
+  IconCalendarPause,
 } from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
@@ -84,9 +87,6 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
   useEffect(() => {
     if (form.values.transactionType === TransactionType[TransactionType.Single]) {
       form.setFieldValue('stoppedAt', null)
-      if (opened) {
-        toggle()
-      }
     }
   }, [form.values.transactionType])
 
@@ -270,7 +270,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           <Flex direction="row">
             {opened && <IconChevronDown />}
             {!opened && <IconChevronRight />}
-            <Text>Advanced options recurring</Text>
+            <Text>{props.dictionary.transactionsPage.advancedOptions}</Text>
           </Flex>
         }
         labelPosition="left"
@@ -279,16 +279,22 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           cursor: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'pointer' : 'not-allowed',
         }}
       />
-      <Collapse in={opened} mb="xl">
+      <Collapse
+        in={opened}
+        mb="xl"
+        style={{
+          display: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'block' : 'none',
+        }}
+      >
         <Flex justify="center" align="center" gap="md" direction="column">
-          <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
-            Pause one month
+          <Button leftSection={<IconClockPause style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
+            {props.dictionary.transactionsPage.pauseForOneInterval}
           </Button>
           <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
             {form.values.transactionType === TransactionType[TransactionType.Annual] && (
               <YearPickerInput
                 type="range"
-                placeholder="Pause from to"
+                placeholder={props.dictionary.transactionsPage.pauseRangePlaceholder}
                 value={dateRange}
                 onChange={setDateRange}
                 clearable
@@ -297,18 +303,22 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             {form.values.transactionType === TransactionType[TransactionType.Monthly] && (
               <MonthPickerInput
                 type="range"
-                placeholder="Pause from to"
+                placeholder={props.dictionary.transactionsPage.pauseRangePlaceholder}
                 value={dateRange}
                 onChange={setDateRange}
                 clearable
               />
             )}
-            <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
-              Pause for range
+            <Button leftSection={<IconCalendarPause style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
+              {props.dictionary.transactionsPage.pauseForRange}
             </Button>
           </Flex>
-          <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
-            Stop this transaction today
+          <Button
+            leftSection={<IconBarrierBlock style={{ width: rem(16), height: rem(16) }} />}
+            onClick={() => {}}
+            color="red"
+          >
+            {props.dictionary.transactionsPage.stopSeries}
           </Button>
         </Flex>
       </Collapse>
@@ -371,7 +381,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                   }
                   onClick={() => {}}
                 >
-                  Only update this months/years transaction
+                  {props.dictionary.transactionsPage.updateOnlyThis}
                 </Menu.Item>
                 <Menu.Item
                   leftSection={
@@ -383,7 +393,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                   }
                   onClick={() => {}}
                 >
-                  Update as new series from this interval onwards
+                  {props.dictionary.transactionsPage.updateFromThisOnward}
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
