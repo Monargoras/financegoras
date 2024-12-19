@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import {
+  ActionIcon,
   Button,
   Checkbox,
   Collapse,
   Divider,
   Flex,
+  Group,
   MantineProvider,
+  Menu,
   Modal,
   NumberInput,
   rem,
@@ -16,17 +19,28 @@ import {
   Text,
   TextInput,
   Tooltip,
+  useMantineTheme,
 } from '@mantine/core'
 import { DateTimePicker, MonthPickerInput, YearPickerInput } from '@mantine/dates'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
-import { IconCheck, IconDeviceFloppy, IconX, IconTrashX, IconChevronRight, IconChevronDown } from '@tabler/icons-react'
+import {
+  IconCheck,
+  IconDeviceFloppy,
+  IconX,
+  IconTrashX,
+  IconChevronRight,
+  IconChevronDown,
+  IconArrowLeftFromArc,
+  IconCircleNumber1,
+} from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
 import updateTransaction from '@/serverActions/updateTransaction'
 import deleteTransaction from '@/serverActions/deleteTransaction'
+import classes from '@/components/TransactionForm/AddTransactionButton.module.css'
 
 interface TransactionEditModalProps {
   dictionary: Dictionary
@@ -39,8 +53,9 @@ interface TransactionEditModalProps {
 export default function TransactionEditModal(props: TransactionEditModalProps) {
   const { mutate } = useSWRConfig()
   const isMobile = useMediaQuery('(max-width: 50em)')
-  const [opened, { toggle }] = useDisclosure(false)
+  const [opened, { toggle }] = useDisclosure(!isMobile)
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
+  const theme = useMantineTheme()
 
   const form = useForm({
     mode: 'controlled',
@@ -266,7 +281,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       />
       <Collapse in={opened} mb="xl">
         <Flex justify="center" align="center" gap="md" direction="column">
-          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+          <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
             Pause one month
           </Button>
           <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
@@ -288,40 +303,20 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                 clearable
               />
             )}
-            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+            <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
               Pause for range
             </Button>
           </Flex>
-          <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
+          <Button leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
             Stop this transaction today
           </Button>
-          <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
-            <NumberInput
-              allowNegative={false}
-              prefix="€"
-              decimalScale={2}
-              thousandSeparator=" "
-              stepHoldDelay={500}
-              stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
-              key={form.key('amount')}
-              error={form.errors.amount}
-              {...form.getInputProps('amount', { type: 'input' })}
-              maxLength={15}
-            />
-            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
-              Update just this months payment
-            </Button>
-            <Button leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />} onClick={() => {}}>
-              Update price starting this month
-            </Button>
-          </Flex>
         </Flex>
       </Collapse>
       <Divider size="md" style={{ marginTop: 16 }} />
       <Flex justify="center" align="center" gap="md" style={{ marginTop: 16 }}>
         <Button
           color="red"
-          leftSection={<IconTrashX style={{ width: rem(14), height: rem(14) }} />}
+          leftSection={<IconTrashX style={{ width: rem(16), height: rem(16) }} />}
           onClick={async () => {
             const success = await handleDeleteTransaction()
             if (success) {
@@ -331,18 +326,69 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
         >
           {props.dictionary.budgetPage.delete}
         </Button>
-        <Button
-          leftSection={<IconDeviceFloppy style={{ width: rem(14), height: rem(14) }} />}
-          onClick={async () => {
-            const success = await handleUpdateTransaction()
-            if (success) {
-              props.close()
-            }
-          }}
-          style={{ marginLeft: 'auto' }}
-        >
-          {props.dictionary.budgetPage.save}
-        </Button>
+        {form.values.transactionType === TransactionType[TransactionType.Single] ? (
+          <Button
+            leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
+            onClick={async () => {
+              const success = await handleUpdateTransaction()
+              if (success) {
+                props.close()
+              }
+            }}
+            style={{ marginLeft: 'auto' }}
+          >
+            {props.dictionary.budgetPage.save}
+          </Button>
+        ) : (
+          <Group wrap="nowrap" gap={0} style={{ marginLeft: 'auto' }}>
+            <Button
+              className={classes.button}
+              leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
+              onClick={async () => {
+                const success = await handleUpdateTransaction()
+                if (success) {
+                  props.close()
+                }
+              }}
+              style={{ marginLeft: 'auto' }}
+            >
+              {props.dictionary.budgetPage.save}
+            </Button>
+            <Menu transitionProps={{ transition: 'pop' }} position="bottom-end" withinPortal>
+              <Menu.Target>
+                <ActionIcon variant="filled" color={theme.primaryColor} size={36} className={classes.menuControl}>
+                  <IconChevronDown style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={
+                    <IconCircleNumber1
+                      style={{ width: rem(16), height: rem(16) }}
+                      stroke={1.5}
+                      color={theme.colors.primary[5]}
+                    />
+                  }
+                  onClick={() => {}}
+                >
+                  Only update this months/years transaction
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={
+                    <IconArrowLeftFromArc
+                      style={{ width: rem(16), height: rem(16) }}
+                      stroke={1.5}
+                      color={theme.colors.primary[5]}
+                    />
+                  }
+                  onClick={() => {}}
+                >
+                  Update as new series from this interval onwards
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
+        )}
         <Button
           variant="light"
           onClick={() => {
