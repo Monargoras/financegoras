@@ -44,6 +44,7 @@ import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
 import updateTransaction from '@/serverActions/updateTransaction'
 import deleteTransaction from '@/serverActions/deleteTransaction'
 import classes from '@/components/TransactionForm/AddTransactionButton.module.css'
+import stopSeriesTransaction from '@/serverActions/stopSeriesTransaction'
 
 interface TransactionEditModalProps {
   dictionary: Dictionary
@@ -164,6 +165,35 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     return false
   }
 
+  const handleStopSeries = async () => {
+    const success = await stopSeriesTransaction(
+      props.transaction.id,
+      form.values.transactionType,
+      form.values.createdAt.toUTCString()
+    )
+    if (success) {
+      notifications.show({
+        title: props.dictionary.budgetPage.feedbackUpdateTransactionSuccessTitle,
+        message: props.dictionary.budgetPage.feedbackUpdateTransactionSuccessMessage,
+        color: 'green',
+        icon: <IconCheck />,
+        position: 'bottom-right',
+      })
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/budget/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/transactions/'))
+      mutate((key) => typeof key === 'string' && key.startsWith('/api/analysis/'))
+      return true
+    }
+    notifications.show({
+      title: props.dictionary.budgetPage.feedbackUpdateTransactionErrorTitle,
+      message: props.dictionary.budgetPage.feedbackUpdateTransactionErrorMessage,
+      color: 'red',
+      icon: <IconX />,
+      position: 'bottom-right',
+    })
+    return false
+  }
+
   return (
     <Modal
       opened={props.opened}
@@ -255,6 +285,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             key={form.key('stoppedAt')}
             error={form.errors.stoppedAt}
             {...form.getInputProps('stoppedAt', { type: 'input' })}
+            clearable
           />
         </Flex>
       </Flex>
@@ -315,7 +346,12 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           </Flex>
           <Button
             leftSection={<IconBarrierBlock style={{ width: rem(16), height: rem(16) }} />}
-            onClick={() => {}}
+            onClick={async () => {
+              const success = await handleStopSeries()
+              if (success) {
+                props.close()
+              }
+            }}
             color="red"
           >
             {props.dictionary.transactionsPage.stopSeries}
