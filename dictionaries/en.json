@@ -42,7 +42,7 @@
     "pauseForOneInterval": "Pause series for current month/year",
     "pauseRangePlaceholder": "Pause range",
     "pauseForRange": "Pause series in range",
-    "stopSeries": "Stop series before next payment",
+    "stopSeries": "Stop series after latest payment",
     "updateOnlyThis": "Only update this transaction in current month/year",
     "updateFromThisOnward": "Update as new series from current month/year onward"
   },
