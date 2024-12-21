@@ -37,7 +37,6 @@ export default async function updateTransaction(
   const res = await db
     .updateTable('transactions')
     .set({
-      id,
       isIncome,
       isSavings,
       amount,
