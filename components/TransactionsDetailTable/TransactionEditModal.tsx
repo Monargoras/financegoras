@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import {
   ActionIcon,
   Button,
   Checkbox,
-  Collapse,
   Divider,
   Flex,
   Group,
@@ -16,13 +15,12 @@ import {
   rem,
   Select,
   Switch,
-  Text,
   TextInput,
   Tooltip,
   useMantineTheme,
 } from '@mantine/core'
-import { DateTimePicker, MonthPickerInput, YearPickerInput } from '@mantine/dates'
-import { useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { DateTimePicker } from '@mantine/dates'
+import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
@@ -31,13 +29,10 @@ import {
   IconDeviceFloppy,
   IconX,
   IconTrashX,
-  IconChevronRight,
   IconChevronDown,
   IconArrowLeftFromArc,
   IconCircleNumber1,
   IconBarrierBlock,
-  IconClockPause,
-  IconCalendarPause,
 } from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
@@ -57,8 +52,6 @@ interface TransactionEditModalProps {
 export default function TransactionEditModal(props: TransactionEditModalProps) {
   const { mutate } = useSWRConfig()
   const isMobile = useMediaQuery('(max-width: 50em)')
-  const [opened, { toggle }] = useDisclosure(!isMobile)
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const theme = useMantineTheme()
 
   const form = useForm({
@@ -289,91 +282,58 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           />
         </Flex>
       </Flex>
-      <Divider
-        onClick={() => {
-          if (form.values.transactionType !== TransactionType[TransactionType.Single]) {
-            toggle()
-          }
-        }}
-        my="md"
-        size="md"
-        label={
-          <Flex direction="row">
-            {opened && <IconChevronDown />}
-            {!opened && <IconChevronRight />}
-            <Text>{props.dictionary.transactionsPage.advancedOptions}</Text>
-          </Flex>
-        }
-        labelPosition="left"
-        style={{
-          display: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'block' : 'none',
-          cursor: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'pointer' : 'not-allowed',
-        }}
-      />
-      <Collapse
-        in={opened}
-        mb="xl"
-        style={{
-          display: form.values.transactionType !== TransactionType[TransactionType.Single] ? 'block' : 'none',
-        }}
-      >
-        <Flex justify="center" align="center" gap="md" direction="column">
-          <Button leftSection={<IconClockPause style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
-            {props.dictionary.transactionsPage.pauseForOneInterval}
-          </Button>
-          <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
-            {form.values.transactionType === TransactionType[TransactionType.Annual] && (
-              <YearPickerInput
-                type="range"
-                placeholder={props.dictionary.transactionsPage.pauseRangePlaceholder}
-                value={dateRange}
-                onChange={setDateRange}
-                clearable
-              />
-            )}
-            {form.values.transactionType === TransactionType[TransactionType.Monthly] && (
-              <MonthPickerInput
-                type="range"
-                placeholder={props.dictionary.transactionsPage.pauseRangePlaceholder}
-                value={dateRange}
-                onChange={setDateRange}
-                clearable
-              />
-            )}
-            <Button leftSection={<IconCalendarPause style={{ width: rem(16), height: rem(16) }} />} onClick={() => {}}>
-              {props.dictionary.transactionsPage.pauseForRange}
-            </Button>
-          </Flex>
+      <Divider size="md" style={{ marginTop: 16 }} />
+      <Flex justify="center" align="center" gap="md" style={{ marginTop: 16 }}>
+        <Group wrap="nowrap" gap={0}>
           <Button
-            leftSection={<IconBarrierBlock style={{ width: rem(16), height: rem(16) }} />}
+            className={
+              form.values.transactionType !== TransactionType[TransactionType.Single] ? classes.button : undefined
+            }
+            color="red"
+            leftSection={<IconTrashX style={{ width: rem(16), height: rem(16) }} />}
             onClick={async () => {
-              const success = await handleStopSeries()
+              const success = await handleDeleteTransaction()
               if (success) {
                 props.close()
               }
             }}
-            color="red"
           >
-            {props.dictionary.transactionsPage.stopSeries}
+            {props.dictionary.budgetPage.delete}
           </Button>
-        </Flex>
-      </Collapse>
-      <Divider size="md" style={{ marginTop: 16 }} />
-      <Flex justify="center" align="center" gap="md" style={{ marginTop: 16 }}>
-        <Button
-          color="red"
-          leftSection={<IconTrashX style={{ width: rem(16), height: rem(16) }} />}
-          onClick={async () => {
-            const success = await handleDeleteTransaction()
-            if (success) {
-              props.close()
-            }
-          }}
-        >
-          {props.dictionary.budgetPage.delete}
-        </Button>
-        {form.values.transactionType === TransactionType[TransactionType.Single] ? (
+          {form.values.transactionType !== TransactionType[TransactionType.Single] && (
+            <Menu transitionProps={{ transition: 'pop' }} position="bottom-start" withinPortal>
+              <Menu.Target>
+                <ActionIcon variant="filled" color={theme.colors.red[8]} size={36} className={classes.menuControl}>
+                  <IconChevronDown style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={
+                    <IconBarrierBlock
+                      style={{ width: rem(16), height: rem(16) }}
+                      stroke={1.5}
+                      color={theme.colors.red[5]}
+                    />
+                  }
+                  onClick={async () => {
+                    const success = await handleStopSeries()
+                    if (success) {
+                      props.close()
+                    }
+                  }}
+                >
+                  {props.dictionary.transactionsPage.stopSeries}
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          )}
+        </Group>
+        <Group wrap="nowrap" gap={0} style={{ marginLeft: 'auto' }}>
           <Button
+            className={
+              form.values.transactionType !== TransactionType[TransactionType.Single] ? classes.button : undefined
+            }
             leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
             onClick={async () => {
               const success = await handleUpdateTransaction()
@@ -385,21 +345,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
           >
             {props.dictionary.budgetPage.save}
           </Button>
-        ) : (
-          <Group wrap="nowrap" gap={0} style={{ marginLeft: 'auto' }}>
-            <Button
-              className={classes.button}
-              leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
-              onClick={async () => {
-                const success = await handleUpdateTransaction()
-                if (success) {
-                  props.close()
-                }
-              }}
-              style={{ marginLeft: 'auto' }}
-            >
-              {props.dictionary.budgetPage.save}
-            </Button>
+          {form.values.transactionType !== TransactionType[TransactionType.Single] && (
             <Menu transitionProps={{ transition: 'pop' }} position="bottom-end" withinPortal>
               <Menu.Target>
                 <ActionIcon variant="filled" color={theme.primaryColor} size={36} className={classes.menuControl}>
@@ -433,8 +379,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
-          </Group>
-        )}
+          )}
+        </Group>
         <Button
           variant="light"
           onClick={() => {
