@@ -37,6 +37,8 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
         totalIncome: 0,
         totalExpenses: 0,
         totalSavings: 0,
+        averageExpensesToDate: 0,
+        averagePercentageOfIncomeToDate: 0,
       },
       expensesByCategory: [],
       transactions: [],
