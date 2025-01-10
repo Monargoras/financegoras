@@ -361,6 +361,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                       color={theme.colors.primary[5]}
                     />
                   }
+                  // TODO implement
+                  disabled
                   onClick={() => {}}
                 >
                   {props.dictionary.transactionsPage.updateOnlyThis}
@@ -373,6 +375,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
                       color={theme.colors.primary[5]}
                     />
                   }
+                  // TODO implement
+                  disabled
                   onClick={() => {}}
                 >
                   {props.dictionary.transactionsPage.updateFromThisOnward}
