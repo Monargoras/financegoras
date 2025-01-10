@@ -110,7 +110,6 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       }}
       barProps={{
         onClick: (event) => {
-          // @ts-expect-error payload is not typed in correctly by recharts, but does exist
           const { month } = event.payload
           // get month number from name
           const selectedMonth = getMonthNameArray(lang).indexOf(month) + 1
