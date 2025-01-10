@@ -4,6 +4,7 @@ import { AggregatedIncomeExpenseTotals } from '@/utils/types'
 import { calculateTotalPerMonth, calculateTotalPerYear } from './calculateTotals'
 import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
 import { validateUserId } from '@/utils/authUtils'
+import { getAverageExpensesToDayOfMonth } from './getAverageExpensesToDayOfMonth'
 
 export default async function getMonthlyData(
   userId: string,
@@ -28,9 +29,17 @@ export default async function getMonthlyData(
     ? calculateTotalPerMonth(savingsTransactions)
     : calculateTotalPerYear(savingsTransactions, year)
 
+  const { averageExpenses, averagePercentageOfIncome } = await getAverageExpensesToDayOfMonth(
+    validatedUserId,
+    year,
+    month ?? 12
+  )
+
   return {
     totalIncome: parseFloat(totalIncome),
     totalExpenses: parseFloat(totalExpenses),
     totalSavings: parseFloat(totalSavings),
+    averageExpensesToDate: averageExpenses,
+    averagePercentageOfIncomeToDate: averagePercentageOfIncome,
   }
 }

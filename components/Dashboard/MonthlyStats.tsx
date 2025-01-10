@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext } from 'react'
-import { Flex, Paper, Text, useMantineTheme } from '@mantine/core'
+import { Flex, Paper, Text, Tooltip, useMantineTheme } from '@mantine/core'
 import { AggregatedIncomeExpenseTotals, Dictionary } from '@/utils/types'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 
@@ -41,17 +41,27 @@ export function MonthlyStats(props: MonthlyStatsProps) {
       </Paper>
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlyExpenses}</Text>
-        <Text c={theme.colors.expense[5]}>{privacyMode ? '**.**' : props.data.totalExpenses.toFixed(2)}€</Text>
-        {
-          // calculate percentage of expenses from income
-          props.data.totalIncome > 0 ? (
-            <Text c={theme.colors.expense[5]}>
-              {((props.data.totalExpenses / props.data.totalIncome) * 100).toFixed(2)}%
-            </Text>
-          ) : (
-            <Text c={theme.colors.expense[5]}>100%</Text>
-          )
-        }
+        <Flex direction="row">
+          <Flex direction="column" mr="md">
+            <Text c={theme.colors.expense[5]}>{privacyMode ? '**.**' : props.data.totalExpenses.toFixed(2)}€</Text>
+            {
+              // calculate percentage of expenses from income
+              props.data.totalIncome > 0 ? (
+                <Text c={theme.colors.expense[5]}>
+                  {((props.data.totalExpenses / props.data.totalIncome) * 100).toFixed(2)}%
+                </Text>
+              ) : (
+                <Text c={theme.colors.expense[5]}>100%</Text>
+              )
+            }
+          </Flex>
+          <Tooltip label={props.dictionary.budgetPage.averageToDate} position="bottom" maw={300} multiline>
+            <Flex direction="column" ml="auto" align="end">
+              <Text>{privacyMode ? '**.**' : props.data.averageExpensesToDate.toFixed(2)}€</Text>
+              <Text>{props.data.averagePercentageOfIncomeToDate.toFixed(2)}%</Text>
+            </Flex>
+          </Tooltip>
+        </Flex>
       </Paper>
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlySavings}</Text>

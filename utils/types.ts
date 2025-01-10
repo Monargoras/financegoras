@@ -76,6 +76,8 @@ export type AggregatedIncomeExpenseTotals = {
   totalIncome: number
   totalExpenses: number
   totalSavings: number
+  averageExpensesToDate: number
+  averagePercentageOfIncomeToDate: number
 }
 
 export type AggregatedIncomeExpenseEvolution = {

@@ -88,6 +88,7 @@
     "monthlyExpenses": "Monatliche Ausgaben",
     "monthlySavings": "Monatliches Sparen",
     "remainingIncome": "Verbleibende Einnahmen",
+    "averageToDate": "Durchschnitt der Ausgaben bis zum aktuellen Tag des Monats über die letzten 12 Monate (absolut und prozentual zu den Einnahmen)",
     "addCategory": "Kategorie hinzufügen",
     "addGroup": "Gruppe hinzufügen",
     "addFirstCategory": "Erste Kategorie hinzufügen",
