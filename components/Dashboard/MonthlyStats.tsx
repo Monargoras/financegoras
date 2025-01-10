@@ -41,7 +41,7 @@ export function MonthlyStats(props: MonthlyStatsProps) {
       </Paper>
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlyExpenses}</Text>
-        <Flex direction="row">
+        <Flex direction="row" wrap="wrap">
           <Flex direction="column" mr="md">
             <Text c={theme.colors.expense[5]}>{privacyMode ? '**.**' : props.data.totalExpenses.toFixed(2)}€</Text>
             {
