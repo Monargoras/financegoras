@@ -41,7 +41,9 @@
     "editTransaction": "Transaktion bearbeiten",
     "stopSeries": "Serie nach neuester Zahlung beenden",
     "updateOnlyThis": "Nur Transaktion in diesem Monat/Jahr bearbeiten",
-    "updateFromThisOnward": "Als neue Serie von diesem Monat/Jahr an speichern"
+    "updateOnlyThisMonthName": "Nur einzelne Transaktion bearbeiten im ",
+    "updateFromThisOnward": "Als neue Serie von diesem Monat/Jahr an speichern",
+    "updateFromThisOnwardMonthName": "Als neue Serie anlegen ab "
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",
@@ -89,6 +91,7 @@
     "monthlySavings": "Monatliches Sparen",
     "remainingIncome": "Verbleibende Einnahmen",
     "averageToDate": "Durchschnitt der Ausgaben bis zum aktuellen Tag des Monats über die letzten 12 Monate (absolut und prozentual zu den Einnahmen)",
+    "averageToDateShort": "Durchschnittsausgaben bis heute",
     "addCategory": "Kategorie hinzufügen",
     "addGroup": "Gruppe hinzufügen",
     "addFirstCategory": "Erste Kategorie hinzufügen",
