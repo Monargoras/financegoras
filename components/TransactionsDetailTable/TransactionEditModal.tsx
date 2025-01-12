@@ -24,16 +24,7 @@ import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
-import {
-  IconCheck,
-  IconDeviceFloppy,
-  IconX,
-  IconTrashX,
-  IconChevronDown,
-  IconArrowLeftFromArc,
-  IconCircleNumber1,
-  IconBarrierBlock,
-} from '@tabler/icons-react'
+import { IconCheck, IconDeviceFloppy, IconX, IconTrashX, IconChevronDown, IconBarrierBlock } from '@tabler/icons-react'
 import { Categories, Dictionary, Transaction, TransactionType } from '@/utils/types'
 import { checkboxTheme, IsIncomeIcon } from '../TransactionForm/TransactionForm'
 import updateTransaction from '@/serverActions/updateTransaction'
@@ -329,62 +320,18 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
             </Menu>
           )}
         </Group>
-        <Group wrap="nowrap" gap={0} style={{ marginLeft: 'auto' }}>
-          <Button
-            className={
-              form.values.transactionType !== TransactionType[TransactionType.Single] ? classes.button : undefined
+        <Button
+          leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
+          onClick={async () => {
+            const success = await handleUpdateTransaction()
+            if (success) {
+              props.close()
             }
-            leftSection={<IconDeviceFloppy style={{ width: rem(16), height: rem(16) }} />}
-            onClick={async () => {
-              const success = await handleUpdateTransaction()
-              if (success) {
-                props.close()
-              }
-            }}
-            style={{ marginLeft: 'auto' }}
-          >
-            {props.dictionary.budgetPage.save}
-          </Button>
-          {form.values.transactionType !== TransactionType[TransactionType.Single] && (
-            <Menu transitionProps={{ transition: 'pop' }} position="bottom-end" withinPortal>
-              <Menu.Target>
-                <ActionIcon variant="filled" color={theme.primaryColor} size={36} className={classes.menuControl}>
-                  <IconChevronDown style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-                </ActionIcon>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item
-                  leftSection={
-                    <IconCircleNumber1
-                      style={{ width: rem(16), height: rem(16) }}
-                      stroke={1.5}
-                      color={theme.colors.primary[5]}
-                    />
-                  }
-                  // TODO implement
-                  disabled
-                  onClick={() => {}}
-                >
-                  {props.dictionary.transactionsPage.updateOnlyThis}
-                </Menu.Item>
-                <Menu.Item
-                  leftSection={
-                    <IconArrowLeftFromArc
-                      style={{ width: rem(16), height: rem(16) }}
-                      stroke={1.5}
-                      color={theme.colors.primary[5]}
-                    />
-                  }
-                  // TODO implement
-                  disabled
-                  onClick={() => {}}
-                >
-                  {props.dictionary.transactionsPage.updateFromThisOnward}
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          )}
-        </Group>
+          }}
+          style={{ marginLeft: 'auto' }}
+        >
+          {props.dictionary.budgetPage.save}
+        </Button>
         <Button
           variant="light"
           onClick={() => {

@@ -38,11 +38,7 @@
     "hideStopped": "Only running",
     "pickDatesRange": "Filter date range",
     "editTransaction": "Edit transaction",
-    "stopSeries": "Stop series after latest payment",
-    "updateOnlyThis": "Only update this transaction in current month/year",
-    "updateOnlyThisMonthName": "Only update this transaction in ",
-    "updateFromThisOnward": "Update as new series from current month/year onward",
-    "updateFromThisOnwardMonthName": "Update as new series starting in "
+    "stopSeries": "Stop series after latest payment"
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",
