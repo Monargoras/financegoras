@@ -16,6 +16,7 @@ interface TransactionTableProps {
   categories: Categories | null
   selectedMonth?: number
   selectedYear?: number
+  analysisPage?: boolean
 }
 
 export function TransactionTable(props: TransactionTableProps) {
@@ -83,7 +84,7 @@ export function TransactionTable(props: TransactionTableProps) {
           </Table.Thead>
           <Table.Tbody>
             {props.data.map((ta: Transaction) => {
-              const alphaValue = isPastDayOfMonth(ta)
+              const alphaValue = props.analysisPage ? 1 : isPastDayOfMonth(ta)
               const showFaded = alphaValue !== 1
               return (
                 <Table.Tr

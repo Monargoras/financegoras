@@ -26,6 +26,7 @@ export default function AnalysisDashboard(props: AnalysisDashboardProps) {
             demo={props.demo}
             data={props.data.transactions}
             categories={props.data.categories}
+            analysisPage
           />
         </Flex>
       </Flex>
