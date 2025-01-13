@@ -85,8 +85,8 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
   return (
     <BarChart
       w={{
-        xl: 1300,
-        md: 900,
+        xl: 1600,
+        md: 1200,
         sm: 400,
       }}
       h={{

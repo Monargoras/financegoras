@@ -78,8 +78,8 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
   return (
     <AreaChart
       w={{
-        xl: 1300,
-        md: 900,
+        xl: 1600,
+        md: 1200,
         sm: 400,
       }}
       h={{

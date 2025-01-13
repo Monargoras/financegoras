@@ -1,8 +1,7 @@
 'use client'
 
 import { useContext } from 'react'
-import { Flex, Paper, Text, Tooltip, useMantineTheme } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Box, Flex, Paper, Text, Tooltip, useMantineTheme } from '@mantine/core'
 import { AggregatedIncomeExpenseTotals, Dictionary } from '@/utils/types'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
 import MobileTooltipPopover from './MobileTooltipPopover'
@@ -15,8 +14,6 @@ interface MonthlyStatsProps {
 export function MonthlyStats(props: MonthlyStatsProps) {
   const theme = useMantineTheme()
   const { privacyMode } = useContext(PrivacyModeContext)
-  // used to change the way the additional average expenses stat is rendered on mobile
-  const isMobile = useMediaQuery('(max-width: 50em)')
 
   const paperStyles = {
     shadow: 'sm',
@@ -29,13 +26,13 @@ export function MonthlyStats(props: MonthlyStatsProps) {
 
   return (
     <Flex
-      gap={isMobile ? 0 : 'md'}
+      gap={0}
       justify="center"
       direction="row"
       wrap="wrap"
       w={{
-        xl: 1300,
-        md: 900,
+        xl: 1600,
+        md: 1200,
         sm: 400,
       }}
     >
@@ -45,29 +42,17 @@ export function MonthlyStats(props: MonthlyStatsProps) {
       </Paper>
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlyExpenses}</Text>
-        <Flex direction="row" wrap="wrap">
-          <Flex direction="column" mr="md">
-            <Text c={theme.colors.expense[5]}>{privacyMode ? '**.**' : props.data.totalExpenses.toFixed(2)}€</Text>
-            {
-              // calculate percentage of expenses from income
-              props.data.totalIncome > 0 ? (
-                <Text c={theme.colors.expense[5]}>
-                  {((props.data.totalExpenses / props.data.totalIncome) * 100).toFixed(2)}%
-                </Text>
-              ) : (
-                <Text c={theme.colors.expense[5]}>100%</Text>
-              )
-            }
-          </Flex>
-          {!isMobile && (
-            <Tooltip label={props.dictionary.budgetPage.averageToDate} position="bottom" maw={300} multiline>
-              <Flex direction="column" ml="auto" align="end">
-                <Text>{privacyMode ? '**.**' : props.data.averageExpensesToDate.toFixed(2)}€</Text>
-                <Text>{props.data.averagePercentageOfIncomeToDate.toFixed(2)}%</Text>
-              </Flex>
-            </Tooltip>
-          )}
-        </Flex>
+        <Text c={theme.colors.expense[5]}>{privacyMode ? '**.**' : props.data.totalExpenses.toFixed(2)}€</Text>
+        {
+          // calculate percentage of expenses from income
+          props.data.totalIncome > 0 ? (
+            <Text c={theme.colors.expense[5]}>
+              {((props.data.totalExpenses / props.data.totalIncome) * 100).toFixed(2)}%
+            </Text>
+          ) : (
+            <Text c={theme.colors.expense[5]}>100%</Text>
+          )
+        }
       </Paper>
       <Paper {...paperStyles}>
         <Text>{props.dictionary.budgetPage.monthlySavings}</Text>
@@ -107,19 +92,18 @@ export function MonthlyStats(props: MonthlyStatsProps) {
           )
         }
       </Paper>
-      {
-        // additional average expenses stat for mobile
-        isMobile && (
-          <Paper {...paperStyles} maw="100%">
-            <Flex direction="row" align="center" gap="md">
-              <Text>{props.dictionary.budgetPage.averageToDateShort}</Text>
+      <Paper {...paperStyles} maw="100%">
+        <Flex direction="row" gap="md">
+          <Text>{props.dictionary.budgetPage.averageToDateShort}</Text>
+          <Tooltip label={props.dictionary.budgetPage.averageToDate} position="top" maw={300} multiline>
+            <Box mb={-6} mt={-3}>
               <MobileTooltipPopover label={props.dictionary.budgetPage.averageToDate} />
-            </Flex>
-            <Text c={theme.colors.gray[5]}>{privacyMode ? '**.**' : props.data.averageExpensesToDate.toFixed(2)}€</Text>
-            <Text c={theme.colors.gray[5]}>{props.data.averagePercentageOfIncomeToDate.toFixed(2)}%</Text>
-          </Paper>
-        )
-      }
+            </Box>
+          </Tooltip>
+        </Flex>
+        <Text c={theme.colors.gray[5]}>{privacyMode ? '**.**' : props.data.averageExpensesToDate.toFixed(2)}€</Text>
+        <Text c={theme.colors.gray[5]}>{props.data.averagePercentageOfIncomeToDate.toFixed(2)}%</Text>
+      </Paper>
     </Flex>
   )
 }
