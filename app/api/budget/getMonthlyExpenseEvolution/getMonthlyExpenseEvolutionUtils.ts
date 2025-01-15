@@ -1,5 +1,5 @@
 import { db } from '@/utils/database'
-import { CategoryEvolution, getGroupFromCategory, MonthlyExpense, Transaction, TransactionType } from '@/utils/types'
+import { CategoryEvolution, getGroupFromCategory, MonthlyExpense, TransactionDTO, TransactionType } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import { calculateTotalPerMonth, calculateTotalPerYear } from '../getAggregatedTransactions/calculateTotals'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
@@ -158,7 +158,7 @@ export const getCategoryEvolutionOneMonth = async (
   month: number,
   year: number,
   lang: string,
-  transactions: Transaction[],
+  transactions: TransactionDTO[],
   usedCategories: string[] | null = null
 ) => {
   const expensesPerGroupedSet = transactions.reduce(

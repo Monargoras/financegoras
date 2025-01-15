@@ -12,7 +12,7 @@ export default async function submitTransaction(
   name: string,
   category: string,
   transactionType: TransactionType,
-  date: string = new Date().toUTCString()
+  date: string
 ) {
   const userId = await getUserId()
   if (!userId) {

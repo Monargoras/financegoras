@@ -1,10 +1,10 @@
 'use server'
 
-import { CategoryAggregationData, Transaction, TransactionType } from '@/utils/types'
+import { CategoryAggregationData, TransactionDTO, TransactionType } from '@/utils/types'
 import { getDynamicMonthYearTuples } from '../../budget/getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { getTransactionsInMonth } from './analysisDashboardUtils'
 
-const getStatsForCategory = (transactions: Transaction[], monthsToCompute: number[][]) => {
+const getStatsForCategory = (transactions: TransactionDTO[], monthsToCompute: number[][]) => {
   const totalsPerMonth = monthsToCompute.map(([m, y]) =>
     getTransactionsInMonth(transactions, m, y).reduce((acc, cur) => {
       if (cur.transactionType === TransactionType.Annual) {
@@ -22,7 +22,7 @@ const getStatsForCategory = (transactions: Transaction[], monthsToCompute: numbe
 }
 
 export default async function getCategoryAggregationData(
-  transactions: Transaction[],
+  transactions: TransactionDTO[],
   startDate: Date,
   endDate: Date
 ): Promise<CategoryAggregationData> {

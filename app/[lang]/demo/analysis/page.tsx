@@ -1,9 +1,10 @@
-import { AnalysisDashboardData, PageProps } from '@/utils/types'
+import { AnalysisDashboardDTO, PageProps } from '@/utils/types'
 import { getDictionary } from '../../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import AnalysisDashboardContainer from '@/components/AnalysisPage/AnalysisDashboardContainer'
 import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDashbaordDataAction'
 import { DEMOUSERID } from '@/utils/CONSTANTS'
+import { emptyData } from '@/app/api/analysis/dashboard/analysisDashboardUtils'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -14,7 +15,7 @@ export async function generateMetadata(props: { params: PageProps }) {
   }
 }
 
-async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
+async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDTO> {
   'use server'
 
   const data = await getAnalysisDashbaordData(
@@ -29,50 +30,7 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDa
     lang
   )
 
-  return (
-    data ?? {
-      categories: [],
-      transactions: [],
-      listOfNames: [],
-      categoryEvolutionData: [],
-      colorMap: {},
-      statsBoardData: {
-        totalFiltered: {
-          expenses: 0,
-          expensesPercentage: 0,
-          income: 0,
-          remainingIncome: 0,
-          savings: 0,
-          savingsPercentage: 0,
-        },
-        averagePerMonth: {
-          expenses: 0,
-          expensesPercentage: 0,
-          income: 0,
-          remainingIncome: 0,
-          savings: 0,
-          savingsPercentage: 0,
-        },
-        maximumOneMonth: {
-          expenses: 0,
-          expensesPercentage: 0,
-          income: 0,
-          remainingIncome: 0,
-          savings: 0,
-          savingsPercentage: 0,
-        },
-        minimumOneMonth: {
-          expenses: 0,
-          expensesPercentage: 0,
-          income: 0,
-          remainingIncome: 0,
-          savings: 0,
-          savingsPercentage: 0,
-        },
-      },
-      categoryAggregationData: [],
-    }
-  )
+  return data ?? emptyData
 }
 
 export default async function BudgetPage(props: { params: PageProps }) {

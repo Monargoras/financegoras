@@ -1,10 +1,10 @@
 'use server'
 
 import {
-  AnalysisDashboardData,
+  AnalysisDashboardDTO,
   getGroupFromCategory,
   getTransactionType,
-  Transaction,
+  TransactionDTO,
   TransactionType,
 } from '@/utils/types'
 import getCategoryEvolution from './getCategoryEvolutionAction'
@@ -26,7 +26,7 @@ export default async function getAnalysisDashbaordData(
   endDate: string | null,
   onlyExpenses: boolean,
   lang: string
-): Promise<AnalysisDashboardData> {
+): Promise<AnalysisDashboardDTO> {
   const validatedUserId = await validateUserId(userId)
 
   const [allCategories, allTransactions] = await Promise.all([getCategories(userId), getAllTransactions(userId)])
@@ -43,7 +43,7 @@ export default async function getAnalysisDashbaordData(
   const safeStartDate = new Date(startDate ?? allTransactions[allTransactions.length - 1].createdAt)
   const safeEndDate = new Date(endDate ?? allTransactions[0].createdAt)
 
-  const filterData = (rawData: Transaction[]) => {
+  const filterData = (rawData: TransactionDTO[]) => {
     let res = rawData
     if (onlyExpenses) {
       res = res.filter((ta) => !ta.isIncome && !ta.isSavings)

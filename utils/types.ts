@@ -37,6 +37,20 @@ export type DatabaseTransactionType = {
   stoppedAt: Date | null
 }
 
+// use everywhere on the server
+export type TransactionDTO = {
+  id: string
+  isIncome: boolean
+  isSavings: boolean
+  amount: number
+  createdAt: string
+  name: string
+  category: string
+  transactionType: TransactionType
+  stoppedAt: string | null
+}
+
+// use everywhere on the client after conversion from DTO to fix timezone issues
 export type Transaction = {
   id: string
   isIncome: boolean
@@ -113,12 +127,25 @@ export type UserSettings = {
   includeEmptyCategories: boolean
 }
 
+// use everywhere on the client after conversion from DTO to fix timezone issues
 export type DashboardData = {
   monthlyExpenseEvolution: MonthlyExpenseEvolution
   incExpEvolution: AggregatedIncomeExpenseEvolution
   monthlyStats: AggregatedIncomeExpenseTotals
   expensesByCategory: CategoryExpenseData[]
   transactions: Transaction[]
+  categories: Categories | null
+  settings: UserSettings
+  colorMap: ColorMap
+}
+
+// use everywhere on the server
+export type DashboardDTO = {
+  monthlyExpenseEvolution: MonthlyExpenseEvolution
+  incExpEvolution: AggregatedIncomeExpenseEvolution
+  monthlyStats: AggregatedIncomeExpenseTotals
+  expensesByCategory: CategoryExpenseData[]
+  transactions: TransactionDTO[]
   categories: Categories | null
   settings: UserSettings
   colorMap: ColorMap
@@ -174,9 +201,21 @@ export type CategoryAggregationData = {
   total: number
 }[]
 
+// use everywhere on the client after conversion from DTO to fix timezone issues
 export type AnalysisDashboardData = {
   categories: Categories | null
   transactions: Transaction[]
+  listOfNames: string[]
+  categoryEvolutionData: CategoryEvolutionLineChartData
+  colorMap: ColorMap
+  statsBoardData: StatsBoardData
+  categoryAggregationData: CategoryAggregationData
+}
+
+// use everywhere on the server
+export type AnalysisDashboardDTO = {
+  categories: Categories | null
+  transactions: TransactionDTO[]
   listOfNames: string[]
   categoryEvolutionData: CategoryEvolutionLineChartData
   colorMap: ColorMap

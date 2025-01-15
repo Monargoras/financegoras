@@ -2,14 +2,14 @@
 
 import { db } from '@/utils/database'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
-import { Transaction, TransactionType } from '@/utils/types'
+import { TransactionDTO, TransactionType } from '@/utils/types'
 import { validateUserId } from '@/utils/authUtils'
 
 export default async function getTransactions(
   userId: string,
   year: number,
   month: number | null
-): Promise<Transaction[]> {
+): Promise<TransactionDTO[]> {
   const validatedUserId = await validateUserId(userId)
 
   const transactions = await db
@@ -28,10 +28,10 @@ export default async function getTransactions(
   // sort array, first all monthly and single transactions, then annual transactions
   const nonAnnual = res
     .filter((ta) => ta.transactionType !== TransactionType.Annual)
-    .sort((a, b) => b.createdAt.getDate() - a.createdAt.getDate())
+    .sort((a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate())
   const annual = res
     .filter((ta) => ta.transactionType === TransactionType.Annual)
-    .sort((a, b) => b.createdAt.getDate() - a.createdAt.getDate())
+    .sort((a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate())
 
   return [...nonAnnual, ...annual]
 }

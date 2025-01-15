@@ -43,7 +43,7 @@ export default function ClientProviders({
   return (
     <SessionProvider session={session}>
       <SWRConfig value={{ revalidateOnFocus: false }}>
-        <DatesProvider settings={{ locale: language, timezone: 'UTC' }}>
+        <DatesProvider settings={{ locale: language }}>
           <PrivacyModeContext.Provider value={{ privacyMode, togglePrivacyMode }}>
             {children}
           </PrivacyModeContext.Provider>

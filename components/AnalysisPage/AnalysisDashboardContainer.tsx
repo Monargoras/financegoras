@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Container, Divider, Flex, Loader, Text } from '@mantine/core'
 import useSWR, { Fetcher } from 'swr'
-import { AnalysisDashboardData, Dictionary } from '@/utils/types'
+import { AnalysisDashboardDTO, Dictionary } from '@/utils/types'
 import AnalysisControls from './AnalysisControls'
 import AnalysisDashboard from './AnalysisDashboard'
 import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
@@ -11,7 +11,7 @@ import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionVie
 interface AnalysisDashboardContainerProps {
   locale: string
   dictionary: Dictionary
-  initialData: AnalysisDashboardData
+  initialData: AnalysisDashboardDTO
   demo: boolean
 }
 
@@ -27,7 +27,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   ])
   const [onlyExpenses, setOnlyExpenses] = useState<boolean>(true)
 
-  const fetcher: Fetcher<AnalysisDashboardData, string> = (input: RequestInfo | URL) =>
+  const fetcher: Fetcher<AnalysisDashboardDTO, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?demo=${props.demo}&names=${nameSearch.join(',')}&categories=${categorySearch.join(',')}&groups=${groupSearch.join(',')}\
 &types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}\
@@ -78,7 +78,19 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
               setOnlyExpenses={setOnlyExpenses}
             />
             <Divider size="lg" w="100%" />
-            <AnalysisDashboard locale={props.locale} dictionary={props.dictionary} demo={props.demo} data={data} />
+            <AnalysisDashboard
+              locale={props.locale}
+              dictionary={props.dictionary}
+              demo={props.demo}
+              data={{
+                ...data,
+                transactions: data.transactions.map((t) => ({
+                  ...t,
+                  createdAt: new Date(t.createdAt),
+                  stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
+                })),
+              }}
+            />
           </Flex>
         )}
         {data && data.transactions.length === 0 && (

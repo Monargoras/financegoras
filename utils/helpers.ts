@@ -1,4 +1,4 @@
-import { DatabaseTransactionType, getTransactionType, Transaction } from './types'
+import { DatabaseTransactionType, getTransactionType, TransactionDTO } from './types'
 
 export const colorsHex = [
   '#868e96',
@@ -25,8 +25,10 @@ export const getMonthNameArray = (lang: string) => {
   return monthNames
 }
 
-export const parseDatabaseTransactionsArray = (transactions: DatabaseTransactionType[]): Transaction[] =>
+export const parseDatabaseTransactionsArray = (transactions: DatabaseTransactionType[]): TransactionDTO[] =>
   transactions.map((transaction) => ({
     ...transaction,
     transactionType: getTransactionType(transaction.transactionType),
+    createdAt: transaction.createdAt.toUTCString(),
+    stoppedAt: transaction.stoppedAt ? transaction.stoppedAt.toUTCString() : null,
   }))

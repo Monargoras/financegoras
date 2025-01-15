@@ -2,10 +2,10 @@
 
 import { db } from '@/utils/database'
 import { parseDatabaseTransactionsArray } from '@/utils/helpers'
-import { Transaction } from '@/utils/types'
+import { TransactionDTO } from '@/utils/types'
 import { validateUserId } from '@/utils/authUtils'
 
-export default async function getAllTransactions(userId: string): Promise<Transaction[]> {
+export default async function getAllTransactions(userId: string): Promise<TransactionDTO[]> {
   const validatedUserId = await validateUserId(userId)
 
   const transactions = await db

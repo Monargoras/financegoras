@@ -1,5 +1,5 @@
 import { Flex } from '@mantine/core'
-import { DashboardData, PageProps, TransactionType } from '@/utils/types'
+import { DashboardDTO, PageProps, TransactionType } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import getMonthlyData from '@/app/api/budget/getAggregatedTransactions/getMonthlyDataAction'
@@ -23,7 +23,7 @@ export async function generateMetadata(props: { params: PageProps }) {
   }
 }
 
-async function getInitialDemoData({ lang }: { lang: string }): Promise<DashboardData> {
+async function getInitialDemoData({ lang }: { lang: string }): Promise<DashboardDTO> {
   'use server'
 
   const curMonth = new Date().getMonth() + 1

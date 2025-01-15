@@ -6,7 +6,7 @@ import getIncExpEvolution from '../getIncExpEvolution/getIncExpEvolutionAction'
 import getMonthlyData from '../getAggregatedTransactions/getMonthlyDataAction'
 import getExpensesByCategory from '../getExpensesByCategory/getExpensesByCategoryAction'
 import getTransactions from '../getTransactions/getTransactionsAction'
-import { DashboardData } from '@/utils/types'
+import { DashboardDTO } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import getColorMap from '../getColorMap/getColorMapAction'
 import { getUserId } from '@/utils/authUtils'
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
       transactions: res[4],
       categories: res[5],
       colorMap: res[6],
-    } as DashboardData),
+    } as DashboardDTO),
     { status: 200 }
   )
 }

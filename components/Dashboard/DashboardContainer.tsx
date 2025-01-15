@@ -5,14 +5,14 @@ import useSWR, { Fetcher } from 'swr'
 import { Container, Divider, Flex, Loader, Text } from '@mantine/core'
 import Dashboard from './Dashboard'
 import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
-import { DashboardData, Dictionary } from '@/utils/types'
+import { DashboardDTO, Dictionary } from '@/utils/types'
 import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
 
 interface DashboardContainerProps {
   lang: string
   dict: Dictionary
   demo: boolean
-  initialData: DashboardData
+  initialData: DashboardDTO
 }
 
 export default function DashboardContainer(props: DashboardContainerProps) {
@@ -26,7 +26,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
   )
   const [percentage, setPercentage] = useState(props.initialData.settings.percentage)
 
-  const fetcher: Fetcher<DashboardData, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const fetcher: Fetcher<DashboardDTO, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
   const selMonth = timeframe === props.dict.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year = timeframe === props.dict.budgetPage.last12Months ? new Date().getFullYear() : selectedYear
   const params = `?year=${year}&month=${selMonth}&selectedMonth=${selectedMonth}&selectedYear=${selectedYear}\
@@ -60,7 +60,14 @@ export default function DashboardContainer(props: DashboardContainerProps) {
             lang={props.lang}
             dictionary={props.dict}
             demo={props.demo}
-            data={data}
+            data={{
+              ...data,
+              transactions: data.transactions.map((t) => ({
+                ...t,
+                createdAt: new Date(t.createdAt),
+                stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
+              })),
+            }}
             grouped={grouped}
             setGrouped={setGrouped}
             includeSavings={includeSavings}

@@ -30,7 +30,14 @@ async function getInitialData(): Promise<InitialDetailTableData> {
   const categories = await getCategories(userId)
   const transactions = await getAllTransactions(userId)
 
-  return { categories, transactions }
+  return {
+    categories,
+    transactions: transactions.map((t) => ({
+      ...t,
+      createdAt: new Date(t.createdAt),
+      stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
+    })),
+  }
 }
 
 export default async function TransactionsPage(props: { params: PageProps }) {

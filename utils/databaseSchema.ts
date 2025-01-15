@@ -23,9 +23,7 @@ export interface TransactionsTable {
   transactionType: string
   // You can specify a different type for each operation (select, insert and
   // update) using the `ColumnType<SelectType, InsertType, UpdateType>`
-  // wrapper. Here we define a column `created_at` that is selected as
-  // a `Date`, has to be provided as a `string` in inserts and
-  // can never be updated:
+  // wrapper.
   createdAt: ColumnType<Date, Date, Date | null>
   stoppedAt: ColumnType<Date | null, Date | null, Date | null>
 }

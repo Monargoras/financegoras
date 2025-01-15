@@ -1,6 +1,6 @@
 'use server'
 
-import { CategoryEvolutionLineChartData, Transaction } from '@/utils/types'
+import { CategoryEvolutionLineChartData, TransactionDTO } from '@/utils/types'
 import {
   getCategoryEvolutionOneMonth,
   getDynamicMonthYearTuples,
@@ -10,7 +10,7 @@ import { getTransactionsInMonth } from './analysisDashboardUtils'
 import { validateUserId } from '@/utils/authUtils'
 
 export default async function getCategoryEvolution(
-  transactions: Transaction[],
+  transactions: TransactionDTO[],
   startDate: Date,
   endDate: Date,
   lang: string,

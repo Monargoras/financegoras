@@ -1,4 +1,4 @@
-import { AnalysisDashboardData, PageProps } from '@/utils/types'
+import { AnalysisDashboardDTO, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
@@ -16,7 +16,7 @@ export async function generateMetadata(props: { params: PageProps }) {
   }
 }
 
-async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardData> {
+async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDTO> {
   'use server'
 
   const userId = await getUserId()
