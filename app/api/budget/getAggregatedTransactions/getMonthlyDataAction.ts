@@ -9,7 +9,8 @@ import { getAverageExpensesToDayOfMonth } from './getAverageExpensesToDayOfMonth
 export default async function getMonthlyData(
   userId: string,
   year: number,
-  month: number | null
+  month: number | null,
+  dateUTC: string
 ): Promise<AggregatedIncomeExpenseTotals> {
   const validatedUserId = await validateUserId(userId)
 
@@ -32,7 +33,8 @@ export default async function getMonthlyData(
   const { averageExpenses, averagePercentageOfIncome } = await getAverageExpensesToDayOfMonth(
     validatedUserId,
     year,
-    month ?? 12
+    month ?? 12,
+    dateUTC
   )
 
   return {

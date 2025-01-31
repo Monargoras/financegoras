@@ -41,6 +41,7 @@ export async function GET(request: NextRequest) {
   const grouped = valueToBoolean(request.nextUrl.searchParams.get('grouped'))
   const includeEmptyCategories = valueToBoolean(request.nextUrl.searchParams.get('includeEmptyCategories'))
   const lang = request.nextUrl.searchParams.get('lang') ?? 'en'
+  const dateUTC = request.nextUrl.searchParams.get('dateUtc')
 
   if (
     !yearString ||
@@ -48,7 +49,8 @@ export async function GET(request: NextRequest) {
     grouped === null ||
     selectedMonthString === null ||
     selectedYearString === null ||
-    includeEmptyCategories === null
+    includeEmptyCategories === null ||
+    !dateUTC
   ) {
     return new Response('More fields are required', { status: 400 })
   }
@@ -62,7 +64,7 @@ export async function GET(request: NextRequest) {
   const res = await Promise.all([
     getMonthlyExpenseEvolution(userId, year, month, lang, includeSavings, grouped),
     getIncExpEvolution(userId, year, month, lang),
-    getMonthlyData(userId, selectedYear, selectedMonth),
+    getMonthlyData(userId, selectedYear, selectedMonth, dateUTC),
     getExpensesByCategory(userId, selectedYear, selectedMonth, includeSavings, grouped, includeEmptyCategories),
     getTransactions(userId, selectedYear, selectedMonth),
     getCategories(userId),

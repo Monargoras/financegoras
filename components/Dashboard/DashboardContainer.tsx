@@ -30,7 +30,8 @@ export default function DashboardContainer(props: DashboardContainerProps) {
   const selMonth = timeframe === props.dict.budgetPage.last12Months ? new Date().getMonth() + 1 : 12
   const year = timeframe === props.dict.budgetPage.last12Months ? new Date().getFullYear() : selectedYear
   const params = `?year=${year}&month=${selMonth}&selectedMonth=${selectedMonth}&selectedYear=${selectedYear}\
-&includeSavings=${includeSavings}&grouped=${grouped}&lang=${props.lang}&demo=${props.demo}&includeEmptyCategories=${includeEmptyCategories}`
+&includeSavings=${includeSavings}&grouped=${grouped}&lang=${props.lang}&demo=${props.demo}&includeEmptyCategories=${includeEmptyCategories}\
+&dateUtc=${new Date().toUTCString()}`
   const { data, error, isLoading } = useSWR(`/api/budget/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
     keepPreviousData: true,
