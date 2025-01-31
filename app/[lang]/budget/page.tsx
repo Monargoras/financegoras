@@ -73,7 +73,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
   ] = await Promise.all([
     getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
     getIncExpEvolution(userId, curYear, curMonth, lang),
-    getMonthlyData(userId, curYear, curMonth, new Date().toUTCString()),
+    getMonthlyData(userId, curYear, curMonth),
     getExpensesByCategory(userId, curYear, curMonth, includeSavings, grouped, includeEmptyCategories),
     getTransactions(userId, curYear, curMonth),
     getCategories(userId),

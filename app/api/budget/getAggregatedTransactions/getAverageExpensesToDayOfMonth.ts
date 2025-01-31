@@ -3,7 +3,7 @@ import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 import { getMonthYearTuples } from '../getMonthlyExpenseEvolution/getMonthlyExpenseEvolutionUtils'
 import { TransactionType } from '@/utils/types'
 
-const getIncomeAndExpenseTransactions = async (userId: string, year: number, month: number, dateUTC: string) => {
+const getIncomeAndExpenseTransactions = async (userId: string, year: number, month: number) => {
   const incomeRes = await db
     .selectFrom('transactions')
     .selectAll()
@@ -28,7 +28,7 @@ const getIncomeAndExpenseTransactions = async (userId: string, year: number, mon
   const expenseTransactions = parseDatabaseTransactionsArray(expenseRes)
 
   // filter out expenses with day of month greater than current day
-  const currentDate = new Date(dateUTC)
+  const currentDate = new Date()
   const currentDay = currentDate.getDate()
   const filteredExpenseTransactions = expenseTransactions.filter((transaction) => {
     const transactionDate = new Date(transaction.createdAt)
@@ -38,7 +38,7 @@ const getIncomeAndExpenseTransactions = async (userId: string, year: number, mon
   return { incomeTransactions, expenseTransactions: filteredExpenseTransactions }
 }
 
-export const getAverageExpensesToDayOfMonth = async (userId: string, year: number, month: number, dateUTC: string) => {
+export const getAverageExpensesToDayOfMonth = async (userId: string, year: number, month: number) => {
   const date = new Date(year, month, 1)
   // set date one month back, respect year change
   date.setMonth(date.getMonth() - 1)
@@ -52,7 +52,7 @@ export const getAverageExpensesToDayOfMonth = async (userId: string, year: numbe
 
   // get all income transaction per month
   for (const [m, y] of monthYearTuples) {
-    const { incomeTransactions, expenseTransactions } = await getIncomeAndExpenseTransactions(userId, y, m, dateUTC)
+    const { incomeTransactions, expenseTransactions } = await getIncomeAndExpenseTransactions(userId, y, m)
     const totalIncome = incomeTransactions.reduce((acc, cur) => {
       if (cur.transactionType === TransactionType.Annual) {
         return acc + cur.amount / 12

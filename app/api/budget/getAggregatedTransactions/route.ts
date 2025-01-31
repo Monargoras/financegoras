@@ -22,16 +22,15 @@ export async function GET(request: NextRequest) {
 
   const monthString = request.nextUrl.searchParams.get('month')
   const yearString = request.nextUrl.searchParams.get('year')
-  const dateUTC = request.nextUrl.searchParams.get('dateUtc')
 
-  if (!yearString || !dateUTC) {
-    return new Response('Year and UTC date is required', { status: 400 })
+  if (!yearString) {
+    return new Response('Year is required', { status: 400 })
   }
 
   const month = monthString ? parseInt(monthString, 10) : null
   const year = parseInt(yearString, 10)
 
-  const res = await getMonthlyData(userId, year, month, dateUTC)
+  const res = await getMonthlyData(userId, year, month)
 
   return Response.json(res, { status: 200 })
 }
