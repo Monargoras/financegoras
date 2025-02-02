@@ -53,7 +53,8 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     }
   }
 
-  const date = new Date()
+  const curMonth = new Date().getMonth() + 1
+  const curYear = new Date().getFullYear()
 
   const userSettings = await getUserSettings()
   const includeSavings = userSettings ? userSettings.includeSavings : false
@@ -70,11 +71,11 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     categories,
     colorMap,
   ] = await Promise.all([
-    getMonthlyExpenseEvolution(userId, date, lang, includeSavings, grouped),
-    getIncExpEvolution(userId, date, lang),
-    getMonthlyData(userId, date),
-    getExpensesByCategory(userId, date, includeSavings, grouped, includeEmptyCategories),
-    getTransactions(userId, date),
+    getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
+    getIncExpEvolution(userId, curYear, curMonth, lang),
+    getMonthlyData(userId, curYear, curMonth),
+    getExpensesByCategory(userId, curYear, curMonth, includeSavings, grouped, includeEmptyCategories),
+    getTransactions(userId, curYear, curMonth),
     getCategories(userId),
     getColorMap(userId),
   ])

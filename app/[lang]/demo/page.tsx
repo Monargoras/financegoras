@@ -26,7 +26,8 @@ export async function generateMetadata(props: { params: PageProps }) {
 async function getInitialDemoData({ lang }: { lang: string }): Promise<DashboardDTO> {
   'use server'
 
-  const date = new Date()
+  const curMonth = new Date().getMonth() + 1
+  const curYear = new Date().getFullYear()
 
   const includeSavings = false
   const grouped = false
@@ -36,14 +37,14 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
   const userId = DEMOUSERID
 
   // get demo transactions for current month
-  const tmpTransactions = await getTransactions(userId, date)
+  const tmpTransactions = await getTransactions(userId, curYear, curMonth)
   // remove monthly and annual transactions
   const filteredTransactions = tmpTransactions.filter(
     (t) => t.transactionType !== TransactionType.Monthly && t.transactionType !== TransactionType.Annual
   )
   // if there are no transactions for the current month, generate some
   if (filteredTransactions.length === 0) {
-    await generateDemoTransactions(date.getFullYear(), date.getMonth() + 1)
+    await generateDemoTransactions(curYear, curMonth)
   }
 
   const [
@@ -55,11 +56,11 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     categories,
     colorMap,
   ] = await Promise.all([
-    getMonthlyExpenseEvolution(userId, date, lang, includeSavings, grouped),
-    getIncExpEvolution(userId, date, lang),
-    getMonthlyData(userId, date),
-    getExpensesByCategory(userId, date, includeSavings, grouped, includeEmptyCategories),
-    getTransactions(userId, date),
+    getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
+    getIncExpEvolution(userId, curYear, curMonth, lang),
+    getMonthlyData(userId, curYear, curMonth),
+    getExpensesByCategory(userId, curYear, curMonth, includeSavings, grouped, includeEmptyCategories),
+    getTransactions(userId, curYear, curMonth),
     getCategories(userId),
     getColorMap(userId),
   ])

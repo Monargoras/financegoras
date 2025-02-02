@@ -7,12 +7,13 @@ import { validateUserId } from '@/utils/authUtils'
 
 export default async function getIncExpEvolution(
   userId: string,
-  date: Date,
+  year: number,
+  month: number | null,
   lang: string
 ): Promise<AggregatedIncomeExpenseEvolution> {
   const validatedUserId = await validateUserId(userId)
 
-  const monthsToCompute = getMonthYearTuples(date.getMonth() + 1, date.getFullYear())
+  const monthsToCompute = getMonthYearTuples(month, year)
   // get the expenses for the last 12 months or the given year
   const expenses = await Promise.all(monthsToCompute.map(([m, y]) => getIncExpOneMonth(m, y, validatedUserId, lang)))
 

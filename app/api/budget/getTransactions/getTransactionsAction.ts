@@ -5,10 +5,12 @@ import { parseDatabaseTransactionsArray } from '@/utils/helpers'
 import { TransactionDTO, TransactionType } from '@/utils/types'
 import { validateUserId } from '@/utils/authUtils'
 
-export default async function getTransactions(userId: string, date: Date): Promise<TransactionDTO[]> {
+export default async function getTransactions(
+  userId: string,
+  year: number,
+  month: number | null
+): Promise<TransactionDTO[]> {
   const validatedUserId = await validateUserId(userId)
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
 
   const transactions = await db
     .selectFrom('transactions')

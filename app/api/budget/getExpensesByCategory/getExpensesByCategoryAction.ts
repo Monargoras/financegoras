@@ -10,14 +10,13 @@ import { validateUserId } from '@/utils/authUtils'
 
 export default async function getExpensesByCategory(
   userId: string,
-  date: Date,
+  year: number,
+  month: number | null,
   includeSavings: boolean,
   grouped: boolean,
   includeEmptyCategories: boolean
 ): Promise<CategoryExpenseData[]> {
   const validatedUserId = await validateUserId(userId)
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
 
   let expenseQuery = db
     .selectFrom('transactions')

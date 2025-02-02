@@ -6,10 +6,12 @@ import { fetchIncExpSavTransactions } from './fetchIncExpSavTransactions'
 import { validateUserId } from '@/utils/authUtils'
 import { getAverageExpensesToDayOfMonth } from './getAverageExpensesToDayOfMonth'
 
-export default async function getMonthlyData(userId: string, date: Date): Promise<AggregatedIncomeExpenseTotals> {
+export default async function getMonthlyData(
+  userId: string,
+  year: number,
+  month: number | null
+): Promise<AggregatedIncomeExpenseTotals> {
   const validatedUserId = await validateUserId(userId)
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
 
   const { incomeTransactions, expenseTransactions, savingsTransactions } = await fetchIncExpSavTransactions(
     validatedUserId,
