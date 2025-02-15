@@ -23,7 +23,8 @@
     "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write"
   },
   "resolutions": {
-    "react-is": "^19.0.0"
+    "react-is": "^19.0.0",
+    "elliptic": "^6.6.1"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.0",
