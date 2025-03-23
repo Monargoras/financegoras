@@ -59,10 +59,22 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     },
     validate: {
       // functions return true if there is an error
-      name: (value) => value.length === 0 || value.length > 50,
-      amount: (value) => value <= 0,
-      createdAt: (value) => value === null,
-      stoppedAt: (value, formValues) =>
+      name: (value: string) => value.length === 0 || value.length > 50,
+      amount: (value: number) => value <= 0,
+      createdAt: (value: Date) => value === null,
+      stoppedAt: (
+        value: Date | null,
+        formValues: {
+          name: string
+          amount: number
+          category: string
+          transactionType: string
+          createdAt: Date
+          stoppedAt: Date | null
+          isIncome: boolean
+          isSavings: boolean
+        }
+      ) =>
         formValues.transactionType === TransactionType[TransactionType.Single] && formValues.createdAt && value
           ? formValues.createdAt.getTime() !== value.getTime()
           : null,
