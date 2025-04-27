@@ -50,5 +50,5 @@ export default async function getCategoryAggregationData(
     return getStatsForCategory(catTransactions, monthsToCompute)
   })
 
-  return [...expensesData, ...incomeData, ...savingsData]
+  return [...expensesData, ...incomeData, ...savingsData].sort((a, b) => b.average - a.average)
 }
