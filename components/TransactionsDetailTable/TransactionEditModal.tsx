@@ -87,6 +87,12 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     }
   }, [form.values.transactionType])
 
+  useEffect(() => {
+    if (form.values.isSavings) {
+      form.setFieldValue('isIncome', false)
+    }
+  }, [form.values.isSavings])
+
   const handleUpdateTransaction = async () => {
     const res = form.validate()
     if (res.hasErrors) {
@@ -205,6 +211,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
               <Checkbox
                 style={{ marginTop: 'auto' }}
                 size="xl"
+                disabled={form.getValues().isSavings}
                 indeterminate={!form.getValues().isIncome}
                 icon={IsIncomeIcon}
                 labelPosition="left"

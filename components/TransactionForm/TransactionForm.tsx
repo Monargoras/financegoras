@@ -60,6 +60,12 @@ export default function TransactionForm(props: TransactionFormProps) {
   }, [data])
 
   useEffect(() => {
+    if (isSavings) {
+      setIsIncome(false)
+    }
+  }, [isSavings])
+
+  useEffect(() => {
     if (categories && categories.length > 0 && categories[0].items && categories[0].items.length > 0) {
       setCategory(categories[0].items[0].name)
       setCategoryError(false)
@@ -173,6 +179,7 @@ export default function TransactionForm(props: TransactionFormProps) {
             <Checkbox
               checked={isIncome}
               style={{ marginTop: 'auto' }}
+              disabled={isSavings}
               size="xl"
               indeterminate={!isIncome}
               icon={IsIncomeIcon}
