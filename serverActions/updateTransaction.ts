@@ -40,7 +40,7 @@ export default async function updateTransaction(
       isIncome,
       isSavings,
       amount,
-      name,
+      name: name.trim(),
       category,
       transactionType,
       createdAt: new Date(createdAt),

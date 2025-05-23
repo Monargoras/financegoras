@@ -32,7 +32,7 @@ export default async function submitTransaction(
     isIncome,
     isSavings,
     amount,
-    name,
+    name: name.trim(),
     category,
     userId,
     id,
