@@ -14,7 +14,7 @@ export default async function generateDemoTransactions(year: number, month: numb
   }
 
   // add christmas bonus transaction in december
-  if (month === 0) {
+  if (month === 12) {
     const id = nanoid(16)
     const date = new Date(year, month - 1, 24)
     const transaction = {
