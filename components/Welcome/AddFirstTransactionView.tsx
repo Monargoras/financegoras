@@ -1,5 +1,5 @@
 import { Divider, Flex, Text } from '@mantine/core'
-import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
+import TransactionForm from '@/components/TransactionForm/TransactionForm'
 import { Categories, Dictionary } from '@/utils/types'
 
 interface AddFirstTransactionViewProps {
@@ -13,7 +13,7 @@ export default function AddFirstTransactionView(props: AddFirstTransactionViewPr
     <Flex gap="md" justify="center" align="center" direction="column" h="100%" w="100%">
       {!props.onlyText && (
         <Flex gap="md" justify="center" align="center" direction="column" w="100%">
-          <IncomeExpenseForm dictionary={props.dict} initialData={props.categories} />
+          <TransactionForm dictionary={props.dict} initialData={props.categories} nameAutocompleteList={[]} />
           <Divider size="lg" w="100%" />
         </Flex>
       )}

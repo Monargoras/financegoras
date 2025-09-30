@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Autocomplete,
   Checkbox,
   CheckboxProps,
   Container,
@@ -9,11 +10,10 @@ import {
   MantineProvider,
   Select,
   NumberInput,
-  TextInput,
   Tooltip,
   Switch,
 } from '@mantine/core'
-import useSWR, { Fetcher, useSWRConfig } from 'swr'
+import { useSWRConfig } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from '@tabler/icons-react'
@@ -26,6 +26,7 @@ import updateCategories from '@/serverActions/updateCategories'
 interface TransactionFormProps {
   dictionary: Dictionary
   initialData: Categories | null
+  nameAutocompleteList: string[]
 }
 
 export const IsIncomeIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
@@ -41,23 +42,12 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [isSavings, setIsSavings] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
-  const [categories, setCategories] = useState<Categories | null>(null)
+  const [categories, setCategories] = useState<Categories | null>(props.initialData)
   const [category, setCategory] = useState<string | null>(null)
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
   const [categoryError, setCategoryError] = useState(false)
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
-
-  const fetcher: Fetcher<Categories, string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
-  const { data } = useSWR('/api/budget/getCategories', fetcher, {
-    fallbackData: props.initialData ?? [],
-  })
-
-  useEffect(() => {
-    if (data && data.length > 0 && data[0].items && data[0].items.length > 0) {
-      setCategories(data)
-    }
-  }, [data])
 
   useEffect(() => {
     if (isSavings) {
@@ -212,15 +202,17 @@ export default function TransactionForm(props: TransactionFormProps) {
           size="xl"
           style={{ marginTop: 'auto' }}
         />
-        <TextInput
+        <Autocomplete
           value={name}
           error={nameError}
           label={props.dictionary.budgetPage.name}
-          onChange={(event) => {
+          data={props.nameAutocompleteList}
+          onChange={(val) => {
             setNameError(false)
-            setName(event.currentTarget.value)
+            setName(val)
           }}
           maxLength={50}
+          selectFirstOptionOnChange
         />
         <Select
           data={

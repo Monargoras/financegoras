@@ -1,7 +1,7 @@
 import { Container, Divider, Flex } from '@mantine/core'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
-import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
+import TransactionForm from '@/components/TransactionForm/TransactionForm'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
 import AuthenticationPrompt from '@/components/AuthenticationPrompt/AuthenticationPrompt'
 import TransactionsDetailTable, {
@@ -10,6 +10,7 @@ import TransactionsDetailTable, {
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
 import { getUserId } from '@/utils/authUtils'
+import getTransactionNameList from '@/app/api/budget/getTransactions/getTransactionNameListAction'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -20,23 +21,27 @@ export async function generateMetadata(props: { params: PageProps }) {
   }
 }
 
-async function getInitialData(): Promise<InitialDetailTableData> {
+async function getInitialData(): Promise<{ nameAutocompleteList: string[]; tableData: InitialDetailTableData }> {
   'use server'
 
   const userId = await getUserId()
   if (!userId) {
-    return { categories: null, transactions: [] }
+    return { tableData: { categories: null, transactions: [] }, nameAutocompleteList: [] }
   }
   const categories = await getCategories(userId)
   const transactions = await getAllTransactions(userId)
+  const nameAutocompleteList = await getTransactionNameList(userId)
 
   return {
-    categories,
-    transactions: transactions.map((t) => ({
-      ...t,
-      createdAt: new Date(t.createdAt),
-      stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
-    })),
+    tableData: {
+      categories,
+      transactions: transactions.map((t) => ({
+        ...t,
+        createdAt: new Date(t.createdAt),
+        stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
+      })),
+    },
+    nameAutocompleteList,
   }
 }
 
@@ -51,9 +56,13 @@ export default async function TransactionsPage(props: { params: PageProps }) {
       {userId ? (
         <Container fluid>
           <Flex gap="md" justify="center" align="center" direction="column">
-            <IncomeExpenseForm dictionary={dict} initialData={initialData.categories} />
+            <TransactionForm
+              dictionary={dict}
+              initialData={initialData.tableData.categories}
+              nameAutocompleteList={initialData.nameAutocompleteList}
+            />
             <Divider size="lg" w="100%" />
-            <TransactionsDetailTable locale={lang} dictionary={dict} initialData={initialData} />
+            <TransactionsDetailTable locale={lang} dictionary={dict} initialData={initialData.tableData} />
           </Flex>
         </Container>
       ) : (

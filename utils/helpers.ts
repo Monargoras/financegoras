@@ -32,3 +32,17 @@ export const parseDatabaseTransactionsArray = (transactions: DatabaseTransaction
     createdAt: transaction.createdAt.toUTCString(),
     stoppedAt: transaction.stoppedAt ? transaction.stoppedAt.toUTCString() : null,
   }))
+
+export const sortAndDeduplicate = (strings: string[]): string[] => {
+  const frequencyMap = new Map<string, number>()
+  for (const str of strings) {
+    frequencyMap.set(str, (frequencyMap.get(str) || 0) + 1)
+  }
+  // sort in descending order
+  const uniqueStrings = Array.from(frequencyMap.keys())
+  uniqueStrings.sort((a, b) => {
+    const freqDiff = frequencyMap.get(b)! - frequencyMap.get(a)!
+    return freqDiff !== 0 ? freqDiff : a.localeCompare(b) // fallback alphabetical
+  })
+  return uniqueStrings
+}

@@ -12,6 +12,7 @@ import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getUserSettings from '@/serverActions/getUserSettings'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 import { getUserId } from '@/utils/authUtils'
+import getTransactionNameList from '@/app/api/budget/getTransactions/getTransactionNameListAction'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -50,6 +51,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
         includeEmptyCategories: false,
       },
       colorMap: {},
+      nameAutocompleteList: [],
     }
   }
 
@@ -70,6 +72,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     transactions,
     categories,
     colorMap,
+    nameAutocompleteList,
   ] = await Promise.all([
     getMonthlyExpenseEvolution(userId, curYear, curMonth, lang, includeSavings, grouped),
     getIncExpEvolution(userId, curYear, curMonth, lang),
@@ -78,6 +81,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
     getTransactions(userId, curYear, curMonth),
     getCategories(userId),
     getColorMap(userId),
+    getTransactionNameList(userId),
   ])
 
   return {
@@ -94,6 +98,7 @@ async function getInitialDashboardData({ lang }: { lang: string }): Promise<Dash
       includeEmptyCategories,
     },
     colorMap,
+    nameAutocompleteList,
   }
 }
 

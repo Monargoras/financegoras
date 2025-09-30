@@ -10,6 +10,7 @@ import { DashboardDTO } from '@/utils/types'
 import getCategories from '../getCategories/getCategoriesAction'
 import getColorMap from '../getColorMap/getColorMapAction'
 import { getUserId } from '@/utils/authUtils'
+import getTransactionNameList from '../getTransactions/getTransactionNameListAction'
 
 /**
  * This endpoint returns the all data needed for the dashboard
@@ -67,6 +68,7 @@ export async function GET(request: NextRequest) {
     getTransactions(userId, selectedYear, selectedMonth),
     getCategories(userId),
     getColorMap(userId),
+    getTransactionNameList(userId),
   ])
 
   return new Response(
@@ -78,6 +80,7 @@ export async function GET(request: NextRequest) {
       transactions: res[4],
       categories: res[5],
       colorMap: res[6],
+      nameAutocompleteList: res[7],
     } as DashboardDTO),
     { status: 200 }
   )

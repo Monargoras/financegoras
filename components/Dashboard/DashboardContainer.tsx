@@ -4,7 +4,7 @@ import { useState } from 'react'
 import useSWR, { Fetcher } from 'swr'
 import { Container, Divider, Flex, Loader, Text } from '@mantine/core'
 import Dashboard from './Dashboard'
-import IncomeExpenseForm from '@/components/TransactionForm/TransactionForm'
+import TransactionForm from '@/components/TransactionForm/TransactionForm'
 import { DashboardDTO, Dictionary } from '@/utils/types'
 import AddFirstTransactionView from '@/components/Welcome/AddFirstTransactionView'
 
@@ -41,7 +41,11 @@ export default function DashboardContainer(props: DashboardContainerProps) {
       <Flex gap="md" justify="center" align="center" direction="column" w="100%">
         {!props.demo && (
           <Flex gap="md" justify="center" align="center" direction="column" w="100%">
-            <IncomeExpenseForm dictionary={props.dict} initialData={props.initialData.categories} />
+            <TransactionForm
+              dictionary={props.dict}
+              initialData={data.categories}
+              nameAutocompleteList={data.nameAutocompleteList}
+            />
             <Divider size="lg" w="100%" />
           </Flex>
         )}
@@ -85,7 +89,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
           />
         )}
         {data && data.transactions.length === 0 && (
-          <AddFirstTransactionView dict={props.dict} categories={props.initialData.categories} onlyText />
+          <AddFirstTransactionView dict={props.dict} categories={data.categories} onlyText />
         )}
       </Flex>
     </Container>

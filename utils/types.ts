@@ -149,6 +149,7 @@ export type DashboardDTO = {
   categories: Categories | null
   settings: UserSettings
   colorMap: ColorMap
+  nameAutocompleteList: string[]
 }
 
 export type CategoryEvolution = {
