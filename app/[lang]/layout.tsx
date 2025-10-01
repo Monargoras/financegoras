@@ -1,4 +1,5 @@
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core'
+import { Metadata } from 'next'
 import { Notifications } from '@mantine/notifications'
 import { getServerSession } from 'next-auth'
 import '@/app/[lang]/globals.css'
@@ -13,7 +14,7 @@ import { getDictionary } from './dictionaries'
 import ClientProviders from '@/components/ClientProviders/ClientProviders'
 import { PageProps } from '@/utils/types'
 
-export async function generateMetadata(props: { params: PageProps }) {
+export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
   return {

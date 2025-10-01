@@ -1,8 +1,9 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 
-export async function generateMetadata(props: { params: PageProps }) {
+export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
   return {

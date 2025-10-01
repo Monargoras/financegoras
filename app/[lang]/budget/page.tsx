@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { DashboardDTO, PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import PageTransitionProvider from '@/components/ClientProviders/PageTransitionProvider'
@@ -14,7 +15,7 @@ import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 import { getUserId } from '@/utils/authUtils'
 import getNameAutocompleteList from '@/app/api/transactions/getNameAutocompleteList/getNameAutocompleteListAction'
 
-export async function generateMetadata(props: { params: PageProps }) {
+export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
   return {

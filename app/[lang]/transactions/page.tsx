@@ -1,4 +1,5 @@
 import { Container, Divider, Flex } from '@mantine/core'
+import { Metadata } from 'next'
 import { PageProps } from '@/utils/types'
 import { getDictionary } from '../dictionaries'
 import TransactionForm from '@/components/TransactionForm/TransactionForm'
@@ -12,7 +13,7 @@ import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAll
 import { getUserId } from '@/utils/authUtils'
 import getNameAutocompleteList from '@/app/api/transactions/getNameAutocompleteList/getNameAutocompleteListAction'
 
-export async function generateMetadata(props: { params: PageProps }) {
+export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
   return {
