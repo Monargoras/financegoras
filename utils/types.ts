@@ -63,6 +63,18 @@ export type Transaction = {
   stoppedAt: Date | null
 }
 
+export const EXPORT_ORDER: (keyof Transaction)[] = [
+  'id',
+  'name',
+  'category',
+  'amount',
+  'isIncome',
+  'isSavings',
+  'transactionType',
+  'createdAt',
+  'stoppedAt',
+]
+
 export type Category = {
   name: string
   color: string

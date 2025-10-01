@@ -39,7 +39,8 @@
     "showStopped": "Auch beendete",
     "pickDatesRange": "Zeitraum filtern",
     "editTransaction": "Transaktion bearbeiten",
-    "stopSeries": "Serie nach neuester Zahlung beenden"
+    "stopSeries": "Serie nach neuester Zahlung beenden",
+    "exportTooltip": "Alle Transaktionen als CSV exportieren"
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",

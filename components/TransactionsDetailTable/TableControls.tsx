@@ -2,7 +2,8 @@
 
 import { ComboboxItem, Flex, MultiSelect, OptionsFilter, Switch } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
-import { Dictionary, TransactionType } from '@/utils/types'
+import { Dictionary, Transaction, TransactionType } from '@/utils/types'
+import ExportImportData from './ExportImportData'
 
 interface TableControlsProps {
   dictionary: Dictionary
@@ -17,6 +18,7 @@ interface TableControlsProps {
   setTypeFilter: (newValue: string[]) => void
   dateRange: [Date | null, Date | null]
   setDateRange: (newValue: [Date | null, Date | null]) => void
+  transactions: Transaction[]
 }
 
 const optionsFilter: OptionsFilter = ({ options, search }) => {
@@ -71,6 +73,7 @@ export default function TableControls(props: TableControlsProps) {
         onChange={(event) => props.setHideStopped(event.currentTarget.checked)}
         label={props.dictionary.transactionsPage.hideStopped}
       />
+      <ExportImportData dictionary={props.dictionary} transactions={props.transactions} />
     </Flex>
   )
 }

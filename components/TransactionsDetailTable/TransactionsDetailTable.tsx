@@ -107,6 +107,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
             setTypeFilter={setTypeFilter}
             dateRange={dateRange}
             setDateRange={setDateRange}
+            transactions={data}
           />
           <Table.ScrollContainer
             mah="73dvh"

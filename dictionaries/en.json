@@ -38,7 +38,8 @@
     "hideStopped": "Only running",
     "pickDatesRange": "Filter date range",
     "editTransaction": "Edit transaction",
-    "stopSeries": "Stop series after latest payment"
+    "stopSeries": "Stop series after latest payment",
+    "exportTooltip": "Export all transactions to CSV"
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",
