@@ -13,7 +13,7 @@ import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import DashboardContainer from '@/components/Dashboard/DashboardContainer'
 import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 import DemoButton from '@/components/Welcome/DemoButton'
-import getTransactionNameList from '@/app/api/budget/getTransactions/getTransactionNameListAction'
+import getNameAutocompleteList from '@/app/api/transactions/getNameAutocompleteList/getNameAutocompleteListAction'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -65,7 +65,7 @@ async function getInitialDemoData({ lang }: { lang: string }): Promise<Dashboard
     getTransactions(userId, curYear, curMonth),
     getCategories(userId),
     getColorMap(userId),
-    getTransactionNameList(userId),
+    getNameAutocompleteList(userId),
   ])
 
   return {

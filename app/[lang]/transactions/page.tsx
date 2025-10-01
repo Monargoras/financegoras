@@ -10,7 +10,7 @@ import TransactionsDetailTable, {
 import getCategories from '@/app/api/budget/getCategories/getCategoriesAction'
 import getAllTransactions from '@/app/api/transactions/getAllTransactions/getAllTransactionsAction'
 import { getUserId } from '@/utils/authUtils'
-import getTransactionNameList from '@/app/api/budget/getTransactions/getTransactionNameListAction'
+import getNameAutocompleteList from '@/app/api/transactions/getNameAutocompleteList/getNameAutocompleteListAction'
 
 export async function generateMetadata(props: { params: PageProps }) {
   const { lang } = await props.params
@@ -30,7 +30,7 @@ async function getInitialData(): Promise<{ nameAutocompleteList: string[]; table
   }
   const categories = await getCategories(userId)
   const transactions = await getAllTransactions(userId)
-  const nameAutocompleteList = await getTransactionNameList(userId)
+  const nameAutocompleteList = await getNameAutocompleteList(userId)
 
   return {
     tableData: {

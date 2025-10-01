@@ -13,7 +13,7 @@ import {
   Tooltip,
   Switch,
 } from '@mantine/core'
-import { useSWRConfig } from 'swr'
+import useSWR, { useSWRConfig, Fetcher } from 'swr'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { IconPlus, IconMinus, IconCheck, IconX } from '@tabler/icons-react'
@@ -48,6 +48,12 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [nameError, setNameError] = useState(false)
   const [categoryError, setCategoryError] = useState(false)
   const [updateBackendCategories, setUpdateBackendCategories] = useState(false)
+
+  const fetcher: Fetcher<string[], string> = (input: RequestInfo | URL) => fetch(input).then((res) => res.json())
+  const { data } = useSWR('/api/transactions/getNameAutocompleteList', fetcher, {
+    fallbackData: props.nameAutocompleteList,
+    keepPreviousData: true,
+  })
 
   useEffect(() => {
     if (isSavings) {
@@ -206,7 +212,7 @@ export default function TransactionForm(props: TransactionFormProps) {
           value={name}
           error={nameError}
           label={props.dictionary.budgetPage.name}
-          data={props.nameAutocompleteList}
+          data={data}
           onChange={(val) => {
             setNameError(false)
             setName(val)
