@@ -55,7 +55,13 @@
     "csvValidationErrorInvalidStoppedAtDate": "Zeile {{rowNumber}}: ungültiges stoppedAt Datum",
     "csvValidationErrorInvalidTransactionType": "Zeile {{rowNumber}}: ungültiger Transaktionstyp",
     "csvValidationErrorInvalidIsIncome": "Zeile {{rowNumber}}: ungültig isIncome",
-    "csvValidationErrorInvalidIsSavings": "Zeile {{rowNumber}}: ungültig isSavings"
+    "csvValidationErrorInvalidIsSavings": "Zeile {{rowNumber}}: ungültig isSavings",
+    "truncateExistingData": "Bestehende Daten überschreiben (Alle vorherigen Daten gehen verloren)",
+    "performImport": "Import durchführen",
+    "successfullyImportedTransactionsTitle": "Import erfolgreich!",
+    "successfullyImportedTransactionsMessage": "Es wurden erfolgreich {{numTransactions}} Transaktionen importiert",
+    "errorImportingTransactionsTitle": "Import fehlgeschlagen!",
+    "errorImportingTransactionsMessage": "Beim Importieren der Transaktionen ist ein Fehler aufgetreten."
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",

@@ -4,8 +4,10 @@ import { useRef, useState } from 'react'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { IconCheck, IconFileDownloadFilled, IconFileUploadFilled, IconX } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
+import { useDisclosure } from '@mantine/hooks'
 import Papa from 'papaparse'
 import { Dictionary, EXPORT_ORDER, Transaction, TransactionType } from '@/utils/types'
+import ImportModal from './ImportModal'
 
 interface ExportImportDataProps {
   dictionary: Dictionary
@@ -15,6 +17,7 @@ interface ExportImportDataProps {
 export default function ExportImportData(props: ExportImportDataProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [opened, { open, close }] = useDisclosure(false)
 
   const convertTransaction = <T extends keyof Transaction>(
     transaction: Transaction,
@@ -166,6 +169,7 @@ export default function ExportImportData(props: ExportImportDataProps) {
           })
 
           setTransactions(txs)
+          open()
           notifications.show({
             title: props.dictionary.transactionsPage.csvImportSuccessTitle,
             message: props.dictionary.transactionsPage.csvImportSuccessMessage.replace(
@@ -216,6 +220,17 @@ export default function ExportImportData(props: ExportImportDataProps) {
           <IconFileUploadFilled />
         </ActionIcon>
       </Tooltip>
+      {opened && (
+        <ImportModal
+          dictionary={props.dictionary}
+          opened={opened}
+          close={() => {
+            setTransactions([])
+            close()
+          }}
+          transactions={transactions}
+        />
+      )}
     </>
   )
 }

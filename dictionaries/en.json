@@ -54,7 +54,13 @@
     "csvValidationErrorInvalidStoppedAtDate": "Row {{rowNumber}}: invalid stoppedAt date",
     "csvValidationErrorInvalidTransactionType": "Row {{rowNumber}}: invalid transaction type",
     "csvValidationErrorInvalidIsIncome": "Row {{rowNumber}}: invalid isIncome",
-    "csvValidationErrorInvalidIsSavings": "Row {{rowNumber}}: invalid isSavings"
+    "csvValidationErrorInvalidIsSavings": "Row {{rowNumber}}: invalid isSavings",
+    "truncateExistingData": "Overwrite existing data (All previous data is lost)",
+    "performImport": "Perform import",
+    "successfullyImportedTransactionsTitle": "Import successful!",
+    "successfullyImportedTransactionsMessage": "Successfully imported {{numTransactions}} transactions",
+    "importErrorTitle": "Import failed!",
+    "importErrorMessage": "An error occurred during the import."
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",
