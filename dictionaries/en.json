@@ -39,7 +39,22 @@
     "pickDatesRange": "Filter date range",
     "editTransaction": "Edit transaction",
     "stopSeries": "Stop series after latest payment",
-    "exportTooltip": "Export all transactions to CSV"
+    "exportTooltip": "Export all transactions to CSV",
+    "importTooltip": "Import transactions from previously exported CSV",
+    "parsingErrorTitle": "Error parsing CSV",
+    "parsingErrorMessage": "The selected file could not be parsed.",
+    "csvValidationErrorTitle": "CSV validation error",
+    "csvValidationErrorMessageFallback": "The selected file is not valid.",
+    "csvValidationErrorMessageMissingHeaders": "The selected file is missing required columns: {{missingHeaders}}",
+    "csvImportSuccessTitle": "File parsed successfully!",
+    "csvImportSuccessMessage": "Parsed {{numTransactions}} transactions successfully.",
+    "csvValidationErrorMissingText": "Row {{rowNumber}}: missing required text fields",
+    "csvValidationErrorInvalidAmount": "Row {{rowNumber}}: invalid amount",
+    "csvValidationErrorInvalidCreatedAtDate": "Row {{rowNumber}}: invalid createdAt date",
+    "csvValidationErrorInvalidStoppedAtDate": "Row {{rowNumber}}: invalid stoppedAt date",
+    "csvValidationErrorInvalidTransactionType": "Row {{rowNumber}}: invalid transaction type",
+    "csvValidationErrorInvalidIsIncome": "Row {{rowNumber}}: invalid isIncome",
+    "csvValidationErrorInvalidIsSavings": "Row {{rowNumber}}: invalid isSavings"
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",

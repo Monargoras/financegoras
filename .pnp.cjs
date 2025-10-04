@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.14"],\
           ["@types/negotiator", "npm:0.6.4"],\
           ["@types/node", "npm:22.18.8"],\
+          ["@types/papaparse", "npm:5.3.16"],\
           ["@types/react", "npm:19.1.16"],\
           ["@typescript-eslint/eslint-plugin", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.18.0"],\
           ["@typescript-eslint/parser", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.18.0"],\
@@ -79,6 +80,7 @@ const RAW_RUNTIME_STATE =
           ["negotiator", "npm:1.0.0"],\
           ["next", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:15.5.4"],\
           ["next-auth", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:4.24.11"],\
+          ["papaparse", "npm:5.5.3"],\
           ["postcss", "npm:8.5.6"],\
           ["postcss-preset-mantine", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.18.0"],\
           ["postcss-simple-vars", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.0.1"],\
@@ -6476,6 +6478,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/papaparse", [\
+      ["npm:5.3.16", {\
+        "packageLocation": "./.yarn/cache/@types-papaparse-npm-5.3.16-54c4b320d7-5428bbd403.zip/node_modules/@types/papaparse/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:22.9.0"],\
+          ["@types/papaparse", "npm:5.3.16"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/parse-json", [\
       ["npm:4.0.2", {\
         "packageLocation": "./.yarn/cache/@types-parse-json-npm-4.0.2-f87f65692e-5bf62eec37.zip/node_modules/@types/parse-json/",\
@@ -11487,6 +11499,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.14"],\
           ["@types/negotiator", "npm:0.6.4"],\
           ["@types/node", "npm:22.18.8"],\
+          ["@types/papaparse", "npm:5.3.16"],\
           ["@types/react", "npm:19.1.16"],\
           ["@typescript-eslint/eslint-plugin", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.18.0"],\
           ["@typescript-eslint/parser", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.18.0"],\
@@ -11515,6 +11528,7 @@ const RAW_RUNTIME_STATE =
           ["negotiator", "npm:1.0.0"],\
           ["next", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:15.5.4"],\
           ["next-auth", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:4.24.11"],\
+          ["papaparse", "npm:5.5.3"],\
           ["postcss", "npm:8.5.6"],\
           ["postcss-preset-mantine", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:1.18.0"],\
           ["postcss-simple-vars", "virtual:c212aaffe112f8dcb0281a3c6e30a28abf909b56c89bd83875081d5cd52a1e52379b9c33fb049bb5ff8a13dc65754fc4052bb99b64549aeddfd7f23ce978e9aa#npm:7.0.1"],\
@@ -15654,6 +15668,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/pako-npm-1.0.11-b8f1b69d3e-1ad07210e8.zip/node_modules/pako/",\
         "packageDependencies": [\
           ["pako", "npm:1.0.11"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["papaparse", [\
+      ["npm:5.5.3", {\
+        "packageLocation": "./.yarn/cache/papaparse-npm-5.5.3-a5461bada4-383e38f8ff.zip/node_modules/papaparse/",\
+        "packageDependencies": [\
+          ["papaparse", "npm:5.5.3"]\
         ],\
         "linkType": "HARD"\
       }]\

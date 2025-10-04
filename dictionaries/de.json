@@ -40,7 +40,22 @@
     "pickDatesRange": "Zeitraum filtern",
     "editTransaction": "Transaktion bearbeiten",
     "stopSeries": "Serie nach neuester Zahlung beenden",
-    "exportTooltip": "Alle Transaktionen als CSV exportieren"
+    "exportTooltip": "Alle Transaktionen als CSV exportieren",
+    "importTooltip": "Transaktionen aus bereits exportierter CSV importieren",
+    "parsingErrorTitle": "Fehler beim Lesen der CSV",
+    "parsingErrorMessage": "Die ausgewählte Datei konnte nicht gelesen werden.",
+    "csvValidationErrorTitle": "CSV Validierungsfehler",
+    "csvValidationErrorMessageFallback": "Die ausgewählte Datei ist nicht gültig.",
+    "csvValidationErrorMessageMissingHeaders": "Der ausgewählten Datei fehlen erforderliche Spalten: {{missingHeaders}}",
+    "csvImportSuccessTitle": "Datei erfolgreich gelesen!",
+    "csvImportSuccessMessage": "Es wurden erfolgreich {{numTransactions}} Transaktionen gelesen.",
+    "csvValidationErrorMissingText": "Zeile {{rowNumber}}: fehlende erforderliche Textfelder",
+    "csvValidationErrorInvalidAmount": "Zeile {{rowNumber}}: ungültiger Betrag",
+    "csvValidationErrorInvalidCreatedAtDate": "Zeile {{rowNumber}}: ungültiges createdAt Datum",
+    "csvValidationErrorInvalidStoppedAtDate": "Zeile {{rowNumber}}: ungültiges stoppedAt Datum",
+    "csvValidationErrorInvalidTransactionType": "Zeile {{rowNumber}}: ungültiger Transaktionstyp",
+    "csvValidationErrorInvalidIsIncome": "Zeile {{rowNumber}}: ungültig isIncome",
+    "csvValidationErrorInvalidIsSavings": "Zeile {{rowNumber}}: ungültig isSavings"
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",
