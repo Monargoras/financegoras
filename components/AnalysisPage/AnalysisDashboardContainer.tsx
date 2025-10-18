@@ -21,10 +21,10 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const [groupSearch, setGroupSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   // set initial range to last 12 months
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    new Date(new Date().setMonth(new Date().getMonth() - 11)),
-    new Date(),
-  ])
+  const now = new Date()
+  const start = new Date(now.getFullYear(), now.getMonth() - 11, 1) // first day of start month
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0) // last day of end month
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([start, end])
   const [onlyExpenses, setOnlyExpenses] = useState<boolean>(true)
 
   const fetcher: Fetcher<AnalysisDashboardDTO, string> = (input: RequestInfo | URL) =>
