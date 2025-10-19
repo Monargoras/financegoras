@@ -119,10 +119,10 @@ export const getMonthYearTuples = (month: number | null, year: number) => {
 
 // calculates the list of month year tuples from a given start date until a given end date
 export const getDynamicMonthYearTuples = (startDate: Date, endDate: Date) => {
-  const startMonth = startDate.getMonth()
-  const startYear = startDate.getFullYear()
-  const endMonth = endDate.getMonth()
-  const endYear = endDate.getFullYear()
+  const startMonth = startDate.getUTCMonth()
+  const startYear = startDate.getUTCFullYear()
+  const endMonth = endDate.getUTCMonth()
+  const endYear = endDate.getUTCFullYear()
 
   let curMonth = startMonth
   let curYear = startYear

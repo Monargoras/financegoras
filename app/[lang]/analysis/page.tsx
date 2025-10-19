@@ -24,14 +24,17 @@ async function getInitialAnalysisData(lang: string): Promise<AnalysisDashboardDT
   if (!userId) {
     return emptyData
   }
+  const now = new Date()
+  const start = new Date(now.getFullYear(), now.getMonth() - 11, 1, 12, 0, 0, 0) // first day of start month
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 12, 0, 0, 0) // last day of end month
   const data = await getAnalysisDashbaordData(
     userId,
     [],
     [],
     [],
     [],
-    new Date(new Date().setMonth(new Date().getMonth() - 11)).toUTCString(),
-    new Date().toUTCString(),
+    start.toUTCString(),
+    end.toUTCString(),
     true,
     lang
   )

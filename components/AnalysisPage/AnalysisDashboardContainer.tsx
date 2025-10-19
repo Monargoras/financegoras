@@ -22,15 +22,15 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   // set initial range to last 12 months
   const now = new Date()
-  const start = new Date(now.getFullYear(), now.getMonth() - 11, 1) // first day of start month
-  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0) // last day of end month
+  const start = new Date(now.getFullYear(), now.getMonth() - 11, 1, 12, 0, 0, 0) // first day of start month
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 12, 0, 0, 0) // last day of end month
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([start, end])
   const [onlyExpenses, setOnlyExpenses] = useState<boolean>(true)
 
   const fetcher: Fetcher<AnalysisDashboardDTO, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?demo=${props.demo}&names=${nameSearch.join(',')}&categories=${categorySearch.join(',')}&groups=${groupSearch.join(',')}\
-&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toISOString()}&endDate=${dateRange[1].toISOString()}` : ''}\
+&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}\
 &onlyExpenses=${onlyExpenses}&lang=${props.locale}`
   const { data, error, isLoading } = useSWR(`/api/analysis/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
