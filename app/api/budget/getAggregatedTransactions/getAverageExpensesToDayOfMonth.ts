@@ -29,10 +29,10 @@ const getIncomeAndExpenseTransactions = async (userId: string, year: number, mon
 
   // filter out expenses with day of month greater than current day
   const currentDate = new Date()
-  const currentDay = currentDate.getDate()
+  const currentDay = currentDate.getUTCDate()
   const filteredExpenseTransactions = expenseTransactions.filter((transaction) => {
     const transactionDate = new Date(transaction.createdAt)
-    return transactionDate.getDate() <= currentDay
+    return transactionDate.getUTCDate() <= currentDay
   })
 
   return { incomeTransactions, expenseTransactions: filteredExpenseTransactions }
@@ -41,11 +41,11 @@ const getIncomeAndExpenseTransactions = async (userId: string, year: number, mon
 export const getAverageExpensesToDayOfMonth = async (userId: string, year: number, month: number) => {
   const date = new Date(year, month, 1)
   // set date one month back, respect year change
-  date.setMonth(date.getMonth() - 1)
+  date.setMonth(date.getUTCMonth() - 1)
   if (month === 1) {
-    date.setFullYear(date.getFullYear() - 1)
+    date.setFullYear(date.getUTCFullYear() - 1)
   }
-  const monthYearTuples = getMonthYearTuples(date.getMonth(), date.getFullYear())
+  const monthYearTuples = getMonthYearTuples(date.getUTCMonth(), date.getUTCFullYear())
 
   // holds tuples of expenses and percentage of income
   const resArray = []
