@@ -42,6 +42,8 @@ export default async function getAnalysisDashbaordData(
 
   const safeStartDate = new Date(startDate ?? allTransactions[allTransactions.length - 1].createdAt)
   const safeEndDate = new Date(endDate ?? allTransactions[0].createdAt)
+  safeStartDate.setUTCHours(0, 0, 0, 0)
+  safeEndDate.setUTCHours(23, 59, 59, 999)
 
   const filterData = (rawData: TransactionDTO[]) => {
     let res = rawData
@@ -66,11 +68,7 @@ export default async function getAnalysisDashbaordData(
       res = res.filter((ta) => {
         const createdAt = new Date(ta.createdAt)
         const stoppedAt = ta.stoppedAt ? new Date(ta.stoppedAt) : null
-        // add 2 hours to the start date to avoid server timezon issues
-        const rangeStart = new Date(safeStartDate.getTime() + 7200000)
-        // add 24 hours to the end date to include the whole day
-        const rangeEnd = new Date(safeEndDate.getTime() + 86400000)
-        return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= rangeStart)
+        return createdAt < safeEndDate && (!stoppedAt || stoppedAt >= safeStartDate)
       })
     }
     return res
