@@ -79,13 +79,13 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
   return (
     <LineChart
       w={{
-        xl: 1300,
-        md: 900,
+        xl: 1500,
+        md: 1200,
         sm: 400,
       }}
       h={{
-        xl: 400,
-        md: 300,
+        xl: 500,
+        md: 350,
         base: 300,
       }}
       data={props.data}

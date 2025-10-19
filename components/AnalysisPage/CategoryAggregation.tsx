@@ -19,7 +19,7 @@ export default function CategoryAggregation(props: CategoryAggregationProps) {
     <>
       <Table.ScrollContainer
         h="40dvh"
-        miw={{ xl: 600, md: 530, base: 300 }}
+        miw={{ xl: 850, md: 750, base: 300 }}
         minWidth={350}
         className={generalClasses.styledScroll}
       >
