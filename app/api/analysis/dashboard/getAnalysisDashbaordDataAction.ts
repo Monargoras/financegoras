@@ -66,9 +66,7 @@ export default async function getAnalysisDashbaordData(
       res = res.filter((ta) => {
         const createdAt = new Date(ta.createdAt)
         const stoppedAt = ta.stoppedAt ? new Date(ta.stoppedAt) : null
-        // add 24 hours to the end date to include the whole day
-        const rangeEnd = new Date(safeEndDate.getTime() + 86400000)
-        return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= safeStartDate)
+        return createdAt < safeEndDate && (!stoppedAt || stoppedAt >= safeStartDate)
       })
     }
     return res
