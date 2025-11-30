@@ -219,6 +219,7 @@ export default function TransactionForm(props: TransactionFormProps) {
           }}
           maxLength={50}
           selectFirstOptionOnChange
+          maxDropdownHeight={100}
         />
         <Select
           data={
