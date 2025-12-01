@@ -1,7 +1,6 @@
 'use client'
 
 import { SessionProvider } from 'next-auth/react'
-import { Session } from 'next-auth'
 import 'dayjs/locale/en'
 import 'dayjs/locale/de'
 import { DatesProvider } from '@mantine/dates'
@@ -18,12 +17,10 @@ export const PrivacyModeContext = createContext({
 })
 
 export default function ClientProviders({
-  session,
   language,
   dict,
   children,
 }: {
-  session: Session | null | undefined
   language: string
   dict: Dictionary
   children: React.ReactNode
@@ -41,7 +38,7 @@ export default function ClientProviders({
   }
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <SWRConfig value={{ revalidateOnFocus: false }}>
         <DatesProvider settings={{ locale: language }}>
           <PrivacyModeContext.Provider value={{ privacyMode, togglePrivacyMode }}>

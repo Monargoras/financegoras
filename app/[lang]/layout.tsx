@@ -1,13 +1,11 @@
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core'
 import { Metadata } from 'next'
 import { Notifications } from '@mantine/notifications'
-import { getServerSession } from 'next-auth'
 import '@/app/[lang]/globals.css'
 import '@mantine/core/styles.css'
 import '@mantine/notifications/styles.css'
 import '@mantine/dates/styles.css'
 import '@mantine/charts/styles.css'
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { theme } from '@/utils/theme'
 import { Appbar } from '@/components/Appbar/Appbar'
 import { getDictionary } from './dictionaries'
@@ -31,7 +29,6 @@ export default async function RootLayout({ children, params }: { children: React
   const { lang } = await params
   // get currently used dictionary
   const dict = await getDictionary(lang)
-  const session = await getServerSession(authOptions)
 
   return (
     <html lang={lang} style={{ overflowX: 'hidden' }} {...mantineHtmlProps}>
@@ -50,7 +47,7 @@ export default async function RootLayout({ children, params }: { children: React
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <ClientProviders session={session} language={lang} dict={dict}>
+          <ClientProviders language={lang} dict={dict}>
             <Appbar props={{ dictionary: dict }}>{children}</Appbar>
             <Notifications />
           </ClientProviders>
