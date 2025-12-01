@@ -11,7 +11,7 @@ import globals from 'globals'
 const config = [
   js.configs.recommended,
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -46,6 +46,7 @@ const config = [
     },
   },
   {
+    files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       '@next/next': nextPlugin,
     },
@@ -59,7 +60,7 @@ const config = [
     },
   },
   {
-    ignores: ['node_modules/**', '.next/**', '.yarn/**', '**.d.ts', '**.cjs', '**.mjs', '.storybook/**'],
+    ignores: ['node_modules/**', '.next/**', '.yarn/**', '**.d.ts', '**.cjs', '**.mjs'],
   },
 ]
 
