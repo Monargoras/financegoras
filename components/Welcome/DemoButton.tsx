@@ -29,4 +29,6 @@ const DemoButtonRef = forwardRef<HTMLButtonElement, DemoButtonProps>((props, ref
   )
 })
 
+DemoButtonRef.displayName = 'DemoButton'
+
 export default motion.create(DemoButtonRef)
