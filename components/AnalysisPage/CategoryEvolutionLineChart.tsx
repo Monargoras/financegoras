@@ -17,7 +17,9 @@ interface ChartTooltipProps {
 }
 
 function ChartTooltip({ label, payload }: ChartTooltipProps) {
-  if (!payload) return null
+  if (!payload) {
+    return null
+  }
   const sortedPayload = [...payload]
     .sort((a, b) => (b.value as number) - (a.value as number))
     .filter((item) => (item.value as number) > 0)
