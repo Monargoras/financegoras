@@ -1,5 +1,4 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 import { i18n } from './utils/i18nConfig'
@@ -26,29 +25,8 @@ function getLocale(request: NextRequest): string | undefined {
   return locale
 }
 
-// eslint-disable-next-line consistent-return
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-
-  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
-  /*if (
-    [
-      '/img/favicon.ico',
-      '/img/apple-icon.png',
-      '.webmanifest',
-      '/img/android-chrome-192x192.png',
-      '/img/android-chrome-512x512.png',
-      '/img/mstile-150x150.png',
-      'browserconfig.xml',
-      '/img/favicon-16x16.png',
-      '/img/favicon-32x32.png',
-      '/img/safari-pinned-tab.svg',
-      // Your other files in `public`
-    ].includes(pathname)
-  ) {
-    return NextResponse.redirect(new URL(`/${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url))
-  }*/
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(

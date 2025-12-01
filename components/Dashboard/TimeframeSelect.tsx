@@ -40,7 +40,9 @@ export default function TimeframeSelect(props: TimeframeSelectProps) {
             props.timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(props.selectedYear, 1, 1)
           }
           onChange={(date) => {
-            if (!date) return
+            if (!date) {
+              return
+            }
             props.setSelectedYear(date.getFullYear())
             props.setSelectedMonth(12)
             props.setTimeframe(date.getFullYear().toString())

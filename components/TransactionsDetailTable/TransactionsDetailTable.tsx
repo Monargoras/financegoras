@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext, useMemo } from 'react'
 import { Flex, Loader, Text, Table, useMantineTheme } from '@mantine/core'
 import useSWR, { Fetcher } from 'swr'
 import { useDisclosure } from '@mantine/hooks'
@@ -46,9 +46,6 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
 
-  const [listOfCategoriesAndNames, setListOfCategoriesAndNames] = useState<string[]>([])
-  const [filteredData, setFilteredData] = useState<Transaction[] | undefined>(undefined)
-
   const filterData = (rawData: Transaction[]) => {
     let res = rawData
     if (hideStopped) {
@@ -79,14 +76,16 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     return res
   }
 
-  useEffect(() => {
-    if (data) {
-      const array = data.map((ta: Transaction) => [ta.category, ta.name]).flat()
-      const unique = Array.from(new Set(array))
-      setListOfCategoriesAndNames(unique)
-      setFilteredData(filterData(data))
-    }
+  const listOfCategoriesAndNames = useMemo(() => {
+    const array = data.map((ta: Transaction) => [ta.category, ta.name]).flat()
+    return Array.from(new Set(array))
   }, [data, hideStopped, typeFilter, dateRange, earliestFirst, catNameSearch])
+
+  const filteredData = useMemo(() => {
+    if (data) {
+      return filterData(data)
+    }
+  }, [listOfCategoriesAndNames, filterData, data])
 
   return (
     <Flex justify="center">

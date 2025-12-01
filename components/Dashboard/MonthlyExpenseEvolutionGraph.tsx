@@ -24,12 +24,14 @@ interface ChartTooltipProps {
 }
 
 function ChartTooltip({ label, payload }: ChartTooltipProps) {
-  if (!payload) return null
-  const sortedPayload = [...payload].reverse()
-
   const theme = useMantineColorScheme()
   const textColor = theme.colorScheme === 'dark' ? 'white' : 'black'
   const { privacyMode } = useContext(PrivacyModeContext)
+
+  if (!payload) {
+    return null
+  }
+  const sortedPayload = [...payload].reverse()
 
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">

@@ -43,7 +43,9 @@ export default function TransactionForm(props: TransactionFormProps) {
   const [name, setName] = useState('')
   const [amount, setAmount] = useState<string | number>(0)
   const [categories, setCategories] = useState<Categories | null>(props.initialData)
-  const [category, setCategory] = useState<string | null>(null)
+  const [category, setCategory] = useState<string | null>(
+    props.initialData && props.initialData.length > 0 ? props.initialData[0].items[0].name : null
+  )
   const [amountError, setAmountError] = useState(false)
   const [nameError, setNameError] = useState(false)
   const [categoryError, setCategoryError] = useState(false)
@@ -54,21 +56,6 @@ export default function TransactionForm(props: TransactionFormProps) {
     fallbackData: props.nameAutocompleteList,
     keepPreviousData: true,
   })
-
-  useEffect(() => {
-    if (isSavings) {
-      setIsIncome(false)
-    }
-  }, [isSavings])
-
-  useEffect(() => {
-    if (categories && categories.length > 0 && categories[0].items && categories[0].items.length > 0) {
-      setCategory(categories[0].items[0].name)
-      setCategoryError(false)
-    } else {
-      setCategory(props.dictionary.budgetPage.noCategory)
-    }
-  }, [categories])
 
   useEffect(() => {
     if (!updateBackendCategories || !categories) {
@@ -202,7 +189,12 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <Switch
           checked={isSavings}
-          onChange={(event) => setIsSavings(event.currentTarget.checked)}
+          onChange={(event) => {
+            setIsSavings(event.currentTarget.checked)
+            if (event.currentTarget.checked) {
+              setIsIncome(false)
+            }
+          }}
           onLabel={props.dictionary.budgetPage.isSavings}
           offLabel={props.dictionary.budgetPage.isIncomeExpense}
           size="xl"
@@ -233,7 +225,15 @@ export default function TransactionForm(props: TransactionFormProps) {
               <CategoryDrawer
                 dictionary={props.dictionary}
                 categories={categories ?? []}
-                setCategories={setCategories}
+                setCategories={(cat) => {
+                  setCategories(cat)
+                  if (cat && cat.length > 0 && cat[0].items && cat[0].items.length > 0) {
+                    setCategory(cat[0].items[0].name)
+                    setCategoryError(false)
+                  } else {
+                    setCategory(props.dictionary.budgetPage.noCategory)
+                  }
+                }}
                 setUpdateBackendCategories={setUpdateBackendCategories}
               />
             </Flex>

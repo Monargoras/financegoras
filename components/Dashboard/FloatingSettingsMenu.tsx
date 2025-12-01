@@ -69,7 +69,9 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
             <YearPicker
               value={timeframe === props.dictionary.budgetPage.last12Months ? null : new Date(selectedYear, 1, 1)}
               onChange={(date) => {
-                if (!date) return
+                if (!date) {
+                  return
+                }
                 setSelectedYear(date.getFullYear())
                 setSelectedMonth(12)
                 setTimeframe(date.getFullYear().toString())

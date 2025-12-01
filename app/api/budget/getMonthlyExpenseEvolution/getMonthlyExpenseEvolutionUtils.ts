@@ -43,7 +43,9 @@ export const getMonthlyExpenseDataOneMonth = async (
         const totalGroup = month
           ? parseFloat(calculateTotalPerMonth(groupTransactions))
           : parseFloat(calculateTotalPerYear(groupTransactions, year))
-        if (totalGroup > 0) expensesPerGroupedSet[group] = totalGroup
+        if (totalGroup > 0) {
+          expensesPerGroupedSet[group] = totalGroup
+        }
       }
     }
   } else {

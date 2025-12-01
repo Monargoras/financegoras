@@ -66,13 +66,17 @@ export default function ExportImportData(props: ExportImportDataProps) {
 
   const uploadCSV = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (!file) return
+    if (!file) {
+      return
+    }
 
     Papa.parse(file, {
       header: true, // first row = headers
       skipEmptyLines: true,
       complete: (results) => {
-        if (fileInputRef.current) fileInputRef.current.value = ''
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''
+        }
 
         const parsedData = results.data as Record<string, string>[]
         const csvHeaders = results.meta.fields ?? []
@@ -195,7 +199,9 @@ export default function ExportImportData(props: ExportImportDataProps) {
         }
       },
       error: () => {
-        if (fileInputRef.current) fileInputRef.current.value = ''
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''
+        }
         notifications.show({
           title: props.dictionary.transactionsPage.parsingErrorTitle,
           message: props.dictionary.transactionsPage.parsingErrorMessage,

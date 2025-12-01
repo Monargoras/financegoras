@@ -15,9 +15,12 @@ export default function LocaleSwitcher(props: LocaleSwitcherProps) {
   const router = useRouter()
 
   const redirectedPathName = (locale: Locale) => {
-    if (!pathName) return '/'
+    if (!pathName) {
+      return '/'
+    }
     const segments = pathName.split('/')
     segments[1] = locale
+    // eslint-disable-next-line react-hooks/immutability
     document.cookie = `NEXT_LOCALE=${locale}; path=/`
     return segments.join('/')
   }

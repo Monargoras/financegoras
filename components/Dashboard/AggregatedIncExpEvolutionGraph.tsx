@@ -24,16 +24,18 @@ interface ChartTooltipProps {
 }
 
 function ChartTooltip({ label, payload, dict }: ChartTooltipProps) {
-  if (!payload) return null
-  // reverse and remove duplicates
-  const sortedPayload = [...payload]
-    .reverse()
-    .filter((item, index, self) => self.findIndex((t) => t.name === item.name) === index)
-
   const colorScheme = useMantineColorScheme()
   const theme = useMantineTheme()
   const textColor = colorScheme.colorScheme === 'dark' ? 'white' : 'black'
   const { privacyMode } = useContext(PrivacyModeContext)
+
+  if (!payload) {
+    return null
+  }
+  // reverse and remove duplicates
+  const sortedPayload = [...payload]
+    .reverse()
+    .filter((item, index, self) => self.findIndex((t) => t.name === item.name) === index)
 
   const series = {
     totalExpenses: { label: dict.budgetPage.monthlyExpenses, color: theme.colors.expense[5] },
