@@ -7,6 +7,8 @@ import getAnalysisDashbaordData from '@/app/api/analysis/dashboard/getAnalysisDa
 import { DEMOUSERID } from '@/utils/CONSTANTS'
 import { emptyData } from '@/app/api/analysis/dashboard/analysisDashboardUtils'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)

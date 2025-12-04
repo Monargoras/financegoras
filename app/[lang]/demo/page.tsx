@@ -16,6 +16,8 @@ import getColorMap from '@/app/api/budget/getColorMap/getColorMapAction'
 import DemoButton from '@/components/Welcome/DemoButton'
 import getNameAutocompleteList from '@/app/api/transactions/getNameAutocompleteList/getNameAutocompleteListAction'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(props: { params: PageProps }): Promise<Metadata> {
   const { lang } = await props.params
   const dict = await getDictionary(lang)
