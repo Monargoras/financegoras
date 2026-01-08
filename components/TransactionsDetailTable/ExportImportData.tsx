@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { ActionIcon, CopyButton, Tooltip } from '@mantine/core'
+import { ActionIcon, Box, CopyButton, Tooltip } from '@mantine/core'
 import {
   IconCheck,
   IconFileDownloadFilled,
@@ -225,7 +225,7 @@ export default function ExportImportData(props: ExportImportDataProps) {
   }
 
   return (
-    <>
+    <Box style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap', alignItems: 'center' }}>
       <Tooltip label={props.dictionary.transactionsPage.exportTooltip}>
         <ActionIcon variant="filled" aria-label="export data button" onClick={downloadCSV}>
           <IconFileDownloadFilled />
@@ -272,6 +272,6 @@ export default function ExportImportData(props: ExportImportDataProps) {
           }}
         />
       )}
-    </>
+    </Box>
   )
 }
