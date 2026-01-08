@@ -68,6 +68,7 @@
     "successfullyImportedCategriesTitle": "Import erfolgreich!",
     "successfullyImportedCategoriesMessage": "Kategorien erfolgreich importiert und ersetzt",
     "truncateExistingCategories": "Bestehende Kategorien überschreiben (Alle bisherigen Kategorien gehen verloren!)",
+    "matchingCategories": "Wenn die Kategorien nicht mit den Transaktionen zusammenpassen (andere Gruppen-/Kategoriennamen), können unvorhergesehene Fehler auftreten.",
     "errorParseCategories": "Kategorien können nicht gelesen werden. Ist der kopierte Text ein valides Financegoras Kategorien JSON Objekt??"
   },
   "budgetPage": {

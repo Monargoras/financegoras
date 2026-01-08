@@ -83,7 +83,7 @@ export default function CategoryImportModal(props: CategoryImportModalProps) {
       fullScreen={isMobile}
       size="xl"
     >
-      <Flex justify="center" align="center" gap="md" direction="column" wrap="wrap">
+      <Flex justify="center" align="center" gap="md" direction="column" wrap="wrap" style={{ textAlign: 'center' }}>
         <Input
           w={500}
           multiline
@@ -97,6 +97,7 @@ export default function CategoryImportModal(props: CategoryImportModalProps) {
         />
         {error && <Text c="#fa5252">{props.dictionary.transactionsPage.errorParseCategories}</Text>}
         <Text>{props.dictionary.transactionsPage.truncateExistingCategories}</Text>
+        <Text w={500}>{props.dictionary.transactionsPage.matchingCategories}</Text>
         <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
           <Button variant="outline" color="green" onClick={props.close}>
             {props.dictionary.budgetPage.cancel}
