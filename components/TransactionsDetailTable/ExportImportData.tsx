@@ -1,23 +1,34 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { ActionIcon, Tooltip } from '@mantine/core'
-import { IconCheck, IconFileDownloadFilled, IconFileUploadFilled, IconX } from '@tabler/icons-react'
+import { ActionIcon, CopyButton, Tooltip } from '@mantine/core'
+import {
+  IconCheck,
+  IconFileDownloadFilled,
+  IconFileUploadFilled,
+  IconX,
+  IconCategoryMinus,
+  IconCategoryPlus,
+  IconCopyCheckFilled,
+} from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
 import Papa from 'papaparse'
-import { Dictionary, EXPORT_ORDER, Transaction, TransactionType } from '@/utils/types'
+import { Categories, Dictionary, EXPORT_ORDER, Transaction, TransactionType } from '@/utils/types'
 import ImportModal from './ImportModal'
+import CategoryImportModal from './CategoryImportModal'
 
 interface ExportImportDataProps {
   dictionary: Dictionary
   transactions: Transaction[]
+  categories: Categories
 }
 
 export default function ExportImportData(props: ExportImportDataProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [opened, { open, close }] = useDisclosure(false)
+  const [openedImportModal, importModalControls] = useDisclosure(false)
+  const [openedCategoryModal, categoryModalControls] = useDisclosure(false)
 
   const convertTransaction = <T extends keyof Transaction>(
     transaction: Transaction,
@@ -173,7 +184,7 @@ export default function ExportImportData(props: ExportImportDataProps) {
           })
 
           setTransactions(txs)
-          open()
+          importModalControls.open()
           notifications.show({
             title: props.dictionary.transactionsPage.csvImportSuccessTitle,
             message: props.dictionary.transactionsPage.csvImportSuccessMessage.replace(
@@ -226,15 +237,39 @@ export default function ExportImportData(props: ExportImportDataProps) {
           <IconFileUploadFilled />
         </ActionIcon>
       </Tooltip>
-      {opened && (
+      {openedImportModal && (
         <ImportModal
           dictionary={props.dictionary}
-          opened={opened}
+          opened={openedImportModal}
           close={() => {
             setTransactions([])
-            close()
+            importModalControls.close()
           }}
           transactions={transactions}
+        />
+      )}
+      <CopyButton value={JSON.stringify(props.categories)}>
+        {({ copied, copy }) => (
+          <Tooltip label={props.dictionary.transactionsPage.exportCategoriesTooltip}>
+            <ActionIcon variant="filled" aria-label="export categories" onClick={copy}>
+              {copied ? <IconCopyCheckFilled /> : <IconCategoryMinus />}
+            </ActionIcon>
+          </Tooltip>
+        )}
+      </CopyButton>
+      <Tooltip label={props.dictionary.transactionsPage.importCategoriesTooltip}>
+        <ActionIcon variant="filled" aria-label="import categories" onClick={categoryModalControls.open}>
+          <IconCategoryPlus />
+        </ActionIcon>
+      </Tooltip>
+      {openedCategoryModal && (
+        <CategoryImportModal
+          dictionary={props.dictionary}
+          opened={openedCategoryModal}
+          close={() => {
+            setTransactions([])
+            categoryModalControls.close()
+          }}
         />
       )}
     </>

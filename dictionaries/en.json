@@ -55,12 +55,19 @@
     "csvValidationErrorInvalidTransactionType": "Row {{rowNumber}}: invalid transaction type",
     "csvValidationErrorInvalidIsIncome": "Row {{rowNumber}}: invalid isIncome",
     "csvValidationErrorInvalidIsSavings": "Row {{rowNumber}}: invalid isSavings",
-    "truncateExistingData": "Overwrite existing data (All previous data is lost)",
+    "truncateExistingData": "Overwrite existing data (All previous data is lost!)",
     "performImport": "Perform import",
     "successfullyImportedTransactionsTitle": "Import successful!",
     "successfullyImportedTransactionsMessage": "Successfully imported {{numTransactions}} transactions",
     "importErrorTitle": "Import failed!",
-    "importErrorMessage": "An error occurred during the import."
+    "importErrorMessage": "An error occurred during the import.",
+    "exportCategoriesTooltip": "Copy custom groups, categories and colors to clipboard in JSON format",
+    "importCategoriesTooltip": "Import custom groups, categories and colors in JSON format",
+    "categoryImportTitle": "Paste category string in JSON format",
+    "successfullyImportedCategriesTitle": "Import successful!",
+    "successfullyImportedCategoriesMessage": "Successfully imported and replaced categories",
+    "truncateExistingCategories": "Overwrite existing categories (All previous categories are lost!)",
+    "errorParseCategories": "Can't parse categories. Is the copied text a valid Financegoras category JSON object?"
   },
   "budgetPage": {
     "metadataPageTitle": "Budget Book - Financegoras",

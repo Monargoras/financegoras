@@ -56,12 +56,19 @@
     "csvValidationErrorInvalidTransactionType": "Zeile {{rowNumber}}: ungültiger Transaktionstyp",
     "csvValidationErrorInvalidIsIncome": "Zeile {{rowNumber}}: ungültig isIncome",
     "csvValidationErrorInvalidIsSavings": "Zeile {{rowNumber}}: ungültig isSavings",
-    "truncateExistingData": "Bestehende Daten überschreiben (Alle vorherigen Daten gehen verloren)",
+    "truncateExistingData": "Bestehende Daten überschreiben (Alle vorherigen Daten gehen verloren!)",
     "performImport": "Import durchführen",
     "successfullyImportedTransactionsTitle": "Import erfolgreich!",
     "successfullyImportedTransactionsMessage": "Es wurden erfolgreich {{numTransactions}} Transaktionen importiert",
     "errorImportingTransactionsTitle": "Import fehlgeschlagen!",
-    "errorImportingTransactionsMessage": "Beim Importieren der Transaktionen ist ein Fehler aufgetreten."
+    "errorImportingTransactionsMessage": "Beim Importieren der Transaktionen ist ein Fehler aufgetreten.",
+    "exportCategoriesTooltip": "Eigene Gruppen, Kategorien und Farben in JSON Format in die Zwischenablage kopieren",
+    "importCategoriesTooltip": "Eigene Gruppen, Kategorien und Farben in JSON Format importieren",
+    "categoryImportTitle": "Kopiere einen Kategorientext im JSON Format",
+    "successfullyImportedCategriesTitle": "Import erfolgreich!",
+    "successfullyImportedCategoriesMessage": "Kategorien erfolgreich importiert und ersetzt",
+    "truncateExistingCategories": "Bestehende Kategorien überschreiben (Alle bisherigen Kategorien gehen verloren!)",
+    "errorParseCategories": "Kategorien können nicht gelesen werden. Ist der kopierte Text ein valides Financegoras Kategorien JSON Objekt??"
   },
   "budgetPage": {
     "metadataPageTitle": "Haushaltsbuch - Financegoras",
