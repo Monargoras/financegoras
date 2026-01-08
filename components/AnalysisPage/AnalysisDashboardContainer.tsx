@@ -20,6 +20,10 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const [categorySearch, setCategorySearch] = useState<string[]>([])
   const [groupSearch, setGroupSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
+
+  const anyFilterSet =
+    nameSearch.length > 0 || categorySearch.length > 0 || groupSearch.length > 0 || typeFilter.length > 0
+
   // set initial range to last 12 months
   const now = new Date()
   const start = new Date(now.getFullYear(), now.getMonth() - 11, 1, 12, 0, 0, 0) // first day of start month
@@ -50,34 +54,34 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
             <Text>{props.dictionary.budgetPage.errorLoadingData}</Text>
           </Flex>
         )}
-        {data && data.transactions.length > 0 && (
-          <Flex gap="md" justify="center" align="center" direction="column" w="100%">
-            <AnalysisControls
-              nameSearch={nameSearch}
-              setNameSearch={setNameSearch}
-              categorySearch={categorySearch}
-              setCategorySearch={setCategorySearch}
-              groupSearch={groupSearch}
-              setGroupSearch={setGroupSearch}
-              typeFilter={typeFilter}
-              setTypeFilter={setTypeFilter}
-              dateRange={dateRange}
-              setDateRange={setDateRange}
-              listOfNames={data.listOfNames}
-              listOfCategories={
-                data.categories
-                  ? data.categories
-                      .map((c) => c.items)
-                      .flat()
-                      .map((i) => i.name)
-                  : []
-              }
-              listOfGroups={data.categories ? data.categories.map((c) => c.group) : []}
-              dictionary={props.dictionary}
-              onlyExpenses={onlyExpenses}
-              setOnlyExpenses={setOnlyExpenses}
-            />
-            <Divider size="lg" w="100%" />
+        <Flex gap="md" justify="center" align="center" direction="column" w="100%">
+          <AnalysisControls
+            nameSearch={nameSearch}
+            setNameSearch={setNameSearch}
+            categorySearch={categorySearch}
+            setCategorySearch={setCategorySearch}
+            groupSearch={groupSearch}
+            setGroupSearch={setGroupSearch}
+            typeFilter={typeFilter}
+            setTypeFilter={setTypeFilter}
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            listOfNames={data.listOfNames}
+            listOfCategories={
+              data.categories
+                ? data.categories
+                    .map((c) => c.items)
+                    .flat()
+                    .map((i) => i.name)
+                : []
+            }
+            listOfGroups={data.categories ? data.categories.map((c) => c.group) : []}
+            dictionary={props.dictionary}
+            onlyExpenses={onlyExpenses}
+            setOnlyExpenses={setOnlyExpenses}
+          />
+          <Divider size="lg" w="100%" />
+          {data && (data.transactions.length > 0 || anyFilterSet) && (
             <AnalysisDashboard
               locale={props.locale}
               dictionary={props.dictionary}
@@ -91,11 +95,12 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
                 })),
               }}
             />
-          </Flex>
-        )}
-        {data && data.transactions.length === 0 && (
-          <AddFirstTransactionView dict={props.dictionary} categories={props.initialData.categories} />
-        )}
+          )}
+          {!data ||
+            (data.transactions.length === 0 && !anyFilterSet && (
+              <AddFirstTransactionView dict={props.dictionary} categories={props.initialData.categories} />
+            ))}
+        </Flex>
       </Flex>
     </Container>
   )
