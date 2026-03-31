@@ -25,7 +25,7 @@
     "elliptic": "^6.6.1"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.7.5",
+    "@formatjs/intl-localematcher": "^0.8.2",
     "@mantine/charts": "^9.0.0",
     "@mantine/core": "9.0.0",
     "@mantine/dates": "^9.0.0",
