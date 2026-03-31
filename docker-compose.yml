@@ -1,8 +1,10 @@
 services:
-   nextjs:
-     build: ./
-     env_file: "prod.env"
-   nginx:
-     build: ./nginx
-     ports:
+  nextjs:
+    build: ./
+    env_file: "prod.env"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  nginx:
+    build: ./nginx
+    ports:
        - 443:443
