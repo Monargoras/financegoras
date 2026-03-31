@@ -36,11 +36,7 @@ async function getInitialData(): Promise<{ nameAutocompleteList: string[]; table
   return {
     tableData: {
       categories,
-      transactions: transactions.map((t) => ({
-        ...t,
-        createdAt: new Date(t.createdAt),
-        stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
-      })),
+      transactions,
     },
     nameAutocompleteList,
   }

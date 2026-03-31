@@ -26,11 +26,11 @@ export default function ImportModal(props: ImportModalProps) {
       id: tx.id,
       amount: tx.amount,
       category: tx.category,
-      createdAt: tx.createdAt.toUTCString(),
+      createdAt: new Date(tx.createdAt).toUTCString(),
       isIncome: tx.isIncome,
       isSavings: tx.isSavings,
       name: tx.name,
-      stoppedAt: tx.stoppedAt ? tx.stoppedAt.toUTCString() : null,
+      stoppedAt: tx.stoppedAt ? new Date(tx.stoppedAt).toUTCString() : null,
       transactionType: tx.transactionType,
     }))
     const numberOfInserted = await importTransactions(transactionDTOs, checked)

@@ -56,11 +56,11 @@ export type Transaction = {
   isIncome: boolean
   isSavings: boolean
   amount: number
-  createdAt: Date
+  createdAt: string
   name: string
   category: string
   transactionType: TransactionType
-  stoppedAt: Date | null
+  stoppedAt: string | null
 }
 
 export const EXPORT_ORDER: (keyof Transaction)[] = [

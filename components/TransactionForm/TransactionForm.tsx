@@ -104,15 +104,9 @@ export default function TransactionForm(props: TransactionFormProps) {
     return isValid
   }
 
-  const handleAddTransaction = async (transactionType: TransactionType, inputDate?: Date) => {
+  const handleAddTransaction = async (transactionType: TransactionType, inputDate?: string) => {
     if (!validData()) {
       return false
-    }
-
-    // set date to 12 noon to avoid timezone issues
-    const date = inputDate ? new Date(inputDate) : undefined
-    if (date) {
-      date.setHours(12, 0, 0, 0)
     }
 
     const success = await submitTransaction(
@@ -122,7 +116,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       name,
       category ?? '',
       transactionType,
-      date?.toUTCString() ?? new Date().toUTCString()
+      inputDate ? new Date(inputDate).toUTCString() : new Date().toUTCString()
     )
     if (success) {
       setName('')

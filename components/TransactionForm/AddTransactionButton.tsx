@@ -8,13 +8,13 @@ import { Dictionary, TransactionType } from '@/utils/types'
 
 interface AddTransactionButtonProps {
   dictionary: Dictionary
-  handleAddTransaction: (transactionType: TransactionType, inputDate?: Date) => Promise<boolean>
+  handleAddTransaction: (transactionType: TransactionType, inputDate?: string) => Promise<boolean>
 }
 
 export function AddTransactionButton(props: AddTransactionButtonProps) {
   const theme = useMantineTheme()
   const [opened, { open, close }] = useDisclosure(false)
-  const [date, setDate] = useState<Date | null>(null)
+  const [date, setDate] = useState<string | null>(null)
   const [type, setType] = useState<string | null>(TransactionType[0])
   const [dateError, setDateError] = useState(false)
 

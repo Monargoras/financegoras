@@ -28,13 +28,13 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
   const now = new Date()
   const start = new Date(now.getFullYear(), now.getMonth() - 11, 1, 12, 0, 0, 0) // first day of start month
   const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 12, 0, 0, 0) // last day of end month
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([start, end])
+  const [dateRange, setDateRange] = useState<[string | null, string | null]>([start.toUTCString(), end.toUTCString()])
   const [onlyExpenses, setOnlyExpenses] = useState<boolean>(true)
 
   const fetcher: Fetcher<AnalysisDashboardDTO, string> = (input: RequestInfo | URL) =>
     fetch(input).then((res) => res.json())
   const params = `?demo=${props.demo}&names=${nameSearch.join(',')}&categories=${categorySearch.join(',')}&groups=${groupSearch.join(',')}\
-&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${dateRange[0].toUTCString()}&endDate=${dateRange[1].toUTCString()}` : ''}\
+&types=${typeFilter.join(',')}${dateRange[0] && dateRange[1] ? `&startDate=${new Date(dateRange[0]).toUTCString()}&endDate=${new Date(dateRange[1]).toUTCString()}` : ''}\
 &onlyExpenses=${onlyExpenses}&lang=${props.locale}`
   const { data, error, isLoading } = useSWR(`/api/analysis/dashboard${params}`, fetcher, {
     fallbackData: props.initialData,
@@ -82,19 +82,7 @@ export default function AnalysisDashboardContainer(props: AnalysisDashboardConta
           />
           <Divider size="lg" w="100%" />
           {data && (data.transactions.length > 0 || anyFilterSet) && (
-            <AnalysisDashboard
-              locale={props.locale}
-              dictionary={props.dictionary}
-              demo={props.demo}
-              data={{
-                ...data,
-                transactions: data.transactions.map((t) => ({
-                  ...t,
-                  createdAt: new Date(t.createdAt),
-                  stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
-                })),
-              }}
-            />
+            <AnalysisDashboard locale={props.locale} dictionary={props.dictionary} demo={props.demo} data={data} />
           )}
           {!data ||
             (data.transactions.length === 0 && !anyFilterSet && (

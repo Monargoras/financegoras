@@ -18,7 +18,7 @@ interface AggregatedIncExpEvolutionGraphProps {
 }
 
 interface ChartTooltipProps {
-  label: string
+  label: string | number | undefined
   payload: Record<string, unknown>[] | undefined
   dict: Dictionary
 }

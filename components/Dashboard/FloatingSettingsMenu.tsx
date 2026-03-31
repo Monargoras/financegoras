@@ -72,9 +72,9 @@ export default function FloatingSettingsMenu(props: FloatingSettingsMenuProps) {
                 if (!date) {
                   return
                 }
-                setSelectedYear(date.getFullYear())
+                setSelectedYear(parseInt(date.slice(0, 4)))
                 setSelectedMonth(12)
-                setTimeframe(date.getFullYear().toString())
+                setTimeframe(date.slice(0, 4))
                 setOpened(false)
               }}
             />

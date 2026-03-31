@@ -16,8 +16,8 @@ interface TableControlsProps {
   setCatNameSearch: (newValue: string[]) => void
   typeFilter: string[]
   setTypeFilter: (newValue: string[]) => void
-  dateRange: [Date | null, Date | null]
-  setDateRange: (newValue: [Date | null, Date | null]) => void
+  dateRange: [string | null, string | null]
+  setDateRange: (newValue: [string | null, string | null]) => void
   transactions: Transaction[]
   categories: Categories
 }

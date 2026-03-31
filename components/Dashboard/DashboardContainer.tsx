@@ -64,14 +64,7 @@ export default function DashboardContainer(props: DashboardContainerProps) {
             lang={props.lang}
             dictionary={props.dict}
             demo={props.demo}
-            data={{
-              ...data,
-              transactions: data.transactions.map((t) => ({
-                ...t,
-                createdAt: new Date(t.createdAt),
-                stoppedAt: t.stoppedAt ? new Date(t.stoppedAt) : null,
-              })),
-            }}
+            data={data}
             grouped={grouped}
             setGrouped={setGrouped}
             includeSavings={includeSavings}

@@ -44,7 +44,7 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
   const [hideStopped, setHideStopped] = useState(false)
   const [catNameSearch, setCatNameSearch] = useState<string[]>([])
   const [typeFilter, setTypeFilter] = useState<string[]>([])
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
+  const [dateRange, setDateRange] = useState<[string | null, string | null]>([null, null])
 
   const filterData = (rawData: Transaction[]) => {
     let res = rawData
@@ -61,10 +61,10 @@ export default function TransactionsDetailTable(props: TransactionsDetailTablePr
     }
     if (dateRange.every((el) => el !== null)) {
       res = res.filter((ta) => {
-        const createdAt = new Date(ta.createdAt)
-        const stoppedAt = ta.stoppedAt ? new Date(ta.stoppedAt) : null
+        const createdAt = ta.createdAt
+        const stoppedAt = ta.stoppedAt ?? null
         // add 24 hours to the end date to include the whole day
-        const rangeEnd = new Date(dateRange[1]!.getTime() + 86400000)
+        const rangeEnd = dateRange[1]!
         return createdAt < rangeEnd && (!stoppedAt || stoppedAt >= dateRange[0]!)
       })
     }

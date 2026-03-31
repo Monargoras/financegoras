@@ -43,9 +43,9 @@ export default function TimeframeSelect(props: TimeframeSelectProps) {
             if (!date) {
               return
             }
-            props.setSelectedYear(date.getFullYear())
+            props.setSelectedYear(parseInt(date.slice(0, 4)))
             props.setSelectedMonth(12)
-            props.setTimeframe(date.getFullYear().toString())
+            props.setTimeframe(date.slice(0, 4))
             setOpened(false)
           }}
         />

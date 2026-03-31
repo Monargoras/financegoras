@@ -17,8 +17,8 @@ interface AnalysisControlsProps {
   setGroupSearch: (newValue: string[]) => void
   typeFilter: string[]
   setTypeFilter: (newValue: string[]) => void
-  dateRange: [Date | null, Date | null]
-  setDateRange: (newValue: [Date | null, Date | null]) => void
+  dateRange: [string | null, string | null]
+  setDateRange: (newValue: [string | null, string | null]) => void
   onlyExpenses: boolean
   setOnlyExpenses: (newValue: boolean) => void
 }

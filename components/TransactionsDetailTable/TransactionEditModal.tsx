@@ -52,8 +52,8 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       amount: props.transaction.amount,
       category: props.transaction.category,
       transactionType: TransactionType[props.transaction.transactionType],
-      createdAt: new Date(props.transaction.createdAt),
-      stoppedAt: props.transaction.stoppedAt ? new Date(props.transaction.stoppedAt) : null,
+      createdAt: props.transaction.createdAt,
+      stoppedAt: props.transaction.stoppedAt ?? null,
       isIncome: props.transaction.isIncome,
       isSavings: props.transaction.isSavings,
     },
@@ -61,22 +61,22 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       // functions return true if there is an error
       name: (value: string) => value.length === 0 || value.length > 50,
       amount: (value: number) => value <= 0,
-      createdAt: (value: Date) => value === null,
+      createdAt: (value: string) => value === null || isNaN(new Date(value).getTime()),
       stoppedAt: (
-        value: Date | null,
+        value: string | null,
         formValues: {
           name: string
           amount: number
           category: string
           transactionType: string
-          createdAt: Date
-          stoppedAt: Date | null
+          createdAt: string
+          stoppedAt: string | null
           isIncome: boolean
           isSavings: boolean
         }
       ) =>
         formValues.transactionType === TransactionType[TransactionType.Single] && formValues.createdAt && value
-          ? formValues.createdAt.getTime() !== value.getTime()
+          ? formValues.createdAt !== value
           : null,
     },
   })
@@ -98,10 +98,6 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     if (res.hasErrors) {
       return false
     }
-    // set stopped date to 12 noon to avoid timezone issues if it was never set before
-    if (form.values.stoppedAt && !props.transaction.stoppedAt) {
-      form.setFieldValue('stoppedAt', new Date(form.values.stoppedAt.setHours(12, 0, 0, 0)))
-    }
     const { name, amount, category, transactionType, createdAt, stoppedAt, isIncome, isSavings } = form.values
 
     const success = await updateTransaction(
@@ -112,11 +108,11 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
       name,
       category ?? '',
       transactionType,
-      createdAt.toUTCString(),
+      new Date(createdAt).toUTCString(),
       transactionType === TransactionType[TransactionType.Single]
-        ? createdAt.toUTCString()
+        ? new Date(createdAt).toUTCString()
         : stoppedAt
-          ? stoppedAt.toUTCString()
+          ? new Date(stoppedAt).toUTCString()
           : null
     )
     if (success) {
@@ -171,7 +167,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     const success = await stopSeriesTransaction(
       props.transaction.id,
       form.values.transactionType,
-      form.values.createdAt.toUTCString()
+      new Date(form.values.createdAt).toUTCString()
     )
     if (success) {
       notifications.show({

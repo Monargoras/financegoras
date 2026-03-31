@@ -175,11 +175,11 @@ export default function ExportImportData(props: ExportImportDataProps) {
               isIncome: row.isIncome === 'true',
               isSavings: row.isSavings === 'true',
               amount: parseFloat(row.amount),
-              createdAt: new Date(row.createdAt),
+              createdAt: row.createdAt,
               name: row.name,
               category: row.category,
               transactionType: TransactionType[row.transactionType as keyof typeof TransactionType],
-              stoppedAt: row.stoppedAt ? new Date(row.stoppedAt) : null,
+              stoppedAt: row.stoppedAt ?? null,
             }
           })
 

@@ -14,6 +14,9 @@ export default async function submitTransaction(
   transactionType: TransactionType,
   date: string
 ) {
+  console.log('Submitting transaction:', {
+    date,
+  })
   const userId = await getUserId()
   if (!userId) {
     return false
