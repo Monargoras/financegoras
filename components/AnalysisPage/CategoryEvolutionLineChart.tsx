@@ -5,6 +5,7 @@ import { Text, Paper, Flex, useMantineColorScheme } from '@mantine/core'
 import { LineChart } from '@mantine/charts'
 import { CategoryEvolutionLineChartData, ColorMap } from '@/utils/types'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
+import { TooltipPayload } from 'recharts'
 
 interface CategoryEvolutionLineChartProps {
   data: CategoryEvolutionLineChartData
@@ -13,7 +14,7 @@ interface CategoryEvolutionLineChartProps {
 
 interface ChartTooltipProps {
   label: string | number | undefined
-  payload: Record<string, unknown>[] | undefined
+  payload: TooltipPayload
 }
 
 function ChartTooltip({ label, payload }: ChartTooltipProps) {
@@ -98,7 +99,7 @@ export default function CategoryEvolutionLineChart(props: CategoryEvolutionLineC
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
-        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload as Record<string, number>[]} />,
+        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload} />,
       }}
       series={getSeries(props.data)}
       valueFormatter={(value) => `${privacyMode ? '**.**' : value.toFixed(2)}€`}

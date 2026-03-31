@@ -6,6 +6,7 @@ import { AreaChart } from '@mantine/charts'
 import { AggregatedIncomeExpenseEvolution, Dictionary } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
+import { TooltipPayload } from 'recharts'
 
 interface AggregatedIncExpEvolutionGraphProps {
   lang: string
@@ -19,7 +20,7 @@ interface AggregatedIncExpEvolutionGraphProps {
 
 interface ChartTooltipProps {
   label: string | number | undefined
-  payload: Record<string, unknown>[] | undefined
+  payload: TooltipPayload
   dict: Dictionary
 }
 
@@ -97,9 +98,7 @@ export default function AggregatedIncExpEvolutionGraph(props: AggregatedIncExpEv
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
-        content: ({ label, payload }) => (
-          <ChartTooltip label={label} payload={payload as Record<string, number>[]} dict={props.dictionary} />
-        ),
+        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload} dict={props.dictionary} />,
       }}
       yAxisProps={{
         domain: ([dataMin, dataMax]) => [

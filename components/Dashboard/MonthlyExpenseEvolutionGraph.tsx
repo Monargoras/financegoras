@@ -6,6 +6,7 @@ import { BarChart } from '@mantine/charts'
 import { ColorMap, Dictionary, MonthlyExpenseEvolution } from '@/utils/types'
 import { getMonthNameArray } from '@/utils/helpers'
 import { PrivacyModeContext } from '@/components/ClientProviders/ClientProviders'
+import { TooltipPayload } from 'recharts'
 
 interface MonthlyExpenseEvolutionGraphProps {
   lang: string
@@ -20,7 +21,7 @@ interface MonthlyExpenseEvolutionGraphProps {
 
 interface ChartTooltipProps {
   label: string | number | undefined
-  payload: Record<string, unknown>[] | undefined
+  payload: TooltipPayload
 }
 
 function ChartTooltip({ label, payload }: ChartTooltipProps) {
@@ -108,7 +109,7 @@ export default function MonthlyExpenseEvolutionGraph(props: MonthlyExpenseEvolut
       tooltipAnimationDuration={200}
       tooltipProps={{
         wrapperStyle: { zIndex: 1000 },
-        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload as Record<string, number>[]} />,
+        content: ({ label, payload }) => <ChartTooltip label={label} payload={payload} />,
       }}
       barProps={{
         onClick: (event) => {
