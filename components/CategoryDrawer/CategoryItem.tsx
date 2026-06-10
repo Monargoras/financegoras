@@ -29,7 +29,7 @@ export default function CategoryItem(props: CateforyItemProps) {
             <FocusTrap>
               <TextInput
                 value={editingValue}
-                onChange={(event) => setEditingValue(event.currentTarget.value)}
+                onChange={(event) => setEditingValue(event.currentTarget.value.replace(/,/g, '/'))}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     const success = props.handleUpdateCategory(editingValue, editingColor)
