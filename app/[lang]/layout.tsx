@@ -1,4 +1,4 @@
-import { mantineHtmlProps, MantineProvider } from '@mantine/core'
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core'
 import { Metadata } from 'next'
 import { Notifications } from '@mantine/notifications'
 import '@/app/[lang]/globals.css'
@@ -33,6 +33,7 @@ export default async function RootLayout({ children, params }: { children: React
   return (
     <html lang={lang} style={{ overflowX: 'hidden' }} {...mantineHtmlProps}>
       <head>
+        <ColorSchemeScript />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon.png" />
