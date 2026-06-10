@@ -89,7 +89,7 @@ export default function TransactionForm(props: TransactionFormProps) {
 
   const validData = () => {
     let isValid = true
-    if (name.length === 0 || name.length > 50) {
+    if (name.length === 0 || name.length > 50 || name.includes(',')) {
       setNameError(true)
       isValid = false
     }
@@ -196,7 +196,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         />
         <Autocomplete
           value={name}
-          error={nameError}
+          error={nameError && props.dictionary.budgetPage.nameError}
           label={props.dictionary.budgetPage.name}
           data={data}
           onChange={(val) => {

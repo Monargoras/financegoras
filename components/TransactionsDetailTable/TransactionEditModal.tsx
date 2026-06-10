@@ -59,7 +59,7 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
     },
     validate: {
       // functions return true if there is an error
-      name: (value: string) => value.length === 0 || value.length > 50,
+      name: (value: string) => value.length === 0 || value.length > 50 || value.includes(','),
       amount: (value: number) => value <= 0,
       createdAt: (value: string) => value === null || isNaN(new Date(value).getTime()),
       stoppedAt: (
@@ -240,11 +240,11 @@ export default function TransactionEditModal(props: TransactionEditModalProps) {
         </Flex>
         <Flex justify="center" align="center" gap="md" direction="row" wrap="wrap">
           <TextInput
+            {...form.getInputProps('name', { type: 'input' })}
             label={props.dictionary.budgetPage.name}
             key={form.key('name')}
-            error={form.errors.name}
+            error={form.errors.name && props.dictionary.budgetPage.nameError}
             maxLength={50}
-            {...form.getInputProps('name', { type: 'input' })}
           />
           <Select
             data={props.categories.map((c) => ({ group: c.group, items: c.items.map((i) => i.name) }))}

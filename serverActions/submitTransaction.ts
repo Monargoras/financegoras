@@ -21,7 +21,7 @@ export default async function submitTransaction(
   if (!userId) {
     return false
   }
-  if (name.length === 0 || name.length > 50) {
+  if (name.length === 0 || name.length > 50 || name.includes(',')) {
     return false
   }
   // 12 digits allow for 999 999 999.99 or even 99 999 999 999 (frontend adds the space and therefore only allows tens of billions without decimals)

@@ -150,7 +150,8 @@
     "percentageTooltip": "Skaliert das Balken- und Liniendiagramm auf 100%",
     "includeSavingsTooltip": "Zeigt die Spartransaktionen mit in den Graphen an",
     "includeEmptyCategoriesTooltip": "Zeigt im Radardiagramm alle bereits verwendeten Kategorien an, auch wenn sie in diesem Monat nicht verwendet wurden um besser vergleichen zu können",
-    "fadedTransactionTooltip": "Verblasste Transaktionen werden später in diesem Monat ausgeführt oder werden jährlich in einem anderen Monat ausgeführt"
+    "fadedTransactionTooltip": "Verblasste Transaktionen werden später in diesem Monat ausgeführt oder werden jährlich in einem anderen Monat ausgeführt",
+    "nameError": "Muss <= 50 Zeichen sein und keine Kommas enthalten"
   },
   "analysisPage": {
     "metadataPageTitle": "Analyse - Financegoras",
