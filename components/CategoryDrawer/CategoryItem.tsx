@@ -29,6 +29,7 @@ export default function CategoryItem(props: CateforyItemProps) {
             <FocusTrap>
               <TextInput
                 value={editingValue}
+                // replace commas with slashes to prevent CSV issues during export
                 onChange={(event) => setEditingValue(event.currentTarget.value.replace(/,/g, '/'))}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
