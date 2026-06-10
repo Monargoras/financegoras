@@ -60,7 +60,7 @@ const config = [
     },
   },
   {
-    ignores: ['node_modules/**', '.next/**', '.yarn/**', '**.d.ts', '**.cjs', '**.mjs'],
+    ignores: ['node_modules/**', '.next/**', '.yarn/**', '**.d.ts', '**.cjs', '**.mjs', 'eslint.config.js'],
   },
 ]
 
